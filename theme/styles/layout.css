@@ -1,0 +1,270 @@
+.slidev-page {
+    position: relative;
+    isolation: isolate;
+    color: #d7dbe3;
+    background-color: #17191e;
+    background-image:
+        radial-gradient(
+            900px 700px at 12% 8%,
+            rgba(50, 69, 255, 0.35),
+            transparent 60%
+        ),
+        radial-gradient(
+            800px 600px at 85% -10%,
+            rgba(240, 65, 255, 0.35),
+            transparent 60%
+        ),
+        radial-gradient(
+            1000px 800px at 50% 120%,
+            rgba(216, 51, 51, 0.25),
+            transparent 65%
+        ),
+        linear-gradient(180deg, rgba(23, 25, 30, 0.96), rgba(8, 9, 13, 0.99));
+    background-repeat: no-repeat;
+    background-size: cover;
+}
+
+.slidev-page::before {
+    content: "";
+    position: absolute;
+    inset: 0;
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='220' height='220'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='2' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='220' height='220' filter='url(%23n)' opacity='0.35'/%3E%3C/svg%3E");
+    opacity: 0.22;
+    mix-blend-mode: overlay;
+    pointer-events: none;
+    z-index: 0;
+}
+
+.slidev-page::after {
+    content: "";
+    position: absolute;
+    inset: 0;
+    background-size: 22px 22px;
+    background-image:
+        linear-gradient(to right, rgba(84, 88, 100, 1) 1px, transparent 1px),
+        linear-gradient(to bottom, rgba(84, 88, 100, 1) 1px, transparent 1px);
+    background-position: top center;
+    opacity: 0.1;
+    mask-image: linear-gradient(
+        to bottom,
+        transparent,
+        #000 18%,
+        #000 82%,
+        transparent
+    );
+    pointer-events: none;
+    z-index: 0;
+}
+
+.slidev-page > * {
+    position: relative;
+    z-index: 1;
+}
+
+:root {
+    @apply [--slidev-code-background:theme(colors.zinc.800)] dark:[--slidev-code-background:theme(colors.zinc.900)];
+}
+
+.slidev-layout {
+    @apply px-14 py-10 text-[1.55rem];
+    font-family: Inter, inter-fallback, system-ui, sans-serif;
+    font-weight: 300;
+    color: #e2e6ee;
+    font-variation-settings: var(--sans-wght);
+    font-feature-settings:
+        var(--sans-case), var(--sans-ss03), var(--sans-cpsp), var(--sans-cv03),
+        var(--cv04), var(--cv05), var(--cv06);
+
+    :not(pre) > code {
+        color: #f2f6fa;
+        background: rgba(255, 255, 255, 0.1);
+        border: 1px solid rgba(255, 255, 255, 0.18);
+        padding: 0.08em 0.45em;
+        border-radius: 0.4em;
+    }
+
+    h1,
+    h2,
+    h3,
+    h4,
+    p,
+    div {
+        @apply select-none;
+    }
+
+    h1,
+    h2,
+    h3,
+    h4 {
+        font-family: Obviously, obviously-fallback, system-ui, sans-serif;
+        font-variation-settings:
+            var(--heading-wdth), var(--heading-wght), var(--heading-slnt);
+        font-feature-settings:
+            var(--heading-salt), var(--heading-ss06), var(--heading-ss11),
+            var(--heading-cv09), var(--heading-liga), var(--heading-calt);
+        color: #f2f6fa;
+    }
+
+    pre,
+    code {
+        @apply select-text;
+        font-family: MDIO, md-io-fallback, monospace;
+        font-variation-settings: var(--mono-ital);
+        font-feature-settings: var(--mono-calt), var(--mono-zero);
+    }
+
+    h1 {
+        @apply text-6xl mb-4 font-300 -ml-[0.05em];
+    }
+    h1 + h2 {
+        @apply -mt-4;
+    }
+
+    h2 {
+        @apply text-4xl font-700;
+    }
+
+    h3 {
+        @apply text-lg pt-2 uppercase tracking-widest font-500 -ml-[0.05em];
+    }
+
+    h3:not(.opacity-100) {
+        @apply opacity-40;
+    }
+
+    p {
+        @apply my-5 leading-8;
+    }
+
+    h1 + p {
+        @apply -mt-2 mb-4;
+    }
+
+    p + h2,
+    ul + h2,
+    table + h2 {
+        @apply mt-10;
+    }
+
+    ul {
+        list-style: disc;
+        @apply mb-4;
+    }
+
+    li {
+        @apply ml-1.1em pl-0.2em leading-[2.2em];
+    }
+
+    blockquote {
+        @apply text-sm px-2 py-1 border-l rounded;
+        background: rgba(255, 255, 255, 0.08);
+        border-left-color: rgba(255, 255, 255, 0.25);
+    }
+
+    blockquote > * {
+        @apply my-0;
+    }
+
+    table {
+        @apply w-full;
+    }
+
+    tr {
+        @apply border-b border-zinc-400 border-opacity-20;
+    }
+
+    th {
+        @apply text-left font-400;
+    }
+
+    a {
+        color: #f2f6fa;
+        border-bottom: 1px solid rgba(255, 255, 255, 0.4);
+    }
+
+    a:hover {
+        color: #ffffff;
+    }
+
+    ol {
+        @apply list-decimal;
+    }
+
+    td,
+    th {
+        @apply p-2 py-3;
+    }
+
+    b,
+    strong {
+        @apply font-600;
+    }
+
+    kbd {
+        @apply border border-b-2 rounded;
+        border-color: rgba(255, 255, 255, 0.2);
+        background: rgba(255, 255, 255, 0.08);
+        @apply py-0.5 px-1 text-sm font-mono;
+    }
+}
+
+.slidev-layout.center {
+    @apply text-center h-full;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+
+    h1 {
+        @apply text-5xl text-balance;
+    }
+}
+
+.slidev-layout.center-vertical,
+.slidev-page.center-vertical .slidev-layout {
+    @apply h-full;
+    min-height: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+}
+
+.slidev-layout.intro-image,
+.slidev-layout.intro {
+    @apply h-full;
+
+    h1 {
+        @apply text-6xl font-700 leading-20;
+    }
+
+    h1 + p {
+        @apply font-700 -mt-4 text-2xl;
+    }
+}
+.slidev-layout.fact {
+    @apply text-center;
+    h1 {
+        line-height: 160%;
+        @apply text-8xl font-700　leading-[1.6];
+    }
+    h1 + p {
+        @apply font-700 text-2xl;
+    }
+}
+.slidev-layout.statement {
+    @apply text-center;
+
+    h1 {
+        @apply text-6xl font-700;
+    }
+}
+.slidev-layout.quote {
+    h1 + p {
+        @apply mt-6 ml-6;
+    }
+}
+.slidev-layout.section {
+    h1 {
+        @apply text-6xl font-500 leading-20;
+    }
+}
