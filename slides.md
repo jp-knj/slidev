@@ -10,7 +10,6 @@ themeConfig:
   primary: "#e8c4f9"
 info: |
   30分で「Astroの事実・技術・コミュニティ」を一本の線にまとめる基調講演。
-  各トピックに適用し、デモと行動指針まで落とし込みます。
 ---
 
 ---
@@ -26,13 +25,9 @@ src: ./slides/2.0.pillars.md
 ---
 
 ---
-src: ./slides/3.0.v6.md
+src: ./slides/3.0.community.md
 ---
 
 ---
-src: ./slides/4.0.community.md
----
-
----
-src: ./slides/5.0.end.md
+src: ./slides/4.0.end.md
 ---
