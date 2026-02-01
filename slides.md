@@ -31,9 +31,9 @@ class: flex items-center justify-center h-full
     <div>
         <h3>今日のはなし</h3>
         <ol class="text-xl font-bold">
-            <li>Astroの現在地</li>
-            <li>現場が抱える痛み</li>
-            <li>エコシステムを支える</li>
+            <li>Astroのいま</li>
+            <li>Astroのつらみ</li>
+            <li>コミニティの役割</li>
         </ol>
     </div>
 </div>
@@ -43,7 +43,7 @@ layout: cover
 class: flex flex-col items-center justify-center h-full
 ---
 
-## Astroは静的ジェネレーター 🤔
+## Astroは静的サイト向けなのか 🤔
 
 ---
 layout: cover
@@ -51,7 +51,7 @@ class: center
 ---
 
 <div class="mt-8">
-  <div class="text-2xl text-white font-light mb-4 text-opacity-60">静的サイトジェネレーターではなく</div>
+  <div class="text-2xl text-white font-light mb-4 text-opacity-60">静的サイト向けではなく</div>
   <div class="text-5xl font-black text-white filter drop-shadow-lg">
     コンテンツ駆動
   </div>
@@ -62,7 +62,7 @@ class: center
 layout: center
 ---
 
-# 再認知されるように
+# 👀　👀　👀
 
 ---
 layout: section
@@ -193,9 +193,8 @@ layout: center
 layout: center
 ---
 
-## Vite Environment API移行
-
-Container APIの追加/どこでもAstro
+<h2 class="mt-8">どこでもAstro 🔔</h2>
+<h4>Container API</h4>
 
 <div class="mt-8 flex gap-8">
   <div class="w-1/2 flex flex-col gap-4">
@@ -215,22 +214,15 @@ Container APIの追加/どこでもAstro
   </div>
 </div>
 
----
-layout: center
-class: flex flex-col items-center justify-center h-full
----
-
-## ブログ、マーケティング、eコマースを
-## 構築することに特化したフレームワーク
-
-<!--<div class="text-2xl text-white font-light mt-4 text-opacity-60">...やっぱりNext.jsがいいんだ</div>-->
+<h2 class="mt-8">Vite Environment APIへ移行</h2>
 
 ---
 layout: center
 class: flex flex-col items-center justify-center h-full
 ---
 
-## 機能の成熟とともに
+## Proxy としてもイケてる
+## UIレンダリングエンジン
 
 ---
 
@@ -258,14 +250,27 @@ layout: cover
 class: flex flex-col items-center justify-center h-full
 ---
 
-## Astro Community
+## Astro Ecosystem
 
 ---
 layout: cover
 class: flex flex-col items-center justify-center h-full
 ---
 
-## Open Collective 🏦
+<h2 class="flex items-center justify-center">
+Open Collective 🏦　+
+
+<div class="flex ml-8">
+  <img src="./images/cloudflare.svg" class="h-20" alt="Cloudflare" />
+</div>
+</h2>
+
+---
+layout: cover
+class: flex flex-col items-center justify-center h-full
+---
+
+## withastro 🚀 + astrolicious 🍨
 
 ---
 layout: cover
@@ -292,7 +297,7 @@ class: flex flex-col items-center justify-center h-full
     ota-meshi
   </a>
   <a href="https://github.com/morinokami">
-    <img src="./images/morinokami.png" width="120" alt="Shinya Fujino" class="rounded-full" />
+    <img src="https://github.com/morinokami.png" width="120" alt="Shinya Fujino" class="rounded-full" />
     Shinya Fujino
   </a>
 </div>
@@ -306,7 +311,7 @@ class: flex flex-col items-center justify-center h-full
 
 <div class="flex gap-6 flex-wrap mt-12">
   <a href="https://github.com/morinokami">
-    <img src="./images/morinokami.png" width="120" alt="Shinya Fujino" class="rounded-full" />
+    <img src="https://github.com/morinokami.png" width="120" alt="Shinya Fujino" class="rounded-full" />
     Shinya Fujino
   </a>
 </div>
@@ -333,17 +338,24 @@ class: flex flex-col items-center justify-center h-full
 ---
 
 ## ここから本題
+### Astroのつらみ
 
 ---
 
-## 境界線の問題
+## シリアライズの壁
 
 <img src="./images/boundary.png" class="mx-auto" alt="境界線の問題" />
 
 ---
 
-## サーバ上で完結するAstro
-### ComponentPropsとPolymorphicの限界
+## nanostores
+
+<img src="./images/nanostore.png" class="mt-10 h-90 mx-auto" alt="nanostores" />
+
+---
+
+## Astroはサーバーで完結させたい
+### ComponentPropsとPolymorphicの限界がある
 
 <div class="flex justify-center items-center gap-6 mt-20">
   <img src="./images/logos/react.svg" class="h-20" alt="React" />
@@ -356,12 +368,6 @@ class: flex flex-col items-center justify-center h-full
   <img src="./images/logos/alpine-js.svg" class="h-20" alt="Alpine.js" />
   <img src="./images/logos/lit.svg" class="h-20" alt="Lit" />
 </div>
-
----
-
-## nanostores
-
-<img src="./images/nanostore.png" class="mt-10 h-90 mx-auto" alt="nanostores" />
 
 ---
 
@@ -383,7 +389,7 @@ layout: center
 class: flex flex-col justify-center
 ---
 
-## セーフティネット
+## 話がしたい。話を聞きたい。
 
 ---
 layout: center
@@ -391,6 +397,10 @@ class: flex flex-col justify-center
 ---
 
 ## Astro Japan Community 設立
+
+---
+
+## つくっただけ、特に何も決めた。
 
 ---
 layout: center
