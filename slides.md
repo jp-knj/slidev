@@ -181,10 +181,10 @@ layout: center
       <h4 class="text-xl font-bold text-white">Standard Sessions</h4>
     </div>
     <div class="flex-grow grid grid-cols-2 gap-2 mb-4">
-      <div class="bg-white/20 rounded flex items-center justify-center p-4"><img src="https://docs.astro.build/logos/aws.svg" class="h-10" alt="AWS" /></div>
-      <div class="bg-white/20 rounded flex items-center justify-center p-4"><img src="https://docs.astro.build/logos/vercel.svg" class="h-10" alt="Vercel" /></div>
-      <div class="bg-white/20 rounded flex items-center justify-center p-4"><img src="https://docs.astro.build/logos/cloudflare-pages.svg" class="h-10" alt="Cloudflare" /></div>
-      <div class="bg-white/20 rounded flex items-center justify-center p-4"><img src="https://docs.astro.build/logos/node.svg" class="h-10" alt="Node" /></div>
+      <div class="bg-white/20 rounded flex items-center justify-center p-4"><img src="./images/aws.svg" class="h-10" alt="AWS" /></div>
+      <div class="bg-white/20 rounded flex items-center justify-center p-4"><img src="./images/vercel.svg" class="h-10" alt="Vercel" /></div>
+      <div class="bg-white/20 rounded flex items-center justify-center p-4"><img src="./images/cloudflare-pages.svg" class="h-10" alt="Cloudflare" /></div>
+      <div class="bg-white/20 rounded flex items-center justify-center p-4"><img src="./images/node.svg" class="h-10" alt="Node" /></div>
     </div>
   </div>
 </div>
@@ -195,28 +195,23 @@ layout: center
 
 ## Vite Environment API移行
 
-複雑なレンダリング環境を、開発環境で分離・再現
+実験的なContainer APIの追加
 
 <div class="mt-8 flex gap-8">
-
   <div class="w-1/2 flex flex-col gap-4">
     <div class="bg-transparent border border-white/30 p-4 rounded-lg text-center border-l-4">
-      <span class="font-bold block text-white">Browser Runtime</span>
+      <span class="font-bold block text-white">Browser</span>
     </div>
     <div class="bg-transparent border border-white/30 p-4 rounded-lg text-center border-l-4">
-      <span class="font-bold block text-white">Node.js Runtime</span>
+      <span class="font-bold block text-white">Node.js</span>
     </div>
     <div class="bg-transparent border border-white/30 p-4 rounded-lg text-center border-l-4">
-      <span class="font-bold block text-white">Edge Runtime</span>
+      <span class="font-bold block text-white">Edge</span>
     </div>
   </div>
 
-  <div class="w-1/2 flex flex-col justify-center gap-6">
-    <div>
-      <p class="text-left">
-        テストで嬉しいやつ
-      </p>
-    </div>
+  <div class="w-1/2 font-bold flex flex-col justify-center gap-6">
+      1つのコードを<br/>3つの環境で
   </div>
 </div>
 
@@ -298,7 +293,7 @@ class: flex flex-col items-center justify-center h-full
   </a>
   <a href="https://github.com/morinokami">
     <img src="https://github.com/morinokami.png" width="120" alt="Shinya Fujino" class="rounded-full" />
-    morinokami
+    Shinya Fujino
   </a>
 </div>
 
@@ -312,7 +307,7 @@ class: flex flex-col items-center justify-center h-full
 <div class="flex gap-6 flex-wrap mt-12">
   <a href="https://github.com/morinokami">
     <img src="https://github.com/morinokami.png" width="120" alt="Shinya Fujino" class="rounded-full" />
-    morinokami
+    Shinya Fujino
   </a>
 </div>
 
@@ -348,7 +343,7 @@ class: flex flex-col items-center justify-center h-full
 ---
 
 ## サーバ上で完結するAstro
-## ComponentPropsとPolymorphicの限界
+### ComponentPropsとPolymorphicの限界
 
 <div class="flex justify-center items-center gap-6 mt-20">
   <img src="./images/logos/react.svg" class="h-20" alt="React" />
