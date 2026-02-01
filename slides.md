@@ -398,9 +398,17 @@ class: flex flex-col justify-center
 
 ## Astro Japan Community 設立
 
+### 設立したはいいんだけど
+
+---
+layout: center
+class: flex flex-col justify-center
 ---
 
-## つくっただけ、特に何も決めた。
+## 🥹 🥹 🥹
+
+<p>もしかしたら、会場提供のお願いとか</p>
+<p>登壇依頼するかもしれません。 助けて🙏</p>
 
 ---
 layout: center
