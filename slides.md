@@ -195,7 +195,7 @@ layout: center
 
 ## Vite Environment API移行
 
-実験的なContainer APIの追加
+Container APIの追加/どこでもAstro
 
 <div class="mt-8 flex gap-8">
   <div class="w-1/2 flex flex-col gap-4">
@@ -276,23 +276,23 @@ class: flex flex-col items-center justify-center h-full
 
 <div class="flex gap-6 flex-wrap mt-12">
   <a href="https://github.com/ktym4a">
-    <img src="https://github.com/ktym4a.png" width="120" alt="ktym4a" class="rounded-full" />
+    <img src="./images/ktym4a.png" width="120" alt="ktym4a" class="rounded-full" />
     ktym4a
   </a>
   <a href="https://github.com/kyosuke">
-    <img src="https://github.com/kyosuke.png" width="120" alt="Kyosuke" class="rounded-full" />
+    <img src="./images/kyosuke.png" width="120" alt="Kyosuke" class="rounded-full" />
     kyosuke
   </a>
   <a href="https://github.com/pilcrowonpaper" class="flex flex-col items-center justify-center h-full">
-    <img src="https://github.com/pilcrowonpaper.png" width="120" alt="pilcrow" class="rounded-full" />
+    <img src="./images/pilcrowonpaper.png" width="120" alt="pilcrow" class="rounded-full" />
     pilcrowonpaper
   </a>
   <a href="https://github.com/ota-meshi">
-    <img src="https://github.com/ota-meshi.png" width="120" alt="ota-shi" class="rounded-full" />
+    <img src="./images/ota-meshi.png" width="120" alt="ota-shi" class="rounded-full" />
     ota-meshi
   </a>
   <a href="https://github.com/morinokami">
-    <img src="https://github.com/morinokami.png" width="120" alt="Shinya Fujino" class="rounded-full" />
+    <img src="./images/morinokami.png" width="120" alt="Shinya Fujino" class="rounded-full" />
     Shinya Fujino
   </a>
 </div>
@@ -306,7 +306,7 @@ class: flex flex-col items-center justify-center h-full
 
 <div class="flex gap-6 flex-wrap mt-12">
   <a href="https://github.com/morinokami">
-    <img src="https://github.com/morinokami.png" width="120" alt="Shinya Fujino" class="rounded-full" />
+    <img src="./images/morinokami.png" width="120" alt="Shinya Fujino" class="rounded-full" />
     Shinya Fujino
   </a>
 </div>
