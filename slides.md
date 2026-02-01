@@ -199,7 +199,7 @@ layout: center
 ---
 
 <h2 class="mt-8">どこでもAstro 🔔</h2>
-<h4>Container API</h4>
+<h4>Container API　+ Server Islands</h4>
 
 <div class="mt-8 flex gap-8">
   <div class="w-1/2 flex flex-col gap-4">
@@ -421,3 +421,41 @@ class: text-center
 ---
 
 ## 終わり
+
+---
+layout: center
+class: text-center
+---
+
+## 休憩
+
+---
+layout: center
+---
+
+<h2>#Gulp #jQuery #Webpack #EJS</h2>
+<h2 class="mt-6">#MPA #SPA</h2>
+<h2 class="mt-6">#Vite #Next.js(Turbopack)</h2>
+<h2 class="mt-6">#Node #WinterCG(Deno, Bun)</h2>
+<h2 class="mt-6">#ホースティングサービス</h2>
+<h2 class="mt-6">#Nuxt #React #Svelte #Starlight #Edge</h2>
+
+<div class="mt-6 flex gap-8 flex-wrap justify-center">
+  <div class="flex flex-col items-center text-center w-36">
+      <img src="./images/jp-knj.png" width="100" class="rounded-full" alt="冨田 健治"/>
+  </div>
+  <div class="flex flex-col items-center text-center w-36">
+    <img src="./images/kyosuke.png" width="100" class="rounded-full" alt="中村 享介" />
+    <p class="text-sm !my-0">kyosuke</p>
+  </div>
+  <div class="flex flex-col items-center text-center w-36">
+    <img src="./images/wattanx.png" width="100" class="rounded-full" alt="渡邊 涼太" />
+    <p class="text-sm !my-0">wattanx（わったん）</p>
+  </div>
+  <div class="flex flex-col items-center text-center w-36">
+      <img src="./images/yuheiy.png" width="100" class="rounded-full" alt="安田 祐平" />
+      <p class="text-sm !my-0">全部入りHTML太郎</p>
+  </div>
+</div>
+
+---
