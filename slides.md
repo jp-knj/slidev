@@ -8,6 +8,11 @@ colorSchema: dark
 themeConfig:
   primary: "#e8c4f9"
 layout: center-vertical
+---
+
+<img src="./images/icon.png" class="" alt="profile" />
+
+---
 class: text-left flex flex-col justify-center h-full
 ---
 
@@ -221,7 +226,7 @@ layout: center
 class: flex flex-col items-center justify-center h-full
 ---
 
-## Proxy としてもイケてる
+## Proxyとしてもイケる
 ## UIレンダリングエンジン
 
 ---
@@ -408,7 +413,7 @@ class: flex flex-col justify-center
 ## 🥹 🥹 🥹
 
 <p>もしかしたら、会場提供のお願いとか</p>
-<p>登壇依頼するかもしれません。 助けて🙏</p>
+<p>登壇依頼するかもしれません。 助けてください　🙏</p>
 
 ---
 layout: center
