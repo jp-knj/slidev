@@ -413,7 +413,7 @@ class: flex flex-col justify-center
 ## 🥹 🥹 🥹
 
 <p>もしかしたら、会場提供のお願いとか</p>
-<p>登壇依頼するかもしれません。 助けてください　🙏</p>
+<p>登壇依頼するかもしれません。 助けてください🙏</p>
 
 ---
 layout: center
