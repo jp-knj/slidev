@@ -9,9 +9,8 @@ themeConfig:
   primary: "#e8c4f9"
 layout: center-vertical
 class: text-left flex flex-col justify-center h-full
-----
+---
 
-## Astro 2026
 ## コンテンツ駆動と
 ## コミュニティの役割
 
@@ -33,8 +32,8 @@ class: flex items-center justify-center h-full
         <h3>今日のはなし</h3>
         <ol class="text-xl font-bold">
             <li>Astroの現在地</li>
-            <li>現場が抱える「痛み」</li>
-            <li>持続可能なエコシステム</li>
+            <li>現場が抱える痛み</li>
+            <li>エコシステムを支える</li>
         </ol>
     </div>
 </div>
@@ -44,7 +43,7 @@ layout: cover
 class: flex flex-col items-center justify-center h-full
 ---
 
-## Astroは静的ジェネレーターなのか 🤔
+## Astroは静的ジェネレーター 🤔
 
 ---
 layout: cover
@@ -60,10 +59,16 @@ class: center
 </div>
 
 ---
+layout: center
+---
+
+# 再認知されるように
+
+---
 layout: section
 ---
 
-# 1. コンテンツ駆動の深化
+# 1. コンテンツ駆動の深み
 ## ファイル管理からデータ基盤へ
 
 ---
@@ -75,18 +80,29 @@ layout: default
 <div class="grid grid-cols-2 gap-8 mt-10">
   <div class="relative p-6 rounded-xl bg-transparent border border-white/30">
     <div class="absolute -top-4 left-4 bg-white/20 text-white px-3 py-1 text-xs rounded-full font-bold">BEFORE</div>
-    <h2 class="font-bold"><span class="text-opacity-30">File Based Management</span></h2>
+    <h2 class="font-bold"><span class="text-opacity-30">File Based</span></h2>
+    <h4 class="mt-8">
+      2016: Modern SSR
+    </h4>
+    <h4 class="mt-2">
+      2018: Content Mesh</h4>
+    <h4 class="mt-2">
+      2020: Content Collection
+    </h4>
   </div>
   <div class="relative p-6 rounded-xl bg-transparent border-2 border-white">
       <div class="absolute -top-4 left-4 bg-purple-600 text-white px-3 py-1 text-xs rounded-full font-bold">AFTER</div>
     <h2 class="font-bold text-white">Content Layer</h2>
-    Gatsby + GraphQL + Webpack
-    Astro + SQLite + zod + Vite
+    <h4 class="mt-8">
+      2024: Database
+    </h4>
   </div>
 </div>
-<div class="mt-8 p-4 text-center">
-  <span class="font-bold text-white">Live CollectionsでHMRで瞬時にプレビューへ反映。リビルド不要</span>
-</div>
+
+<h2 class="mt-8 p-4 text-center">
+  内部エンジンがSQLite化<br/>
+  Live Content Collections
+</h2>
 
 ---
 layout: section
@@ -101,14 +117,14 @@ layout: center
 
 ## Server Islands
 
-**速さと動的のトレードオフを解消**
+速さとパーソナルのトレードオフを解消
 
 <div class="flex items-center justify-between gap-4 w-full mt-8">
   <div class="flex-1 text-center min-w-0">
     <div class="bg-transparent border border-white/30 p-6 rounded-lg mb-4 h-32 flex items-center justify-center">
       <span class="text-4xl">🖼️</span>
     </div>
-    <h4 class="font-bold text-white whitespace-nowrap overflow-visible">1. Static Shell</h4>
+    <h4 class="font-bold text-white whitespace-nowrap overflow-visible">Static Shell</h4>
   </div>
 
   <div class="text-2xl text-white flex-shrink-0">➜</div>
@@ -117,7 +133,7 @@ layout: center
     <div class="bg-transparent p-6 rounded-lg mb-4 h-32 flex items-center justify-center border-2 border-white/30">
       <span class="text-4xl animate-pulse">⚙️</span>
     </div>
-    <h4 class="font-bold text-white whitespace-nowrap overflow-visible">2. Server Defer</h4>
+    <h4 class="font-bold text-white whitespace-nowrap overflow-visible">Server Defer</h4>
   </div>
 
   <div class="text-2xl text-white flex-shrink-0">➜</div>
@@ -126,9 +142,8 @@ layout: center
       <div class="bg-transparent p-6 rounded-lg mb-4 h-32 flex items-center justify-center border-2 border-white/30">
       <span class="text-4xl">👤</span>
     </div>
-    <h4 class="font-bold text-white whitespace-nowrap overflow-visible">3. Injection</h4>
+    <h4 class="font-bold text-white whitespace-nowrap overflow-visible">Injection</h4>
   </div>
-
 </div>
 
 ---
@@ -136,7 +151,7 @@ layout: section
 ---
 
 # 3. アプリケーション基盤の強化
-## SaaS開発を支える標準化
+## 開発を支える標準化
 
 ---
 layout: center
@@ -151,7 +166,7 @@ layout: center
       <span class="text-white text-xl">💻</span>
       <h4 class="text-xl font-bold text-white">Astro Actions</h4>
     </div>
-    <div class="border-2 py-2 border-white/30 flex-grow flex items-center justify-center rounded mb-4 bg-black/20">
+    <div class="border-2 px-2 border-white/30 flex-grow flex items-center justify-center rounded mb-4 bg-black/20">
       <div class="text-lg text-center font-mono">
         actions.like.safe(input)<br>
         ⬇<br>
@@ -166,20 +181,13 @@ layout: center
       <h4 class="text-xl font-bold text-white">Standard Sessions</h4>
     </div>
     <div class="flex-grow grid grid-cols-2 gap-2 mb-4">
-      <div class="bg-white/20 rounded flex items-center justify-center text-xs text-white font-bold">AWS</div>
-      <div class="bg-white/20 rounded flex items-center justify-center text-xs text-white font-bold">Vercel</div>
-      <div class="bg-white/20 rounded flex items-center justify-center text-xs text-white font-bold">Cloudflare</div>
-      <div class="bg-white/20 rounded flex items-center justify-center text-xs text-white font-bold">Node</div>
+      <div class="bg-white/20 rounded flex items-center justify-center p-4"><img src="https://docs.astro.build/logos/aws.svg" class="h-10" alt="AWS" /></div>
+      <div class="bg-white/20 rounded flex items-center justify-center p-4"><img src="https://docs.astro.build/logos/vercel.svg" class="h-10" alt="Vercel" /></div>
+      <div class="bg-white/20 rounded flex items-center justify-center p-4"><img src="https://docs.astro.build/logos/cloudflare-pages.svg" class="h-10" alt="Cloudflare" /></div>
+      <div class="bg-white/20 rounded flex items-center justify-center p-4"><img src="https://docs.astro.build/logos/node.svg" class="h-10" alt="Node" /></div>
     </div>
   </div>
 </div>
-
----
-layout: section
----
-
-# 4. 開発基盤の刷新
-## Vite Environment API への移行
 
 ---
 layout: center
@@ -187,7 +195,7 @@ layout: center
 
 ## Vite Environment API移行
 
-**複雑なレンダリング環境を、開発環境で分離・再現**
+複雑なレンダリング環境を、開発環境で分離・再現
 
 <div class="mt-8 flex gap-8">
 
@@ -206,9 +214,7 @@ layout: center
   <div class="w-1/2 flex flex-col justify-center gap-6">
     <div>
       <p class="text-left">
-        複雑な構成でも<br/>
-        本番環境と同じ挙動を<br/>
-        ローカルで再現。
+        テストで嬉しいやつ
       </p>
     </div>
   </div>
@@ -219,7 +225,17 @@ layout: center
 class: flex flex-col items-center justify-center h-full
 ---
 
-## 技術的な成熟が、どのように信頼に繋がったか
+## ブログ、マーケティング、eコマースを
+## 構築することに特化したフレームワーク
+
+<!--<div class="text-2xl text-white font-light mt-4 text-opacity-60">...やっぱりNext.jsがいいんだ</div>-->
+
+---
+layout: center
+class: flex flex-col items-center justify-center h-full
+---
+
+## 機能の成熟とともに
 
 ---
 
@@ -254,12 +270,7 @@ layout: cover
 class: flex flex-col items-center justify-center h-full
 ---
 
-## ❤️ Sponsors / Donations
-## ↓
 ## Open Collective 🏦
-## ↓
-## Contributors / Goods / Events
-## 💬 Support Squad
 
 ---
 layout: cover
@@ -326,42 +337,49 @@ class: flex flex-col items-center justify-center h-full
 class: flex flex-col items-center justify-center h-full
 ---
 
-## ここから、本題
+## ここから本題
 
 ---
 
 ## 境界線の問題
 
-サーバーサイドで実行される領域とタイミング
-ブラウザで実行される領域とタイミング
+<img src="./images/boundary.png" class="mx-auto" alt="境界線の問題" />
 
 ---
 
-## 型システムの制約
+## サーバ上で完結するAstro
+## ComponentPropsとPolymorphicの限界
 
-.astroファイルの独自構文とTypeScriptの型システムのあいだ
-
----
-
-## Astroのツールチェーン
-
+<div class="flex justify-center items-center gap-6 mt-20">
+  <img src="./images/logos/react.svg" class="h-20" alt="React" />
+  <img src="./images/logos/vue.svg" class="h-20" alt="Vue" />
+  <img src="./images/logos/svelte.svg" class="h-20" alt="Svelte" />
+  <img src="./images/logos/solid.svg" class="h-20" alt="SolidJS" />
+</div>
+<div class="flex justify-center items-center gap-6 mt-8">
+  <img src="./images/logos/preact.svg" class="h-20" alt="Preact" />
+  <img src="./images/logos/alpine-js.svg" class="h-20" alt="Alpine.js" />
+  <img src="./images/logos/lit.svg" class="h-20" alt="Lit" />
+</div>
 
 ---
 
 ## nanostores
 
----
-class: flex flex-col items-center justify-center h-full
+<img src="./images/nanostore.png" class="mt-10 h-90 mx-auto" alt="nanostores" />
+
 ---
 
-## うーん 🤔
+## Astroのツールチェーン
+
+<img src="./images/vscode.png" class="mt-10 h-90 mx-auto" alt="vscode" />
 
 ---
 layout: center
 class: flex flex-col items-center justify-center h-full
 ---
 
-# Astroという
+# .astroという
 # 独自言語が抱える
 # 宿命的な課題
 
@@ -384,16 +402,4 @@ layout: center
 class: text-center
 ---
 
-# 迷ったら、資産を選ぶ
-
-<div class="mt-4 mb-12 opacity-80">
-  その行動は、未来に残るか
-</div>
-
----
-layout: center
-class: text-center
----
-
-# 終わり
-### Questions / Feedback / Demo follow-up
+## 終わり
