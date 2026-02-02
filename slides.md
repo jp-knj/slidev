@@ -199,7 +199,7 @@ layout: center
 ---
 
 <h2>どこでもAstro 🔔</h2>
-<h4>Container API (Enviroment API)</h4>
+<h4>Container API (Enviroment API) + Server Island</h4>
 
 <div class="mt-12 flex items-center justify-center gap-4">
   <!-- Left: Backend Frameworks -->
