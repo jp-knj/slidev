@@ -198,28 +198,54 @@ layout: center
 layout: center
 ---
 
-<h2 class="mt-8">どこでもAstro 🔔</h2>
-<h4>Container API　+ Server Islands</h4>
+<h2>どこでもAstro 🔔</h2>
+<h4>Container API (Enviroment API)</h4>
 
-<div class="mt-8 flex gap-8">
-  <div class="w-1/2 flex flex-col gap-4">
-    <div class="bg-transparent border border-white/30 p-4 rounded-lg text-center border-l-4">
-      <span class="font-bold block text-white">Browser</span>
+<div class="mt-12 flex items-center justify-center gap-4">
+  <!-- Left: Backend Frameworks -->
+  <div class="flex flex-col items-center gap-6">
+    <div class="flex flex-col items-center gap-1">
+      <img src="/images/laravel.svg" class="w-12 h-12" />
+      <span class="text-sm opacity-80">Laravel</span>
     </div>
-    <div class="bg-transparent border border-white/30 p-4 rounded-lg text-center border-l-4">
-      <span class="font-bold block text-white">Node.js</span>
+    <div class="flex flex-col items-center gap-1">
+      <img src="/images/rails.svg" class="w-12 h-12" />
+      <span class="text-sm opacity-80">Rails</span>
     </div>
-    <div class="bg-transparent border border-white/30 p-4 rounded-lg text-center border-l-4">
-      <span class="font-bold block text-white">Edge</span>
+    <div class="flex flex-col items-center gap-1">
+      <img src="/images/hono.svg" class="w-12 h-12" />
+      <span class="text-sm opacity-80">Hono</span>
     </div>
   </div>
 
-  <div class="w-1/2 font-bold flex flex-col justify-center gap-6">
-      1つのコードを<br/>3つの環境で
+  <!-- Arrow -->
+  <span class="text-4xl opacity-60 mx-2">→</span>
+
+  <!-- Center: Astro -->
+  <div class="flex flex-col items-center gap-2 px-6 py-4 rounded-xl">
+    <img src="/images/astro.svg" class="w-20 h-20" />
+    <span class="text-lg font-bold">Astro</span>
+  </div>
+
+  <!-- Arrow -->
+  <span class="text-4xl opacity-60 mx-2">→</span>
+
+  <!-- Right: Runtime Environments -->
+  <div class="flex flex-col items-center gap-5">
+    <div class="flex flex-col items-center gap-1">
+      <img src="/images/browser.svg" class="w-10 h-10" />
+      <span class="text-sm opacity-80">Browser</span>
+    </div>
+    <div class="flex flex-col items-center gap-1">
+      <img src="/images/edge-runtime.svg" class="w-10 h-10" />
+      <span class="text-sm opacity-80">Edge</span>
+    </div>
+    <div class="flex flex-col items-center gap-1">
+      <img src="/images/node.svg" class="w-10 h-10" />
+      <span class="text-sm opacity-80">Node.js</span>
+    </div>
   </div>
 </div>
-
-<h2 class="mt-8">Vite Environment APIへ移行</h2>
 
 ---
 layout: center
