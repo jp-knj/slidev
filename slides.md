@@ -80,22 +80,22 @@ layout: section
 layout: default
 ---
 
-## 移り変わり
+## コンテンツのパラダイムシフト
 
-<div class="grid grid-cols-3 gap-4 mt-10">
-  <div class="relative p-6 rounded-xl bg-transparent border border-white/30">
+<div class="grid grid-cols-3 gap-3 mt-16">
+  <div class="relative p-4 rounded-xl bg-transparent border border-white/30">
     <h2 class="font-bold">Data Layer</h2>
-    <p class="mt-8 font-bold">
+    <h4 class="mt-8 leading-8 tracking-tighter">
       Gatsby.js+GraphQL<br/> 
       Content Mesh
-    </p>
+    </h4>
   </div>
-  <div class="relative p-6 rounded-xl bg-transparent border border-white/30">
+  <div class="relative p-4 rounded-xl bg-transparent border border-white/30">
     <h2 class="font-bold text-lg">Validation</h2>
-    <p class="mt-8">
+    <h4 class="mt-8 leading-8 tracking-tighter">
       Zod + File System<br/>
       Content Collection
-    </p>
+    </h4>
   </div>
   <div class="relative p-6 rounded-xl bg-transparent border-2 border-white">
     <div class="absolute -top-4 left-4 bg-purple-600 text-white px-3 py-1 text-xs rounded-full font-bold">New</div>
@@ -123,8 +123,6 @@ layout: center
 ---
 
 ## Server Islands
-
-速さとパーソナルのトレードオフを解消
 
 <div class="flex items-center justify-between gap-4 w-full mt-8">
   <div class="flex-1 text-center min-w-0">
