@@ -152,6 +152,46 @@ layout: center
 </div>
 
 ---
+layout: default
+---
+
+## Server Islandsのポテンシャル
+
+<h4 class="mt-8 text-center">コンポーネント単位でStatic→Serverへ段階的移行</h4>
+
+<div class="grid grid-cols-2 gap-8 mt-8">
+  <div>
+    <h4 class="text-center mb-4 font-bold">Static</h4>
+    <div class="border border-white/30 p-6 rounded-lg text-center">
+      <h2>
+        📄<br>
+        📄<br>
+        📄<br>
+        📄<br>
+        📄
+      </h2>
+    </div>
+  </div>
+
+  <div>
+    <h4 class="text-center mb-4 font-bold">Static + Server</h4>
+    <div class="border-2 border-purple-500 p-6 rounded-lg text-center">
+      <h2>
+        📄<br>
+        ⚙️ <span class="text-purple-400">Server</span><br>
+        📄<br>
+        ⚙️ <span class="text-purple-400">Server</span><br>
+        📄
+      </h2>
+    </div>
+  </div>
+</div>
+
+<div class="mt-8 text-center">
+<strong>🚀 メインプロセスを邪魔せず、遅いAPIが全体を止めない</strong><br>
+</div>
+
+---
 layout: section
 ---
 
