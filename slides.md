@@ -250,7 +250,7 @@ layout: center
     </div>
     <div class="flex flex-col items-center gap-1">
       <img src="/images/rails.svg" class="w-12 h-12" />
-      <span class="text-sm opacity-80">Rails</span>
+      <span class="text-sm opacity-80">Rails???</span>
     </div>
     <div class="flex flex-col items-center gap-1">
       <img src="/images/hono.svg" class="w-12 h-12" />
