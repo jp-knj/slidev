@@ -80,32 +80,34 @@ layout: section
 layout: default
 ---
 
-## Content Layer API
+## 移り変わり
 
-<div class="grid grid-cols-2 gap-8 mt-10">
+<div class="grid grid-cols-3 gap-4 mt-10">
   <div class="relative p-6 rounded-xl bg-transparent border border-white/30">
-    <div class="absolute -top-4 left-4 bg-white/20 text-white px-3 py-1 text-xs rounded-full font-bold">BEFORE</div>
-    <h2 class="font-bold"><span class="text-opacity-30">File Based</span></h2>
-    <h4 class="mt-8">
-      2016: Modern SSR
-    </h4>
-    <h4 class="mt-2">
-      2018: Content Mesh</h4>
-    <h4 class="mt-2">
-      2020: Content Collection
-    </h4>
+    <h2 class="font-bold">Data Layer</h2>
+    <p class="mt-8 font-bold">
+      Gatsby.js+GraphQL<br/> 
+      Content Mesh
+    </p>
+  </div>
+  <div class="relative p-6 rounded-xl bg-transparent border border-white/30">
+    <h2 class="font-bold text-lg">Validation</h2>
+    <p class="mt-8">
+      Zod + File System<br/>
+      Content Collection
+    </p>
   </div>
   <div class="relative p-6 rounded-xl bg-transparent border-2 border-white">
-      <div class="absolute -top-4 left-4 bg-purple-600 text-white px-3 py-1 text-xs rounded-full font-bold">AFTER</div>
-    <h2 class="font-bold text-white">Content Layer</h2>
+    <div class="absolute -top-4 left-4 bg-purple-600 text-white px-3 py-1 text-xs rounded-full font-bold">New</div>
+    <h2 class="font-bold text-white">Database</h2>
     <h4 class="mt-8">
-      2024: Database
+      Content Layer
     </h4>
   </div>
 </div>
 
 <h2 class="mt-8 p-4 text-center">
-  内部エンジンがSQLite化<br/>
+  エンジンはSQLite化<br/>
   Live Content Collections
 </h2>
 
@@ -198,8 +200,8 @@ layout: center
 layout: center
 ---
 
-<h2>どこでもAstro 🔔</h2>
-<h4>Container API (Enviroment API) + Server Island</h4>
+## どこでも動くAstro
+<h4 class="font-bold text-white mt-6">Container API (Enviroment API) + Server Island</h4>
 
 <div class="mt-12 flex items-center justify-center gap-4">
   <!-- Left: Backend Frameworks -->
