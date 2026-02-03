@@ -239,7 +239,7 @@ layout: center
 ---
 
 ## どこでも動くAstro
-<h4 class="font-bold text-white mt-6">Container API (Enviroment API) + Server Island</h4>
+<h4 class="font-bold text-white mt-6">Container API (Enviroment API)</h4>
 
 <div class="mt-12 flex items-center justify-center gap-4">
   <!-- Left: Backend Frameworks -->
@@ -294,6 +294,8 @@ class: flex flex-col items-center justify-center h-full
 
 ## Proxyとしてもイケる
 ## UIレンダリングエンジン
+
+<h4 class="mt-8">Server Islands, Fragment + Edge Routing + Container API</h4>
 
 ---
 
