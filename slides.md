@@ -86,7 +86,7 @@ layout: default
   <div class="relative p-4 rounded-xl bg-transparent border border-white/30">
     <h2 class="font-bold">Data Layer</h2>
     <h4 class="mt-8 leading-8 tracking-tighter">
-      Gatsby.js+GraphQL<br/> 
+      Gatsby.js+GraphQL<br/>
       Content Mesh
     </h4>
   </div>
@@ -331,11 +331,9 @@ class: flex flex-col items-center justify-center h-full
 ---
 
 <h2 class="flex items-center justify-center">
-Open Collective 🏦　+
-
-<div class="flex ml-8">
-  <img src="./images/cloudflare.svg" class="h-20" alt="Cloudflare" />
-</div>
+    <div class="flex ml-8">
+      <img src="./images/cloudflare.svg" class="h-20" alt="Cloudflare" />
+    </div> + Open Collective 🏦　
 </h2>
 
 ---
@@ -496,6 +494,8 @@ class: text-center
 ---
 
 ## 休憩
+
+<img src="./images/qrcode_discord.com.png" class="h-80 mx-auto mt-8" alt="Discord QR Code" />
 
 ---
 layout: center
