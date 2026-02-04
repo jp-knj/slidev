@@ -298,6 +298,17 @@ class: flex flex-col items-center justify-center h-full
 <h4 class="mt-8">Server Islands, Fragment + Edge Routing + Container API</h4>
 
 ---
+layout: center
+class: flex flex-col items-center justify-center h-full
+---
+
+## Astroを選ぶということは
+
+<h2 class="mt-4">「また自由に技術を選び直せる権利」</h2>
+
+<h2 class="mt-4">を確保すること</h2>
+
+---
 
 ## Astroの2025
 
