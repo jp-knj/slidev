@@ -228,41 +228,15 @@
     padding: 14px 18px !important;
 }
 
-/* Restore the nested syntax example on slide 19. */
-.slidev-layout.syntax-nesting .slidev-code {
-    font-size: 21px !important;
-    line-height: 28px !important;
+/*
+ * 第2章で、コードと <Flow> の図を1枚に同居させる枚。
+ * 既定の 30px だと図の高さぶんが足りなくなるので、コードだけ小さくする。
+ */
+.slidev-layout.ch2-code .slidev-code {
+    font-size: 22px !important;
+    line-height: 30px !important;
     padding: 14px 18px !important;
-}
-
-.syntax-nesting .syntax-layer {
-    border-left: 4px solid #9ca3af;
-    padding: 8px 0 8px 24px;
-    font-size: 26px;
-    line-height: 32px;
-    transition: border-color 0.3s ease;
-}
-
-.syntax-nesting .syntax-layer .syntax-layer {
-    margin-top: 8px;
-}
-
-.syntax-nesting .syntax-label {
-    color: #6b7280;
-    font-weight: 600;
-    transition: color 0.3s ease;
-}
-
-.syntax-nesting .syntax-source {
-    color: #374151;
-}
-
-.syntax-nesting .syntax-layer.is-active {
-    border-left-color: var(--layer-color);
-}
-
-.syntax-nesting .syntax-layer.is-active > .syntax-label {
-    color: var(--layer-color);
+    margin: 12px 0 !important;
 }
 
 .table-comparison .code-split {
