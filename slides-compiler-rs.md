@@ -1,10 +1,10 @@
 ---
 theme: ./theme-light
 author: jp-knj
-title: なぜAstroはGoコンパイラをRustで書き直したのか
+title: AstroとRustで考えるフロントエンドツールチェーンの今
 info: |
   動いていたGoコンパイラを、AstroはなぜRustで書き直したのか。
-  当時の判断と発見した問題と前提の変化と新しい判断の4章で、技術選定を責務の設計として読み解く。
+  当時の判断と発見した問題と前提の変化と新しい判断の4章で、歴史を読み解く。
 duration: 40min
 mdc: true
 transition: fade
@@ -77,19 +77,19 @@ class: body-center
 ## 話すこと
 
 <div class="grid grid-cols-1 gap-4 mt-10">
-  <div class="border-l-2 border-[#E5E0EC] pl-5">
+  <div>
     <div class="text-3xl font-600 mt-1">1. 当時の判断</div>
     <div class="text-lg opacity-60 mt-2">なぜ最初にGoとWASMを選んだのか</div>
   </div>
-  <div class="border-l-2 border-[#E5E0EC] pl-5">
+  <div>
     <div class="text-3xl font-600 mt-1">2. 発見した問題</div>
     <div class="text-lg opacity-60 mt-2">使い続けるなかで何が見えたのか</div>
   </div>
-  <div class="border-l-2 border-[#E5E0EC] pl-5">
+  <div>
     <div class="text-3xl font-600 mt-1">3. 前提の変化</div>
     <div class="text-lg opacity-60 mt-2">2026年までに周囲はどう変わったのか</div>
   </div>
-  <div class="border-l-2 border-[#E5E0EC] pl-5">
+  <div>
     <div class="text-3xl font-600 mt-1">4. 新しい判断</div>
     <div class="text-lg opacity-60 mt-2">その結果、責務をどう分け直したのか</div>
   </div>
@@ -338,15 +338,34 @@ const props = { title: "second" };
   <div v-if="$clicks === 1"><span class="text-primary font-600">Template</span><br />HTML を基礎に、式やコンポーネントを書ける</div>
   <div v-if="$clicks === 2"><span class="text-primary font-600">{ }</span><br />JavaScript 式の結果を、その場所に表示する</div>
   <div v-if="$clicks === 3"><span class="text-primary font-600">Q. </span>この <code>title</code> は、どちらの値になる？</div>
-  <div v-if="$clicks === 3"　class="mt-4"><code>first</code> か、<code>second</code> か</div>
+  <div v-if="$clicks === 3" class="mt-4"><code>first</code> か、<code>second</code> か</div>
+  <section v-if="$clicks >= 4" class="syntax-answer-panel" aria-label="属性の値の答え">
+    <div class="syntax-answer-heading">
+      <strong class="syntax-answer-value"><code>first</code></strong>
+      <span class="syntax-answer-context">2022年の報告に基づく例</span>
+    </div>
+    <div class="syntax-answer-details">
+      <div>
+        <strong><code>second</code> と予想する理由</strong>
+        <div>後から書いた <code>{...props}</code> の <code>title</code> が優先されると考えるため。</div>
+      </div>
+      <div>
+        <strong>当時 <code>first</code> になった理由</strong>
+        <div>Astroが同じ名前の属性を出力し、<br />ブラウザが先にある <code>title="first"</code> を採用したため。</div>
+      </div>
+    </div>
+    <div class="syntax-answer-reference">
+      <a href="https://github.com/withastro/astro/issues/5558#issuecomment-1343799494" target="_blank" rel="noopener noreferrer">astro#5558の説明</a>
+    </div>
+  </section>
 </div>
 
 <Ref v-if="$clicks < 3" href="https://docs.astro.build/en/reference/astro-syntax/">Astro Syntax</Ref>
-<!--<Ref v-else href="https://github.com/withastro/astro/issues/5558#issuecomment-1343799494">astro#5558とspread attributes</Ref>-->
 
 <!--
 Astro の構文をおさらいします。初めに三本線で囲まれた Component script を示します。1クリック目で Template、2クリック目で波かっこに埋め込んだ JavaScript の式を示します。
 3クリック目では同じ例に属性を加え、title がどちらの値になるかを問いかけます。4クリック目で報告者の期待と当時の結果を示します。報告の論点に絞った例です。HTML の重複属性では先の値を採用し、JSX での props 合成では後の指定を優先します。Astro は HTML を基礎にした構文で、JSX に似ていても同じ規則とは限りません。この違いが利用者の期待との不一致になりました。
+2022年の元の報告にある class 属性を、ここでは title に簡略化しています。現在のAstroの挙動を示す例ではありません。
 -->
 
 ---
