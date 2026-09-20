@@ -202,89 +202,108 @@
     font-size: 20px;
 }
 
-/*
- * コード例は説明の主役なので、本文より大きく出す。
- * .code-hero  : 構文そのものを読ませる1枚（Astro構文など）
- * 既定        : 全幅のコード
- * .code-tall  : 全幅で行数が多いコード
- * .code-compact: 2カラムに並べる比較用。20px の床ちょうど
+/* Default code size, independent of load order.
+ * Slidev applies !important on .slidev-code, so scope the override to the layout.
+ * Restored progressive examples use their original sizes below.
  */
-/*
- * Slidev は .slidev-code の font-size / padding / margin を
- * CSS変数 + !important で当てるため、font-size を直接書いても効かない。
- * 既定値は 12px / 18px / 8px と小さいので、変数側を上書きする。
- */
-:root {
-    --slidev-code-font-size: 30px;
-    --slidev-code-line-height: 42px;
-    --slidev-code-padding: 22px 26px;
-    --slidev-code-margin: 16px 0;
-    --slidev-code-radius: 12px;
+.slidev-layout .slidev-code {
+    font-size: 30px !important;
+    line-height: 42px !important;
+    padding: 18px 24px !important;
+    margin: 16px 0 !important;
+    border-radius: 12px;
 }
 
-/*
- * ラッパーに変数を置いてもコードブロックまで継承されないので、
- * ここだけは Slidev の !important を上回る詳細度で直接当てる。
- */
-
-/* 構文そのものを読ませる1枚 */
-.slidev-layout.code-hero .slidev-code {
-    font-size: 32px !important;
-    line-height: 44px !important;
-    padding: 22px 26px !important;
-}
-
-/* 全幅だが行数が多い1枚。9行を説明つきで載せられる上限が24px/32px */
-.slidev-layout.code-tall .slidev-code {
+/* Restore the original progressive syntax overview on slide 13. */
+.slidev-layout.syntax-overview .slidev-code {
     font-size: 24px !important;
     line-height: 32px !important;
     padding: 5px 16px !important;
 }
 
-/*
- * クリックで対になるコードが現れるスライド用。
- * 左の幅が縮むのに合わせて、右が滑り込んでくる。
- */
-.code-split {
+/* Restore the original side-by-side table example. */
+.slidev-layout.table-comparison .slidev-code {
+    font-size: 21px !important;
+    line-height: 28px !important;
+    padding: 14px 18px !important;
+}
+
+/* Restore the nested syntax example on slide 19. */
+.slidev-layout.syntax-nesting .slidev-code {
+    font-size: 21px !important;
+    line-height: 28px !important;
+    padding: 14px 18px !important;
+}
+
+.syntax-nesting .syntax-layer {
+    border-left: 4px solid #9ca3af;
+    padding: 8px 0 8px 24px;
+    font-size: 26px;
+    line-height: 32px;
+    transition: border-color 0.3s ease;
+}
+
+.syntax-nesting .syntax-layer .syntax-layer {
+    margin-top: 8px;
+}
+
+.syntax-nesting .syntax-label {
+    color: #6b7280;
+    font-weight: 600;
+    transition: color 0.3s ease;
+}
+
+.syntax-nesting .syntax-source {
+    color: #374151;
+}
+
+.syntax-nesting .syntax-layer.is-active {
+    border-left-color: var(--layer-color);
+}
+
+.syntax-nesting .syntax-layer.is-active > .syntax-label {
+    color: var(--layer-color);
+}
+
+.table-comparison .code-split {
     transition: width 0.35s ease;
 }
 
-.reveal-right-enter-active {
+.table-comparison .reveal-right-enter-active {
     transition:
         opacity 0.3s ease 0.15s,
         transform 0.3s ease 0.15s;
 }
 
-.reveal-right-enter-from {
+.table-comparison .reveal-right-enter-from {
     opacity: 0;
     transform: translateX(1.5rem);
 }
 
-.reveal-right-leave-active {
+.table-comparison .reveal-right-leave-active {
     transition: opacity 0.15s ease;
 }
 
-.reveal-right-leave-to {
+.table-comparison .reveal-right-leave-to {
     opacity: 0;
 }
 
-/* 結論はその場でふわりと上がってくる */
-.reveal-up-enter-active {
+.table-comparison .reveal-up-enter-active {
     transition:
         opacity 0.3s ease,
         transform 0.3s ease;
 }
 
-.reveal-up-enter-from {
+.table-comparison .reveal-up-enter-from {
     opacity: 0;
     transform: translateY(0.75rem);
 }
 
-.reveal-up-leave-active {
+.table-comparison .reveal-up-leave-active {
     transition: opacity 0.15s ease;
 }
 
-.reveal-up-leave-to {
+.table-comparison .reveal-up-leave-to {
     opacity: 0;
 }
 
@@ -296,13 +315,6 @@
     background: rgba(188, 82, 238, 0.18);
     border-radius: 0.25em;
     box-shadow: 0 0 0 3px rgba(188, 82, 238, 0.18);
-}
-
-/* 2カラム比較。幅386pxに30桁が入る上限が21px */
-.slidev-layout.code-compact .slidev-code {
-    font-size: 21px !important;
-    line-height: 28px !important;
-    padding: 14px 18px !important;
 }
 
 /*

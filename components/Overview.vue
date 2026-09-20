@@ -51,8 +51,8 @@ type Node = Rect & {
 };
 
 const SUBS = [
-  { id: "parser", label: "Parser / AST" },
-  { id: "oxc", label: "Oxc（JS / TS）" },
+  { id: "parser", label: "ParserとAST" },
+  { id: "oxc", label: "Oxc（JSとTS）" },
   { id: "astro-syntax", label: "Astro固有の構文" },
 ] as const;
 
@@ -114,21 +114,21 @@ const box = (id: string, x: number, w: number, cy: number, h: number) => ({
 const BASE_NODES = computed<Node[]>(() => [
   // source 系はエディタのファイルタブに見えるよう tab: true で上端だけ角丸にする
   { ...box("source", 0, 175, 175, 70), label: ".astro", icon: "astro", tab: true },
-  { ...box("mdsource", 0, 175, 320, 70), label: ".md / .mdx", icon: "md", tab: true },
+  { ...box("mdsource", 0, 175, 320, 70), label: ".mdと.mdx", icon: "md", tab: true },
   { ...box("compiler", 215, 250, 175, compilerH.value), label: "Compiler", icon: "compiler" },
   {
     ...box("content", 215, 250, 320, 70),
     label: "Content Processor",
-    note: "Markdown / MDX",
+    note: "MarkdownとMDX",
   },
   {
     ...box("editor", 490, 378, 35, 70),
     label: "Editor",
-    note: "ESLint / LSP / Formatter",
+    note: "ESLintとLSPとFormatter",
     icon: "editor",
   },
   // ラベルが長いぶん、アイコンは横ではなく上に積んで幅に収める
-  { ...box("build", 490, 175, 175, 70), label: "Vite / Rolldown", icon: "vite", stack: true },
+  { ...box("build", 490, 175, 175, 70), label: "ViteとRolldown", icon: "vite", stack: true },
   { ...box("browser", 693, 175, 175, 70), label: "Browser", icon: "browser" },
 ]);
 
