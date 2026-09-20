@@ -2,7 +2,7 @@
 import { computed } from "vue";
 
 // foreignObject の中に置くので、相対パスではなく import して解決させる
-import gopher from "../images/logos/gopher-cute.svg";
+import gopher from "../images/logos/gopher-classic.png";
 
 const props = withDefaults(
   defineProps<{
@@ -416,6 +416,8 @@ const viewBox = computed(() => `0 ${vb.value.y} ${W} ${vb.value.h}`);
               <logos-astro-icon v-if="n.icon === 'astro'" class="ov-ico" />
               <logos-markdown v-else-if="n.icon === 'md'" class="ov-ico" />
               <logos-vitejs v-else-if="n.icon === 'vite'" class="ov-ico" />
+              <logos-svelte-icon v-else-if="n.icon === 'svelte'" class="ov-ico" />
+              <logos-snowpack v-else-if="n.icon === 'snowpack'" class="ov-ico" />
               <logos-visual-studio-code v-else-if="n.icon === 'editor'" class="ov-ico" />
               <carbon-code v-else-if="n.icon === 'compiler'" class="ov-ico ov-ico-mono" />
               <carbon-application-web v-else-if="n.icon === 'browser'" class="ov-ico ov-ico-mono" />
@@ -571,9 +573,9 @@ const viewBox = computed(() => `0 ${vb.value.y} ${W} ${vb.value.h}`);
   color: #6b7280;
 }
 
-/* Gopher は余白を含んだ正方形の svg なので、他のアイコンより少し大きく置く */
+/* Gopher は余白のない縦長の png。width を当てると潰れるので height だけにする */
 .ov-ico-go {
-  width: 40px;
+  width: auto;
   height: 40px;
 }
 

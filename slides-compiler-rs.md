@@ -114,10 +114,16 @@ layout: section
 layout: center
 ---
 
-<Overview visible="source,compiler,build,browser" :labels="{ build: 'Vite' }" />
+<Overview
+  visible="source,compiler,build,browser"
+  :labels="{ compiler: 'Svelte Compiler', build: 'Snowpack' }"
+  :icons="{ compiler: 'svelte', build: 'snowpack' }"
+/>
+
+<div class="text-center text-xl opacity-60 mt-2">Astro 0.x の出発点</div>
 
 <!--
-これが出発点の全体図です。.astro のソースを Astro Compiler が読んで、Build に渡して、最後にブラウザが表示する。この講演では、この図に何度も戻ってきます。章が進むごとに、登場人物と矢印が増えていきます。
+これが出発点です。最初の Astro は、.astro を Svelte のコンパイラの fork で読んで、Snowpack がビルドと配信を担い、ブラウザが表示する。この4つでした。ここに出ている Svelte Compiler と Snowpack は、このあと Go 製のコンパイラと Vite に入れ替わります。その入れ替えがこの章の話です。そしてこの図には、この講演で何度も戻ってきます。章が進むごとに、登場人物と矢印が増えていきます。
 -->
 
 ---
@@ -138,7 +144,7 @@ class: body-center
       <div class="w-3.5 h-3.5 rounded-full bg-[#9A90AB]"></div>
       <logos-vitejs class="text-6xl mt-8" />
       <div class="text-xl mt-5 leading-snug">Vite 2.0</div>
-      <img src="./images/logos/gopher.svg" alt="Go" class="h-16 mt-6" />
+      <img src="./images/logos/gopher-classic.png" alt="Go" class="h-16 mt-6" />
     </div>
     <div class="flex-1 min-w-0 flex flex-col items-center">
       <div class="text-3xl text-[#717781] h-11 leading-none">Sep</div>
@@ -166,14 +172,14 @@ class: body-center
       <div class="w-5 h-5 rounded-full bg-[#BC52EE] -mt-[3px]"></div>
       <logos-astro-icon class="text-6xl mt-8" />
       <div class="text-xl mt-5 leading-snug text-primary font-600">Astro 0.21</div>
-      <img src="./images/logos/gopher.svg" alt="Go" class="h-16 mt-6" />
+      <img src="./images/logos/gopher-classic.png" alt="Go" class="h-16 mt-6" />
     </div>
     <div class="flex-1 min-w-0 flex flex-col items-center">
       <div class="text-3xl text-[#717781] h-11 leading-none">Dec</div>
       <div class="w-3.5 h-3.5 rounded-full bg-[#9A90AB]"></div>
       <logos-turborepo-icon class="text-6xl mt-8" />
       <div class="text-xl mt-5 leading-snug">Turborepo</div>
-      <img src="./images/logos/gopher.svg" alt="Go" class="h-16 mt-6" />
+      <img src="./images/logos/gopher-classic.png" alt="Go" class="h-16 mt-6" />
     </div>
   </div>
 </div>
@@ -208,7 +214,7 @@ class: center-vertical
 <Ref href="https://natemoo.re/posts/hello-from-the-other-side/">Nate Moore — Hello from the other side</Ref>
 
 <!--
-Astro のコンパイラは Svelte のコンパイラの fork から始まりました。そこに Go を置き、JavaScript との境界に WASM を置き、ビルドは Vite に任せた。重要なのは、当時これは「ビルドのためのコンパイラ」だったということです。主な入口は transform API ひとつ。ソースを受け取って、実行できる JavaScript を返す。それが仕事のすべてでした。
+さきほどの Svelte のコンパイラの fork を、ここで Go に置き換えます。JavaScript との境界には WASM を置き、ビルドは Snowpack から Vite に任せ直した。重要なのは、当時これは「ビルドのためのコンパイラ」だったということです。主な入口は transform API ひとつ。ソースを受け取って、実行できる JavaScript を返す。それが仕事のすべてでした。
 選んだ理由は本人がこう書いています。esbuild が Go で書かれていたこと、Go が学びやすかったこと。深く考えすぎずに選んだ、と。そして esbuild を参考に Go を学んで、HTML5 のパーサを Astro 向けに拡張した。ここで HTML5 パーサをベースにしたことが、第2章の話につながります。
 -->
 
@@ -461,27 +467,25 @@ clicks: 3
 
 ## Go Compilerの二つのパーサー
 
-<Flow
-  :cols="[
-    [{ id: 's', label: '.astro\nSource', tone: 'gray' }],
-    [{ id: 't', label: 'Tokenizer', tone: 'gray' }],
-    [
-      { id: 'b', label: 'HTML5\nパーサー', tone: 'yellow', at: 1 },
-      { id: 'l', label: 'Literal modeの\nパーサー', tone: 'purple', at: 2 },
-    ],
-    [
-      { id: 'o', label: 'transform()', tone: 'blue', at: 1, note: 'Build向け' },
-      { id: 'e', label: 'parse()と\nconvertToTSX()', tone: 'blue', at: 3, note: 'Editor向け' },
-    ],
-  ]"
-  :edges="[
-    ['s', 't'],
-    ['t', 'b', { at: 1 }],
-    ['b', 'o', { at: 1 }],
-    ['t', 'l', { at: 2 }],
-    ['l', 'e', { at: 3 }],
-  ]"
-/>
+<div class="mt-10 flex flex-col items-center gap-8 text-3xl">
+  <div class="flex items-center gap-4 text-[#717781]">
+    <span>.astro Source</span><span class="text-[#9A90AB]">→</span><span>Tokenizer</span>
+  </div>
+  <div class="grid grid-cols-[auto_auto_auto] items-center gap-x-4 gap-y-7">
+    <span v-click="1" class="text-[#A36B09]">HTML5パーサー</span>
+    <span v-click="1" class="text-[#9A90AB]">→</span>
+    <span v-click="1" class="flex items-baseline gap-3">
+      <span class="text-[#0B7BC1]">transform()</span>
+      <span class="text-xl text-[#717781]">Build向け</span>
+    </span>
+    <span v-click="2" class="text-[#7611A6]">Literal modeのパーサー</span>
+    <span v-click="3" class="text-[#9A90AB]">→</span>
+    <span v-click="3" class="flex items-baseline gap-3">
+      <span class="text-[#0B7BC1]">parse()とconvertToTSX()</span>
+      <span class="text-xl text-[#717781]">Editor向け</span>
+    </span>
+  </div>
+</div>
 
 <Ref href="https://github.com/withastro/compiler/blob/ab9b285a34c482544da359f0ca91d0b0c25cdee4/cmd/astro-wasm/astro-wasm.go#L251-L284">Go Compiler 2.12.2とParseとConvertToTSXとTransform</Ref>
 
@@ -504,20 +508,19 @@ clicks: 4
 <p>A<div>B</div>C</p>
 ```
 
-<Flow
-  :cols="[
-    [{ id: 's', label: 'Astro\nSource', tone: 'gray' }],
-    [{ id: 'a', label: 'Astro AST', tone: 'purple', at: 1, note: 'pの子にdiv' }],
-    [{ id: 'j', label: '仮想JSX', tone: 'yellow', at: 2 }],
-    [{ id: 'e', label: 'ParserとESLint', tone: 'blue', at: 3 }],
-  ]"
-  :edges="[
-    ['s', 'a', { at: 1 }],
-    ['a', 'j', { at: 2 }],
-    ['j', 'e', { at: 3 }],
-    ['e', 's', { at: 4, dashed: true, label: '位置を戻す', tone: 'purple' }],
-  ]"
-/>
+<div class="mt-8 flex flex-col items-center gap-5">
+  <div class="flex items-center gap-3 text-3xl">
+    <span class="text-[#717781]">Astro Source</span>
+    <span v-click="1" class="text-[#9A90AB]">→</span>
+    <span v-click="1" class="text-[#7611A6]">Astro AST</span>
+    <span v-click="2" class="text-[#9A90AB]">→</span>
+    <span v-click="2" class="text-[#A36B09]">仮想JSX</span>
+    <span v-click="3" class="text-[#9A90AB]">→</span>
+    <span v-click="3" class="text-[#0B7BC1]">ParserとESLint</span>
+  </div>
+  <div v-click="1" class="text-xl text-[#7611A6]">Astro AST では、pの子がdiv</div>
+  <div v-click="4" class="text-2xl text-[#7611A6]">診断の位置は、元のSourceへ戻す</div>
+</div>
 
 <Ref href="https://github.com/ota-meshi/astro-eslint-parser/blob/v1.2.2/src/parser/index.ts">astro-eslint-parser v1.2.2とparseForESLint</Ref>
 
@@ -542,21 +545,20 @@ clicks: 4
 <p>A<div>B</div>C</p>
 ```
 
-<Flow
-  :cols="[
-    [{ id: 's', label: 'Source', tone: 'gray' }],
-    [{ id: 'a', label: 'Astro AST', tone: 'purple', at: 1, note: 'pの子にdiv' }],
-    [{ id: 'p', label: 'Astro Printer', tone: 'yellow', at: 2 }],
-    [{ id: 'f', label: 'Prettier', tone: 'blue', at: 3 }],
-    [{ id: 'o', label: '整形後の\nSource', tone: 'purple', at: 4 }],
-  ]"
-  :edges="[
-    ['s', 'a', { at: 1 }],
-    ['a', 'p', { at: 2 }],
-    ['p', 'f', { at: 3 }],
-    ['f', 'o', { at: 4 }],
-  ]"
-/>
+<div class="mt-8 flex flex-col items-center gap-5">
+  <div class="flex items-center gap-3 text-2xl">
+    <span class="text-[#717781]">Source</span>
+    <span v-click="1" class="text-[#9A90AB]">→</span>
+    <span v-click="1" class="text-[#7611A6]">Astro AST</span>
+    <span v-click="2" class="text-[#9A90AB]">→</span>
+    <span v-click="2" class="text-[#A36B09]">Astro Printer</span>
+    <span v-click="3" class="text-[#9A90AB]">→</span>
+    <span v-click="3" class="text-[#0B7BC1]">Prettier</span>
+    <span v-click="4" class="text-[#9A90AB]">→</span>
+    <span v-click="4" class="text-[#7611A6]">整形後のSource</span>
+  </div>
+  <div v-click="1" class="text-xl text-[#7611A6]">Astro AST では、pの子がdiv</div>
+</div>
 
 <div v-click="4" class="mt-6 text-center text-2xl text-primary">整形の前後で、pの子がdivであることは変わらない</div>
 
@@ -586,22 +588,21 @@ const price = 1_200;
 <p>{pirce}</p>
 ```
 
-<Flow
-  :cols="[
-    [{ id: 's', label: 'Astro\nSource', tone: 'gray' }],
-    [{ id: 't', label: 'TextNode', tone: 'purple', at: 1, note: '値は文字列', noteTone: 'red' }],
-    [{ id: 'm', label: 'mapped TSX', tone: 'yellow', at: 2 }],
-    [{ id: 'i', label: 'Identifier', tone: 'blue', at: 3 }],
-    [{ id: 'd', label: 'TypeScript\n診断', tone: 'blue', at: 4 }],
-  ]"
-  :edges="[
-    ['s', 't', { at: 1 }],
-    ['t', 'm', { at: 2 }],
-    ['m', 'i', { at: 3 }],
-    ['i', 'd', { at: 4 }],
-    ['d', 's', { at: 5, dashed: true, label: '位置を戻す', tone: 'purple' }],
-  ]"
-/>
+<div class="mt-6 flex flex-col items-center gap-4">
+  <div class="flex items-center gap-3 text-2xl">
+    <span class="text-[#717781]">Astro Source</span>
+    <span v-click="1" class="text-[#9A90AB]">→</span>
+    <span v-click="1" class="text-[#7611A6]">TextNode</span>
+    <span v-click="2" class="text-[#9A90AB]">→</span>
+    <span v-click="2" class="text-[#A36B09]">mapped TSX</span>
+    <span v-click="3" class="text-[#9A90AB]">→</span>
+    <span v-click="3" class="text-[#0B7BC1]">Identifier</span>
+    <span v-click="4" class="text-[#9A90AB]">→</span>
+    <span v-click="4" class="text-[#0B7BC1]">TypeScript診断</span>
+  </div>
+  <div v-click="1" class="text-xl text-[#B42318]">TextNode は、式を文字列のまま持つ</div>
+  <div v-click="5" class="text-2xl text-[#7611A6]">診断の位置は、元のSourceへ戻す</div>
+</div>
 
 <Ref>
   <a href="https://github.com/withastro/compiler/blob/ab9b285a34c482544da359f0ca91d0b0c25cdee4/README.md#parse-astro-and-return-an-ast">Go Compiler 2.12.2と公開ASTの制約</a>
@@ -624,25 +625,23 @@ clicks: 4
 
 ## Language Toolと二つの表現
 
-<Flow
-  :cols="[
-    [{ id: 's', label: 'Astro\nSource', tone: 'gray' }],
-    [
-      { id: 'h', label: '仮想HTML', tone: 'yellow', at: 1 },
-      { id: 'm', label: 'mapped TSX', tone: 'yellow', at: 3 },
-    ],
-    [
-      { id: 'hl', label: 'HTML\nLanguage Service', tone: 'blue', at: 2, note: 'タグと属性の補完' },
-      { id: 'ts', label: 'TypeScript', tone: 'blue', at: 4, note: 'pirceの診断' },
-    ],
-  ]"
-  :edges="[
-    ['s', 'h', { at: 1 }],
-    ['h', 'hl', { at: 2 }],
-    ['s', 'm', { at: 3 }],
-    ['m', 'ts', { at: 4 }],
-  ]"
-/>
+<div class="mt-10 flex flex-col items-center gap-8 text-3xl">
+  <div class="text-[#717781]">Astro Source</div>
+  <div class="grid grid-cols-[auto_auto_auto] items-center gap-x-4 gap-y-7">
+    <span v-click="1" class="text-[#A36B09]">仮想HTML</span>
+    <span v-click="2" class="text-[#9A90AB]">→</span>
+    <span v-click="2" class="flex items-baseline gap-3">
+      <span class="text-[#0B7BC1]">HTML Language Service</span>
+      <span class="text-xl text-[#717781]">タグと属性の補完</span>
+    </span>
+    <span v-click="3" class="text-[#A36B09]">mapped TSX</span>
+    <span v-click="4" class="text-[#9A90AB]">→</span>
+    <span v-click="4" class="flex items-baseline gap-3">
+      <span class="text-[#0B7BC1]">TypeScript</span>
+      <span class="text-xl text-[#717781]">pirceの診断</span>
+    </span>
+  </div>
+</div>
 
 <Ref href="https://github.com/withastro/language-tools/blob/b4bcb4fc02cd960936a5faee6c9cc0ad94fc4c05/packages/language-server/src/core/index.ts">language-toolsとb4bcb4fとAstroVirtualCode</Ref>
 
@@ -732,27 +731,19 @@ clicks: 3
 
 ## Compilerの二つの契約
 
-<Flow
-  :cols="[
-    [{ id: 'c', label: 'Compiler', tone: 'gray' }],
-    [
-      { id: 'o', label: 'Output contract', tone: 'yellow', at: 1 },
-      { id: 's', label: 'Source contract', tone: 'blue', at: 2 },
-    ],
-    [
-      { id: 'b', label: '実行と表示', tone: 'yellow', at: 1 },
-      { id: 'e', label: '解析と編集', tone: 'blue', at: 2 },
-    ],
-  ]"
-  :edges="[
-    ['c', 'o', { at: 1 }],
-    ['o', 'b', { at: 1 }],
-    ['c', 's', { at: 2 }],
-    ['s', 'e', { at: 2 }],
-  ]"
-/>
+<div class="mt-10 flex flex-col items-center gap-8 text-3xl">
+  <div class="text-[#717781]">Compiler</div>
+  <div class="grid grid-cols-[auto_auto_auto] items-center gap-x-4 gap-y-7">
+    <span v-click="1" class="text-[#A36B09]">Output contract</span>
+    <span v-click="1" class="text-[#9A90AB]">→</span>
+    <span v-click="1" class="text-[#A36B09]">実行と表示</span>
+    <span v-click="2" class="text-[#0B7BC1]">Source contract</span>
+    <span v-click="2" class="text-[#9A90AB]">→</span>
+    <span v-click="2" class="text-[#0B7BC1]">解析と編集</span>
+  </div>
+</div>
 
-<div v-click="3" class="mt-4 text-xl text-center text-[#0B7BC1]">
+<div v-click="3" class="mt-8 text-xl text-center text-[#0B7BC1]">
   Source contractが渡す情報　書かれたHTMLの親子関係、JavaScriptの内部構造、Source位置、変換後との位置対応
 </div>
 

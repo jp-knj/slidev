@@ -68,7 +68,11 @@ svg を等倍で描くので、ここで書いた `font-size` がそのまま px
 | ファイル | 出どころ | ライセンス |
 |---|---|---|
 | `ferris.svg` | rustacean.net `rustacean-flat-happy.svg` | CC0 |
-| `gopher.svg` | MariaLetta/free-gophers-pack `characters/svg/71.svg` | CC0 |
+| `gopher-classic.png` | 出どころ不明の配布画像から、ゴーファーだけを切り出したもの | **要確認**。Go Gopher は Renee French 作で CC BY 3.0（表示が必要） |
+
+`gopher-classic.png` は、白地と JS のロゴを外して透過 PNG にしてある。切り出しの手順は
+黒い輪郭の外側を flood fill して落とし、輪郭の内側の島（目と鼻）を種にして輪郭を拾い直す、というもの。
+背景の白を一括で消すと**白目まで抜ける**ので、必ず外側から塗る。
 
 絵文字のアイコンコレクション（`noto` / `twemoji` / `openmoji`）は1アイコンのために 10〜40MB の
 依存を増やすことになり、ライセンスも CC-BY や CC BY-SA が混ざる。
