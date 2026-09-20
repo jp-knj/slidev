@@ -494,6 +494,7 @@ class: text-center
 ---
 
 ## 休憩
+## Astro Discord
 
 <img src="./images/qrcode_discord.com.png" class="h-80 mx-auto mt-8" alt="Discord QR Code" />
 

@@ -5,9 +5,13 @@
   "scripts": {
     "build": "slidev build",
     "dev": "slidev --open",
-    "export": "slidev export"
+    "export": "slidev export",
+    "dev:compiler": "slidev slides-compiler-rs.md --open",
+    "build:compiler": "slidev build slides-compiler-rs.md --out dist/compiler",
+    "export:compiler": "slidev export slides-compiler-rs.md --output slides-compiler-rs.pdf"
   },
   "dependencies": {
+    "@fontsource-variable/m-plus-2": "^5.3.0",
     "@slidev/cli": "^52.10.1",
     "@slidev/theme-default": "latest",
     "@slidev/theme-seriph": "latest",
@@ -15,6 +19,7 @@
     "vue": "^3.5.25"
   },
   "devDependencies": {
+    "@iconify-json/logos": "^1.2.14",
     "playwright-chromium": "^1.58.1"
   }
 }

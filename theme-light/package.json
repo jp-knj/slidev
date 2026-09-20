@@ -1,0 +1,29 @@
+{
+  "name": "slidev-theme-astro-light",
+  "version": "0.1.0",
+  "description": "Light Astro-branded variant of the apple-basic theme, used by slides-compiler-rs.md",
+  "license": "MIT",
+  "keywords": [
+    "slidev-theme",
+    "slidev"
+  ],
+  "engines": {
+    "node": ">=14.0.0",
+    "slidev": ">=v0.47.0"
+  },
+  "slidev": {
+    "colorSchema": "light",
+    "defaults": {
+      "fonts": {
+        "sans": "Inter, inter-fallback, system-ui, sans-serif",
+        "mono": "MDIO, md-io-fallback, monospace",
+        "fallbacks": false
+      }
+    }
+  },
+  "dependencies": {
+    "@slidev/types": "^0.47.0",
+    "codemirror-theme-vars": "^0.1.2",
+    "prism-theme-vars": "^0.2.4"
+  }
+}

@@ -1,0 +1,409 @@
+/*
+ * Astro light — 白地に Astro パープルの見出し。
+ * ダーク版（../../theme/styles/layout.css）の明度を反転したもので、
+ * グラデーション・ノイズ・グリッドの装飾は外してフラットな白にしている。
+ */
+:root {
+    /*
+     * 欧文は Astro のブランド書体、和文は M PLUS 2。
+     * Obviously / Inter は CJK を持たないので、和文は自動的に M PLUS 2 へ流れる。
+     * obviously-fallback / inter-fallback は Verdana / Arial のメトリクス調整用で、
+     * これらも CJK を持たないため和文の落ち先にはならない。
+     */
+    --font-heading: Obviously, obviously-fallback, "M PLUS 2 Variable", system-ui,
+        sans-serif;
+    --font-body: Inter, inter-fallback, "M PLUS 2 Variable", system-ui, sans-serif;
+    --font-mono: MDIO, md-io-fallback, "M PLUS 2 Variable", monospace;
+
+    --astro-bg: #ffffff;
+    --astro-heading: #7611a6;
+    --astro-body: #1f2328;
+    --astro-accent: #bc52ee;
+    --astro-muted: #6b7280;
+    --astro-rule: #e5e0ec;
+    --astro-surface: #faf9fc;
+    --slidev-code-background: #f6f7f9;
+}
+
+.slidev-page {
+    position: relative;
+    isolation: isolate;
+    color: var(--astro-body);
+    background-color: var(--astro-bg);
+}
+
+.slidev-page > * {
+    position: relative;
+    z-index: 1;
+}
+
+.slidev-layout {
+    /* Ref の pinned 配置がスライド下端を基準にするように */
+    position: relative;
+    min-height: 100%;
+    /*
+     * 上の余白は詰める。見出しを上端寄りに置いたほうが、本文に使える高さが増える。
+     * 下は Ref の脚注（bottom:1.5rem）ぶんを残す。
+     */
+    @apply px-14 pt-6 pb-10 text-[1.55rem];
+    font-family: var(--font-body);
+    font-weight: 400;
+    color: var(--astro-body);
+
+    :not(pre) > code {
+        color: #4a0d6b;
+        background: rgba(188, 82, 238, 0.09);
+        border: 1px solid rgba(188, 82, 238, 0.22);
+        padding: 0.08em 0.45em;
+        border-radius: 0.4em;
+    }
+
+    h1,
+    h2,
+    h3,
+    h4,
+    p,
+    div {
+        @apply select-none;
+    }
+
+    h1,
+    h2,
+    h3,
+    h4 {
+        font-family: var(--font-heading);
+        color: var(--astro-heading);
+    }
+
+    pre,
+    code {
+        @apply select-text;
+        font-family: var(--font-mono);
+    }
+
+    pre {
+        border: 1px solid var(--astro-rule);
+    }
+
+    h1 {
+        @apply text-6xl mb-4 font-700 -ml-[0.05em];
+    }
+    h1 + h2 {
+        @apply -mt-4;
+    }
+
+    h2 {
+        @apply text-4xl font-700;
+    }
+
+    h3 {
+        @apply text-lg pt-2 uppercase tracking-widest font-500 -ml-[0.05em];
+        color: var(--astro-muted);
+    }
+
+    h3:not(.opacity-100) {
+        @apply opacity-70;
+    }
+
+    p {
+        @apply my-5 leading-8;
+    }
+
+    h1 + p {
+        @apply -mt-2 mb-4;
+    }
+
+    p + h2,
+    ul + h2,
+    table + h2 {
+        @apply mt-10;
+    }
+
+    ul {
+        list-style: disc;
+        @apply mb-4;
+    }
+
+    li {
+        @apply ml-1.1em pl-0.2em leading-[2.2em];
+    }
+
+    li::marker {
+        color: var(--astro-accent);
+    }
+
+    blockquote {
+        @apply text-sm px-2 py-1 border-l rounded;
+        background: var(--astro-surface);
+        border-left-color: var(--astro-accent);
+    }
+
+    blockquote > * {
+        @apply my-0;
+    }
+
+    table {
+        @apply w-full;
+    }
+
+    tr {
+        border-bottom: 1px solid var(--astro-rule);
+    }
+
+    th {
+        @apply text-left font-500;
+        color: var(--astro-heading);
+    }
+
+    a {
+        color: var(--astro-heading);
+        border-bottom: 1px solid rgba(118, 17, 166, 0.35);
+    }
+
+    a:hover {
+        color: var(--astro-accent);
+    }
+
+    ol {
+        @apply list-decimal;
+    }
+
+    td,
+    th {
+        @apply p-2 py-3;
+    }
+
+    b,
+    strong {
+        @apply font-600;
+        color: var(--astro-heading);
+    }
+
+    kbd {
+        @apply border border-b-2 rounded;
+        border-color: var(--astro-rule);
+        background: var(--astro-surface);
+        @apply py-0.5 px-1 text-sm font-mono;
+    }
+}
+
+/*
+ * 最小フォントサイズ 20px。
+ * Slidev は 980x551 の内部座標で組んでから拡大するので、ここでの px は
+ * 「デッキを書くときの px」＝ 1920x1080 投影時のおよそ 2 倍で表示される。
+ * UnoCSS の text-sm(14) / text-base(16) / text-lg(18) は下回るので床を敷く。
+ */
+.slidev-layout .text-sm,
+.slidev-layout .text-base,
+.slidev-layout .text-lg,
+.slidev-layout h3,
+.slidev-layout blockquote,
+.slidev-layout kbd {
+    font-size: 20px;
+}
+
+/*
+ * コード例は説明の主役なので、本文より大きく出す。
+ * .code-hero  : 構文そのものを読ませる1枚（Astro構文など）
+ * 既定        : 全幅のコード
+ * .code-tall  : 全幅で行数が多いコード
+ * .code-compact: 2カラムに並べる比較用。20px の床ちょうど
+ */
+/*
+ * Slidev は .slidev-code の font-size / padding / margin を
+ * CSS変数 + !important で当てるため、font-size を直接書いても効かない。
+ * 既定値は 12px / 18px / 8px と小さいので、変数側を上書きする。
+ */
+:root {
+    --slidev-code-font-size: 30px;
+    --slidev-code-line-height: 42px;
+    --slidev-code-padding: 22px 26px;
+    --slidev-code-margin: 16px 0;
+    --slidev-code-radius: 12px;
+}
+
+/*
+ * ラッパーに変数を置いてもコードブロックまで継承されないので、
+ * ここだけは Slidev の !important を上回る詳細度で直接当てる。
+ */
+
+/* 構文そのものを読ませる1枚 */
+.slidev-layout.code-hero .slidev-code {
+    font-size: 32px !important;
+    line-height: 44px !important;
+    padding: 22px 26px !important;
+}
+
+/* 全幅だが行数が多い1枚。9行を説明つきで載せられる上限が24px/32px */
+.slidev-layout.code-tall .slidev-code {
+    font-size: 24px !important;
+    line-height: 32px !important;
+    padding: 5px 16px !important;
+}
+
+/*
+ * クリックで対になるコードが現れるスライド用。
+ * 左の幅が縮むのに合わせて、右が滑り込んでくる。
+ */
+.code-split {
+    transition: width 0.35s ease;
+}
+
+.reveal-right-enter-active {
+    transition:
+        opacity 0.3s ease 0.15s,
+        transform 0.3s ease 0.15s;
+}
+
+.reveal-right-enter-from {
+    opacity: 0;
+    transform: translateX(1.5rem);
+}
+
+.reveal-right-leave-active {
+    transition: opacity 0.15s ease;
+}
+
+.reveal-right-leave-to {
+    opacity: 0;
+}
+
+/* 結論はその場でふわりと上がってくる */
+.reveal-up-enter-active {
+    transition:
+        opacity 0.3s ease,
+        transform 0.3s ease;
+}
+
+.reveal-up-enter-from {
+    opacity: 0;
+    transform: translateY(0.75rem);
+}
+
+.reveal-up-leave-active {
+    transition: opacity 0.15s ease;
+}
+
+.reveal-up-leave-to {
+    opacity: 0;
+}
+
+/*
+ * コードフェンスの `word:title` で指定した語の装飾。
+ * padding ではなく box-shadow で余白を作り、等幅の桁がずれないようにする。
+ */
+.slidev-layout .slidev-code .code-word {
+    background: rgba(188, 82, 238, 0.18);
+    border-radius: 0.25em;
+    box-shadow: 0 0 0 3px rgba(188, 82, 238, 0.18);
+}
+
+/* 2カラム比較。幅386pxに30桁が入る上限が21px */
+.slidev-layout.code-compact .slidev-code {
+    font-size: 21px !important;
+    line-height: 28px !important;
+    padding: 14px 18px !important;
+}
+
+/*
+ * themeConfig.primary（#bc52ee）は枠線やアクセント面には十分だが、
+ * 白地の本文サイズだとコントラストが足りない。文字色として使うときだけ濃くする。
+ * 枠線は border-[#BC52EE] のようにリテラル指定しているのでここでは変わらない。
+ */
+.slidev-layout .text-primary {
+    color: #9a2fd0;
+}
+
+.slidev-layout.center {
+    @apply text-center h-full;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+
+    h1 {
+        @apply text-5xl text-balance;
+    }
+}
+
+.slidev-layout.center-vertical,
+.slidev-page.center-vertical .slidev-layout {
+    @apply h-full;
+    min-height: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+}
+
+/*
+ * 見出しは上端に置いたまま、その下の本文だけを上下中央へ寄せる。
+ * 本文の先頭に margin-top:auto、末尾に margin-bottom:auto を置いて、
+ * 余った縦の余白を上下で折半させる（本文が詰まっていれば auto は 0 になる）。
+ * <Ref> は absolute なので行送りには関わらないが :last-child には当たるため、
+ * 末尾が Ref のスライドだけ、ひとつ手前を本文の末尾として扱う。
+ */
+.slidev-layout.body-center {
+    @apply h-full;
+    min-height: 100%;
+    display: flex;
+    flex-direction: column;
+}
+
+.slidev-layout.body-center > h1 + *,
+.slidev-layout.body-center > h2 + * {
+    margin-top: auto !important;
+}
+
+.slidev-layout.body-center:not(:has(> .ref-note:last-child)) > :last-child,
+.slidev-layout.body-center:has(> .ref-note:last-child) > :nth-last-child(2) {
+    margin-bottom: auto !important;
+}
+
+.slidev-layout.intro-image,
+.slidev-layout.intro {
+    @apply h-full;
+
+    h1 {
+        @apply text-6xl font-700 leading-20;
+    }
+
+    h1 + p {
+        @apply font-700 -mt-4 text-2xl;
+    }
+}
+
+.slidev-layout.fact {
+    @apply text-center;
+    h1 {
+        line-height: 160%;
+        @apply text-8xl font-700 leading-[1.6];
+    }
+    h1 + p {
+        @apply font-700 text-2xl;
+    }
+}
+
+.slidev-layout.statement {
+    @apply text-center;
+
+    h1 {
+        @apply text-6xl font-700;
+    }
+}
+
+.slidev-layout.quote {
+    h1 + p {
+        @apply mt-6 ml-6;
+    }
+}
+
+.slidev-layout.section {
+    h1 {
+        @apply text-6xl font-700 leading-20;
+    }
+
+    h2 {
+        @apply text-3xl font-500;
+        color: var(--astro-muted);
+    }
+}

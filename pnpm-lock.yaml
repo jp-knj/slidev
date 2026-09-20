@@ -8,6 +8,9 @@ importers:
 
   .:
     dependencies:
+      '@fontsource-variable/m-plus-2':
+        specifier: ^5.3.0
+        version: 5.3.0
       '@slidev/cli':
         specifier: ^52.10.1
         version: 52.11.5(@nuxt/kit@3.21.0)(@types/markdown-it@14.1.2)(@types/node@22.19.7)(@vue/compiler-sfc@3.5.27)(markdown-it-async@2.2.0)(playwright-chromium@1.58.1)(postcss@8.5.6)
@@ -24,6 +27,9 @@ importers:
         specifier: ^3.5.25
         version: 3.5.27(typescript@5.9.3)
     devDependencies:
+      '@iconify-json/logos':
+        specifier: ^1.2.14
+        version: 1.2.14
       playwright-chromium:
         specifier: ^1.58.1
         version: 1.58.1
@@ -353,8 +359,14 @@ packages:
   '@floating-ui/utils@0.2.10':
     resolution: {integrity: sha512-aGTxbpbg8/b5JfU1HXSrbH3wXZuLPJcNEcZQFMxLs3oSzgtVu6nFPkbbGGUvBcUjKV2YyB9Wxxabo+HEH9tcRQ==}
 
+  '@fontsource-variable/m-plus-2@5.3.0':
+    resolution: {integrity: sha512-Sp0zoiDdITPuGJTAxMMeHXSTg2Cgh2sVHVziX37Z3FCNb08NAqLL5L47wF9sIvjtu/KEropA+sReMpgXJGMy+A==}
+
   '@iconify-json/carbon@1.2.18':
     resolution: {integrity: sha512-Grb13E6r/RqTEV4Sqd/BQR2FUt57U2WLuticJ5H8JbTdHLop1LmdePu3EJJA3Xi8DcWRbD6OnC133hKfOwlgtg==}
+
+  '@iconify-json/logos@1.2.14':
+    resolution: {integrity: sha512-O36DicXkgAMT6NAsH7MTWlOql8NktHz9fBCItTjz6L/9gyRXw4vQj6qTeVgww5UZWiVugUV1MhVFA/g9HWIkBw==}
 
   '@iconify-json/ph@1.2.2':
     resolution: {integrity: sha512-PgkEZNtqa8hBGjHXQa4pMwZa93hmfu8FUSjs/nv4oUU6yLsgv+gh9nu28Kqi8Fz9CCVu4hj1MZs9/60J57IzFw==}
@@ -2937,7 +2949,13 @@ snapshots:
 
   '@floating-ui/utils@0.2.10': {}
 
+  '@fontsource-variable/m-plus-2@5.3.0': {}
+
   '@iconify-json/carbon@1.2.18':
+    dependencies:
+      '@iconify/types': 2.0.0
+
+  '@iconify-json/logos@1.2.14':
     dependencies:
       '@iconify/types': 2.0.0
 
