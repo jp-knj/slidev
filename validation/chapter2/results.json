@@ -1,0 +1,145 @@
+{
+  "linter": {
+    "source": "---\nconst price = 10;\nconst amount = 3;\n---\n\n<p>{pirce * amount}</p>\n<!-- pirceは診断用の誤記 -->\n",
+    "compilerExpression": {
+      "type": "expression",
+      "children": [
+        {
+          "type": "text",
+          "value": "pirce * amount",
+          "position": {
+            "start": {
+              "line": 6,
+              "column": 5,
+              "offset": 49
+            },
+            "end": {
+              "line": 6,
+              "column": 19,
+              "offset": 63
+            }
+          }
+        }
+      ],
+      "position": {
+        "start": {
+          "line": 6,
+          "column": 3,
+          "offset": 47
+        },
+        "end": {
+          "line": 7,
+          "column": 12,
+          "offset": 80
+        }
+      }
+    },
+    "correctedExpressionRange": [
+      48,
+      64
+    ],
+    "binaryExpression": {
+      "type": "BinaryExpression",
+      "operator": "*",
+      "left": "pirce",
+      "right": "amount"
+    },
+    "virtualTSX": "\nconst price = 10;\nconst amount = 3;\n;\n\n<><p>{pirce * amount}</p>\n<></>\n</>;",
+    "declarations": [
+      "price",
+      "amount"
+    ],
+    "unresolvedRange": [
+      49,
+      54
+    ],
+    "diagnostics": [
+      {
+        "ruleId": "no-undef",
+        "severity": 2,
+        "message": "'pirce' is not defined.",
+        "line": 6,
+        "column": 5,
+        "nodeType": "Identifier",
+        "messageId": "undef",
+        "endLine": 6,
+        "endColumn": 10
+      }
+    ]
+  },
+  "formatter": {
+    "input": "<ul>\n{products.map(product=><li>\n{product.name}:{product.price}</li>)}\n</ul>\n",
+    "babelInputs": [
+      "<>{product.name\n}</>",
+      "<>{product.price\n}</>",
+      "<>{products.map(product=><li>\n{product.name}:{product.price}</li>)\n}</>"
+    ],
+    "formatted": "<ul>\n  {\n    products.map((product) => (\n      <li>\n        {product.name}:{product.price}\n      </li>\n    ))\n  }\n</ul>\n"
+  },
+  "html": {
+    "virtualHTML": "                                                             \n\n<a href=\"/products\">\n  {product.nmae}\n</a>\n",
+    "sourcePosition": {
+      "line": 6,
+      "character": 3
+    },
+    "virtualPosition": {
+      "line": 2,
+      "character": 3
+    },
+    "cursorOffset": 66,
+    "verifiedCompletions": [
+      "target",
+      "title"
+    ],
+    "mappings": [
+      {
+        "sourceOffsets": [
+          0
+        ],
+        "generatedOffsets": [
+          0
+        ],
+        "lengths": [
+          106
+        ],
+        "data": {
+          "verification": true,
+          "completion": true,
+          "semantic": true,
+          "navigation": true,
+          "structure": true,
+          "format": false
+        }
+      }
+    ]
+  },
+  "language": {
+    "source": "---\nconst product = {\n  name: \"Notebook\", price: 1200,\n};\n---\n\n<a href=\"/products\">\n  {product.nmae}\n</a>\n",
+    "virtualTSX": "/* @jsxImportSource astro */\n\n\nconst product = {\n  name: \"Notebook\", price: 1200,\n};\n\n<Fragment>\n<a href=\"/products\">\n  {product.nmae}\n</a>\n\n</Fragment>\nexport default function Example(_props: Record<string, any>): any {}\n\n",
+    "diagnostic": {
+      "code": 2339,
+      "start": 129,
+      "length": 4,
+      "message": "Property 'nmae' does not exist on type '{ name: string; price: number; }'."
+    },
+    "sourceRange": [
+      95,
+      99
+    ],
+    "generatedRange": [
+      129,
+      133
+    ],
+    "editorRange": {
+      "start": {
+        "line": 7,
+        "character": 11
+      },
+      "end": {
+        "line": 7,
+        "character": 15
+      }
+    },
+    "otherDiagnosticCodes": []
+  }
+}

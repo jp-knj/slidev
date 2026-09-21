@@ -290,6 +290,102 @@
     margin: 12px 0 !important;
 }
 
+/* Chapter 2: editor tool examples, limited to the revised slides. */
+.slidev-layout.ch2-detail {
+    font-size: 20px;
+    line-height: 1.5;
+    padding-bottom: 64px;
+}
+
+.ch2-detail h2 {
+    font-size: 32px;
+    line-height: 1.3;
+    margin-bottom: 24px;
+}
+
+.slidev-layout.ch2-detail .slidev-code {
+    font-size: 20px !important;
+    line-height: 27px !important;
+    padding: 12px 14px !important;
+    margin: 10px 0 !important;
+}
+
+.ch2-cols {
+    display: grid;
+    grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
+    gap: 24px;
+}
+
+.ch2-label {
+    font-size: 20px;
+    font-weight: 600;
+    color: #7611a6;
+}
+
+.ch2-note {
+    font-size: 20px;
+    line-height: 1.5;
+    color: #5b626d;
+}
+
+.ch2-summary {
+    margin-top: 22px;
+    font-size: 22px;
+    font-weight: 500;
+    color: #7611a6;
+}
+
+.ch2-pipeline {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 20px;
+    margin-top: 42px;
+    font-size: 24px;
+}
+
+.ch2-connector { color: #9a90ab; }
+.ch2-branches { width: 100%; height: 55px; margin: 16px 0 20px; }
+.ch2-three { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 28px; }
+.ch2-question { font-size: 24px; font-weight: 500; margin-top: 14px; }
+.ch2-three p { font-size: 20px; line-height: 1.8; margin-top: 18px; }
+
+.ch2-ruler {
+    font-size: 22px;
+    line-height: 1.3;
+    padding: 10px 20px;
+    margin: 12px 0 20px;
+    border-radius: 10px;
+    background: #f6f7f9;
+}
+
+.ch2-ranges { display: grid; gap: 14px; }
+.ch2-ranges > div { display: grid; grid-template-columns: 255px 225px 1fr; align-items: baseline; gap: 10px; }
+.ch2-ranges > div > code { font-size: 20px; }
+.ch2-result { margin-top: 14px; padding: 10px 18px; border-radius: 10px; background: #f6f7f9; }
+.ch2-result > .ch2-label { margin-bottom: 6px; }
+.ch2-scope { margin-top: 20px; }
+.ch2-detail table { font-size: 20px; width: 100%; }
+.ch2-detail td, .ch2-detail th { padding: 12px 6px; }
+.ch2-format-stage { margin-top: 18px; }
+.ch2-doc { grid-template-columns: 330px minmax(0, 1fr); }
+.ch2-bottom-note { position: absolute; bottom: 70px; font-size: 20px; color: #5b626d; }
+.ch2-language-results { min-width: 0; }
+.ch2-range-value { font-family: var(--font-mono); font-size: 28px; color: #a36b09; margin: 8px 0; }
+.ch2-mapping { margin-top: 14px; display: flex; flex-direction: column; gap: 6px; }
+.ch2-editor-result { display: grid; grid-template-columns: 270px 1fr; align-items: center; gap: 16px; }
+.ch2-comparison { margin-top: 22px; }
+.ch2-comparison td { height: 86px; }
+.ch2-comparison th { font-size: 20px; white-space: nowrap; }
+.ch2-comparison td:first-child { font-weight: 600; }
+.ch2-intro { font-size: 24px; margin: 12px 0 26px; }
+.ch2-roles { gap: 24px; }
+.ch2-roles .ch2-question { font-size: 22px; }
+.ch2-foundations { display: grid; gap: 20px; margin-top: 28px; }
+.ch2-foundations > div { display: grid; grid-template-columns: 180px 1fr; font-size: 24px; }
+.ch2-foundations .ch2-label { font-size: 26px; }
+.ch2-next-question { font-size: 32px; line-height: 1.5; font-weight: 600; margin-top: 28px; color: #7611a6; }
+
 .table-comparison .code-split {
     transition: width 0.35s ease;
 }

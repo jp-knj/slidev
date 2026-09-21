@@ -462,7 +462,6 @@ DOMは、Browserが表示のために作るHTMLの木です。HTML5の補正は�
 ---
 layout: default
 class: body-center
-clicks: 3
 ---
 
 ## Go Compilerの二つのパーサー
@@ -472,15 +471,15 @@ clicks: 3
     <span>.astro Source</span><span class="text-[#9A90AB]">→</span><span>Tokenizer</span>
   </div>
   <div class="grid grid-cols-[auto_auto_auto] items-center gap-x-4 gap-y-7">
-    <span v-click="1" class="text-[#A36B09]">HTML5パーサー</span>
-    <span v-click="1" class="text-[#9A90AB]">→</span>
-    <span v-click="1" class="flex items-baseline gap-3">
+    <span class="text-[#A36B09]">HTML5パーサー</span>
+    <span class="text-[#9A90AB]">→</span>
+    <span class="flex items-baseline gap-3">
       <span class="text-[#0B7BC1]">transform()</span>
       <span class="text-xl text-[#717781]">Build向け</span>
     </span>
-    <span v-click="2" class="text-[#7611A6]">Literal modeのパーサー</span>
-    <span v-click="3" class="text-[#9A90AB]">→</span>
-    <span v-click="3" class="flex items-baseline gap-3">
+    <span class="text-[#7611A6]">Literal modeのパーサー</span>
+    <span class="text-[#9A90AB]">→</span>
+    <span class="flex items-baseline gap-3">
       <span class="text-[#0B7BC1]">parse()とconvertToTSX()</span>
       <span class="text-xl text-[#717781]">Editor向け</span>
     </span>
@@ -490,7 +489,6 @@ clicks: 3
 <Ref href="https://github.com/withastro/compiler/blob/ab9b285a34c482544da359f0ca91d0b0c25cdee4/cmd/astro-wasm/astro-wasm.go#L251-L284">Go Compiler 2.12.2とParseとConvertToTSXとTransform</Ref>
 
 <!--
-SourceとTokenizerを示し、クリックでtransformの経路、Literal modeの経路、parseとconvertToTSXの順に足します。
 Tokenizerは、コードをタグや文字などの小さな単位へ分けます。Literal modeは、HTMLの規則で木を直さず、書かれた入れ子のまま木を作るパーサーです。transformはBuildするコードを作り、parseは書かれたとおりの木をASTにし、convertToTSXはAstroをTypeScriptが読める形に変えます。
 Go版2.12.2の実装を確認すると、ParseとConvertToTSXはParseOptionEnableLiteral(true)を指定しています。Transformはこの指定をしていません。HTMLの補正という説明には、どのAPIの経路なのかを明示する必要があります。同じSourceを二つの方法で読んでいた、というのがこの枚の要点です。Go版にもEditor向けの工夫はありました。
 次の問い: 取得した木を、各Editor toolはどう使っていたのか？
@@ -498,388 +496,480 @@ Go版2.12.2の実装を確認すると、ParseとConvertToTSXはParseOptionEnabl
 
 ---
 layout: default
-class: ch2-code body-center
-clicks: 2
----
-
-## Linterに要る二つの情報
-
-```astro
----
-const { title } = Astro.props;
----
-<p class="lead">
-  {title}
-  <div class="note">{descrption}</div>
-</p>
-```
-
-<div class="mt-4 flex flex-col gap-3">
-  <div v-click="1">
-    <div class="text-2xl font-600 text-[#7611A6]">Astroのnodeと位置</div>
-    <div class="text-xl">補正で <code>div</code> は <code>p</code> の兄弟になる。位置はsourceから数え直す</div>
-  </div>
-  <div v-click="2">
-    <div class="text-2xl font-600 text-[#0B7BC1]">JavaScriptのESTreeとscope</div>
-    <div class="text-xl"><code>descrption</code> に宣言が無いことは、ここで分かる</div>
-  </div>
-</div>
-
-<Ref href="https://github.com/ota-meshi/astro-eslint-parser/blob/v1.2.2/src/parser/index.ts">astro-eslint-parser v1.2.2とparseForESLint</Ref>
-
-<!--
-コンポーネントを出して、クリックで二つ足します。
-Linter に要るものは二種類あります。ひとつは Astro の node と、.astro 上の位置。HTML5 の規則では div の開始で p が閉じるので、補正後の木では div は p の兄弟になります。木をたどる順と、書かれた順がずれる。だから位置は source から数え直します。
-もうひとつは JavaScript です。descrption に宣言が無い、という判定はここでしか出せません。
-この二つは、別々のところからしか出てきません。
-次の問い: 別々のところにある情報を、どうやって一度に検査するのか？
--->
-
----
-layout: default
-class: body-center
+class: ch2-detail
 clicks: 3
 ---
 
-## ESTreeにAstro nodeを加える
+## 三つのEditor toolは別の問いに答える
 
-<div class="mt-6 grid grid-cols-[auto_auto_auto_auto_auto] items-center justify-center gap-x-3 gap-y-6">
-  <div class="row-span-2 text-[22px] text-[#717781]">Astro AST</div>
-
-  <div v-click="1" class="text-[22px] text-[#9A90AB]">→</div>
-  <div v-click="1">
-    <div class="text-[22px] font-600 text-[#7611A6]">source順に並べ直す</div>
-    <div class="text-xl text-[#0B7BC1]">位置を数え直す</div>
-  </div>
-  <div v-click="1" class="text-[22px] text-[#9A90AB]">→</div>
-
-  <div class="row-span-2">
-    <div v-click="3" class="text-[22px] font-600 text-[#7611A6]">ESTreeにAstro nodeを加える</div>
-  </div>
-
-  <div v-click="2" class="text-[22px] text-[#9A90AB]">→</div>
-  <div v-click="2">
-    <div class="text-[22px] font-600 text-[#A36B09]">JavaScript parserへ渡す形を作る</div>
-    <div class="text-xl text-[#0B7BC1]">ESTreeとscopeを受け取る</div>
-  </div>
-  <div v-click="2" class="text-[22px] text-[#9A90AB]">→</div>
+<div class="ch2-pipeline"><span>Astro Source</span><span class="ch2-connector">▸</span><strong>Compiler</strong><span class="ch2-connector">▸</span><span>Astro ASTとSource位置</span></div>
+<svg class="ch2-branches" viewBox="0 0 860 55" aria-label="Compilerから三つのツールへ分岐">
+  <path d="M430 0 V20 M140 50 V20 H720 V50 M430 20 V50" fill="none" stroke="#9a90ab" stroke-width="2" />
+</svg>
+<div class="ch2-three">
+  <div v-click="1"><div class="ch2-label">Linter</div><div class="ch2-question">参照する変数は<br />宣言されているか</div><p>検査した結果を<br />診断として返す</p></div>
+  <div v-click="2"><div class="ch2-label">Formatter</div><div class="ch2-question">空白と改行を<br />どうそろえるか</div><p>整形後のSourceを返す</p></div>
+  <div v-click="3"><div class="ch2-label">Language Tool</div><div class="ch2-question">何を入力できるか<br />型に合っているか</div><p>補完候補と型の診断を返す</p></div>
 </div>
-
-<div class="mt-8 text-center text-xl text-[#717781]">
-  <code>parse(source, &#123; position: true &#125;)</code> が返す Astro AST から始まる
-</div>
-
-<Ref href="https://github.com/ota-meshi/astro-eslint-parser/pull/14">astro-eslint-parser PR #14とadjustHTML</Ref>
 
 <!--
-Astro AST から二手に分かれて、下でまた一つになります。クリックで左、右、最後の一つ、の順に足します。
-左は位置の話です。補正後の木は source 順と並びが違うので、adjustHTML と adjustHTMLBody で source 順へそろえてから、fixLocations が source の UTF-16 range を計算し直します。PR #14 はここで crash した話で、木の巡回順を source 順として扱っていたのが原因でした。
-右は JavaScript の話です。template から virtual JSX を作って、espree または @typescript-eslint/parser に渡すと、ESTree と token と comment と scope manager が返ってきます。
-そして最後に一つにします。返ってきた ESTree へ Astro node を入れて、Astro 用の visitor key と parent と range を加える。virtual JSX にしか無い token と scope は除きます。
-ここが今日いちばん言いたいところです。片方へ変換して終わりではありません。二つを組み合わせて、はじめて ESLint が走れる形になります。判定するのは eslint-plugin-astro の rule で、fixer は完成した range で .astro へ edit を当てます。
-次の問い: 親子関係を検査できても、書かれたとおりに書き戻せるのか？
+Compilerの情報を利用する三つのツールは、答える問いが異なります。クリック1でLinterの検査、2でFormatterの整形、3でLanguage Toolの補完と型解析を示します。
+これから、各ツールが何を受け取り、どのデータへ変換し、利用者へ何を返すかをコードで確認します。Linterは変数名の誤記、Formatterは空白と改行、Language ToolはHTMLの属性補完とプロパティ名の誤記を例にします。
 -->
 
 ---
 layout: default
-class: ch2-code body-center
-clicks: 4
+class: ch2-detail
 ---
 
-## Formatterと書かれた表記
+## Compilerが返すJavaScript式
 
-```astro
-<p class="lead">
-  {title}
-  <div class="note">{descrption}</div>
-</p>
-```
-
-<div class="mt-8 flex flex-col items-center gap-5">
-  <div class="flex items-center gap-3 text-2xl">
-    <span class="text-[#717781]">Source</span>
-    <span v-click="1" class="text-[#9A90AB]">→</span>
-    <span v-click="1" class="text-[#7611A6]">Astro AST</span>
-    <span v-click="2" class="text-[#9A90AB]">→</span>
-    <span v-click="2" class="text-[#A36B09]">Astro Printer</span>
-    <span v-click="3" class="text-[#9A90AB]">→</span>
-    <span v-click="3" class="text-[#0B7BC1]">Prettier</span>
-    <span v-click="4" class="text-[#9A90AB]">→</span>
-    <span v-click="4" class="text-[#7611A6]">整形後のSource</span>
-  </div>
-  <div v-click="1" class="text-xl text-[#7611A6]">補正で div は p の外へ出ている</div>
-</div>
-
-<div v-click="4" class="mt-6 text-center text-2xl text-primary">補正後のASTだけでは戻せない。printerはASTとsourceの両方を見る</div>
-
-<Ref href="https://github.com/withastro/prettier-plugin-astro/blob/v0.14.1/src/index.ts">prettier-plugin-astro v0.14.1とparserとSource位置</Ref>
-
-<!--
-整形前のSourceを示し、クリックでAstro AST、Astro Printer、Prettier、整形後のSourceの順に足します。
-補正後のASTをそのまま直列化すると、div が p の外に出た形で書き戻ります。空白と改行だけでなく、tag の境界まで変わってしまう。
-だから Astro 専用の printer は、Astro AST だけでなく source も見ます。prettier-ignore、raw text、quote、comment、補正前の文字範囲は source にしかありません。
-prettier-plugin-astro v0.14.1はGo版の同期parse APIを使います。Astro ASTとSource範囲で全体を扱い、locStartとlocEndで範囲を参照します。式はJSX互換の表現にして、babel-tsを基にしたparserで整形します。これは既存Formatterを再利用するための変換です。
-参考: https://github.com/withastro/prettier-plugin-astro/blob/v0.14.1/src/printer/embed.ts
-次の問い: 書かれた表記はsourceを見れば戻せた。JavaScriptの中身も理解できるのか？
--->
-
----
-layout: default
-class: ch2-code body-center
-clicks: 5
----
-
-## TextNodeとJavaScript AST
-
-```astro
----
-const price = 1_200;
----
-<p>{pirce}</p>
-```
-
-<div class="mt-6 flex flex-col items-center gap-4">
-  <div class="flex items-center gap-3 text-2xl">
-    <span class="text-[#717781]">Astro Source</span>
-    <span v-click="1" class="text-[#9A90AB]">→</span>
-    <span v-click="1" class="text-[#7611A6]">TextNode</span>
-    <span v-click="2" class="text-[#9A90AB]">→</span>
-    <span v-click="2" class="text-[#A36B09]">Virtual TSX</span>
-    <span v-click="3" class="text-[#9A90AB]">→</span>
-    <span v-click="3" class="text-[#0B7BC1]">Identifier</span>
-    <span v-click="4" class="text-[#9A90AB]">→</span>
-    <span v-click="4" class="text-[#0B7BC1]">TypeScript診断</span>
-  </div>
-  <div v-click="1" class="text-xl text-[#B42318]">TextNode は、式を文字列のまま持つ</div>
-  <div v-click="5" class="text-2xl text-[#7611A6]">診断の位置は、元のSourceへ戻す</div>
-</div>
-
-<Ref>
-  <a href="https://github.com/withastro/compiler/blob/ab9b285a34c482544da359f0ca91d0b0c25cdee4/README.md#parse-astro-and-return-an-ast">Go Compiler 2.12.2と公開ASTの制約</a>
-  <a href="https://github.com/withastro/compiler/blob/ab9b285a34c482544da359f0ca91d0b0c25cdee4/README.md#position-data" class="ml-8">同 Position data</a>
-</Ref>
-
-<!--
-pirceへ波線を引きたい、という目的から始めます。クリックでTextNode、Virtual TSX、Identifier、TypeScriptの診断、位置を戻す、の順に足します。
-ASTはコードの部品とその関係を表した木、NodeはASTを構成する一つの部品、TextNodeは文字をひとかたまりで持つNode、Identifierは変数名を表すNodeです。Virtual TSXはTSXと元のSourceの位置を対応させたもの、mappingは変換前と変換後の位置を結び付ける情報です。
-TextNodeもASTの一部です。ただし、pirceを変数名として分解していません。Go版の公開ASTでは、ExpressionNodeの子のTextNodeが式のソースを文字列で保持します。周辺ノードと位置フィールドを省くと、type expression の children に type text の value として式がそのまま入っている形です。JavaScriptの式を内部ASTとして提供する形ではありません。
-TypeScriptがIdentifierとして扱うことで、priceとの違いを診断できます。診断を出すには、元のAstroファイル上の範囲も要ります。Go版2.12.2のREADMEは、位置データが不完全で一部のケースでは不正確と明記しています。位置情報が存在しなかったという説明は誤りです。astro-eslint-parser v1.2.2にはfixLocationsがあり、元のソースから範囲を再計算しています。
-次の問い: HTML補完とJavaScriptの意味解析に、同じ表現を渡せるのか？
--->
-
----
-layout: default
-class: body-center
-clicks: 4
----
-
-## Language Toolと二つの表現
-
-<div class="mt-10 flex flex-col items-center gap-8 text-2xl">
-  <div class="text-[#717781]">Astro Source</div>
-  <div class="grid grid-cols-[auto_auto_auto] items-center gap-x-4 gap-y-7">
-    <span v-click="1" class="text-[#A36B09]">HTML virtual document</span>
-    <span v-click="2" class="text-[#9A90AB]">→</span>
-    <span v-click="2" class="flex items-baseline gap-3">
-      <span class="text-[#0B7BC1]">HTML Language Service</span>
-      <span class="text-xl text-[#717781]">タグと属性の補完</span>
-    </span>
-    <span v-click="3" class="text-[#A36B09]">Virtual TSX</span>
-    <span v-click="4" class="text-[#9A90AB]">→</span>
-    <span v-click="4" class="flex items-baseline gap-3">
-      <span class="text-[#0B7BC1]">TypeScript</span>
-      <span class="text-xl text-[#717781]">pirceの診断</span>
-    </span>
-  </div>
-</div>
-
-<Ref href="https://github.com/withastro/language-tools/blob/b4bcb4fc02cd960936a5faee6c9cc0ad94fc4c05/packages/language-server/src/core/index.ts">language-toolsとb4bcb4fとAstroVirtualCode</Ref>
-
-<!--
-Astro Sourceを示し、クリックでHTML virtual documentの経路、タグと属性の補完、Virtual TSXの経路、pirceの診断の順に足します。
-Language Toolは、補完と診断と定義への移動をEditorへ提供する仕組みです。Language Serviceは、コードを解析して補完や診断の結果を返します。HTML virtual documentは、HTMLの機能へ渡すために一時的に作るHTMLです。
-目的に合わせて二つの表現を使い分けています。language-toolsの2025年11月末時点のコミットb4bcb4fを参照しています。AstroVirtualCodeはHTML virtual documentとTSXを作ります。Go版convertToTSXのsource mapをVolarのmappingへ変換し、TypeScriptの診断や補完を元ファイルと対応させます。
-参考: https://github.com/withastro/language-tools/blob/b4bcb4fc02cd960936a5faee6c9cc0ad94fc4c05/packages/language-server/src/core/astro2tsx.ts
-次の問い: 三つのツールを並べると、同じところは何か？
--->
-
----
-layout: default
-class: body-center
-clicks: 2
----
-
-## 三つのEditor tool
-
-<div class="mt-8 grid grid-cols-[190px_214px_214px_214px] gap-x-3 gap-y-6 text-xl">
-<div></div>
-<div class="text-[#7611A6] font-600">Source</div>
-<div class="text-[#A36B09] font-600">変換</div>
-<div class="text-[#0B7BC1] font-600">解析結果</div>
-<div class="text-2xl font-600">Linter</div>
-<div>Astro AST</div>
-<div>virtual JSX<div class="text-base text-[#717781]">ESTreeに加えて、位置を戻す</div></div>
-<div>ESTreeとESLint</div>
-<div v-click="1" class="text-2xl font-600">Formatter</div>
-<div v-click="1">Astro AST</div>
-<div v-click="1">Astro Printer<div class="text-base text-[#717781]">整形したSourceを返す</div></div>
-<div v-click="1">Prettier</div>
-<div v-click="2" class="text-2xl font-600">Language Tool</div>
-<div v-click="2">Astro AST</div>
-<div v-click="2">HTML virtual documentと<br />Virtual TSX<div class="text-base text-[#717781]">補完と診断を戻す</div></div>
-<div v-click="2">HTML Language<br />ServiceとTypeScript</div>
-</div>
-
-<!--
-クリックごとに一段ずつ足します。Linter、Formatter、Language Toolの順です。
-どのツールもSourceを基準にし、必要な形へ変換していました。左にSource、中央に変換、右に解析結果を並べると、三つとも同じ形をしていることが分かります。そして三つとも、結果を元のSourceへ戻す工程を自分で持っています。
-次の問い: 変換が多いこと自体が問題だったのか？
--->
-
----
-layout: default
-class: body-center
-clicks: 2
----
-
-## 必要な変換と、足りない分を書く工程
-
-<div class="mt-6 grid grid-cols-3 gap-x-8 items-center text-xl">
+<div class="ch2-cols">
 <div>
-<div class="text-2xl font-600 text-[#A36B09]">必要な変換</div>
-<div class="mt-3">virtual JSX</div>
-<div>HTML virtual document</div>
-<div>Virtual TSX</div>
-<div>整形後のSource</div>
+<div class="ch2-label">Linterの入力</div>
+
+```astro
+---
+const price = 10;
+const amount = 3;
+---
+
+<p>{pirce * amount}</p>
+<!-- pirceは診断用の誤記 -->
+```
+
+<div class="ch2-note">宣言は <code>price</code>、参照は <code>pirce</code></div>
 </div>
-<div class="text-center">
-<div class="inline-block border-2 rounded-xl px-6 py-4 border-[#7611A6] bg-[#7611A614]">
-<div class="text-2xl font-600 text-[#7611A6]">Astro AST</div>
+<div>
+<div class="ch2-label">Astro AST</div>
+
+```js
+{
+  type: "expression",
+  children: [{
+    type: "text",
+    value: "pirce * amount"
+  }]
+}
+```
+
+<div class="ch2-note"><code>TextNode.value</code> は文字列</div>
 </div>
+</div>
+<div class="ch2-summary">変数名と演算子を調べるには、式の中身を解析する必要がある</div>
+
+<Ref href="https://github.com/withastro/compiler/blob/ab9b285a34c482544da359f0ca91d0b0c25cdee4/README.md#parse-astro-and-return-an-ast">Compiler 2.12.2と公開AST</Ref>
+
+<!--
+左のコードは5行目に空行があり、末尾はLFです。priceを宣言していますが、Templateではpirceと参照しています。末尾のコメントに、診断を示すための意図的な誤記であることを記しています。
+右はparse(source, { position: true })の返却値から、式とその子を抜粋したものです。Astro ASTは式の範囲を表し、TextNode.valueにpirce * amountという文字列を持ちます。変数名を表すIdentifierや、掛け算を表すBinaryExpressionは、この公開ASTにはありません。
+Compiler 2.12.2で検証しています。Go版がJavaScript式の内部ASTを提供していた、という説明にはしません。
+-->
+
+---
+layout: default
+class: ch2-detail
+---
+
+## 不正確な位置を計算し直す
+
+<div class="ch2-label">6行目の文字オフセット</div>
+<pre class="ch2-ruler">十の位  44444555555555566666666
+一の位  56789012345678901234567
+文字    &lt;p&gt;{pirce * amount}&lt;/p&gt;</pre>
+
+<div class="ch2-ranges">
+  <div><span class="ch2-label">Compilerの式の位置</span><code>start: 47, end: 80</code><span>終端が式の外を指している</span></div>
+  <div><span class="ch2-label">式全体の正しいRange</span><code>[48, 64)</code><span><code>{pirce * amount}</code></span></div>
+  <div><span class="ch2-label">変数名のRange</span><code>[49, 54)</code><span><code>pirce</code> の5文字</span></div>
+</div>
+<div class="ch2-summary"><code>fixLocations</code> がSourceから範囲を数え直す</div>
+<div class="ch2-note">Rangeは0始まりで終端を含まない。ここではUTF-16の文字オフセットを使う</div>
+
+<Ref href="https://github.com/ota-meshi/astro-eslint-parser/blob/v1.2.2/src/parser/astro-parser/parse.ts">astro-eslint-parser 1.2.2とfixLocations</Ref>
+
+<!--
+前のコードの空行と末尾のLFを含めて数えた値です。Compilerが返すExpressionNodeのstart.offsetは47、end.offsetは80です。実際には、開始の波かっこが48、閉じ波かっこが63にあり、式全体は[48, 64)です。pirceは[49, 54)です。
+CompilerのREADMEは、一部の位置が不正確であることを明記しています。astro-eslint-parserはSourceを走査し、fixLocationsで位置を計算し直します。Compilerの位置情報が存在することと、診断や編集に利用できる精度であることは区別します。
+式までのコードはASCIIなので1文字がUTF-16の1単位です。ESLintの行と列は1始まりで、pirceは6行目の5列目から10列目に相当します。終端は含みません。
+-->
+
+---
+layout: default
+class: ch2-detail
+clicks: 2
+---
+
+## LinterがVirtual TSXを作る
+
+<div class="ch2-cols">
+<div>
+<div class="ch2-label">Astro Source</div>
+
+```astro
+---
+const price = 10;
+const amount = 3;
+---
+
+<p>{pirce * amount}</p>
+<!-- pirceは診断用の誤記 -->
+```
+
 </div>
 <div v-click="1">
-<div class="text-2xl font-600 text-[#B42318]">足りない分を書く工程</div>
-<div class="mt-3">TextNodeをJavaScriptとして<br />パースし直す</div>
-<div>不完全な位置を修正する</div>
-<div>解析結果を元のSourceへ戻す</div>
+<div class="ch2-label">Virtual TSX</div>
+
+```tsx
+const price = 10;
+const amount = 3;
+<>
+  <p>{pirce * amount}</p>
+  {/* pirceは診断用の誤記 */}
+</>;
+```
+
 </div>
+</div>
+<div class="ch2-note">Component scriptの区切りを外し、TemplateをFragmentで囲む</div>
+<div v-click="2" class="ch2-result">
+  <div class="ch2-label">AST: <code>BinaryExpression</code> と演算子 <code>*</code></div>
+  <div>左の <code>Identifier: pirce</code> と右の <code>Identifier: amount</code></div>
 </div>
 
-<div v-click="2" class="mt-10 text-center text-2xl text-primary">変換の前に、必要な木と位置が揃っていなかった</div>
+<Ref href="https://github.com/ota-meshi/astro-eslint-parser/blob/v1.2.2/src/parser/process-template.ts">astro-eslint-parser 1.2.2とprocessTemplate</Ref>
 
 <!--
-クリックごとに、次の項目を説明します。
-変換先が複数あることは自然です。既存のエコシステムを利用するために要る変換なので、変換そのものを問題として扱いません。問題は右です。JavaScriptの内部ASTを得る工程、不完全な位置を直す工程、結果を元のSourceへ戻す工程を、それぞれのツールが自分で持っていました。共通して必要な情報をCompilerがどこまで提供するか、という設計上の課題です。
-次の問い: Compilerは、何を保証すればよかったのか？
+クリック1でVirtual TSXを示します。ここではJavaScriptとJSXだけを使っています。実装は区切りを除いた位置にセミコロンを挿入するなどの調整も行います。表示用の抜粋では、そのセミコロンと一部の空行を省き、Fragment内を字下げしています。CompilerのconvertToTSXではなく、astro-eslint-parserが生成するコードです。
+クリック2で変換後のASTを示します。JavaScript parserがpirceとamountをIdentifierに分け、掛け算をBinaryExpressionとして解析します。
+パーサーはASTとともにスコープ情報も用意します。スコープとは、変数を参照できる範囲です。スコープ解析では、宣言と参照の対応を調べます。
 -->
 
 ---
 layout: default
-class: body-center
-clicks: 3
+class: ch2-detail
 ---
 
-## Compilerの二つの契約
+## ESLintが未定義の参照を検査する
 
-<div class="mt-10 flex flex-col items-center gap-8 text-3xl">
-  <div class="text-[#717781]">Compiler</div>
-  <div class="grid grid-cols-[auto_auto_auto] items-center gap-x-4 gap-y-7">
-    <span v-click="1" class="text-[#A36B09]">Output contract</span>
-    <span v-click="1" class="text-[#9A90AB]">→</span>
-    <span v-click="1" class="text-[#A36B09]">実行と表示</span>
-    <span v-click="2" class="text-[#0B7BC1]">Source contract</span>
-    <span v-click="2" class="text-[#9A90AB]">→</span>
-    <span v-click="2" class="text-[#0B7BC1]">解析と編集</span>
-  </div>
+<div class="ch2-note">スコープは変数を参照できる範囲。スコープ解析は宣言と参照の対応を調べること</div>
+<div class="ch2-cols ch2-scope">
+<div>
+<div class="ch2-label">パーサーが用意するスコープ情報</div>
+<table>
+<thead><tr><th>名前</th><th>宣言と参照</th></tr></thead>
+<tbody>
+<tr><td><code>price</code></td><td>宣言あり</td></tr>
+<tr><td><code>amount</code></td><td>宣言あり、参照先が分かる</td></tr>
+<tr><td><code>pirce</code></td><td>参照先の宣言がない</td></tr>
+</tbody>
+</table>
 </div>
+<div>
+<div class="ch2-label">ESLintの実際の診断</div>
 
-<div v-click="3" class="mt-8 text-xl text-center text-[#0B7BC1]">
-  Source contractが渡す情報　書かれたHTMLの親子関係、JavaScriptのAST、Source位置、変換後との位置対応
+```json
+{
+  "ruleId": "no-undef",
+  "line": 6,
+  "column": 5,
+  "endLine": 6,
+  "endColumn": 10
+}
+```
+
+<div class="ch2-note">メッセージ: <code>'pirce' is not defined.</code></div>
 </div>
+</div>
+<div class="ch2-summary">パーサーがASTの位置をAstroへ戻してから、<code>no-undef</code> が検査する</div>
+
+<Ref href="https://github.com/ota-meshi/astro-eslint-parser/blob/v1.2.2/src/parser/index.ts">parseForESLintと位置の復元</Ref>
 
 <!--
-クリックごとに、Output contractの経路、Source contractの経路、Source contractが渡す情報を足します。
-contractは、Compilerが何を渡すかについての約束です。Output contractは実行結果を正しく作るための約束で、Browserが解釈するHTMLを生成します。Source contractは、書かれた事実をツールへ渡す約束です。
-BuildとEditorを排他的に分類する用語ではなく、保証する情報を区別するための整理です。
-次の問い: この約束を、誰がどこまで担当するのか？
+パーサーが用意したスコープ情報では、priceとamountには宣言があります。amountの参照はその宣言に対応します。pirceの参照には対応する宣言がなく、globalScope.throughに含まれます。
+parseForESLintは、Virtual TSXを解析してASTとスコープ情報を用意した後、restoreでASTの位置を元のAstroへ戻します。Astro専用のNodeやvisitorKeysも整えた返却値をESLintへ渡します。ESLintのno-undefは、このスコープ情報から未定義の参照を検査します。
+右のJSONは診断の抜粋です。ESLint 9.36.0で確認した値で、6行目の5列目から10列目、Rangeでは[49, 54)です。この例ではESLint本体のno-undefを使っています。
 -->
 
 ---
 layout: default
-class: body-center
-clicks: 5
----
-
-## 三つの責務
-
-<div class="relative mt-6">
-<div v-click="2" class="absolute inset-y-[-10px] left-[196px] w-[226px] border-2 rounded-xl border-[#7611A6] bg-[#7611A60D]"></div>
-<div v-click="3" class="absolute inset-y-[-10px] left-[422px] w-[226px] border-2 rounded-xl border-[#A36B09] bg-[#A36B090D]"></div>
-<div v-click="4" class="absolute inset-y-[-10px] left-[648px] w-[220px] border-2 rounded-xl border-[#0B7BC1] bg-[#0B7BC10D]"></div>
-<div class="relative grid grid-cols-[190px_214px_214px_214px] gap-x-3 gap-y-6 text-xl">
-<div></div>
-<div class="text-[#7611A6] font-600">Source</div>
-<div class="font-600" :class="$clicks >= 1 ? 'text-[#A36B09]' : 'text-[#717781]'">変換</div>
-<div class="text-[#0B7BC1] font-600">解析結果</div>
-<div class="text-2xl font-600">Linter</div>
-<div>Astro AST</div>
-<div :class="{ 'text-[#A36B09]': $clicks >= 1 }">virtual JSX<div class="text-base text-[#717781]">ESTreeに加えて、位置を戻す</div></div>
-<div>ESTreeとESLint</div>
-<div class="text-2xl font-600">Formatter</div>
-<div>Astro AST</div>
-<div :class="{ 'text-[#A36B09]': $clicks >= 1 }">Astro Printer<div class="text-base text-[#717781]">整形したSourceを返す</div></div>
-<div>Prettier</div>
-<div class="text-2xl font-600">Language Tool</div>
-<div>Astro AST</div>
-<div :class="{ 'text-[#A36B09]': $clicks >= 1 }">HTML virtual documentと<br />Virtual TSX<div class="text-base text-[#717781]">補完と診断を戻す</div></div>
-<div>HTML Language<br />ServiceとTypeScript</div>
-</div>
-</div>
-
-<div v-click="5" class="mt-8 grid grid-cols-[190px_214px_214px_214px] gap-x-3 text-xl">
-<div></div>
-<div class="text-[#7611A6] font-600">Compiler<div class="text-base font-400 text-[#717781]">書かれた事実</div></div>
-<div class="text-[#A36B09] font-600">Adapter<div class="text-base font-400 text-[#717781]">形と位置を変換</div></div>
-<div class="text-[#0B7BC1] font-600">Ecosystem tool<div class="text-base font-400 text-[#717781]">解析と検査と整形</div></div>
-</div>
-
-<!--
-三つのツールの処理を並べ、クリックで変換と位置対応を黄色で強調し、Compilerの領域、Adapterの領域、Ecosystem toolの領域を順に囲み、最後に三つの役割を出します。
-Adapterは、Compilerと各ツールの間でデータの形と位置を変換する処理です。Ecosystem toolは、ESLintとPrettierとTypeScriptなど、解析を担当するツールです。
-実装場所は分かれていました。ただし、無関係な処理が乱立していたわけではありません。各ツールが変換と位置対応を持っていました。共通して必要だったのは、Compilerから渡される構造と位置です。
-章の結論です。Compilerは書かれた事実を渡す。Adapterは各ツールが読める形へ変換する。Ecosystem toolが解析する。
-次の問い: 2026年、この三つの責務を支える基盤として何が使えるのか？
--->
-
----
-layout: default
-class: body-center
+class: ch2-detail
 clicks: 2
 ---
 
-## 第3章への接続
+## FormatterがJavaScript式を解析する
 
-<div class="mt-4 grid grid-cols-3 gap-x-6 text-center text-xl">
-  <div class="border-2 rounded-xl py-2 border-[#7611A6] text-[#7611A6] font-600">Compiler</div>
-  <div class="border-2 rounded-xl py-2 border-[#A36B09] text-[#A36B09] font-600">Adapter</div>
-  <div class="border-2 rounded-xl py-2 border-[#0B7BC1] text-[#0B7BC1] font-600">Ecosystem tool</div>
-</div>
+<div class="ch2-label">整形前のAstro Source</div>
 
-<div v-click="1" class="mt-8 text-center text-3xl leading-relaxed text-[#7611A6]">
-  <p class="!my-1">書かれたHTMLの構造</p>
-  <p class="!my-1">JavaScript AST</p>
-  <p class="!my-1">Source位置と位置対応</p>
-</div>
+```astro
+<ul>
+{products.map(product=><li>
+{product.name}:{product.price}</li>)}
+</ul>
+```
 
-<div v-click="2" class="mt-8 text-center text-4xl font-700 text-primary">
-  これらをAstroだけで作り続ける必要はあるのか？
+<div v-if="$clicks === 1" class="ch2-format-stage">
+<div class="ch2-label">1. Astro ASTとSourceから抽出した式</div>
+
+```jsx
+products.map(product=><li>
+{product.name}:{product.price}</li>)
+```
+
 </div>
+<div v-if="$clicks >= 2" class="ch2-format-stage">
+<div class="ch2-label">2. JSXで囲んだBabel入力</div>
+
+```jsx
+<>{products.map(product=><li>
+{product.name}:{product.price}</li>)
+}</>
+```
+
+</div>
+<div class="ch2-bottom-note">Astro全体はCompilerが解析し、式の中身は <code>babel-ts</code> が解析する</div>
+
+<Ref href="https://github.com/withastro/prettier-plugin-astro/blob/v0.14.1/src/index.ts">prettier-plugin-astro 0.14.1とastroExpressionParser</Ref>
 
 <!--
-クリックごとに、必要な三つの情報、そして中心の問いを出します。
-必要な情報と役割の境界が分かりました。Compilerが書かれた事実を渡し、Adapterが形と位置を変換し、Ecosystem toolが解析する。この三つを支えるために要るのは、書かれたHTMLの構造、JavaScript AST、Source位置と位置対応です。
-ここからは、これらをAstroだけで作り続ける必要があるのかを考えます。2026年に使えるParserとASTとToolchainの話へ進みます。
+ここからはFormatter専用の例です。変数名の誤記はなく、products.mapの空白と改行をそろえたい場面です。
+クリック1でAstro ASTとSourceから取り出した式を示します。クリック2では同じ式をJSX Fragmentと波かっこで囲んだBabel入力に切り替えます。astroExpressionParser.preprocessは、この末尾の改行を含むコードを作ります。babel-tsを基にしたparserが解析し、Fragment内部の式のASTを返します。
+この入力と整形結果はprettier-plugin-astro 0.14.1とPrettier 3.6.2で確認しています。整形設定はprintWidth 80、tabWidth 2、endOfLine lfです。
 -->
+
+---
+layout: default
+class: ch2-detail
+---
+
+## Docから整形後のSourceを作る
+
+<div class="ch2-cols ch2-doc">
+<div>
+<div class="ch2-label">Astro PrinterのDoc</div>
+
+```js
+ group([
+   "{",
+   indent([
+     softline,
+     expressionDoc
+   ]),
+   softline,
+   "}"
+ ])
+```
+
+<div class="ch2-note"><code>group</code> は改行する範囲<br /><code>softline</code> は改行候補<br /><code>indent</code> は字下げ</div>
+</div>
+<div>
+<div class="ch2-label">Prettierによる実際の整形結果</div>
+
+```astro
+<ul>
+  {
+    products.map((product) => (
+      <li>
+        {product.name}:{product.price}
+      </li>
+    ))
+  }
+</ul>
+```
+
+<div class="ch2-note">行幅80、インデント2、LF<br />二つの式の間に空白は追加しない</div>
+</div>
+</div>
+
+<Ref href="https://github.com/withastro/prettier-plugin-astro/blob/v0.14.1/src/printer/embed.ts">Astro PrinterとDoc</Ref>
+
+<!--
+Docは、文字列と改行候補と字下げの指示を組み合わせたデータです。Astro Printerは、Babelが解析した式の整形用Docを受け取り、Astroの波かっこやタグのDocと組み合わせます。左は式を囲むDocの抜粋で、実装のlineSuffixBoundaryを省いています。expressionDocは説明用の名前です。
+groupは、まとまりを1行で表示するか改行するかを選ぶ単位です。softlineは1行に収まれば空文字、改行を選べば改行になります。indentは改行後の字下げを表します。Prettierがこれらを行幅などの設定に従って文字列にします。
+右は前の入力の実出力です。product.nameとproduct.priceの間にはコロンだけがあり、空白を追加しません。
+-->
+
+---
+layout: default
+class: ch2-detail
+clicks: 2
+---
+
+## Language Toolが二つのVirtual Codeを作る
+
+<div class="ch2-cols">
+<div>
+<div class="ch2-label">Astro Source</div>
+
+```astro
+---
+const product = {
+  name: "Notebook", price: 1200,
+};
+---
+
+<a href="/products">
+  {product.nmae}
+</a>
+```
+
+</div>
+<div class="ch2-language-results">
+<div v-if="$clicks === 1">
+<div class="ch2-label">Virtual HTML</div>
+
+```html
+<a href="/products">
+  {product.nmae}
+</a>
+```
+
+<div class="ch2-note">HTML Language Service<br />属性補完: <code>target</code> と <code>title</code></div>
+<div class="ch2-result">Component scriptを空白化し、文字オフセットを保持する</div>
+</div>
+<div v-if="$clicks >= 2">
+<div class="ch2-label">Virtual TSX</div>
+
+```tsx
+const product = {
+  name: "Notebook", price: 1200,
+};
+<Fragment>
+<a href="/products">
+  {product.nmae}
+</a>
+</Fragment>
+```
+
+<div class="ch2-note">TypeScript: <code>nmae</code> は型にない</div>
+</div>
+</div>
+</div>
+
+<Ref href="https://github.com/withastro/language-tools/blob/b4bcb4fc02cd960936a5faee6c9cc0ad94fc4c05/packages/language-server/src/core/index.ts">language-tools b4bcb4fとAstroVirtualCode</Ref>
+
+<!--
+Language Toolは、Editorに補完や診断を提供します。この例ではproduct.nameを宣言し、Templateでproduct.nmaeと誤記しています。
+クリック1でVirtual HTMLを示します。Component scriptを区切りごと同じ長さの空白へ変えます。抜粋では先頭の空白を省いています。HTML Language Serviceは、aタグのhref属性の直前でtargetやtitleを補完候補として返します。
+空白化は改行も変えるため、保持するのはUTF-16の文字オフセットです。元コードとVirtual HTMLの行番号が一致する、という意味ではありません。
+クリック2で表示を切り替え、CompilerのconvertToTSXが作るVirtual TSXの抜粋を示します。Component scriptの宣言も同じTSXに含まれます。抜粋では先頭のpragmaと一部の空行と末尾の関数を省いています。TypeScriptはproductの型を調べ、nmaeというプロパティがないことを診断します。次の枚で診断位置を確認します。
+参照実装はlanguage-tools b4bcb4fc02cd960936a5faee6c9cc0ad94fc4c05です。HTMLの前変換はpackages/language-server/src/core/parseHTML.ts、TSXと位置対応は同じディレクトリのastro2tsx.tsにあります。
+-->
+
+---
+layout: default
+class: ch2-detail
+---
+
+## TypeScriptの診断位置を戻す
+
+<div class="ch2-cols">
+<div>
+<div class="ch2-label">Virtual TSX</div>
+
+```tsx
+  {product.nmae}
+```
+
+<div class="ch2-range-value">[129, 133)</div>
+<div class="ch2-note">TypeScript診断 <code>TS2339</code><br />型にあるのは <code>name</code> と <code>price</code></div>
+</div>
+<div>
+<div class="ch2-label">元のAstro</div>
+
+```astro
+  {product.nmae}
+```
+
+<div class="ch2-range-value">[95, 99)</div>
+<div class="ch2-note">8行目の12列目から16列目<br />元のプロパティ名に波線を表示する</div>
+</div>
+</div>
+<div class="ch2-mapping"><strong>Source mapとVolarのmapping</strong><span>TSXの範囲を元コードの範囲へ対応させる</span></div>
+<div class="ch2-result ch2-editor-result">
+<div><div class="ch2-label">Editor向けの診断</div><div class="ch2-note">LSPの行と列は0始まり</div></div>
+<div>
+<code>start: { line: 7, character: 11 }</code><br />
+<code>end: { line: 7, character: 15 }</code>
+</div>
+</div>
+
+<Ref href="https://github.com/withastro/language-tools/blob/b4bcb4fc02cd960936a5faee6c9cc0ad94fc4c05/packages/language-server/src/core/astro2tsx.ts">convertToTSXと位置対応</Ref>
+
+<!--
+前のAstro全文から、Compiler 2.12.2で生成したTSXをTypeScript 5.9.3へ渡した結果です。型にないnmaeに対する診断TS2339は、TSX上の[129, 133)を指します。CompilerのSource mapで対応する位置を調べると、Astro上では[95, 99)です。抜粋の表示位置から数えた値ではありません。
+language-toolsはSource mapをVolarのmappingへ変換します。Volarがこの対応を利用し、診断範囲を元コードへ戻します。一定の差分34を常に引く方法ではなく、この範囲について対応が確認できたという意味です。
+下はEditorへ渡す診断のrangeの抜粋です。LSPは行と列が0始まりなので、8行目の12列目をline 7とcharacter 11で表します。終端は含みません。
+-->
+
+---
+layout: default
+class: ch2-detail
+clicks: 3
+---
+
+## 三つの中間データと結果
+
+<div class="ch2-note"><strong>Compiler</strong> はAstro ASTと位置を返す。Language ToolにはTSXとSource mapも返す</div>
+<table class="ch2-comparison">
+<thead><tr><th>ツール</th><th>Adapterの中間データ</th><th>Ecosystem tool</th><th>利用者へ返す結果</th></tr></thead>
+<tbody>
+<tr v-click="1"><td>Linter</td><td>Virtual TSX<br />ASTとスコープ情報</td><td>JS parserとESLint</td><td><code>no-undef</code><br /><code>pirce</code> の診断</td></tr>
+<tr v-click="2"><td>Formatter</td><td>Babel入力<br />整形用のDoc</td><td>BabelとPrettier</td><td>空白と改行を<br />そろえたSource</td></tr>
+<tr v-click="3"><td>Language Tool</td><td>Virtual HTML<br />Virtual TSXとmapping</td><td>HTML Service<br />TypeScript</td><td>属性補完<br /><code>nmae</code> の診断</td></tr>
+</tbody>
+</table>
+<div class="ch2-summary">Adapterが用途に応じてデータを変換し、結果をAstroと対応させる</div>
+
+<!--
+クリック1でLinter、2でFormatter、3でLanguage Toolの経路を示します。AdapterはCompilerと各ツールの間で、データ形式と位置を変換する担当を指します。
+Linterは自分でVirtual TSXを作り、JavaScript parserからASTとスコープ情報を取得します。位置を元に戻してからESLintが検査します。Formatterは式をBabel入力へ変換し、Astro PrinterがDocを組み立て、Prettierが文字列にします。Language ToolはVirtual HTMLとCompiler製のTSXを使い分け、補完と診断を元コードと対応させます。
+Compilerがすべての中間データを作るわけではありません。また、LinterとLanguage ToolのVirtual TSXは、生成元も用途も異なります。
+-->
+
+---
+layout: default
+class: ch2-detail
+---
+
+## Source contractと三つの担当
+
+<div class="ch2-intro">Compilerへ求める保証を <strong>Source contract</strong> と呼ぶ</div>
+<div class="ch2-three ch2-roles">
+<div>
+<div class="ch2-label">Compiler</div>
+<div class="ch2-question">Sourceの情報を保証する</div>
+<p>書かれたHTMLの親子関係<br />JavaScript式の内部AST<br />正確なSource位置<br />生成コードとの位置対応</p>
+</div>
+<div>
+<div class="ch2-label">Adapter</div>
+<div class="ch2-question">用途別の形式へ変換する</div>
+<p>ESLintが扱うAST<br />PrettierのDoc<br />二つのVirtual Code<br />元のAstroとの対応</p>
+</div>
+<div>
+<div class="ch2-label">Ecosystem tool</div>
+<div class="ch2-question">検査と整形と型解析を担う</div>
+<p>未定義の参照を検査する<br />空白と改行を決める<br />補完候補を列挙する<br />プロパティの型を調べる</p>
+</div>
+</div>
+<div class="ch2-summary">用途別の変換は必要。共通して使うASTと位置の保証をCompilerに求める</div>
+
+<!--
+Source contractは、この発表でCompilerへ求める保証を整理するための呼び名です。Go版が左の情報をすべて提供していた、という実装の説明ではありません。特にJavaScript式の内部ASTと位置の精度は、ここまでの例で課題として確認しました。
+CompilerはSourceの親子関係と式の中身と位置を保証する。Adapterは各ツールに必要な形式へ変換し、元のAstroと対応させる。Ecosystem toolは検査と整形と型解析を担う。この分担で考えると、用途別の変換と、Compilerの情報不足に対する再解析や位置の再計算を区別できます。
+Compilerが生成したコードとの位置対応はCompilerに求めます。Adapterが独自に変換したコードとの対応はAdapterが管理します。
+-->
+
+---
+layout: statement
+---
+
+<h1 class="!text-5xl !leading-relaxed !m-0">Astro が使える基盤は、<br />2021年からどう変わったのか？</h1>
+
+<!--
+第3章では、Go版を選んだ2021年から、Astro が利用できる基盤がどう変わったかを確認します。
+-->
+
 ---
 layout: section
 clicks: 1
