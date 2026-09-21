@@ -537,7 +537,7 @@ const viewBox = computed(() => `0 ${vb.value.y} ${W} ${vb.value.h}`);
   align-items: center;
   text-align: center;
   padding: 0 10px;
-  color: #1f2328;
+  color: var(--astro-body, #1f2328);
   font-family: var(--font-body);
 }
 
@@ -570,7 +570,7 @@ const viewBox = computed(() => `0 ${vb.value.y} ${W} ${vb.value.h}`);
 }
 
 .ov-ico-mono {
-  color: #6b7280;
+  color: var(--astro-body, #6b7280);
 }
 
 /* Gopher は余白のない縦長の png。width を当てると潰れるので height だけにする */
@@ -593,7 +593,7 @@ const viewBox = computed(() => `0 ${vb.value.y} ${W} ${vb.value.h}`);
   font-size: 24px;
   font-weight: 600;
   line-height: 1.2;
-  color: #1f2328;
+  color: var(--astro-body, #1f2328);
 }
 
 .is-on .ov-label {
@@ -608,14 +608,14 @@ const viewBox = computed(() => `0 ${vb.value.y} ${W} ${vb.value.h}`);
 .ov-sublabel {
   font-size: 20px;
   line-height: 1.2;
-  color: #3a3f47;
+  color: var(--astro-body, #3a3f47);
 }
 
 .ov-note {
   font-size: 20px;
   line-height: 1.2;
   margin-top: 3px;
-  color: #6b7280;
+  color: var(--astro-body, #6b7280);
 }
 
 .ov-legend {
@@ -648,6 +648,6 @@ const viewBox = computed(() => `0 ${vb.value.y} ${W} ${vb.value.h}`);
 }
 
 .ov-legend-desc {
-  color: #1f2328;
+  color: var(--astro-body, #1f2328);
 }
 </style>

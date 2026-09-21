@@ -38,15 +38,21 @@ const parsed = astroParser.parseForESLint(source, {
   sourceType: 'module',
   eslintScopeManager: true,
 });
-let binaryExpression;
-function visit(node) {
-  if (node.type === 'BinaryExpression') binaryExpression = node;
-  for (const key of parsed.visitorKeys[node.type] ?? []) {
-    const children = Array.isArray(node[key]) ? node[key] : [node[key]];
-    for (const child of children) if (child?.type) visit(child);
+function findNode(result, type) {
+  function visit(node) {
+    if (node.type === type) return node;
+    for (const key of result.visitorKeys[node.type] ?? []) {
+      const children = Array.isArray(node[key]) ? node[key] : [node[key]];
+      for (const child of children) {
+        if (!child?.type) continue;
+        const found = visit(child);
+        if (found) return found;
+      }
+    }
   }
+  return visit(result.ast);
 }
-visit(parsed.ast);
+const binaryExpression = findNode(parsed, 'BinaryExpression');
 assert.deepEqual(
   [binaryExpression?.operator, binaryExpression?.left.name, binaryExpression?.right.name],
   ['*', 'pirce', 'amount'],
@@ -78,6 +84,42 @@ output.linter = {
   declarations: moduleScope.variables.map((variable) => variable.name),
   unresolvedRange: parsed.scopeManager.globalScope.through[0].identifier.range,
   diagnostics: lintDiagnostics,
+};
+
+// Verify the normal expression before introducing the typo in the Linter example.
+const normalSource = fixture('expression.astro');
+const normalExpression = parse(normalSource, { position: true }).ast.children[1].children[0];
+assert.equal(normalExpression.children[0].type, 'text');
+assert.equal(normalExpression.children[0].value, 'price * amount');
+assert.deepEqual([normalExpression.position.start.offset, normalExpression.position.end.offset], [47, 80]);
+assert.equal(normalSource.slice(48, 64), '{price * amount}');
+assert.equal(normalSource.slice(49, 54), 'price');
+const normalParsed = astroParser.parseForESLint(normalSource, {
+  parser: captureParser, ecmaVersion: 2022, sourceType: 'module', eslintScopeManager: true,
+});
+const normalFixed = normalParsed.services.getAstroAst().children[1].children[0];
+assert.deepEqual([normalFixed.position.start.offset, normalFixed.position.end.offset], [48, 64]);
+const priceReference = normalParsed.scopeManager.scopes.flatMap((scope) => scope.references)
+  .find((ref) => ref.identifier.name === 'price' && ref.isRead());
+assert.equal(priceReference.resolved.name, 'price');
+assert.deepEqual(priceReference.identifier.range, [49, 54]);
+const normalBinary = findNode(normalParsed, 'BinaryExpression');
+assert.equal(normalBinary.type, 'BinaryExpression');
+assert.deepEqual([normalBinary.operator, normalBinary.left.name, normalBinary.right.name], ['*', 'price', 'amount']);
+assert.deepEqual(normalParsed.scopeManager.globalScope.through, []);
+const normalDiagnostics = new Linter().verify(normalSource, [{
+  files: ['**/*.astro'],
+  languageOptions: { parser: astroParser, ecmaVersion: 2022, sourceType: 'module' },
+  rules: { 'no-undef': 'error' },
+}], { filename: 'example.astro' });
+assert.deepEqual(normalDiagnostics, []);
+output.expression = {
+  source: normalSource, compilerExpression: normalExpression,
+  correctedExpressionRange: [normalFixed.position.start.offset, normalFixed.position.end.offset],
+  identifierRange: priceReference.identifier.range,
+  binaryExpression: { type: normalBinary.type, operator: normalBinary.operator,
+    left: normalBinary.left.name, right: normalBinary.right.name },
+  virtualTSX, diagnostics: normalDiagnostics,
 };
 
 const babelInputs = [];
@@ -177,9 +219,10 @@ output.language = {
 
 // Keep the displayed full inputs and the actual formatting output synchronized.
 const deck = readFileSync(new URL('../../slides-compiler-rs.md', import.meta.url), 'utf8');
-const chapter = deck.slice(deck.indexOf('## 三つのEditor toolは別の問いに答える'), deck.indexOf('# 3. 前提の変化'));
-for (const input of [source, fixture('formatter.astro'), languageSource, formatted]) {
+const chapter = deck.slice(deck.indexOf('## Astro Syntaxを振り返る'), deck.indexOf('# 3. 前提の変化'));
+for (const input of [normalSource, source, fixture('formatter.astro'), languageSource, formatted]) {
   assert(chapter.includes('```astro\n' + input + '```'), 'Slide code differs from validated fixture');
 }
+assert(!chapter.slice(0, chapter.indexOf('## ESLintが未定義の参照を検査する')).includes('pirce'), 'The typo must first appear in the final Linter example');
 writeFileSync(new URL('results.json', import.meta.url), JSON.stringify(output, null, 2) + '\n');
 console.log('PASS: Compiler ranges, Linter scope and no-undef, Babel input, Doc output, HTML completion, TS2339, Source map, Volar mapping, slide fixtures');

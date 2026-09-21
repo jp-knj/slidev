@@ -67,6 +67,58 @@
       }
     ]
   },
+  "expression": {
+    "source": "---\nconst price = 10;\nconst amount = 3;\n---\n\n<p>{price * amount}</p>\n",
+    "compilerExpression": {
+      "type": "expression",
+      "children": [
+        {
+          "type": "text",
+          "value": "price * amount",
+          "position": {
+            "start": {
+              "line": 6,
+              "column": 5,
+              "offset": 49
+            },
+            "end": {
+              "line": 6,
+              "column": 19,
+              "offset": 63
+            }
+          }
+        }
+      ],
+      "position": {
+        "start": {
+          "line": 6,
+          "column": 3,
+          "offset": 47
+        },
+        "end": {
+          "line": 7,
+          "column": 12,
+          "offset": 80
+        }
+      }
+    },
+    "correctedExpressionRange": [
+      48,
+      64
+    ],
+    "identifierRange": [
+      49,
+      54
+    ],
+    "binaryExpression": {
+      "type": "BinaryExpression",
+      "operator": "*",
+      "left": "price",
+      "right": "amount"
+    },
+    "virtualTSX": "\nconst price = 10;\nconst amount = 3;\n;\n\n<><p>{price * amount}</p>\n</>;",
+    "diagnostics": []
+  },
   "formatter": {
     "input": "<ul>\n{products.map(product=><li>\n{product.name}:{product.price}</li>)}\n</ul>\n",
     "babelInputs": [

@@ -23,7 +23,7 @@ withDefaults(
 .ref-note {
   font-size: 20px;
   line-height: 1.4;
-  color: #6b7280;
+  color: var(--astro-muted, #6b7280);
 }
 
 .ref-note:hover {

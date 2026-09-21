@@ -15,13 +15,13 @@ layout: center-vertical
 class: text-center
 ---
 
-<div class="text-2xl text-[#6B7280] font-400">Astro Compiler</div>
+<div class="text-2xl text-black font-400">Astro Compiler</div>
 
 <h1 class="!text-6xl !font-700 mt-4 leading-tight">
   動いていたものを、<br />なぜ書き直すのか
 </h1>
 
-<div class="text-xl text-[#6B7280] mt-8">
+<div class="text-xl text-black mt-8">
   GoとWASMからRustへ、5年ぶんの前提の変化
 </div>
 
@@ -79,19 +79,19 @@ class: body-center
 <div class="grid grid-cols-1 gap-4 mt-10">
   <div>
     <div class="text-3xl font-600 mt-1">1. 当時の判断</div>
-    <div class="text-lg opacity-60 mt-2">なぜ最初にGoとWASMを選んだのか</div>
+    <div class="text-lg mt-2">なぜ最初にGoとWASMを選んだのか</div>
   </div>
   <div>
     <div class="text-3xl font-600 mt-1">2. 発見した問題</div>
-    <div class="text-lg opacity-60 mt-2">使い続けるなかで何が見えたのか</div>
+    <div class="text-lg mt-2">使い続けるなかで何が見えたのか</div>
   </div>
   <div>
     <div class="text-3xl font-600 mt-1">3. 前提の変化</div>
-    <div class="text-lg opacity-60 mt-2">2026年までに周囲はどう変わったのか</div>
+    <div class="text-lg mt-2">2026年までに周囲はどう変わったのか</div>
   </div>
   <div>
     <div class="text-3xl font-600 mt-1">4. 新しい判断</div>
-    <div class="text-lg opacity-60 mt-2">その結果、責務をどう分け直したのか</div>
+    <div class="text-lg mt-2">その結果、責務をどう分け直したのか</div>
   </div>
 </div>
 
@@ -120,7 +120,7 @@ layout: center
   :icons="{ compiler: 'svelte', build: 'snowpack' }"
 />
 
-<div class="text-center text-xl opacity-60 mt-2">Astro 0.x の出発点</div>
+<div class="text-center text-xl mt-2">Astro 0.x の出発点</div>
 
 <!--
 これが出発点です。最初の Astro は、.astro を Svelte のコンパイラの fork で読んで、Snowpack がビルドと配信を担い、ブラウザが表示する。この4つでした。ここに出ている Svelte Compiler と Snowpack は、このあと Go 製のコンパイラと Vite に入れ替わります。その入れ替えがこの章の話です。そしてこの図には、この講演で何度も戻ってきます。章が進むごとに、登場人物と矢印が増えていきます。
@@ -140,28 +140,28 @@ class: body-center
 
   <div class="relative flex items-start">
     <div class="flex-1 min-w-0 flex flex-col items-center">
-      <div class="text-3xl text-[#717781] h-11 leading-none">Feb</div>
+      <div class="text-3xl text-black h-11 leading-none">Feb</div>
       <div class="w-3.5 h-3.5 rounded-full bg-[#9A90AB]"></div>
       <logos-vitejs class="text-6xl mt-8" />
       <div class="text-xl mt-5 leading-snug">Vite 2.0</div>
       <img src="./images/logos/gopher-classic.png" alt="Go" class="h-16 mt-6" />
     </div>
     <div class="flex-1 min-w-0 flex flex-col items-center">
-      <div class="text-3xl text-[#717781] h-11 leading-none">Sep</div>
+      <div class="text-3xl text-black h-11 leading-none">Sep</div>
       <div class="w-3.5 h-3.5 rounded-full bg-[#9A90AB]"></div>
       <logos-rome-icon class="text-6xl mt-8" />
       <div class="text-xl mt-5 leading-snug">Rome</div>
       <img src="./images/logos/ferris.svg" alt="Rust" class="h-11 mt-9" />
     </div>
     <div class="flex-1 min-w-0 flex flex-col items-center">
-      <div class="text-3xl text-[#717781] h-11 leading-none">Oct</div>
+      <div class="text-3xl text-black h-11 leading-none">Oct</div>
       <div class="w-3.5 h-3.5 rounded-full bg-[#9A90AB]"></div>
       <logos-parcel-icon class="text-6xl mt-8" />
       <div class="text-xl mt-5 leading-snug">Parcel 2</div>
       <img src="./images/logos/ferris.svg" alt="Rust" class="h-11 mt-9" />
     </div>
     <div class="flex-1 min-w-0 flex flex-col items-center">
-      <div class="text-3xl text-[#717781] h-11 leading-none">Oct</div>
+      <div class="text-3xl text-black h-11 leading-none">Oct</div>
       <div class="w-3.5 h-3.5 rounded-full bg-[#9A90AB]"></div>
       <logos-nextjs-icon class="text-6xl mt-8" />
       <div class="text-xl mt-5 leading-snug">Next.js 12</div>
@@ -175,7 +175,7 @@ class: body-center
       <img src="./images/logos/gopher-classic.png" alt="Go" class="h-16 mt-6" />
     </div>
     <div class="flex-1 min-w-0 flex flex-col items-center">
-      <div class="text-3xl text-[#717781] h-11 leading-none">Dec</div>
+      <div class="text-3xl text-black h-11 leading-none">Dec</div>
       <div class="w-3.5 h-3.5 rounded-full bg-[#9A90AB]"></div>
       <logos-turborepo-icon class="text-6xl mt-8" />
       <div class="text-xl mt-5 leading-snug">Turborepo</div>
@@ -201,14 +201,14 @@ class: center-vertical
   :edgeLabels="{ 'compiler->build': 'WASM 境界' }"
 />
 
-<div class="mt-10 flex justify-center gap-10 text-lg opacity-70">
+<div class="mt-10 flex justify-center gap-10 text-lg ">
   <div>Build のための Compiler だった</div>
   <div>主な入口は <code>transform</code> API</div>
 </div>
 
 <div class="mt-12 border-l-2 border-[#BC52EE] pl-5">
   <div class="text-2xl font-600 text-primary">深く考えすぎずに選んだ</div>
-  <div class="text-xl opacity-70 mt-2">esbuild が Go だった。Go は学びやすかった。</div>
+  <div class="text-xl mt-2">esbuild が Go だった。Go は学びやすかった。</div>
 </div>
 
 <Ref href="https://natemoo.re/posts/hello-from-the-other-side/">Nate Moore — Hello from the other side</Ref>
@@ -227,20 +227,20 @@ class: body-center
 
 <div class="grid grid-cols-3 gap-6 mt-10 text-xl">
   <div class="border border-[#E5E0EC] rounded-xl p-5">
-    <div class="text-sm uppercase tracking-widest text-[#717781]">実装言語</div>
+    <div class="text-sm uppercase tracking-widest text-black">実装言語</div>
     <div class="text-2xl font-600 mt-2">Go か Rust か</div>
   </div>
   <div class="border border-[#E5E0EC] rounded-xl p-5">
-    <div class="text-sm uppercase tracking-widest text-[#717781]">配布と実行</div>
+    <div class="text-sm uppercase tracking-widest text-black">配布と実行</div>
     <div class="text-2xl font-600 mt-2">ネイティブバイナリか WASM か</div>
   </div>
   <div class="border border-[#E5E0EC] rounded-xl p-5">
-    <div class="text-sm uppercase tracking-widest text-[#717781]">置き換える範囲</div>
+    <div class="text-sm uppercase tracking-widest text-black">置き換える範囲</div>
     <div class="text-2xl font-600 mt-2">全体か、重い処理だけか</div>
   </div>
 </div>
 
-<div class="mt-10 text-xl opacity-70">
+<div class="mt-10 text-xl ">
   そしてどの選択でも、JavaScript の境界には WASM や JSON 変換のコストが残る
 </div>
 
@@ -261,7 +261,7 @@ class: body-center
   <p class="mt-8 text-primary font-600">GoとWASMは、2021年のAstroに合った合理的な選択だった</p>
 </div>
 
-<div class="mt-8 text-xl opacity-60">
+<div class="mt-8 text-xl ">
   この判断を失敗として扱うのではなく、当時の要件に対する選択として扱う
 </div>
 
@@ -286,7 +286,7 @@ layout: center
 
 <Overview />
 
-<div class="text-center text-xl opacity-60 mt-2">Editor のツールと Content の経路が増えた</div>
+<div class="text-center text-xl mt-2">Editor のツールと Content の経路が増えた</div>
 
 <!--
 全体図に登場人物が増えました。Editor のツール、つまり ESLint や Language Server や Formatter が、同じコンパイラを使うようになった。それと MarkdownとMDX の経路。Content の経路は図に残しますが、第3章の後半まで強調はしません。この章では2か所にズームします。HTML の構造と、埋め込まれた JavaScript です。
@@ -444,7 +444,7 @@ clicks: 2
 
 <Transition name="reveal-up">
 <div class="mt-10 text-center" v-if="$clicks >= 2">
-  <div class="text-2xl">HTMLの規則に従って構造を直した結果、<b>表の後の見出しが表の中に入った</b></div>
+  <div class="text-2xl">Compilerの変換で、<b>表の後の見出しが表の中に入った</b></div>
 </div>
 </Transition>
 
@@ -456,65 +456,103 @@ clicks: 2
 最初は書いたAstroを確認します。1回目のクリックで、報告された生成HTMLを右に表示します。2回目で問題を整理します。
 compiler#870の報告当時、Build向けの変換でtableの後のh2がtableの中に入る不具合がありました。この結果をHTML仕様どおりとは説明しません。Compilerが生成するHTMLと、BrowserがそのHTMLから作るDOMは区別します。
 DOMは、Browserが表示のために作るHTMLの木です。HTML5の補正は、HTMLの規則に従って要素の移動や追加を行うことです。補正後の親子関係だけを見ても、書かれた入れ子は分かりません。たとえばpの中にdivを書くと、divの開始でpが閉じられます。補正後の木からは、元の入れ子を診断できません。
-次の問い: Editorは、補正される前の構造をどう取得するのか？
--->
-
----
-layout: default
-class: body-center
----
-
-## Go Compilerの二つのパーサー
-
-<div class="mt-10 flex flex-col items-center gap-8 text-3xl">
-  <div class="flex items-center gap-4 text-[#717781]">
-    <span>.astro Source</span><span class="text-[#9A90AB]">→</span><span>Tokenizer</span>
-  </div>
-  <div class="grid grid-cols-[auto_auto_auto] items-center gap-x-4 gap-y-7">
-    <span class="text-[#A36B09]">HTML5パーサー</span>
-    <span class="text-[#9A90AB]">→</span>
-    <span class="flex items-baseline gap-3">
-      <span class="text-[#0B7BC1]">transform()</span>
-      <span class="text-xl text-[#717781]">Build向け</span>
-    </span>
-    <span class="text-[#7611A6]">Literal modeのパーサー</span>
-    <span class="text-[#9A90AB]">→</span>
-    <span class="flex items-baseline gap-3">
-      <span class="text-[#0B7BC1]">parse()とconvertToTSX()</span>
-      <span class="text-xl text-[#717781]">Editor向け</span>
-    </span>
-  </div>
-</div>
-
-<Ref href="https://github.com/withastro/compiler/blob/ab9b285a34c482544da359f0ca91d0b0c25cdee4/cmd/astro-wasm/astro-wasm.go#L251-L284">Go Compiler 2.12.2とParseとConvertToTSXとTransform</Ref>
-
-<!--
-Tokenizerは、コードをタグや文字などの小さな単位へ分けます。Literal modeは、HTMLの規則で木を直さず、書かれた入れ子のまま木を作るパーサーです。transformはBuildするコードを作り、parseは書かれたとおりの木をASTにし、convertToTSXはAstroをTypeScriptが読める形に変えます。
-Go版2.12.2の実装を確認すると、ParseとConvertToTSXはParseOptionEnableLiteral(true)を指定しています。Transformはこの指定をしていません。HTMLの補正という説明には、どのAPIの経路なのかを明示する必要があります。同じSourceを二つの方法で読んでいた、というのがこの枚の要点です。Go版にもEditor向けの工夫はありました。
-次の問い: 取得した木を、各Editor toolはどう使っていたのか？
+ここまでの例から、Astro Syntaxに必要な規則を振り返ります。
 -->
 
 ---
 layout: default
 class: ch2-detail
+---
+
+## Astro Syntaxを振り返る
+
+<div class="ch2-reflection">
+  <div><strong>HTMLらしさ</strong><p>HTMLに似た構文と、利用者が期待する挙動</p></div>
+  <div><strong>空白の扱い</strong><p>ブラウザで空白になる改行を、<br />Astro Syntaxの規則で扱えないか</p></div>
+  <div><strong>HTML5パーサー<br />固有のふるまい</strong><p>タグの補完や入れ子の補正まで、<br />Astroで採用する必要があるか</p></div>
+</div>
+<div class="ch2-next-question">HTML5パーサーは必要なのか？</div>
+
+<!--
+13枚目の属性と14枚目の空白と15枚目の不具合を振り返ります。HTMLに似た構文を解析することと、Browserと同じHTMLの補正を採用することは別の判断です。
+改行を含む空白の表示は、HTMLの補正とは別の論点です。Astro Syntaxでどの規則を採用するかという問いであり、空白の仕様が変更済みだという説明ではありません。
+tableの後のh2がtableの中に入った例は、Compilerの不具合です。HTML5の正しい挙動として説明しません。Rustへの移行だけで、これらの課題をすべて解決できるという説明もしません。
+次は、Go版Compilerの情報を各ツールがどう利用していたかを確認します。
+-->
+
+---
+layout: default
+class: ch2-detail ch2-api-slide
+---
+
+## `parse()`と`convertToTSX()`を使うツールの役割
+
+<div class="ch2-api-map" aria-label="Go CompilerのAPIから各ツールへの分岐">
+  <div class="ch2-api-node ch2-api-parse"><strong><code>parse()</code></strong><span>Astro ASTと位置情報</span></div>
+  <svg class="ch2-api-fork" viewBox="0 0 60 220" preserveAspectRatio="none" aria-hidden="true"><path d="M0 110 H25 V55 H55 M25 110 V165 H55 M47 50 L55 55 L47 60 M47 160 L55 165 L47 170" /></svg>
+  <div class="ch2-api-consumer"><strong>Linter</strong><span>式を再解析し、宣言と参照を検査する</span></div>
+  <div class="ch2-api-consumer"><strong>Formatter</strong><span>式を再解析し、空白と改行を整える</span></div>
+  <div class="ch2-api-node"><strong><code>convertToTSX()</code></strong><span>Virtual TSXとSource map</span></div>
+  <svg class="ch2-api-arrow" viewBox="0 0 60 110" preserveAspectRatio="none" aria-hidden="true"><path d="M0 55 H55 M47 50 L55 55 L47 60" /></svg>
+  <div class="ch2-api-consumer"><strong>Language Toolの型解析</strong><span>TypeScriptの補完と診断を<br />元のAstroへ対応させる</span></div>
+</div>
+
+<Ref href="https://github.com/withastro/compiler/blob/ab9b285a34c482544da359f0ca91d0b0c25cdee4/cmd/astro-wasm/astro-wasm.go#L251-L284">Go Compilerのparse()とconvertToTSX()</Ref>
+
+<!--
+architecture/docs/drafts/astro-go-compiler-internals-and-consumers.mdのAPIと用途の対応表を参照しています。資料はCompiler 3.0.0、続く実測例はCompiler 2.12.2です。
+parseはAstro ASTと位置情報を返し、astro-eslint-parserとprettier-plugin-astroが利用します。Linterは宣言と参照を検査し、Formatterは空白と改行を決めます。式の再解析については後の具体例で確認します。
+convertToTSXはTypeScriptが解析できるコードとSource mapを返します。この図のLanguage Toolは型解析の経路です。HTML属性の補完は別にVirtual HTMLを使います。
+Go Compilerの二つの解析モードも区別します。TokenizerとParserの実装は共通です。transform()はLiteral modeを指定せず、parse()とconvertToTSX()はParseOptionEnableLiteral(true)を指定します。Literal modeはHTMLの補正を抑え、書かれた入れ子を保持します。各APIは個別にParserを呼び、返す形式を選びます。一度の解析結果を三つのAPIで共有する図ではありません。
+transform()はBuild向けの実行コードを生成します。parse()とconvertToTSX()はEditor向けにも使われます。この違いは2.12.2と、資料の3.0.0の固定コミット8870738a46baf6e639b1fab61e9e443b5e5df8f0で確認しています。
+-->
+
+---
+layout: default
+class: ch2-detail ch2-nesting-slide
 clicks: 3
 ---
 
-## 三つのEditor toolは別の問いに答える
+## 式の内部ASTと正確な位置を<br />ツールへ提供できていたか？
 
-<div class="ch2-pipeline"><span>Astro Source</span><span class="ch2-connector">▸</span><strong>Compiler</strong><span class="ch2-connector">▸</span><span>Astro ASTとSource位置</span></div>
-<svg class="ch2-branches" viewBox="0 0 860 55" aria-label="Compilerから三つのツールへ分岐">
-  <path d="M430 0 V20 M140 50 V20 H720 V50 M430 20 V50" fill="none" stroke="#9a90ab" stroke-width="2" />
-</svg>
-<div class="ch2-three">
-  <div v-click="1"><div class="ch2-label">Linter</div><div class="ch2-question">参照する変数は<br />宣言されているか</div><p>検査した結果を<br />診断として返す</p></div>
-  <div v-click="2"><div class="ch2-label">Formatter</div><div class="ch2-question">空白と改行を<br />どうそろえるか</div><p>整形後のSourceを返す</p></div>
-  <div v-click="3"><div class="ch2-label">Language Tool</div><div class="ch2-question">何を入力できるか<br />型に合っているか</div><p>補完候補と型の診断を返す</p></div>
+<div class="ch2-nesting-cols">
+<div class="ch2-source-regions" aria-label="Astroの言語領域">
+<pre><span class="ch2-region-script">---
+const products =
+  await getProducts();
+&#45;&#45;&#45;</span>
+<span class="ch2-region-template">&lt;ul&gt;</span>
+<span :class="{ 'ch2-region-expression': $clicks >= 1 }">  {products.map((product) =&gt; (</span>
+<span :class="{ 'ch2-region-markup': $clicks >= 2 }">    &lt;li&gt;<span :class="{ 'ch2-region-inner': $clicks >= 3 }">{product.name}</span>&lt;/li&gt;</span>
+<span :class="{ 'ch2-region-expression': $clicks >= 1 }">  ))}</span>
+<span class="ch2-region-template">&lt;/ul&gt;</span></pre>
 </div>
+<div class="ch2-tree" aria-label="Component scriptとTemplateは同じ階層">
+  <div class="ch2-tree-root">.astro</div>
+  <div class="ch2-tree-children">
+    <div class="ch2-tree-node ch2-region-script">Component script</div>
+    <div class="ch2-tree-node"><span class="ch2-region-template">Template</span>
+      <div class="ch2-tree-children">
+        <div class="ch2-tree-node" :class="{ 'ch2-region-expression': $clicks >= 1 }">JavaScript expression
+          <div class="ch2-tree-children">
+            <div class="ch2-tree-node" :class="{ 'ch2-region-markup': $clicks >= 2 }">Markup
+              <div class="ch2-tree-children">
+                <div class="ch2-tree-node" :class="{ 'ch2-region-inner': $clicks >= 3 }">JavaScript expression</div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+</div>
+<div class="ch2-note">Astro Syntaxには、式の中のMarkupと、Markupの中の式がある</div>
 
 <!--
-Compilerの情報を利用する三つのツールは、答える問いが異なります。クリック1でLinterの検査、2でFormatterの整形、3でLanguage Toolの補完と型解析を示します。
-これから、各ツールが何を受け取り、どのデータへ変換し、利用者へ何を返すかをコードで確認します。Linterは変数名の誤記、Formatterは空白と改行、Language ToolはHTMLの属性補完とプロパティ名の誤記を例にします。
+左は13枚目のproducts.mapを簡略化した例です。Component scriptとTemplateは同じ階層です。Templateの式にMarkupがあり、そのMarkupに再び式があります。
+三回のクリックでTemplate直下の式、liのMarkup、product.nameの式を順に強調します。コードと図の色が対応します。
+右はSourceに含まれる言語領域の図であり、Go Compilerが返すASTのNode名を示す図ではありません。Go版もexpressionの子にelementを含めることができ、Markupの入れ子を保持します。式の変数名や演算子を個別にたどるJavaScript ASTは提供されません。次の例で公開ASTを確認します。
 -->
 
 ---
@@ -526,7 +564,7 @@ class: ch2-detail
 
 <div class="ch2-cols">
 <div>
-<div class="ch2-label">Linterの入力</div>
+<div class="ch2-label">Astro Source</div>
 
 ```astro
 ---
@@ -534,21 +572,19 @@ const price = 10;
 const amount = 3;
 ---
 
-<p>{pirce * amount}</p>
-<!-- pirceは診断用の誤記 -->
+<p>{price * amount}</p>
 ```
 
-<div class="ch2-note">宣言は <code>price</code>、参照は <code>pirce</code></div>
 </div>
 <div>
-<div class="ch2-label">Astro AST</div>
+<div class="ch2-label">Go Compilerの公開AST</div>
 
 ```js
 {
   type: "expression",
   children: [{
     type: "text",
-    value: "pirce * amount"
+    value: "price * amount"
   }]
 }
 ```
@@ -556,42 +592,14 @@ const amount = 3;
 <div class="ch2-note"><code>TextNode.value</code> は文字列</div>
 </div>
 </div>
-<div class="ch2-summary">変数名と演算子を調べるには、式の中身を解析する必要がある</div>
+<div class="ch2-summary">変数名と演算子を、個別のASTノードとしてたどれない</div>
 
 <Ref href="https://github.com/withastro/compiler/blob/ab9b285a34c482544da359f0ca91d0b0c25cdee4/README.md#parse-astro-and-return-an-ast">Compiler 2.12.2と公開AST</Ref>
 
 <!--
-左のコードは5行目に空行があり、末尾はLFです。priceを宣言していますが、Templateではpirceと参照しています。末尾のコメントに、診断を示すための意図的な誤記であることを記しています。
-右はparse(source, { position: true })の返却値から、式とその子を抜粋したものです。Astro ASTは式の範囲を表し、TextNode.valueにpirce * amountという文字列を持ちます。変数名を表すIdentifierや、掛け算を表すBinaryExpressionは、この公開ASTにはありません。
-Compiler 2.12.2で検証しています。Go版がJavaScript式の内部ASTを提供していた、という説明にはしません。
--->
-
----
-layout: default
-class: ch2-detail
----
-
-## 不正確な位置を計算し直す
-
-<div class="ch2-label">6行目の文字オフセット</div>
-<pre class="ch2-ruler">十の位  44444555555555566666666
-一の位  56789012345678901234567
-文字    &lt;p&gt;{pirce * amount}&lt;/p&gt;</pre>
-
-<div class="ch2-ranges">
-  <div><span class="ch2-label">Compilerの式の位置</span><code>start: 47, end: 80</code><span>終端が式の外を指している</span></div>
-  <div><span class="ch2-label">式全体の正しいRange</span><code>[48, 64)</code><span><code>{pirce * amount}</code></span></div>
-  <div><span class="ch2-label">変数名のRange</span><code>[49, 54)</code><span><code>pirce</code> の5文字</span></div>
-</div>
-<div class="ch2-summary"><code>fixLocations</code> がSourceから範囲を数え直す</div>
-<div class="ch2-note">Rangeは0始まりで終端を含まない。ここではUTF-16の文字オフセットを使う</div>
-
-<Ref href="https://github.com/ota-meshi/astro-eslint-parser/blob/v1.2.2/src/parser/astro-parser/parse.ts">astro-eslint-parser 1.2.2とfixLocations</Ref>
-
-<!--
-前のコードの空行と末尾のLFを含めて数えた値です。Compilerが返すExpressionNodeのstart.offsetは47、end.offsetは80です。実際には、開始の波かっこが48、閉じ波かっこが63にあり、式全体は[48, 64)です。pirceは[49, 54)です。
-CompilerのREADMEは、一部の位置が不正確であることを明記しています。astro-eslint-parserはSourceを走査し、fixLocationsで位置を計算し直します。Compilerの位置情報が存在することと、診断や編集に利用できる精度であることは区別します。
-式までのコードはASCIIなので1文字がUTF-16の1単位です。ESLintの行と列は1始まりで、pirceは6行目の5列目から10列目に相当します。終端は含みません。
+左のコードは5行目に空行があり、末尾はLFです。priceとamountはともに宣言されています。
+右はparse(source, { position: true })の返却値から、式とその子を抜粋したものです。Astro ASTは式の範囲を表し、TextNode.valueにprice * amountという文字列を持ちます。変数名を表すIdentifierや、掛け算を表すBinaryExpressionは、この公開ASTにはありません。
+この枚では、式の中身が文字列であることだけを伝えます。Compiler 2.12.2で検証しています。
 -->
 
 ---
@@ -600,7 +608,7 @@ class: ch2-detail
 clicks: 2
 ---
 
-## LinterがVirtual TSXを作る
+## 式を解析するためにVirtual TSXを作る
 
 <div class="ch2-cols">
 <div>
@@ -612,37 +620,63 @@ const price = 10;
 const amount = 3;
 ---
 
-<p>{pirce * amount}</p>
-<!-- pirceは診断用の誤記 -->
+<p>{price * amount}</p>
 ```
 
 </div>
 <div v-click="1">
-<div class="ch2-label">Virtual TSX</div>
+<div class="ch2-label">Linter独自のVirtual TSX</div>
 
 ```tsx
 const price = 10;
 const amount = 3;
 <>
-  <p>{pirce * amount}</p>
-  {/* pirceは診断用の誤記 */}
+  <p>{price * amount}</p>
 </>;
 ```
 
 </div>
 </div>
-<div class="ch2-note">Component scriptの区切りを外し、TemplateをFragmentで囲む</div>
+<div class="ch2-note"><code>astro-eslint-parser</code> がJavaScriptパーサーへ渡すコードを作る</div>
 <div v-click="2" class="ch2-result">
-  <div class="ch2-label">AST: <code>BinaryExpression</code> と演算子 <code>*</code></div>
-  <div>左の <code>Identifier: pirce</code> と右の <code>Identifier: amount</code></div>
+  <div class="ch2-label"><code>BinaryExpression</code> と演算子 <code>*</code></div>
+  <div>左の <code>Identifier: price</code> と右の <code>Identifier: amount</code></div>
 </div>
 
 <Ref href="https://github.com/ota-meshi/astro-eslint-parser/blob/v1.2.2/src/parser/process-template.ts">astro-eslint-parser 1.2.2とprocessTemplate</Ref>
 
 <!--
-クリック1でVirtual TSXを示します。ここではJavaScriptとJSXだけを使っています。実装は区切りを除いた位置にセミコロンを挿入するなどの調整も行います。表示用の抜粋では、そのセミコロンと一部の空行を省き、Fragment内を字下げしています。CompilerのconvertToTSXではなく、astro-eslint-parserが生成するコードです。
-クリック2で変換後のASTを示します。JavaScript parserがpirceとamountをIdentifierに分け、掛け算をBinaryExpressionとして解析します。
-パーサーはASTとともにスコープ情報も用意します。スコープとは、変数を参照できる範囲です。スコープ解析では、宣言と参照の対応を調べます。
+Astroの式を既存のJavaScriptパーサーで解析するため、astro-eslint-parserは独自にVirtual TSXを作ります。CompilerのconvertToTSX()とは別の変換です。この例はJavaScriptとJSXだけで表せるため、検証ではEspreeを使います。
+クリック1でVirtual TSXを示します。Component scriptの区切りを外し、TemplateをFragmentで囲みます。実装は区切りを除いた位置にセミコロンを挿入するなどの調整も行います。表示用の抜粋では、そのセミコロンと一部の空行を省き、Fragment内を字下げしています。
+クリック2で解析後のASTを示します。JavaScriptパーサーがpriceとamountをIdentifierに分け、掛け算をBinaryExpressionとして解析します。パーサーは宣言と参照を対応させるスコープ情報も用意します。
+-->
+
+---
+layout: default
+class: ch2-detail
+---
+
+## 診断のために、元のAstroの位置を求める
+
+<div class="ch2-label">6行目の文字オフセット</div>
+<pre class="ch2-ruler">十の位  44444555555555566666666
+一の位  56789012345678901234567
+文字    &lt;p&gt;{price * amount}&lt;/p&gt;</pre>
+
+<div class="ch2-ranges">
+  <div><span class="ch2-label">Compilerの式の位置</span><code>start: 47, end: 80</code><span>開始と終端が不正確</span></div>
+  <div><span class="ch2-label">補正後の式全体</span><code>[48, 64)</code><span><code>{price * amount}</code></span></div>
+  <div><span class="ch2-label">復元した変数名の位置</span><code>[49, 54)</code><span><code>price</code> の5文字</span></div>
+</div>
+<div class="ch2-summary"><code>fixLocations</code> で式の位置を補正し、<br />JavaScript ASTの位置を元のAstroへ戻す</div>
+<div class="ch2-note">Rangeは0始まりで終端を含まない</div>
+
+<Ref href="https://github.com/ota-meshi/astro-eslint-parser/blob/v1.2.2/src/parser/astro-parser/parse.ts">astro-eslint-parser 1.2.2とfixLocations</Ref>
+
+<!--
+前のコードの空行と末尾のLFを含めて数えた値です。Compilerが返すExpressionNodeのstart.offsetは47、end.offsetは80です。開始の波かっこは48、閉じ波かっこは63にあり、式全体は[48, 64)です。priceは[49, 54)です。
+CompilerのREADMEは、一部の位置が不正確であることを明記しています。astro-eslint-parserはSourceを走査し、fixLocationsでAstroの式の位置を補正します。JavaScriptの識別子を解析するのはJavaScriptパーサーです。そのASTの位置をrestoreで元のAstroへ戻します。fixLocationsが識別子を解析するという意味ではありません。
+この例はASCIIなので、UTF-8のbyteとUTF-16の文字オフセットの値が一致します。一般の日本語を含む入力で両者が一致するとは限りません。ESLintの行と列は1始まりで、priceは6行目の5列目から10列目に相当します。終端は含みません。
 -->
 
 ---
@@ -652,43 +686,37 @@ class: ch2-detail
 
 ## ESLintが未定義の参照を検査する
 
-<div class="ch2-note">スコープは変数を参照できる範囲。スコープ解析は宣言と参照の対応を調べること</div>
 <div class="ch2-cols ch2-scope">
 <div>
-<div class="ch2-label">パーサーが用意するスコープ情報</div>
-<table>
-<thead><tr><th>名前</th><th>宣言と参照</th></tr></thead>
-<tbody>
-<tr><td><code>price</code></td><td>宣言あり</td></tr>
-<tr><td><code>amount</code></td><td>宣言あり、参照先が分かる</td></tr>
-<tr><td><code>pirce</code></td><td>参照先の宣言がない</td></tr>
-</tbody>
-</table>
-</div>
-<div>
-<div class="ch2-label">ESLintの実際の診断</div>
+<div class="ch2-label">ここで変数名を誤記する</div>
 
-```json
-{
-  "ruleId": "no-undef",
-  "line": 6,
-  "column": 5,
-  "endLine": 6,
-  "endColumn": 10
-}
+```astro
+---
+const price = 10;
+const amount = 3;
+---
+
+<p>{pirce * amount}</p>
+<!-- pirceは診断用の誤記 -->
 ```
 
-<div class="ch2-note">メッセージ: <code>'pirce' is not defined.</code></div>
+</div>
+<div>
+<div class="ch2-label">宣言と参照を照合する</div>
+<div class="ch2-lint-matches"><div><code>price</code><span>宣言あり</span></div><div><code>amount</code><span>参照先の宣言あり</span></div><div><code>pirce</code><span>参照先の宣言なし</span></div></div>
+<div class="ch2-label">元のAstroへの診断</div>
+<pre class="ch2-lint-diagnostic">&lt;p&gt;{<span>pirce</span> * amount}&lt;/p&gt;</pre>
+<div class="ch2-note"><code>no-undef</code><br /><code>'pirce' is not defined.</code></div>
 </div>
 </div>
-<div class="ch2-summary">パーサーがASTの位置をAstroへ戻してから、<code>no-undef</code> が検査する</div>
+<div class="ch2-summary">未定義の参照を検出し、元の5文字に波線を表示する</div>
 
 <Ref href="https://github.com/ota-meshi/astro-eslint-parser/blob/v1.2.2/src/parser/index.ts">parseForESLintと位置の復元</Ref>
 
 <!--
-パーサーが用意したスコープ情報では、priceとamountには宣言があります。amountの参照はその宣言に対応します。pirceの参照には対応する宣言がなく、globalScope.throughに含まれます。
-parseForESLintは、Virtual TSXを解析してASTとスコープ情報を用意した後、restoreでASTの位置を元のAstroへ戻します。Astro専用のNodeやvisitorKeysも整えた返却値をESLintへ渡します。ESLintのno-undefは、このスコープ情報から未定義の参照を検査します。
-右のJSONは診断の抜粋です。ESLint 9.36.0で確認した値で、6行目の5列目から10列目、Rangeでは[49, 54)です。この例ではESLint本体のno-undefを使っています。
+この枚で初めてpirceという誤記を示します。パーサーが用意したスコープ情報では、priceとamountには宣言があります。amountの参照はその宣言に対応します。pirceの参照には対応する宣言がなく、globalScope.throughに含まれます。
+parseForESLintは、Virtual TSXを解析してASTとスコープ情報を用意した後、restoreでASTの位置を元のAstroへ戻します。Astro専用のNodeやvisitorKeysも整えた返却値をESLintへ渡します。ESLintのno-undefは、このスコープ情報から未定義の参照を検査します。意図した綴りを推測して修正するルールではありません。
+診断JSONの抜粋は { "ruleId": "no-undef", "message": "'pirce' is not defined.", "line": 6, "column": 5, "endLine": 6, "endColumn": 10 } です。ESLint 9.36.0で確認した値で、Rangeでは[49, 54)です。波線はこの範囲を示した図です。
 -->
 
 ---
@@ -727,7 +755,7 @@ products.map(product=><li>
 ```
 
 </div>
-<div class="ch2-bottom-note">Astro全体はCompilerが解析し、式の中身は <code>babel-ts</code> が解析する</div>
+<div class="ch2-bottom-note"><code>parse()</code> でAstro全体を、<code>babel-ts</code> で式の中身を解析する</div>
 
 <Ref href="https://github.com/withastro/prettier-plugin-astro/blob/v0.14.1/src/index.ts">prettier-plugin-astro 0.14.1とastroExpressionParser</Ref>
 
@@ -742,7 +770,7 @@ layout: default
 class: ch2-detail
 ---
 
-## Docから整形後のSourceを作る
+## Docから整形後のAstroを作る
 
 <div class="ch2-cols ch2-doc">
 <div>
@@ -795,7 +823,7 @@ class: ch2-detail
 clicks: 2
 ---
 
-## Language Toolが二つのVirtual Codeを作る
+## 補完と型検査のためにVirtual Codeを作る
 
 <div class="ch2-cols">
 <div>
@@ -825,10 +853,10 @@ const product = {
 ```
 
 <div class="ch2-note">HTML Language Service<br />属性補完: <code>target</code> と <code>title</code></div>
-<div class="ch2-result">Component scriptを空白化し、文字オフセットを保持する</div>
+<div class="ch2-result">Component scriptを空白化し、<br />文字オフセットを保持する</div>
 </div>
 <div v-if="$clicks >= 2">
-<div class="ch2-label">Virtual TSX</div>
+<div class="ch2-label"><code>convertToTSX()</code> の出力</div>
 
 ```tsx
 const product = {
@@ -841,7 +869,7 @@ const product = {
 </Fragment>
 ```
 
-<div class="ch2-note">TypeScript: <code>nmae</code> は型にない</div>
+<div class="ch2-note">型検査用のVirtual TSX<br />TypeScript: <code>nmae</code> は型にない</div>
 </div>
 </div>
 </div>
@@ -904,27 +932,47 @@ language-toolsはSource mapをVolarのmappingへ変換します。Volarがこの
 
 ---
 layout: default
-class: ch2-detail
+class: ch2-detail ch2-flow-slide
 clicks: 3
 ---
 
-## 三つの中間データと結果
+## Astroから各ツールのアウトプットまで
 
-<div class="ch2-note"><strong>Compiler</strong> はAstro ASTと位置を返す。Language ToolにはTSXとSource mapも返す</div>
-<table class="ch2-comparison">
-<thead><tr><th>ツール</th><th>Adapterの中間データ</th><th>Ecosystem tool</th><th>利用者へ返す結果</th></tr></thead>
-<tbody>
-<tr v-click="1"><td>Linter</td><td>Virtual TSX<br />ASTとスコープ情報</td><td>JS parserとESLint</td><td><code>no-undef</code><br /><code>pirce</code> の診断</td></tr>
-<tr v-click="2"><td>Formatter</td><td>Babel入力<br />整形用のDoc</td><td>BabelとPrettier</td><td>空白と改行を<br />そろえたSource</td></tr>
-<tr v-click="3"><td>Language Tool</td><td>Virtual HTML<br />Virtual TSXとmapping</td><td>HTML Service<br />TypeScript</td><td>属性補完<br /><code>nmae</code> の診断</td></tr>
-</tbody>
-</table>
-<div class="ch2-summary">Adapterが用途に応じてデータを変換し、結果をAstroと対応させる</div>
+<div class="ch2-flow" aria-label="Astroから三つのツールへのフロー">
+  <div class="ch2-flow-head ch2-flow-data">中間データ</div><div class="ch2-flow-head ch2-flow-tool">各ツール</div><div class="ch2-flow-head ch2-flow-output">アウトプット</div>
+  <div class="ch2-flow-source"><code>.astro</code></div>
+  <div v-click="1" class="ch2-flow-row ch2-flow-lint">
+    <svg class="ch2-flow-branch" viewBox="0 0 42 180" preserveAspectRatio="none" aria-hidden="true"><path d="M0 180 H14 V60 H40 M33 54 L40 60 L33 66" /></svg>
+    <div class="ch2-flow-data"><strong>ASTとスコープ情報</strong><span>astro-eslint-parserが<br />独自のTSXをJS解析</span></div>
+    <svg class="ch2-flow-arrow ch2-flow-arrow-one" viewBox="0 0 32 30" aria-hidden="true"><path d="M0 15 H28 M20 9 L28 15 L20 21" /></svg>
+    <div class="ch2-flow-tool"><strong>ESLint</strong></div>
+    <svg class="ch2-flow-arrow ch2-flow-arrow-two" viewBox="0 0 32 30" aria-hidden="true"><path d="M0 15 H28 M20 9 L28 15 L20 21" /></svg>
+    <div class="ch2-flow-output">未定義変数の診断</div>
+  </div>
+  <div v-click="2" class="ch2-flow-row ch2-flow-format">
+    <svg class="ch2-flow-branch" viewBox="0 0 42 120" preserveAspectRatio="none" aria-hidden="true"><path d="M0 60 H40 M33 54 L40 60 L33 66" /></svg>
+    <div class="ch2-flow-data"><strong>整形用Doc</strong><span>Babelで式を解析し、<br />Astro Printerが作成</span></div>
+    <svg class="ch2-flow-arrow ch2-flow-arrow-one" viewBox="0 0 32 30" aria-hidden="true"><path d="M0 15 H28 M20 9 L28 15 L20 21" /></svg>
+    <div class="ch2-flow-tool"><strong>Prettier</strong></div>
+    <svg class="ch2-flow-arrow ch2-flow-arrow-two" viewBox="0 0 32 30" aria-hidden="true"><path d="M0 15 H28 M20 9 L28 15 L20 21" /></svg>
+    <div class="ch2-flow-output">整形後のAstro</div>
+  </div>
+  <div v-click="3" class="ch2-flow-row ch2-flow-language">
+    <svg class="ch2-flow-branch" viewBox="0 0 42 180" preserveAspectRatio="none" aria-hidden="true"><path d="M0 0 H14 V120 H40 M33 114 L40 120 L33 126" /></svg>
+    <div class="ch2-flow-data"><strong>Virtual HTMLとTSX</strong><span>HTMLはLanguage Tool、<br />TSXはconvertToTSX()</span></div>
+    <svg class="ch2-flow-arrow ch2-flow-arrow-one" viewBox="0 0 32 30" aria-hidden="true"><path d="M0 15 H28 M20 9 L28 15 L20 21" /></svg>
+    <div class="ch2-flow-tool"><strong>HTML Language<br />ServiceとTypeScript</strong></div>
+    <svg class="ch2-flow-arrow ch2-flow-arrow-two" viewBox="0 0 32 30" aria-hidden="true"><path d="M0 15 H28 M20 9 L28 15 L20 21" /></svg>
+    <div class="ch2-flow-output">属性補完と<br />型の診断</div>
+  </div>
+</div>
 
 <!--
-クリック1でLinter、2でFormatter、3でLanguage Toolの経路を示します。AdapterはCompilerと各ツールの間で、データ形式と位置を変換する担当を指します。
-Linterは自分でVirtual TSXを作り、JavaScript parserからASTとスコープ情報を取得します。位置を元に戻してからESLintが検査します。Formatterは式をBabel入力へ変換し、Astro PrinterがDocを組み立て、Prettierが文字列にします。Language ToolはVirtual HTMLとCompiler製のTSXを使い分け、補完と診断を元コードと対応させます。
-Compilerがすべての中間データを作るわけではありません。また、LinterとLanguage ToolのVirtual TSXは、生成元も用途も異なります。
+共通のAstro Sourceから、中間データと各ツールとアウトプットへ進むフローです。クリック1でLinter、2でFormatter、3でLanguage Toolの経路を示します。
+Linterはastro-eslint-parserが独自にVirtual TSXを作り、JavaScriptパーサーからASTとスコープ情報を取得します。位置を元に戻してからESLintが検査します。
+Formatterは式をBabel入力へ変換し、Astro PrinterがDocを組み立て、Prettierが文字列にします。DocはPrettierが整形するために必要な形式です。Docへの変換自体をCompilerの不具合とは説明しません。
+Language Toolは自分で生成するVirtual HTMLと、CompilerのconvertToTSX()が生成するVirtual TSXを使い分けます。HTML Language Serviceは属性を補完し、TypeScriptは型を検査します。結果は元のAstroと対応させます。
+Compilerがすべての中間データを作るわけではありません。二つのVirtual TSXは生成元と用途が異なります。
 -->
 
 ---
@@ -932,30 +980,18 @@ layout: default
 class: ch2-detail
 ---
 
-## Source contractと三つの担当
+## `parse()`と`convertToTSX()`を使う難しさ
 
-<div class="ch2-intro">Compilerへ求める保証を <strong>Source contract</strong> と呼ぶ</div>
-<div class="ch2-three ch2-roles">
-<div>
-<div class="ch2-label">Compiler</div>
-<div class="ch2-question">Sourceの情報を保証する</div>
-<p>書かれたHTMLの親子関係<br />JavaScript式の内部AST<br />正確なSource位置<br />生成コードとの位置対応</p>
+<div class="ch2-cols ch2-api-recap">
+  <div><div class="ch2-label"><code>parse()</code></div><h3>式のASTと位置の不足</h3><ul><li>式の内部ASTがない</li><li>位置情報が不正確な箇所がある</li><li>ツールごとに式を再解析する</li></ul></div>
+  <div><div class="ch2-label"><code>convertToTSX()</code></div><h3>型検査用の変換と位置対応</h3><ul><li>生成コードをTypeScriptで解析する</li><li>元のAstroとの位置対応が必要</li><li>Editor向け変換も保守する</li></ul></div>
 </div>
-<div>
-<div class="ch2-label">Adapter</div>
-<div class="ch2-question">用途別の形式へ変換する</div>
-<p>ESLintが扱うAST<br />PrettierのDoc<br />二つのVirtual Code<br />元のAstroとの対応</p>
-</div>
-<div>
-<div class="ch2-label">Ecosystem tool</div>
-<div class="ch2-question">検査と整形と型解析を担う</div>
-<p>未定義の参照を検査する<br />空白と改行を決める<br />補完候補を列挙する<br />プロパティの型を調べる</p>
-</div>
-</div>
-<div class="ch2-summary">用途別の変換は必要。共通して使うASTと位置の保証をCompilerに求める</div>
+<div class="ch2-summary">情報の不足や不正確さと、<br />用途別の変換に伴う負担を区別する</div>
 
 <!--
-Source contractは、この発表でCompilerへ求める保証を整理するための呼び名です。Go版が左の情報をすべて提供していた、という実装の説明ではありません。特にJavaScript式の内部ASTと位置の精度は、ここまでの例で課題として確認しました。
+parse()の公開ASTでは式の中身が文字列なので、LinterとFormatterは式を再解析します。一部の位置情報は補正が必要です。これは、正確なASTを受け取った後で各ツール向けの形式へ変換する負担とは区別します。
+convertToTSX()はTypeScriptの型解析を利用するためのコードを生成します。TypeScriptによる解析と元のAstroへの位置対応とEditor向け変換の保守が必要です。すべてをHTML5由来の欠陥とは説明しません。Rustへ移行して式のASTを提供できても、TypeScriptの型解析やツール固有の形式への変換が不要になるとは限りません。
+Source contractは、この発表でCompilerへ求める保証を整理するための呼び名です。書かれたHTMLの親子関係とJavaScript式の内部ASTと正確なSource位置と生成コードとの位置対応を含みます。Go版がこれらをすべて提供していた、という実装の説明ではありません。
 CompilerはSourceの親子関係と式の中身と位置を保証する。Adapterは各ツールに必要な形式へ変換し、元のAstroと対応させる。Ecosystem toolは検査と整形と型解析を担う。この分担で考えると、用途別の変換と、Compilerの情報不足に対する再解析や位置の再計算を区別できます。
 Compilerが生成したコードとの位置対応はCompilerに求めます。Adapterが独自に変換したコードとの対応はAdapterが管理します。
 -->
@@ -998,7 +1034,7 @@ clicks: 4
   <div v-click="3"><logos-rolldown class="h-20 w-full" /></div>
 </div>
 
-<div v-click="4" class="mt-16 text-2xl opacity-70">2021年にも存在した基盤が育ち、その後の新しい実装も加わった</div>
+<div v-click="4" class="mt-16 text-2xl ">2021年にも存在した基盤が育ち、その後の新しい実装も加わった</div>
 
 <Ref href="https://oxc.rs/docs/guide/introduction.html">SWC と Biome と Oxc</Ref>
 
@@ -1021,11 +1057,11 @@ clicks: 4
     <div class="flex items-start justify-center gap-7 mt-4">
       <div class="flex flex-col items-center gap-2">
         <logos-oxc-icon class="w-14 h-14" />
-        <span class="text-base text-[#6B7280]">Oxc</span>
+        <span class="text-base text-black">Oxc</span>
       </div>
       <div class="flex flex-col items-center gap-2">
         <logos-swc class="w-14 h-14" />
-        <span class="text-base text-[#6B7280]">SWC</span>
+        <span class="text-base text-black">SWC</span>
       </div>
     </div>
   </div>
@@ -1034,11 +1070,11 @@ clicks: 4
     <div class="flex items-start justify-center gap-7 mt-4">
       <div class="flex flex-col items-center gap-2">
         <logos-swc class="w-14 h-14" />
-        <span class="text-base text-[#6B7280]">SWC</span>
+        <span class="text-base text-black">SWC</span>
       </div>
       <div class="flex flex-col items-center gap-2">
         <logos-esbuild class="w-14 h-14" />
-        <span class="text-base text-[#6B7280]">esbuild</span>
+        <span class="text-base text-black">esbuild</span>
       </div>
     </div>
   </div>
@@ -1047,11 +1083,11 @@ clicks: 4
     <div class="flex items-start justify-center gap-7 mt-4">
       <div class="flex flex-col items-center gap-2">
         <logos-oxc-icon class="w-14 h-14" />
-        <span class="text-base text-[#6B7280]">Oxc</span>
+        <span class="text-base text-black">Oxc</span>
       </div>
       <div class="flex flex-col items-center gap-2">
         <logos-vitejs class="w-14 h-14" />
-        <span class="text-base text-[#6B7280]">Vite</span>
+        <span class="text-base text-black">Vite</span>
       </div>
     </div>
   </div>
@@ -1060,11 +1096,11 @@ clicks: 4
     <div class="flex items-start justify-center gap-7 mt-4">
       <div class="flex flex-col items-center gap-2">
         <logos-rollupjs class="w-14 h-14" />
-        <span class="text-base text-[#6B7280]">Rollup</span>
+        <span class="text-base text-black">Rollup</span>
       </div>
       <div class="flex flex-col items-center gap-2">
         <logos-rolldown-icon class="w-14 h-14" />
-        <span class="text-base text-[#6B7280]">Rolldown</span>
+        <span class="text-base text-black">Rolldown</span>
       </div>
     </div>
   </div>
@@ -1073,11 +1109,11 @@ clicks: 4
     <div class="flex items-start justify-center gap-7 mt-4">
       <div class="flex flex-col items-center gap-2">
         <logos-esbuild class="w-14 h-14" />
-        <span class="text-base text-[#6B7280]">esbuild</span>
+        <span class="text-base text-black">esbuild</span>
       </div>
       <div class="flex flex-col items-center gap-2">
         <logos-oxc-icon class="w-14 h-14" />
-        <span class="text-base text-[#6B7280]">Oxc</span>
+        <span class="text-base text-black">Oxc</span>
       </div>
     </div>
   </div>
@@ -1086,11 +1122,11 @@ clicks: 4
     <div class="flex items-start justify-center gap-7 mt-4">
       <div class="flex flex-col items-center gap-2">
         <logos-biomejs-icon class="w-14 h-14" />
-        <span class="text-base text-[#6B7280]">Biome</span>
+        <span class="text-base text-black">Biome</span>
       </div>
       <div class="flex flex-col items-center gap-2">
         <logos-eslint class="w-14 h-14" />
-        <span class="text-base text-[#6B7280]">ESLint</span>
+        <span class="text-base text-black">ESLint</span>
       </div>
     </div>
   </div>
@@ -1099,11 +1135,11 @@ clicks: 4
     <div class="flex items-start justify-center gap-7 mt-4">
       <div class="flex flex-col items-center gap-2">
         <logos-biomejs-icon class="w-14 h-14" />
-        <span class="text-base text-[#6B7280]">Biome</span>
+        <span class="text-base text-black">Biome</span>
       </div>
       <div class="flex flex-col items-center gap-2">
         <logos-prettier class="w-14 h-14" />
-        <span class="text-base text-[#6B7280]">Prettier</span>
+        <span class="text-base text-black">Prettier</span>
       </div>
     </div>
   </div>
@@ -1141,7 +1177,7 @@ clicks: 2
   </div>
 </div>
 
-<div v-click="2" class="mt-16 text-2xl opacity-70">
+<div v-click="2" class="mt-16 text-2xl ">
   フレームワークの外で、汎用的なBuild基盤が育った
 </div>
 
@@ -1210,20 +1246,20 @@ clicks: 3
 <div class="grid grid-cols-3 gap-6 mt-8 text-lg">
   <div class="border border-[#E5E0EC] rounded-xl p-5">
     <div class="text-2xl font-600">ネイティブバイナリ</div>
-    <div class="opacity-65 mt-2">OSとCPUに対応した実行形式を配布する。Node.jsから bindings を通じて利用する</div>
+    <div class="mt-2">OSとCPUに対応した実行形式を配布する。Node.jsから bindings を通じて利用する</div>
   </div>
   <div v-click="1" class="border border-[#E5E0EC] rounded-xl p-5">
     <div class="text-2xl font-600">WASM</div>
-    <div class="opacity-65 mt-2">対応する実行環境で動かせるバイナリ形式。BrowserやNode.jsなどへ配布する選択肢</div>
+    <div class="mt-2">対応する実行環境で動かせるバイナリ形式。BrowserやNode.jsなどへ配布する選択肢</div>
   </div>
   <div v-click="2" class="border border-[#E5E0EC] rounded-xl p-5">
     <div class="text-2xl font-600">Rust crate</div>
-    <div class="opacity-65 mt-2">Rustの実装へ組み込めるライブラリ。必要な解析や変換の機能を取り込む</div>
+    <div class="mt-2">Rustの実装へ組み込めるライブラリ。必要な解析や変換の機能を取り込む</div>
   </div>
 </div>
 
 <div v-click="3" class="mt-10 text-xl leading-relaxed">
-  <p class="opacity-70">Node-APIやWASM自体は、2021年にも存在していた。napi-rs も2021年には bindings や型定義の生成を提供していた</p>
+  <p class="">Node-APIやWASM自体は、2021年にも存在していた。napi-rs も2021年には bindings や型定義の生成を提供していた</p>
   <p class="text-primary">変わったのは、<b>組み合わせられる実装と配布の選択肢</b></p>
 </div>
 
@@ -1337,16 +1373,16 @@ clicks: 2
 
 <div class="grid grid-cols-2 gap-10 mt-10 text-xl">
   <div class="border border-[#E5E0EC] rounded-xl p-6">
-    <div class="text-sm uppercase tracking-widest text-[#717781]">実装に利用する基盤</div>
+    <div class="text-sm uppercase tracking-widest text-black">実装に利用する基盤</div>
     <div class="text-3xl font-600 mt-2">Oxc と Rust</div>
   </div>
   <div v-click="1" class="border border-[#E5E0EC] rounded-xl p-6">
-    <div class="text-sm uppercase tracking-widest text-[#717781]">実装を進めるための開発支援</div>
+    <div class="text-sm uppercase tracking-widest text-black">実装を進めるための開発支援</div>
     <div class="text-3xl font-600 mt-2">Claude Code</div>
   </div>
 </div>
 
-<div v-click="2" class="mt-10 text-xl opacity-70">
+<div v-click="2" class="mt-10 text-xl ">
   関連する試みとして、自分が取り組んでいた <b>xmdx</b> も紹介された
 </div>
 
@@ -1424,7 +1460,7 @@ clicks: 3
 
 <div class="flex items-center gap-4 mb-6">
   <Status kind="poc" />
-  <span class="text-xl opacity-70">2025年7月、Astroへ組み込むPoCを提案した</span>
+  <span class="text-xl ">2025年7月、Astroへ組み込むPoCを提案した</span>
 </div>
 
 <div class="grid grid-cols-3 gap-6 text-lg">
@@ -1465,7 +1501,7 @@ clicks: 3
 
 ## 既存pluginとの接続が必要だった
 
-<div class="mt-10 text-xl opacity-70">既存の処理は remark と rehype の plugin に依存していた</div>
+<div class="mt-10 text-xl ">既存の処理は remark と rehype の plugin に依存していた</div>
 
 <div class="mt-4 flex flex-wrap gap-4 text-xl">
   <span class="border border-[#E5E0EC] rounded-lg px-5 py-2"><code>remark-gfm</code></span>
@@ -1492,7 +1528,7 @@ clicks: 2
 
 ## AST Bridgeによる分担を試した
 
-<div class="text-xl opacity-70 mb-6">AST Bridge — RustとJavaScriptの間でASTを受け渡し、処理を分担する仕組み</div>
+<div class="text-xl mb-6">AST Bridge — RustとJavaScriptの間でASTを受け渡し、処理を分担する仕組み</div>
 
 <div class="grid grid-cols-[1fr_auto] gap-10">
   <div>
@@ -1514,7 +1550,7 @@ clicks: 2
 
 <div v-click="2" class="mt-8 text-xl">
   <p class="text-primary">RustとJavaScriptを、処理ごとに使い分けられる</p>
-  <p class="opacity-70">ASTを受け渡す境界も、設計する必要がある</p>
+  <p class="">ASTを受け渡す境界も、設計する必要がある</p>
 </div>
 
 <!--
@@ -1573,23 +1609,23 @@ clicks: 5
 <div class="grid grid-cols-2 gap-x-10 gap-y-5 mt-8 text-xl">
   <div>
     <div class="text-primary font-600">配布方法</div>
-    <div class="opacity-65 text-lg">WASMとNode-APIのどちらを使うか。両方に対応するか</div>
+    <div class="text-lg">WASMとNode-APIのどちらを使うか。両方に対応するか</div>
   </div>
   <div v-click="1">
     <div class="text-primary font-600">対応環境</div>
-    <div class="opacity-65 text-lg">OSとCPUごとのバイナリを誰がビルドし、誰がテストして保守するか</div>
+    <div class="text-lg">OSとCPUごとのバイナリを誰がビルドし、誰がテストして保守するか</div>
   </div>
   <div v-click="2">
     <div class="text-primary font-600">依存関係</div>
-    <div class="opacity-65 text-lg">追加機能を全員に含めるか、必要な利用者だけが追加する形にするか</div>
+    <div class="text-lg">追加機能を全員に含めるか、必要な利用者だけが追加する形にするか</div>
   </div>
   <div v-click="3">
     <div class="text-primary font-600">pluginとの互換性</div>
-    <div class="opacity-65 text-lg">既存のpluginを、どこまで利用できるようにするか</div>
+    <div class="text-lg">既存のpluginを、どこまで利用できるようにするか</div>
   </div>
   <div v-click="4" class="col-span-2">
     <div class="text-primary font-600">汎用部分の担当</div>
-    <div class="opacity-65 text-lg">Astro本体が持つか、開発元や独立したprojectが持つか</div>
+    <div class="text-lg">Astro本体が持つか、開発元や独立したprojectが持つか</div>
   </div>
 </div>
 
@@ -1610,7 +1646,7 @@ clicks: 1
 
 <div class="flex items-center gap-4 mb-5">
   <Status kind="poc" />
-  <span class="text-xl opacity-70">Astroのレビューを受け、汎用的なMarkdownとMDXの処理を独立したprojectとして実装した</span>
+  <span class="text-xl ">Astroのレビューを受け、汎用的なMarkdownとMDXの処理を独立したprojectとして実装した</span>
 </div>
 
 <div class="grid grid-cols-2 gap-8 text-lg">
@@ -1824,7 +1860,7 @@ clicks: 2
 
 <div class="mt-10 text-2xl leading-relaxed">
   <p>Rust版Compilerでは、<b>HTML correctionを行わない</b>方針が明示されている</p>
-  <p v-click="1" class="opacity-70">一方、閉じ忘れたタグなどの構文エラーは拒否する</p>
+  <p v-click="1" class="">一方、閉じ忘れたタグなどの構文エラーは拒否する</p>
   <p v-click="2" class="text-primary">どんな入力でも受け入れる、という意味ではない</p>
 </div>
 
@@ -1861,7 +1897,7 @@ clicks: 2
 </div>
 
 <div v-click="2" class="mt-8 text-xl leading-relaxed">
-  <p class="opacity-70">同じ入れ子のHTMLをBrowserへ渡せば、BrowserではHTMLの規則に従って補正が起きる</p>
+  <p class="">同じ入れ子のHTMLをBrowserへ渡せば、BrowserではHTMLの規則に従って補正が起きる</p>
   <p class="text-primary">HTMLの補正方針は、GoかRustかとは別の設計判断</p>
 </div>
 
@@ -2023,7 +2059,7 @@ clicks: 2
 
 ## Contentの例へ戻る
 
-<div class="text-xl opacity-70 mb-6">Content Processor — MarkdownとMDXを解析し、HTMLやJavaScriptへ変換する処理系</div>
+<div class="text-xl mb-6">Content Processor — MarkdownとMDXを解析し、HTMLやJavaScriptへ変換する処理系</div>
 
 <div class="grid grid-cols-2 gap-8 text-xl">
   <div class="border border-[#BC52EE] border-opacity-45 rounded-xl p-6" style="background: rgba(188, 82, 238, 0.06)">
@@ -2165,7 +2201,7 @@ clicks: 2
 </div>
 
 <div v-click="2" class="mt-8 flex gap-4 items-center">
-  <span class="text-lg opacity-60">スライドには、対象バージョンと状態を添える</span>
+  <span class="text-lg ">スライドには、対象バージョンと状態を添える</span>
   <Status kind="adopted" />
   <Status kind="wip" />
   <Status kind="proposed" />
@@ -2227,26 +2263,26 @@ clicks: 4
 <div class="grid grid-cols-4 gap-5 mt-8 text-lg">
   <div class="border border-[#E5E0EC] rounded-xl p-5">
     <div class="text-xl font-600">実装言語</div>
-    <div class="opacity-65 mt-2">どの言語で処理を書くか</div>
+    <div class="mt-2">どの言語で処理を書くか</div>
   </div>
   <div v-click="1" class="border border-[#E5E0EC] rounded-xl p-5">
     <div class="text-xl font-600">配布と実行方法</div>
-    <div class="opacity-65 mt-2">どの環境で、その処理を動かすか</div>
+    <div class="mt-2">どの環境で、その処理を動かすか</div>
   </div>
   <div v-click="2" class="border border-[#E5E0EC] rounded-xl p-5">
     <div class="text-xl font-600">AST設計</div>
-    <div class="opacity-65 mt-2">ソースをどの構造で表し、何を保持するか</div>
+    <div class="mt-2">ソースをどの構造で表し、何を保持するか</div>
   </div>
   <div v-click="3" class="border border-[#E5E0EC] rounded-xl p-5">
     <div class="text-xl font-600">責務の所有</div>
-    <div class="opacity-65 mt-2">どのprojectが実装して保守するか</div>
+    <div class="mt-2">どのprojectが実装して保守するか</div>
   </div>
 </div>
 
 <div v-click="4" class="mt-8 text-xl leading-relaxed">
   <p class="text-primary">これらは、それぞれ別の判断になる</p>
-  <p class="opacity-70">Node.js向けには native bindings。Browser内でCompilerを動かす場合はWASMの経路を考える</p>
-  <p class="opacity-60 text-lg">全体図のBrowserは、生成されたサイトを表示する場所。Compiler自体をBrowser内で実行する話とは区別する</p>
+  <p class="">Node.js向けには native bindings。Browser内でCompilerを動かす場合はWASMの経路を考える</p>
+  <p class="text-lg">全体図のBrowserは、生成されたサイトを表示する場所。Compiler自体をBrowser内で実行する話とは区別する</p>
 </div>
 
 <Ref href="https://github.com/withastro/compiler-rs">Rust版Compiler READMEとbindingsの構成</Ref>
@@ -2285,7 +2321,7 @@ clicks: 2
 
 <div class="grid grid-cols-3 gap-6 mt-10 text-lg">
   <div class="border border-[#E5E0EC] rounded-xl p-5">
-    <div class="text-sm uppercase tracking-widest text-[#717781]">HTML</div>
+    <div class="text-sm uppercase tracking-widest text-black">HTML</div>
     <div class="text-2xl font-600 mt-1">保持と補正</div>
     <ul class="mt-3">
       <li>書かれた構造を保持する</li>
@@ -2293,7 +2329,7 @@ clicks: 2
     </ul>
   </div>
   <div v-click="1" class="border border-[#E5E0EC] rounded-xl p-5">
-    <div class="text-sm uppercase tracking-widest text-[#717781]">JavaScript</div>
+    <div class="text-sm uppercase tracking-widest text-black">JavaScript</div>
     <div class="text-2xl font-600 mt-1">構造と再利用</div>
     <ul class="mt-3">
       <li>式の内部をASTとして提供する</li>
@@ -2301,7 +2337,7 @@ clicks: 2
     </ul>
   </div>
   <div v-click="2" class="border border-[#E5E0EC] rounded-xl p-5">
-    <div class="text-sm uppercase tracking-widest text-[#717781]">Markdown と MDX</div>
+    <div class="text-sm uppercase tracking-widest text-black">Markdown と MDX</div>
     <div class="text-2xl font-600 mt-1">互換性と所有</div>
     <ul class="mt-3">
       <li>pluginとの接続も要件に含める</li>
@@ -2376,14 +2412,14 @@ clicks: 3
 
 <div class="grid grid-cols-2 gap-x-10 gap-y-8 mt-8 text-xl leading-relaxed">
   <div class="border-l-2 border-[#E5E0EC] pl-5">
-    <div class="text-sm uppercase tracking-widest text-[#717781]">当時の判断</div>
+    <div class="text-sm uppercase tracking-widest text-black">当時の判断</div>
     <div class="mt-2 flex flex-col gap-1">
       <div>高速な変換と、複数環境での実行</div>
       <div>GoとWASMが要件に合っていた</div>
     </div>
   </div>
   <div v-click="1" class="border-l-2 border-[#E5E0EC] pl-5">
-    <div class="text-sm uppercase tracking-widest text-[#717781]">発見した問題</div>
+    <div class="text-sm uppercase tracking-widest text-black">発見した問題</div>
     <div class="mt-2 flex flex-col gap-1">
       <div>ソース構造と位置への要求</div>
       <div>HTML補正による予想しにくい挙動</div>
@@ -2391,7 +2427,7 @@ clicks: 3
     </div>
   </div>
   <div v-click="2" class="border-l-2 border-[#E5E0EC] pl-5">
-    <div class="text-sm uppercase tracking-widest text-[#717781]">前提の変化</div>
+    <div class="text-sm uppercase tracking-widest text-black">前提の変化</div>
     <div class="mt-2 flex flex-col gap-1">
       <div>Rust基盤の成熟</div>
       <div>再利用できる範囲の拡大</div>
@@ -2399,7 +2435,7 @@ clicks: 3
     </div>
   </div>
   <div v-click="3" class="border-l-2 border-[#BC52EE] border-opacity-60 pl-5">
-    <div class="text-sm uppercase tracking-widest text-[#717781]">新しい判断</div>
+    <div class="text-sm uppercase tracking-widest text-black">新しい判断</div>
     <div class="mt-2 flex flex-col gap-1">
       <div>保持する情報と変換する段階の明確化</div>
       <div>保守範囲を絞る</div>
@@ -2452,7 +2488,7 @@ clicks: 3
 
 <div class="mt-8 text-xl leading-relaxed">
   <p>技術を選び直す機会に、<b>担当する責務も見直す</b></p>
-  <p class="opacity-70">PoCがmergeされなくても、制約を明らかにし、communityの次の判断につなげられる</p>
+  <p class="">PoCがmergeされなくても、制約を明らかにし、communityの次の判断につなげられる</p>
 </div>
 
 <!--
@@ -2468,7 +2504,7 @@ clicks: 1
 
 ## ありがとうございました
 
-<div class="mt-8 text-xl opacity-60">Astro Japan Community</div>
+<div class="mt-8 text-xl ">Astro Japan Community</div>
 
 <img v-click="1" src="./images/qrcode_discord.com.png" class="h-60 mx-auto mt-6" alt="Discord QR Code" />
 
