@@ -360,6 +360,16 @@
 .ch2-ranges > div > code { font-size: 20px; }
 .ch2-result { margin-top: 14px; padding: 10px 18px; border-radius: 10px; background: #f6f7f9; }
 .ch2-result > .ch2-label { margin-bottom: 6px; }
+.ch2-expression-cols { min-height: 324px; }
+.ch2-expression-stages { min-width: 0; }
+.ch2-expression-ast { margin-top: 12px; font-size: 20px; line-height: 1.5; }
+.ch2-expression-ast code { padding: 0; border: 0; background: none; font-size: inherit; }
+.ch2-expression-root { text-align: center; }
+.ch2-expression-root strong { display: block; font-size: 24px; }
+.ch2-expression-operator { margin-top: 10px; }
+.ch2-expression-branches { display: block; width: 100%; height: 36px; }
+.ch2-expression-branches path { fill: none; stroke: #9a90ab; stroke-width: 1.5; }
+.ch2-expression-operands { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 16px; text-align: center; }
 .ch2-scope { margin-top: 20px; }
 .ch2-detail table { font-size: 20px; width: 100%; }
 .ch2-detail td, .ch2-detail th { padding: 12px 6px; }
@@ -597,3 +607,39 @@
 .ch2-api-recap h3 { font-size: 24px; margin: 16px 0; }
 .ch2-api-recap ul { padding-left: 24px; margin: 0; }
 .ch2-api-recap li { font-size: 20px; margin: 16px 0; }
+
+/* Chapter 3: foundations and implementation examples, slides 30–37. */
+.slidev-layout.ch3-detail {
+    color: #000;
+    font-size: 24px;
+    line-height: 1.5;
+    padding-bottom: 68px;
+}
+.ch3-detail h2 { color: #000; font-size: 32px; line-height: 1.35; margin-bottom: 32px; }
+.ch3-detail h3 { color: #000; font-size: 24px; font-weight: 600; letter-spacing: 0; text-transform: none; padding: 0; margin: 0 0 26px; }
+.ch3-detail strong, .ch3-detail a, .ch3-detail .ref-note { color: #000; }
+.ch3-cols { display: grid; grid-template-columns: minmax(0, 1fr) minmax(0, 1fr); gap: 32px; align-items: start; }
+.ch3-cols > div { min-width: 0; }
+.ch3-oxc { grid-template-columns: minmax(0, 3fr) minmax(0, 2fr); gap: 24px; }
+.ch3-label { font-size: 24px; font-weight: 500; margin-bottom: 16px; }
+.slidev-layout.ch3-detail .slidev-code { font-size: 20px !important; line-height: 30px !important; padding: 14px 12px !important; margin: 0 !important; }
+.ch3-detail p { font-size: 24px; line-height: 1.5; margin: 18px 0 0; }
+.ch3-summary { font-size: 24px; font-weight: 500; line-height: 1.6; margin-top: 30px; }
+.ch3-note { font-size: 20px; line-height: 1.6; margin-top: 38px; }
+.ch3-syntax { grid-template-columns: minmax(0, 1.2fr) minmax(0, 1fr); }
+.ch3-syntax-labels { display: grid; gap: 18px; }
+.ch3-syntax-labels strong, .ch3-syntax-labels span { display: block; }
+.ch3-syntax-labels span { font-size: 20px; line-height: 1.5; margin-top: 2px; }
+.ch3-syntax-labels code { font-size: 20px; }
+.ch3-proposals { gap: 48px; }
+.ch3-proposal { min-height: 168px; }
+.ch3-proposal p { margin-top: 6px; }
+.ch3-links { font-size: 20px; line-height: 1.5; margin-top: 10px; }
+.ch3-integration { display: grid; gap: 30px; margin-top: 42px; }
+.ch3-integration > div { display: grid; grid-template-columns: 200px 1fr; gap: 24px; }
+.ch3-recap { font-size: 24px; margin-top: 30px; }
+.ch3-detail .ch3-recap th, .ch3-detail .ch3-recap td { color: #000; padding: 20px 12px; }
+.slidev-layout.ch3-section h1, .slidev-layout.ch3-section h2 { color: #000; }
+.slidev-layout.ch3-section h2 { line-height: 1.6; }
+
+.ch3-detail :not(pre) > code { color: #000; }
