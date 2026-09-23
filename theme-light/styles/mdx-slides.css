@@ -1,0 +1,43 @@
+/* Scoped to the MDX proposals, integration diagram, and source posts. */
+.mdx-proposals h2,
+.mdx-integration h2 { margin-bottom: 18px; }
+.mdx-proposals .mdx-lead { font-size: 24px; line-height: 32px; margin-bottom: 20px; }
+.mdx-proposal-grid { display: grid; grid-template-columns: 1.22fr 1fr; gap: 48px; }
+.mdx-evidence { min-width: 0; position: relative; height: 365px; }
+.mdx-evidence img { display: block; width: 100%; height: auto; border: 1px solid var(--astro-rule); border-radius: 6px; }
+.mdx-evidence-pair { display: grid; gap: 32px; }
+.mdx-proposals img.mdx-repo-image { max-height: 300px; object-fit: contain; object-position: top; }
+.mdx-efforts { display: grid; gap: 15px; align-content: start; }
+.mdx-efforts section { padding: 0; }
+.mdx-proposals .mdx-efforts h3 { font-size: 22px; line-height: 30px; margin: 0 0 4px; color: #000; }
+.mdx-proposals .mdx-efforts p { font-size: 18px; line-height: 27px; margin: 0; }
+.mdx-proposals .mdx-efforts .mdx-current h3 { color: var(--astro-heading); }
+
+.mdx-overview { display: grid; grid-template-columns: 155px 50px 235px 50px 1fr; align-items: center; gap: 18px; margin: 25px 0 28px; }
+.mdx-inputs { display: grid; gap: 8px; }
+.mdx-inputs span { border: 1px solid var(--astro-rule); border-radius: 6px; padding: 7px 12px; font-size: 20px; text-align: center; }
+.mdx-overview-engine,
+.mdx-sites { display: grid; gap: 6px; text-align: center; }
+.mdx-overview-engine { background: var(--astro-surface); border: 1px solid var(--astro-rule); border-radius: 10px; padding: 16px 10px; }
+.mdx-overview strong { font-size: 24px; color: var(--astro-heading); }
+.mdx-overview span { font-size: 18px; }
+.mdx-flow-arrow { height: 2px; background: #8b7895; position: relative; }
+.mdx-flow-arrow::after { content: ''; position: absolute; right: 0; top: -4px; width: 10px; height: 10px; border-top: 2px solid #8b7895; border-right: 2px solid #8b7895; transform: rotate(45deg); }
+.mdx-integration .mdx-detail-label { font-size: 20px; line-height: 28px; margin: 0 0 12px; color: #000; }
+.mdx-pipeline { display: grid; grid-template-columns: 1fr 190px 1.25fr; gap: 26px; align-items: start; }
+.mdx-pipeline section { min-height: 195px; }
+.mdx-pipeline .mdx-rust,
+.mdx-pipeline .mdx-js { padding: 16px 20px; background: var(--astro-surface); border-radius: 10px; }
+.mdx-integration .mdx-pipeline h3 { font-size: 24px; line-height: 32px; margin: 0 0 8px; }
+.mdx-integration .mdx-pipeline p { font-size: 20px; line-height: 28px; margin: 4px 0 8px; }
+.mdx-transfer { padding-top: 16px; text-align: center; }
+.mdx-transfer .mdx-flow-arrow { margin: 14px 0; }
+.mdx-wasm-note { font-size: 18px; line-height: 26px; margin-top: 15px; }
+
+.mdx-source-post .mdx-post-author { display: flex; align-items: baseline; gap: 16px; margin-top: 40px; font-size: 22px; font-weight: 600; }
+.mdx-source-post .mdx-post-author span,
+.mdx-source-post .mdx-post-author time { font-size: 18px; font-weight: 400; }
+.mdx-source-post .mdx-post-author time { margin-left: auto; }
+.slidev-layout.mdx-source-post .mdx-post-quote { font-size: 28px; line-height: 40px; font-weight: 500; color: var(--astro-heading); background: none; border: 0; padding: 0; margin: 26px 0; }
+.mdx-post-summary { font-size: 24px; line-height: 38px; }
+.mdx-post-takeaway { font-size: 22px; line-height: 32px; margin-top: 28px; }

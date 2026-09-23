@@ -15,7 +15,7 @@
     "colorSchema": "light",
     "defaults": {
       "fonts": {
-        "sans": "Inter, inter-fallback, system-ui, sans-serif",
+        "sans": "M PLUS 2 Variable, system-ui, sans-serif",
         "mono": "MDIO, md-io-fallback, monospace",
         "fallbacks": false
       }

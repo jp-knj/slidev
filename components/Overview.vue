@@ -51,9 +51,11 @@ type Node = Rect & {
 };
 
 const SUBS = [
-  { id: "parser", label: "ParserとAST" },
-  { id: "oxc", label: "Oxc（JSとTS）" },
-  { id: "astro-syntax", label: "Astro固有の構文" },
+  { id: "html5-parser", label: "HTML5 Parser", h: 34 },
+  { id: "esbuild-css", label: "esbuild（CSS）", h: 34 },
+  { id: "parser", label: "Parser と AST", h: 34 },
+  { id: "oxc", label: "Oxc（JavaScript と TypeScript）", h: 58 },
+  { id: "astro-syntax", label: "Astro syntax", h: 34 },
 ] as const;
 
 const CONTRACTS: Record<
@@ -64,19 +66,19 @@ const CONTRACTS: Record<
     label: "Source contract",
     tone: "#0B7BC1",
     edges: ["compiler->editor"],
-    desc: "書かれた構造とソース位置を保持し、ツールが使える内部構造を渡す",
+    desc: "書かれた親子関係と位置情報を保持し、ツールが使える AST を渡す",
   },
   output: {
     label: "Output contract",
     tone: "#A36B09",
     edges: ["compiler->build", "build->browser"],
-    desc: "実行や表示につながる成果物を生成し、ソースと表示の構造を区別する",
+    desc: "実行や表示につながる成果物を生成し、Source と表示の親子関係を区別する",
   },
   ecosystem: {
     label: "Ecosystem contract",
     tone: "#198755",
     edges: ["mdsource->content", "content->build"],
-    desc: "既存pluginの経路を維持し、新しいplugin modelへの移行方法を用意する",
+    desc: "既存 plugin の経路を維持し、新しい plugin model への移行方法を用意する",
   },
 };
 
@@ -92,13 +94,20 @@ const dimming = computed(() => on.value.size > 0);
 const subIds = computed(() => toSet(props.subs));
 
 /** サブ枠の枚数ぶんだけ Astro Compiler が伸びる */
-const SUB_H = 34;
 const SUB_GAP = 8;
 const SUB_TOP = 40;
-const subCount = computed(() => SUBS.filter((x) => subIds.value.has(x.id)).length);
+const activeSubs = computed(() => SUBS.filter((s) => subIds.value.has(s.id)));
+const hasGoSubs = computed(() =>
+  subIds.value.has("html5-parser") || subIds.value.has("esbuild-css"),
+);
+// Give the Gopher icon breathing room inside the compiler group.
+const compilerSubTop = computed(() => hasGoSubs.value ? 56 : SUB_TOP);
 const compilerH = computed(() =>
-  subCount.value
-    ? SUB_TOP + subCount.value * SUB_H + (subCount.value - 1) * SUB_GAP + 12
+  activeSubs.value.length
+    ? compilerSubTop.value
+      + activeSubs.value.reduce((height, s) => height + s.h, 0)
+      + (activeSubs.value.length - 1) * SUB_GAP
+      + 12
     : 54,
 );
 
@@ -114,21 +123,21 @@ const box = (id: string, x: number, w: number, cy: number, h: number) => ({
 const BASE_NODES = computed<Node[]>(() => [
   // source 系はエディタのファイルタブに見えるよう tab: true で上端だけ角丸にする
   { ...box("source", 0, 175, 175, 70), label: ".astro", icon: "astro", tab: true },
-  { ...box("mdsource", 0, 175, 320, 70), label: ".mdと.mdx", icon: "md", tab: true },
-  { ...box("compiler", 215, 250, 175, compilerH.value), label: "Compiler", icon: "compiler" },
+  { ...box("mdsource", 0, 175, 320, 70), label: ".md と .mdx", icon: "md", tab: true },
+  { ...box("compiler", 215, 250, 175, compilerH.value), label: "Astro Compiler", icon: "compiler" },
   {
     ...box("content", 215, 250, 320, 70),
     label: "Content Processor",
-    note: "MarkdownとMDX",
+    note: "Markdown と MDX",
   },
   {
     ...box("editor", 490, 378, 35, 70),
     label: "Editor",
-    note: "ESLintとLSPとFormatter",
+    note: "ESLint と LSP と Formatter",
     icon: "editor",
   },
   // ラベルが長いぶん、アイコンは横ではなく上に積んで幅に収める
-  { ...box("build", 490, 175, 175, 70), label: "ViteとRolldown", icon: "vite", stack: true },
+  { ...box("build", 490, 175, 175, 70), label: "Vite と Rolldown", icon: "vite", stack: true },
   { ...box("browser", 693, 175, 175, 70), label: "Browser", icon: "browser" },
 ]);
 
@@ -141,8 +150,14 @@ const NODES = computed<Node[]>(() =>
     const icon = props.icons?.[n.id] ?? n.icon;
     const note = props.subnotes?.[n.id] ?? n.note;
     const label = props.labels?.[n.id];
+    const noteLines = note?.split("\n").length ?? 0;
+    const h = n.id === "build" && noteLines > 1
+      ? Math.max(n.h, 56 + noteLines * 24)
+      : n.h;
     return {
       ...n,
+      h,
+      y: n.y - (h - n.h) / 2,
       label: label ?? n.label,
       icon: icon || undefined,
       note: note || undefined,
@@ -164,13 +179,12 @@ const byId = computed(() => new Map(shownNodes.value.map((n) => [n.id, n])));
 const shownSubs = computed(() => {
   const c = byId.value.get("compiler");
   if (!c) return [];
-  return SUBS.filter((s) => subIds.value.has(s.id)).map((s, i) => ({
-    ...s,
-    x: c.x + 14,
-    y: c.y + SUB_TOP + i * (SUB_H + SUB_GAP),
-    w: c.w - 28,
-    h: SUB_H,
-  }));
+  let y = c.y + compilerSubTop.value;
+  return activeSubs.value.map((s) => {
+    const rect = { ...s, x: c.x + 14, y, w: c.w - 28 };
+    y += s.h + SUB_GAP;
+    return rect;
+  });
 });
 
 /** ノードの矩形から矢印のパスを組み立てる */
@@ -224,7 +238,13 @@ const shownEdges = computed(() => {
 
   if (s && c) push("source->compiler", "source", "compiler", straight(s, c));
   if (md && ct) push("mdsource->content", "mdsource", "content", straight(md, ct));
-  if (c && e) push("compiler->editor", "compiler", "editor", branch(c, e, -c.h * 0.26));
+  if (c && e) {
+    // Leave the Go group from its top to keep the WASM label clear.
+    const path = hasGoSubs.value
+      ? `M${cx(c)},${c.y} C${cx(c)},${cy(e)} ${e.x - GAP - 36},${cy(e)} ${e.x - GAP},${cy(e)}`
+      : branch(c, e, -c.h * 0.26);
+    push("compiler->editor", "compiler", "editor", path);
+  }
   // Editor へ分岐しないなら、下へ振らずまっすぐ引く
   if (c && b)
     push("compiler->build", "compiler", "build", e ? branch(c, b, c.h * 0.26) : straight(c, b));
@@ -250,9 +270,6 @@ const edgeLabelOf = (id: string) => props.edgeLabels?.[id];
 
 /** 破線のエッジは「またぐ境界」として、矢印の上に縦の破線も引く */
 const isBoundary = (id: string) => dashedEdges.value.has(id);
-const hasEdgeLabels = computed(
-  () => Object.keys(props.edgeLabels ?? {}).length > 0,
-);
 
 const activeContracts = computed(() =>
   toList(props.contract)
@@ -323,8 +340,10 @@ const PAD = 12;
 const vb = computed(() => {
   const rects = shownNodes.value;
   if (!rects.length) return { y: 0, h: 400 };
-  const minY =
-    Math.min(...rects.map((r) => r.y)) - PAD - (hasEdgeLabels.value ? 28 : 0);
+  const minY = Math.min(
+    ...rects.map((r) => r.y),
+    ...shownEdges.value.filter((e) => edgeLabelOf(e.id)).map((e) => e.ty - 34),
+  ) - PAD;
   const maxY = Math.max(...rects.map((r) => r.y + r.h)) + PAD;
   return { y: minY, h: maxY - minY };
 });
@@ -393,6 +412,15 @@ const viewBox = computed(() => `0 ${vb.value.y} ${W} ${vb.value.h}`);
 
       <g v-for="n in shownNodes" :key="n.id" class="ov-node" :class="stateOf(n.id)">
         <rect
+          v-if="n.id === 'compiler' && hasGoSubs"
+          class="ov-compiler-group"
+          :x="n.x"
+          :y="n.y"
+          :width="n.w"
+          :height="n.h"
+          rx="12"
+        />
+        <rect
           v-if="n.tab"
           class="ov-tab-bar"
           :x="n.x + 12"
@@ -405,7 +433,7 @@ const viewBox = computed(() => `0 ${vb.value.y} ${W} ${vb.value.h}`);
           :x="n.x"
           :y="n.y"
           :width="n.w"
-          :height="n.id === 'compiler' && shownSubs.length ? SUB_TOP : n.h"
+          :height="n.id === 'compiler' && shownSubs.length ? compilerSubTop : n.h"
         >
           <div
             xmlns="http://www.w3.org/1999/xhtml"
@@ -428,7 +456,11 @@ const viewBox = computed(() => `0 ${vb.value.y} ${W} ${vb.value.h}`);
                 </template>
               </div>
             </div>
-            <div v-if="n.note" class="ov-note">{{ n.note }}</div>
+            <div v-if="n.note" class="ov-note">
+              <template v-for="(line, i) in labelLines(n.note)" :key="i">
+                <br v-if="i" />{{ line }}
+              </template>
+            </div>
           </div>
         </foreignObject>
       </g>
@@ -472,9 +504,13 @@ const viewBox = computed(() => `0 ${vb.value.y} ${W} ${vb.value.h}`);
   flex: none;
 }
 
-/*
- * ノードに枠は描かない。強調と減光は、ラベルの色と全体の不透明度だけで表す。
- */
+/* The Go compiler frame groups its internal dependencies. */
+.ov-compiler-group {
+  fill: #fff;
+  stroke: #d9d0e4;
+  stroke-width: 1.2;
+}
+
 .ov-node.is-off,
 .ov-edge.is-off,
 .ov-sub.is-off {
@@ -560,6 +596,8 @@ const viewBox = computed(() => `0 ${vb.value.y} ${W} ${vb.value.h}`);
 
 .ov-head-stack .ov-label {
   font-size: 20px;
+  /* 空白を含む Vite と Rolldown を1行で表示し、図の高さに収める。 */
+  white-space: nowrap;
 }
 
 /* アイコンは width/height を両方指定する（1em のままだと幅で頭打ちになる） */

@@ -1,6 +1,6 @@
-// 和文は M PLUS 2（可変フォント）を npm 同梱で配る。
-// Astro のブランド書体（Obviously / Inter / MDIO）は fonts.css 経由で
-// fonts-cdn.astro.build から読み込む。
+// Bundle M PLUS 2 for Japanese and Latin prose.
+// Load the existing MDIO code font through fonts.css.
 import '@fontsource-variable/m-plus-2'
 import './fonts.css'
 import './layout.css'
+import './mdx-slides.css'
