@@ -11,13 +11,15 @@
 <style scoped>
 .answer-overlay {
   position: absolute;
-  inset: 104px 24px 64px;
+  inset: 104px 0 64px;
+  width: 100%;
+  box-sizing: border-box;
   z-index: 10;
   display: flex;
   flex-direction: column;
   padding: 24px 32px;
   border-radius: 12px;
-  background: var(--astro-bg, #fff);
+  background: rgba(255, 255, 255, 0.9);
   box-shadow: 0 4px 24px rgba(31, 35, 40, 0.14);
   font-family: var(--font-body);
   text-align: left;

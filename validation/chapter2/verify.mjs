@@ -1,4 +1,5 @@
 import assert from 'node:assert/strict';
+import { parse as parseSlides } from '@slidev/parser';
 import { readFileSync, writeFileSync } from 'node:fs';
 import { createRequire } from 'node:module';
 import { fileURLToPath } from 'node:url';
@@ -17,6 +18,21 @@ import { astro2tsx } from '@astrojs/language-server/dist/core/astro2tsx.js';
 const require = createRequire(import.meta.url);
 const fixture = (name) => readFileSync(new URL(name, import.meta.url), 'utf8');
 const output = {};
+// Compare expression semantics while ignoring source positions and layout whitespace.
+function expressionShape(node, visitorKeys) {
+  if (!node?.type) return node;
+  if (node.type === 'JSXText' && !node.value.trim()) return undefined;
+  const result = { type: node.type };
+  for (const key of ['name', 'operator', 'value', 'computed', 'optional', 'async', 'generator', 'kind']) {
+    if (key in node && (node[key] === null || typeof node[key] !== 'object')) result[key] = node[key];
+  }
+  for (const key of visitorKeys[node.type] ?? []) {
+    result[key] = Array.isArray(node[key])
+      ? node[key].map((child) => expressionShape(child, visitorKeys)).filter((child) => child !== undefined)
+      : expressionShape(node[key], visitorKeys);
+  }
+  return result;
+}
 const source = fixture('linter.astro');
 const expression = parse(source, { position: true }).ast.children[1].children[0];
 assert.equal(expression.children[0].value, 'pirce * amount');
@@ -106,6 +122,9 @@ assert.deepEqual(priceReference.identifier.range, [49, 54]);
 const normalBinary = findNode(normalParsed, 'BinaryExpression');
 assert.equal(normalBinary.type, 'BinaryExpression');
 assert.deepEqual([normalBinary.operator, normalBinary.left.name, normalBinary.right.name], ['*', 'price', 'amount']);
+assert.deepEqual(normalBinary.range, [49, 63]);
+assert.deepEqual(normalBinary.left.range, [49, 54]);
+assert.deepEqual(normalBinary.right.range, [57, 63]);
 assert.deepEqual(normalParsed.scopeManager.globalScope.through, []);
 const normalDiagnostics = new Linter().verify(normalSource, [{
   files: ['**/*.astro'],
@@ -219,10 +238,30 @@ output.language = {
 
 // Keep the displayed full inputs and the actual formatting output synchronized.
 const deck = readFileSync(new URL('../../slides-compiler-rs.md', import.meta.url), 'utf8');
-const chapter = deck.slice(deck.indexOf('## Astro Syntaxを振り返る'), deck.indexOf('# 3. 前提の変化'));
+const slides = (await parseSlides(deck)).slides;
+const astroBlocks = slides.flatMap((slide, index) =>
+  [...slide.content.matchAll(/^```astro\n([\s\S]*?)^```[ \t]*$/gm)]
+    .map((match) => ({ slide: index, code: match[1] })),
+);
 for (const input of [normalSource, source, fixture('formatter.astro'), languageSource, formatted]) {
-  assert(chapter.includes('```astro\n' + input + '```'), 'Slide code differs from validated fixture');
+  assert(astroBlocks.some((block) => block.code === input), 'Slide code differs from validated fixture');
 }
-assert(!chapter.slice(0, chapter.indexOf('## ESLintが未定義の参照を検査する')).includes('pirce'), 'The typo must first appear in the final Linter example');
+// Verify that formatting preserves the expression in the displayed example.
+const formatterParses = [fixture('formatter.astro'), formatted].map((code) =>
+  astroParser.parseForESLint(code, { ecmaVersion: 2022, sourceType: 'module' }));
+const shapes = formatterParses.map((result) => expressionShape(findNode(result, 'CallExpression'), result.visitorKeys));
+assert(shapes.every(Boolean), 'Expected products.map call in all formatting examples');
+assert.deepEqual(shapes[1], shapes[0]);
+const normalExample = astroBlocks.find((block) => block.code === normalSource);
+const typoExample = astroBlocks.find((block) => block.code === source);
+const formatterExample = astroBlocks.find((block) => block.code === fixture('formatter.astro'));
+assert(normalExample.slide < typoExample.slide && typoExample.slide < formatterExample.slide,
+  'The normal expression, Linter diagnostic, and Formatter example must remain in order');
+assert(!slides.slice(normalExample.slide, typoExample.slide)
+  .some((slide) => `${slide.content}\n${slide.note ?? ''}`.includes('pirce')),
+  'The typo must first appear in the final Linter example');
+assert.equal(slides.length, 63);
+assert.deepEqual(slides.slice(15, 27).map((slide) => slide.frontmatter.clicks ?? 0),
+  [0, 0, 2, 0, 0, 0, 2, 0, 0, 2, 0, 0]);
 writeFileSync(new URL('results.json', import.meta.url), JSON.stringify(output, null, 2) + '\n');
 console.log('PASS: Compiler ranges, Linter scope and no-undef, Babel input, Doc output, HTML completion, TS2339, Source map, Volar mapping, slide fixtures');
