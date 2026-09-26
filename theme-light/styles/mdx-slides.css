@@ -1,6 +1,8 @@
 /* Scoped to the MDX proposals, integration diagram, and source posts. */
 .mdx-proposals h2,
 .mdx-integration h2 { margin-bottom: 18px; }
+/* This page has no pinned reference; use the standard bottom padding to fit the diagram. */
+.slidev-layout.mdx-integration { padding-bottom: 40px; }
 .mdx-proposals .mdx-lead { font-size: 24px; line-height: 32px; margin-bottom: 20px; }
 .mdx-proposal-grid { display: grid; grid-template-columns: 1.22fr 1fr; gap: 48px; }
 .mdx-evidence { min-width: 0; position: relative; height: 365px; }
@@ -13,26 +15,36 @@
 .mdx-proposals .mdx-efforts p { font-size: 18px; line-height: 27px; margin: 0; }
 .mdx-proposals .mdx-efforts .mdx-current h3 { color: var(--astro-heading); }
 
-.mdx-overview { display: grid; grid-template-columns: 155px 50px 235px 50px 1fr; align-items: center; gap: 18px; margin: 25px 0 28px; }
-.mdx-inputs { display: grid; gap: 8px; }
-.mdx-inputs span { border: 1px solid var(--astro-rule); border-radius: 6px; padding: 7px 12px; font-size: 20px; text-align: center; }
-.mdx-overview-engine,
-.mdx-sites { display: grid; gap: 6px; text-align: center; }
-.mdx-overview-engine { background: var(--astro-surface); border: 1px solid var(--astro-rule); border-radius: 10px; padding: 16px 10px; }
-.mdx-overview strong { font-size: 24px; color: var(--astro-heading); }
-.mdx-overview span { font-size: 18px; }
-.mdx-flow-arrow { height: 2px; background: #8b7895; position: relative; }
-.mdx-flow-arrow::after { content: ''; position: absolute; right: 0; top: -4px; width: 10px; height: 10px; border-top: 2px solid #8b7895; border-right: 2px solid #8b7895; transform: rotate(45deg); }
-.mdx-integration .mdx-detail-label { font-size: 20px; line-height: 28px; margin: 0 0 12px; color: #000; }
-.mdx-pipeline { display: grid; grid-template-columns: 1fr 190px 1.25fr; gap: 26px; align-items: start; }
-.mdx-pipeline section { min-height: 195px; }
-.mdx-pipeline .mdx-rust,
-.mdx-pipeline .mdx-js { padding: 16px 20px; background: var(--astro-surface); border-radius: 10px; }
-.mdx-integration .mdx-pipeline h3 { font-size: 24px; line-height: 32px; margin: 0 0 8px; }
-.mdx-integration .mdx-pipeline p { font-size: 20px; line-height: 28px; margin: 4px 0 8px; }
-.mdx-transfer { padding-top: 16px; text-align: center; }
-.mdx-transfer .mdx-flow-arrow { margin: 14px 0; }
-.mdx-wasm-note { font-size: 18px; line-height: 26px; margin-top: 15px; }
+/* Slide 39: a single relationship diagram, with the native layer emphasized on click 1. */
+.mdx-relation { position: relative; width: 868px; height: 398px; font-family: var(--font-body); }
+.mdx-relation-lines { position: absolute; inset: 0; width: 100%; height: 100%; overflow: visible; }
+.mdx-relation-lines path { fill: none; stroke: #887294; stroke-width: 1.8; marker-end: url(#mdx-relation-arrow); }
+.mdx-relation-lines marker path { marker-end: none; stroke-linecap: round; stroke-linejoin: round; }
+.mdx-relation-context { transition: opacity 200ms ease; }
+.mdx-relation-node { position: absolute; display: flex; flex-direction: column; justify-content: center; align-items: center; gap: 2px; border: 1px solid #d9d0df; border-radius: 9px; background: #faf9fc; text-align: center; }
+.mdx-relation-node strong { font-size: 24px; line-height: 32px; font-weight: 600; }
+.mdx-relation-node span { font-size: 19px; line-height: 26px; }
+.mdx-relation-node small { font-size: 18px; line-height: 26px; }
+.mdx-starlight { position: absolute; left: 0; top: -3px; width: 240px; text-align: center; font-size: 18px; line-height: 26px; }
+.mdx-node-astro { left: 0; top: 28px; width: 240px; height: 76px; }
+.mdx-node-vite { left: 300px; top: 28px; width: 250px; height: 76px; }
+.mdx-node-rollup { left: 634px; top: 16px; width: 234px; height: 100px; }
+.mdx-node-integration { left: 0; top: 162px; width: 240px; height: 92px; }
+.mdx-node-plugin { left: 300px; top: 162px; width: 250px; height: 92px; }
+.mdx-node-bindings { left: 300px; top: 306px; width: 250px; height: 92px; }
+.mdx-node-compiler { left: 634px; top: 306px; width: 234px; height: 92px; }
+.mdx-node-compiler strong { font-size: 22px; line-height: 30px; }
+.mdx-edge-label { position: absolute; font-size: 18px; line-height: 26px; white-space: nowrap; }
+.mdx-edge-use { left: 252px; top: 32px; }
+.mdx-edge-build { left: 558px; top: 7px; width: 68px; text-align: center; }
+.mdx-edge-introduce { left: 132px; top: 119px; }
+.mdx-edge-register { left: 252px; top: 174px; }
+.mdx-edge-hook { left: 437px; top: 119px; }
+.mdx-edge-binding-call { left: 437px; top: 267px; }
+.mdx-edge-compiler-call { left: 556px; top: 317px; }
+.mdx-relation.is-rust-focus .mdx-relation-context { opacity: .28; }
+.mdx-relation.is-rust-focus .mdx-node-bindings,
+.mdx-relation.is-rust-focus .mdx-node-compiler { border-color: #7611a6; background: #f6edfb; }
 
 .mdx-source-post .mdx-post-author { display: flex; align-items: baseline; gap: 16px; margin-top: 40px; font-size: 22px; font-weight: 600; }
 .mdx-source-post .mdx-post-author span,
@@ -41,3 +53,14 @@
 .slidev-layout.mdx-source-post .mdx-post-quote { font-size: 28px; line-height: 40px; font-weight: 500; color: var(--astro-heading); background: none; border: 0; padding: 0; margin: 26px 0; }
 .mdx-post-summary { font-size: 24px; line-height: 38px; }
 .mdx-post-takeaway { font-size: 22px; line-height: 32px; margin-top: 28px; }
+
+/* Chapter 3 story pages; keep the shared source-post and diagram styles unchanged. */
+.ch3-syntax-spec .ch3-syntax-date { font-size: 24px; line-height: 32px; margin: 0 0 18px; }
+.mdx-astro-proposal .mdx-evidence,
+.mdx-upstream-proposal .mdx-evidence { height: 310px; }
+.mdx-astro-proposal .mdx-evidence-pair { align-content: start; }
+/* Slide 40: preserve the post screenshot, including its original typography. */
+.mdx-contribution h2 { margin-bottom: 16px; }
+.mdx-contribution .mdx-contribution-grid { display: grid; grid-template-columns: repeat(2, 422px); gap: 24px; align-items: start; }
+.mdx-contribution .mdx-contribution-image { display: flex; justify-content: center; align-items: flex-start; width: 422px; margin: 0; border: 0; }
+.mdx-contribution .mdx-contribution-image img { display: block; width: auto; height: auto; max-width: 100%; max-height: 392px; object-fit: contain; }

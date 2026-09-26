@@ -9,7 +9,7 @@
     "dev:compiler": "slidev slides-compiler-rs.md --open",
     "build:compiler": "slidev build slides-compiler-rs.md --out dist/compiler",
     "export:compiler": "slidev export slides-compiler-rs.md --output slides-compiler-rs.pdf",
-    "lint:text": "python3 .claude/skills/slidev-talk-deck/scripts/check-wording.py slides-compiler-rs.md"
+    "lint:text": "python3 .claude/skills/slidev-talk-deck/scripts/check-wording.py slides-compiler-rs.md 'images/**/*.md' 'components/**/*.vue' 'theme-light/**/*.vue'"
   },
   "dependencies": {
     "@fontsource-variable/m-plus-2": "^5.3.0",

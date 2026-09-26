@@ -11,7 +11,8 @@
 <style scoped>
 .answer-overlay {
   position: absolute;
-  inset: 104px 0 64px;
+  inset: 50% 0 auto;
+  transform: translateY(-50%);
   width: 100%;
   box-sizing: border-box;
   z-index: 10;
@@ -19,7 +20,7 @@
   flex-direction: column;
   padding: 24px 32px;
   border-radius: 12px;
-  background: rgba(255, 255, 255, 0.9);
+  background: #fff;
   box-shadow: 0 4px 24px rgba(31, 35, 40, 0.14);
   font-family: var(--font-body);
   text-align: left;
@@ -46,9 +47,12 @@
   line-height: inherit;
 }
 
+.answer-overlay-body:empty {
+  display: none;
+}
+
 .answer-overlay-reference {
-  margin-top: auto;
-  padding-top: 16px;
+  margin-top: 16px;
   font-size: 20px;
   line-height: 28px;
 }

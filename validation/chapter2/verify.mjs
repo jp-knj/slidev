@@ -37,15 +37,19 @@ const source = fixture('linter.astro');
 const expression = parse(source, { position: true }).ast.children[1].children[0];
 assert.equal(expression.children[0].value, 'pirce * amount');
 assert.deepEqual([expression.position.start.offset, expression.position.end.offset], [47, 80]);
-assert.equal(source.length, 91);
+assert.equal(source.length, 94);
 assert.equal(source.slice(48, 64), '{pirce * amount}');
 assert.equal(source.slice(49, 54), 'pirce');
 
 let virtualTSX;
+let generatedAST;
 const captureParser = {
   parseForESLint(code, options) {
     virtualTSX = code;
-    return { ast: require('espree').parse(code, options) };
+    const ast = require('espree').parse(code, options);
+    // The adapter restores ranges in place; retain the parser's original result.
+    generatedAST = structuredClone(ast);
+    return { ast };
   },
 };
 const parsed = astroParser.parseForESLint(source, {
@@ -120,6 +124,10 @@ const priceReference = normalParsed.scopeManager.scopes.flatMap((scope) => scope
 assert.equal(priceReference.resolved.name, 'price');
 assert.deepEqual(priceReference.identifier.range, [49, 54]);
 const normalBinary = findNode(normalParsed, 'BinaryExpression');
+const generatedBinary = findNode({ ast: generatedAST, visitorKeys: normalParsed.visitorKeys }, 'BinaryExpression');
+assert.deepEqual(generatedBinary.left.range, [46, 51]);
+assert.equal(virtualTSX.slice(...generatedBinary.left.range), 'price');
+assert.equal(normalSource.slice(...normalBinary.left.range), 'price');
 assert.equal(normalBinary.type, 'BinaryExpression');
 assert.deepEqual([normalBinary.operator, normalBinary.left.name, normalBinary.right.name], ['*', 'price', 'amount']);
 assert.deepEqual(normalBinary.range, [49, 63]);
@@ -136,6 +144,7 @@ output.expression = {
   source: normalSource, compilerExpression: normalExpression,
   correctedExpressionRange: [normalFixed.position.start.offset, normalFixed.position.end.offset],
   identifierRange: priceReference.identifier.range,
+  generatedIdentifierRange: generatedBinary.left.range,
   binaryExpression: { type: normalBinary.type, operator: normalBinary.operator,
     left: normalBinary.left.name, right: normalBinary.right.name },
   virtualTSX, diagnostics: normalDiagnostics,
@@ -260,7 +269,7 @@ assert(normalExample.slide < typoExample.slide && typoExample.slide < formatterE
 assert(!slides.slice(normalExample.slide, typoExample.slide)
   .some((slide) => `${slide.content}\n${slide.note ?? ''}`.includes('pirce')),
   'The typo must first appear in the final Linter example');
-assert.equal(slides.length, 63);
+assert.equal(slides.length, 69);
 assert.deepEqual(slides.slice(15, 27).map((slide) => slide.frontmatter.clicks ?? 0),
   [0, 0, 2, 0, 0, 0, 2, 0, 0, 2, 0, 0]);
 writeFileSync(new URL('results.json', import.meta.url), JSON.stringify(output, null, 2) + '\n');

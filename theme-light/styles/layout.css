@@ -298,23 +298,6 @@
 .ch2-question { font-size: 24px; font-weight: 500; margin-top: 14px; }
 .ch2-three p { font-size: 20px; line-height: 1.8; margin-top: 18px; }
 
-.ch2-ruler {
-    padding: 10px 20px;
-    margin: 12px 0 20px;
-    border-radius: 10px;
-    background: #f6f7f9;
-}
-
-/* Slide 19: compare positions below a shared ruler at the default code size. */
-.ch2-position-slide h2 { margin-bottom: 8px; }
-.ch2-position-slide .ch2-ruler { margin: 8px 0 12px; padding: 0 20px; }
-.ch2-position-comparison { gap: 28px; }
-.ch2-position-comparison p { margin: 4px 0; line-height: 30px; }
-.ch2-position-slide .ch2-position-values { margin: 4px 0; padding: 0; border: 0; background: none; }
-.ch2-position-ranges { margin: 12px 0 0; font-family: var(--font-mono); font-size: 24px; line-height: 32px; }
-.ch2-position-ranges > div { display: flex; justify-content: space-between; gap: 12px; }
-.ch2-position-ranges dd { margin: 0; }
-.ch2-position-note { margin-top: 6px; }
 /* Preserve the formatter page's footer inset with the prose font. */
 .ch2-doc-slide h2 { margin-bottom: 12px; }
 .slidev-layout.ch2-doc-slide .slidev-code { margin: 4px 0 !important; }
@@ -590,6 +573,12 @@
 .go-era-build .go-era-reason { margin-top: 24px; }
 .go-era-tools > .ov { margin-top: 8px; }
 
+/* Content overview pages share the existing diagram coordinates. */
+.slidev-layout.content-overview { display: flex; flex-direction: column; }
+.content-overview h2 { margin: 0; flex: none; }
+.content-overview > .ov { margin-top: 16px; flex: none; }
+.content-overview-summary { font-size: 24px; line-height: 32px; margin-top: 16px; }
+
 /* Chapter 3: foundations and implementation examples. */
 .slidev-layout.ch3-detail {
     color: #000;
@@ -607,7 +596,29 @@
 .slidev-layout.ch3-detail .slidev-code { padding: 14px 12px !important; margin: 0 !important; }
 .ch3-detail p { font-size: 24px; line-height: 1.5; margin: 18px 0 0; }
 .ch3-summary { font-size: 24px; font-weight: 500; line-height: 1.6; margin-top: 30px; }
-.ch3-note { font-size: 20px; line-height: 1.6; margin-top: 38px; }
+.ch3-cst h2 { margin-bottom: 20px; }
+.ch3-cst-definitions { display: grid; gap: 12px; margin-bottom: 16px; }
+.ch3-cst-definitions > div { display: grid; grid-template-columns: 128px 1fr; gap: 16px; align-items: baseline; }
+.ch3-cst-definitions strong { color: var(--astro-heading); }
+.ch3-cst-definitions p { font-size: 22px; line-height: 30px; margin: 0; }
+.ch3-cst-source { padding: 12px 16px; margin: 0; border-radius: 8px; background: var(--slidev-code-background); }
+.ch3-cst-sequence { display: grid; grid-template-columns: 1fr .85fr .65fr .85fr 1.15fr .65fr .85fr 1.4fr .7fr; gap: 6px; margin-top: 16px; }
+.ch3-cst-sequence > div { display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 6px; padding: 10px 0; border: 1px solid var(--astro-rule); border-radius: 6px; font-size: 20px; line-height: 28px; }
+.ch3-cst-sequence .ch3-cst-trivia { background: var(--astro-surface); }
+.slidev-layout .ch3-cst-sequence code { font-size: 24px; line-height: 32px; padding: 0; border: 0; border-radius: 0; background: transparent; }
+.ch3-cst-caption { font-size: 20px; line-height: 28px; margin-top: 12px; }
+.ch3-cst-benefit { color: var(--astro-heading); font-size: 22px; line-height: 30px; font-weight: 500; margin-top: 8px; }
+.ch3-format-flow { width: 100%; table-layout: fixed; font-size: 24px; line-height: 32px; margin: 0; }
+.ch3-format-flow th:first-child { width: 22%; }
+.ch3-format-comparison .ch3-format-flow th, .ch3-format-comparison .ch3-format-flow td { padding: 16px 12px; vertical-align: middle; text-align: left; }
+.ch3-format-flow th { font-weight: 500; }
+.ch3-format-comparison .ch3-summary { font-size: 22px; line-height: 32px; margin-top: 22px; }
+.ch3-recovery-intro { margin-bottom: 18px; font-size: 22px; line-height: 30px; }
+.ch3-recovery-cols { margin-top: 24px; }
+.ch3-error-recovery h3 { font-size: 22px; line-height: 30px; margin: 0; }
+.ch3-error-recovery p { font-size: 22px; line-height: 32px; margin-top: 10px; }
+.ch3-error-recovery .ch3-summary { font-size: 22px; line-height: 32px; margin-top: 24px; }
+.ch3-cst-caveat { font-size: 20px; line-height: 28px; margin-top: 10px; }
 .ch3-syntax { grid-template-columns: minmax(0, 1.2fr) minmax(0, 1fr); }
 .ch3-syntax-labels { display: grid; gap: 18px; }
 .ch3-syntax-labels strong, .ch3-syntax-labels span { display: block; }
@@ -621,12 +632,10 @@
 .ch3-integration > div { display: grid; grid-template-columns: 200px 1fr; gap: 24px; }
 .ch3-recap { font-size: 24px; margin-top: 30px; }
 .ch3-detail .ch3-recap th, .ch3-detail .ch3-recap td { color: #000; padding: 20px 12px; }
-.slidev-layout.ch3-section h1, .slidev-layout.ch3-section h2 { color: #000; }
-.slidev-layout.ch3-section h2 { line-height: 1.6; }
 
 .ch3-detail :not(pre) > code { color: #000; }
 
-/* Only chapter 3 uses purple headings; chapter 4 shares ch3-section. */
+/* Chapter 3 body pages use purple headings. */
 .slidev-layout.chapter-three h1,
 .slidev-layout.chapter-three h2,
 .slidev-layout.chapter-three h3,
@@ -664,16 +673,34 @@
 .ch2-route-caption { font-size: 20px; line-height: 28px; }
 .ch2-route-arrow { display: block; width: 24px; height: 18px; margin: 2px 0 2px 138px; }
 .ch2-route-arrow path, .ch2-language-fork path { fill: none; stroke: #9a90ab; stroke-width: 2; }
-.ch2-position-purpose { font-size: 20px; line-height: 30px; }
-.ch2-linter-check .ch2-scope { margin-top: 12px; }
-.ch2-linter-check .ch2-lint-matches { margin-bottom: 16px; }
+.ch2-context-flow { display: grid; grid-template-columns: 130px 28px minmax(0, 1fr) 28px 180px; gap: 6px; align-items: center; margin-bottom: 16px; }
+.ch2-context-node { padding: 6px 10px; border-radius: 8px; background: #f6f7f9; font-size: 20px; line-height: 28px; text-align: center; }
+.ch2-context-node span { display: block; font-size: 20px; line-height: 28px; font-weight: 400; }
+.ch2-context-node.is-current { color: var(--astro-heading); background: rgba(188, 82, 238, .09); font-weight: 600; }
+.ch2-context-arrow { width: 28px; height: 24px; }
+.ch2-context-arrow path { fill: none; stroke: #9a90ab; stroke-width: 2; }
+.ch2-position-slide h2, .ch2-linter-check h2 { margin-bottom: 12px; }
+.ch2-position-purpose { font-size: 22px; line-height: 32px; margin-bottom: 14px; }
+.ch2-position-code { padding: 12px 10px; border-radius: 8px; background: var(--slidev-code-background); margin: 12px 0 6px; }
+.ch2-position-code span { color: var(--astro-heading); background: rgba(188, 82, 238, .09); }
+.ch2-position-mapping .ch2-range-value { font-size: 24px; line-height: 32px; }
+.ch2-position-slide .ch2-position-note { margin-top: 12px; }
+/* Keep the diagnostic and takeaway visible below the repeated flow. */
+.ch2-linter-check h2 { margin-bottom: 10px; }
+.ch2-linter-check .ch2-context-flow { margin-bottom: 8px; }
+.ch2-linter-check .ch2-context-node { padding-top: 2px; padding-bottom: 2px; }
+.ch2-linter-check .ch2-scope { margin-top: 8px; }
+.ch2-linter-check .ch2-lint-matches { gap: 4px; margin: 4px 0; }
+.ch2-linter-check .ch2-lint-diagnostic { padding: 8px 12px; margin: 8px 0; }
+.ch2-linter-check .ch2-summary { margin-top: 10px; }
 /* Slide 22 stacks four source lines and three parser-input lines above a fixed note. */
 .ch2-formatter-parse { --code-example-font-size: 22px; --code-example-line-height: 30px; }
 /* Slide 23: the 37-character output line exceeds its column at 22px.
  * Both excerpts use 20px, including the abbreviated six-line Doc example. */
 .slidev-layout.ch2-doc-explainer { --code-example-font-size: 20px; --code-example-line-height: 28px; }
 .ch2-doc-explainer .ch2-doc { grid-template-columns: 340px minmax(0, 1fr); }
-.ch2-doc-definition { margin-bottom: 10px; font-size: 20px; line-height: 30px; }
+.ch2-doc-context { margin-bottom: 4px; }
+.slidev-layout.ch2-doc-explainer .slidev-code { padding-top: 8px !important; padding-bottom: 8px !important; }
 .ch2-virtual-definition { font-size: 20px; line-height: 30px; }
 .ch2-language-origin { margin: 10px auto 0; width: 300px; text-align: center; font-size: 22px; font-weight: 600; line-height: 30px; }
 .ch2-language-fork { display: block; width: 100%; height: 28px; }

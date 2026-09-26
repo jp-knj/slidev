@@ -1,0 +1,61 @@
+/* Chapter 4 only. Shared overview coordinates and previous chapters stay unchanged. */
+.chapter-four h2 { margin: 0 0 18px; }
+.chapter-four .ch4-list { margin: 0; font-size: 24px; line-height: 32px; }
+.chapter-four .ch4-list li { line-height: 32px; margin-bottom: 18px; }
+.ch4-axes .ch4-list { margin-top: 72px; }
+.ch4-axes .ch4-list li { margin-bottom: 30px; }
+.ch4-comparison h2 { margin-bottom: 14px; }
+.ch4-state { display: flex; justify-content: space-between; align-items: baseline; font-size: 21px; line-height: 30px; margin-bottom: 4px; }
+.ch4-state b { font-size: 24px; color: var(--astro-heading); }
+.ch4-state span { color: var(--astro-heading); }
+.ch4-diagram { position: relative; width: 868px; font-family: var(--font-body); }
+.ch4-compiler-diagram { height: 398px; }
+.ch4-satteri-diagram { height: 402px; }
+.ch4-lines { position: absolute; inset: 0; width: 100%; height: 100%; overflow: visible; }
+.ch4-lines > path { fill: none; stroke: #887294; stroke-width: 1.8; }
+.ch4-compiler-diagram .ch4-lines > path { marker-end: url(#ch4-compiler-arrow); }
+.ch4-satteri-diagram .ch4-lines > path { marker-end: url(#ch4-satteri-arrow); }
+.ch4-satteri-diagram .ch4-lines > .ch4-branch { marker-end: none; }
+.ch4-lines marker path { fill: none; stroke: #887294; stroke-width: 1.4; stroke-linejoin: round; }
+.ch4-node { position: absolute; display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 3px; background: #faf9fc; border: 1px solid #d9d0df; border-radius: 9px; text-align: center; }
+.ch4-node strong { font-size: 24px; line-height: 32px; font-weight: 600; }
+.ch4-node span { font-size: 19px; line-height: 27px; }
+.ch4-owned { background: #f7effb; border-color: #bc52ee; }
+.ch4-owned strong { color: var(--astro-heading); }
+.ch4-edge { position: absolute; font-size: 18px; line-height: 26px; white-space: nowrap; }
+.ch4-api { left: 0; top: 0; width: 868px; height: 68px; }
+.ch4-parser { left: 0; top: 146px; width: 350px; height: 90px; }
+.ch4-codegen { left: 480px; top: 146px; width: 388px; height: 90px; }
+.ch4-oxc { left: 244px; top: 302px; width: 326px; height: 84px; }
+.ch4-oxc strong { font-size: 22px; line-height: 30px; }
+.ch4-css { left: 606px; top: 302px; width: 262px; height: 84px; }
+.ch4-edge-parse { left: 191px; top: 91px; }
+.ch4-edge-transform { left: 690px; top: 91px; }
+.ch4-edge-ast { left: 360px; top: 160px; }
+.ch4-edge-js { left: 425px; top: 270px; }
+.ch4-edge-css { left: 703px; top: 242px; background: white; }
+.ch4-responsibilities { display: flex; flex-direction: column; gap: 23px; margin-top: 28px; }
+.chapter-four .ch4-responsibilities h3 { font-size: 24px; line-height: 32px; margin: 0 0 10px; padding: 0; letter-spacing: 0; text-transform: none; font-weight: 600; color: var(--astro-heading); }
+.ch4-responsibilities .ch4-list li { font-size: 22px; line-height: 30px; margin-bottom: 9px; }
+.slidev-layout.ch4-content { padding-bottom: 12px; }
+.ch4-content h2 { margin-bottom: 8px; }
+.ch4-content .ch4-list { margin-top: 8px; }
+.ch4-content .ch4-list li { font-size: 21px; line-height: 30px; margin-bottom: 10px; }
+.ch4-satteri-api { left: 0; top: 0; width: 310px; height: 80px; }
+.ch4-visitor { left: 510px; top: 0; width: 358px; height: 80px; }
+.ch4-binding { left: 0; top: 147px; width: 398px; height: 63px; }
+.ch4-rust { left: 0; top: 248px; width: 310px; height: 68px; }
+.ch4-rust strong { font-size: 22px; }
+.ch4-rust span { font-size: 18px; }
+.ch4-rust-parser { left: 0; top: 344px; width: 282px; height: 62px; }
+.ch4-rust-ast { left: 302px; top: 344px; width: 264px; height: 62px; }
+.ch4-rust-mdx { left: 586px; top: 344px; width: 282px; height: 62px; }
+.ch4-rust-parser strong, .ch4-rust-ast strong, .ch4-rust-mdx strong { font-size: 22px; line-height: 28px; }
+.ch4-rust-parser span, .ch4-rust-ast span, .ch4-rust-mdx span { font-size: 18px; line-height: 26px; }
+.ch4-edge-call { left: 170px; top: 96px; }
+.ch4-edge-native { left: 170px; top: 216px; }
+.ch4-edge-visit { left: 402px; top: 99px; }
+.ch4-edge-mutations { left: 596px; top: 134px; }
+.ch4-edge-rust-parts { left: 343px; top: 281px; }
+.ch4-config .ch4-list { margin: 28px 0 25px; }
+.ch4-config .ch4-list li { margin-bottom: 14px; }

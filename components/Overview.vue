@@ -10,7 +10,7 @@ const props = withDefaults(
     highlight?: string;
     /** 描画する上位ノード。省略時は全ノード */
     visible?: string;
-    /** Astro Compiler の内側に出すサブ枠。例: "parser,oxc,astro-syntax" */
+    /** Astro Compiler の内部に表示する項目。例: "oxc,lightning-css,astro-syntax" */
     subs?: string;
     /** 図の下に添える注釈。キーはノードid、または "compiler->editor" のエッジid */
     annotate?: Record<string, string>;
@@ -52,9 +52,12 @@ type Node = Rect & {
 
 const SUBS = [
   { id: "html5-parser", label: "HTML5 Parser", h: 34 },
+  { id: "go-ast", label: "独自の AST", h: 32 },
+  { id: "html-correction", label: "HTML correction", h: 32 },
   { id: "esbuild-css", label: "esbuild（CSS）", h: 34 },
-  { id: "parser", label: "Parser と AST", h: 34 },
-  { id: "oxc", label: "Oxc（JavaScript と TypeScript）", h: 58 },
+  { id: "oxc", label: "Oxc（Parser と AST）", h: 58 },
+  { id: "astro-codegen", label: "Astro Codegen", h: 34 },
+  { id: "lightning-css", label: "Lightning CSS", h: 34 },
   { id: "astro-syntax", label: "Astro syntax", h: 34 },
 ] as const;
 
@@ -78,7 +81,7 @@ const CONTRACTS: Record<
     label: "Ecosystem contract",
     tone: "#198755",
     edges: ["mdsource->content", "content->build"],
-    desc: "既存 plugin の経路を維持し、新しい plugin model への移行方法を用意する",
+    desc: "plugin を引き続き利用できるようにし、新しい plugin model への移行方法を用意する",
   },
 };
 
@@ -96,12 +99,17 @@ const subIds = computed(() => toSet(props.subs));
 /** サブ枠の枚数ぶんだけ Astro Compiler が伸びる */
 const SUB_GAP = 8;
 const SUB_TOP = 40;
-const activeSubs = computed(() => SUBS.filter((s) => subIds.value.has(s.id)));
+const isComparison = computed(() => subIds.value.has("go-ast") || subIds.value.has("astro-codegen"));
+const activeSubs = computed(() => SUBS.filter((s) => subIds.value.has(s.id)).map(s => ({
+  ...s,
+  label: props.labels?.[s.id] ?? s.label,
+  h: isComparison.value && subIds.value.has("go-ast") ? 32 : s.h,
+})));
 const hasGoSubs = computed(() =>
   subIds.value.has("html5-parser") || subIds.value.has("esbuild-css"),
 );
 // Give the Gopher icon breathing room inside the compiler group.
-const compilerSubTop = computed(() => hasGoSubs.value ? 56 : SUB_TOP);
+const compilerSubTop = computed(() => hasGoSubs.value ? (isComparison.value ? 44 : 56) : SUB_TOP);
 const compilerH = computed(() =>
   activeSubs.value.length
     ? compilerSubTop.value
@@ -412,7 +420,7 @@ const viewBox = computed(() => `0 ${vb.value.y} ${W} ${vb.value.h}`);
 
       <g v-for="n in shownNodes" :key="n.id" class="ov-node" :class="stateOf(n.id)">
         <rect
-          v-if="n.id === 'compiler' && hasGoSubs"
+          v-if="n.id === 'compiler' && (hasGoSubs || isComparison)"
           class="ov-compiler-group"
           :x="n.x"
           :y="n.y"

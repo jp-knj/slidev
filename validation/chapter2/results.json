@@ -1,6 +1,6 @@
 {
   "linter": {
-    "source": "---\nconst price = 10;\nconst amount = 3;\n---\n\n<p>{pirce * amount}</p>\n<!-- pirceは診断用の誤記 -->\n",
+    "source": "---\nconst price = 10;\nconst amount = 3;\n---\n\n<p>{pirce * amount}</p>\n<!-- pirce は診断のための誤記 -->\n",
     "compilerExpression": {
       "type": "expression",
       "children": [
@@ -109,6 +109,10 @@
     "identifierRange": [
       49,
       54
+    ],
+    "generatedIdentifierRange": [
+      46,
+      51
     ],
     "binaryExpression": {
       "type": "BinaryExpression",

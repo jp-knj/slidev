@@ -6,6 +6,9 @@
 - Omit the unnecessary modifier `各` in prose.
 - Separate English words, abbreviations, product names, and inline code from adjacent Japanese text with one ASCII space, for example `Astro の API を使う`. Apply this to prose, headings, speaker notes, reference labels, diagram labels, and chat responses. Preserve the contents of code, URLs, paths, and exact identifiers.
 - Apply the spacing rule to newly written or revised sentences and labels. Do not reformat unrelated existing prose solely to add spaces.
+- Do not use `向け`, `固有`, or the purpose suffix `用` in prose, headings, diagram labels, speaker notes, source documents, or chat responses. Name the recipient, action, or execution stage explicitly instead.
+- Allow the compounds `利用`, `採用`, `適用`, `用意`, `用途`, `用語`, `汎用`, `引用`, and `使用`. Flag other expressions containing `用` for review. Preserve code, exact identifiers, URLs, and paths.
+- Run `npm run lint:text` to check the deck, image source documents, and Vue display strings. The checker reports file names, lines, and columns and fails on findings, including the existing prohibited terms.
 
 # Slide layout preferences
 
