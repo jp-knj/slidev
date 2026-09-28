@@ -1,0 +1,46 @@
+/* One post per click, with a shared image area and caption baseline. */
+.slidev-layout.community-story {
+    display: flex;
+    flex-direction: column;
+    height: 100%;
+    padding-bottom: 24px;
+}
+.community-story h2 {
+    flex: none;
+    margin: 0 0 16px;
+    font-size: 36px;
+    line-height: 40px;
+}
+.community-state {
+    flex: 1;
+    min-height: 0;
+    display: grid;
+    grid-template-rows: minmax(0, 1fr) 32px 28px;
+    gap: 8px;
+    text-align: center;
+}
+.community-story .community-post {
+    display: flex;
+    min-height: 0;
+    align-items: center;
+    justify-content: center;
+    border: 0;
+}
+.community-post img {
+    display: block;
+    width: auto;
+    height: auto;
+    max-width: 100%;
+    max-height: 100%;
+    object-fit: contain;
+}
+.community-story .community-caption {
+    margin: 0;
+    font-size: 24px;
+    line-height: 32px;
+}
+.community-story .community-source {
+    justify-self: center;
+    font-size: 20px;
+    line-height: 28px;
+}

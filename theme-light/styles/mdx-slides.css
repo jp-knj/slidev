@@ -15,7 +15,7 @@
 .mdx-proposals .mdx-efforts p { font-size: 18px; line-height: 27px; margin: 0; }
 .mdx-proposals .mdx-efforts .mdx-current h3 { color: var(--astro-heading); }
 
-/* Slide 39: a single relationship diagram, with the native layer emphasized on click 1. */
+/* Slide 40: a single relationship diagram, with the native layer emphasized on click 1. */
 .mdx-relation { position: relative; width: 868px; height: 398px; font-family: var(--font-body); }
 .mdx-relation-lines { position: absolute; inset: 0; width: 100%; height: 100%; overflow: visible; }
 .mdx-relation-lines path { fill: none; stroke: #887294; stroke-width: 1.8; marker-end: url(#mdx-relation-arrow); }
@@ -59,7 +59,7 @@
 .mdx-astro-proposal .mdx-evidence,
 .mdx-upstream-proposal .mdx-evidence { height: 310px; }
 .mdx-astro-proposal .mdx-evidence-pair { align-content: start; }
-/* Slide 40: preserve the post screenshot, including its original typography. */
+/* Slide 41: preserve the post screenshot, including its original typography. */
 .mdx-contribution h2 { margin-bottom: 16px; }
 .mdx-contribution .mdx-contribution-grid { display: grid; grid-template-columns: repeat(2, 422px); gap: 24px; align-items: start; }
 .mdx-contribution .mdx-contribution-image { display: flex; justify-content: center; align-items: flex-start; width: 422px; margin: 0; border: 0; }

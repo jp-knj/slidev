@@ -47,15 +47,42 @@ class: flex items-center justify-center h-full
     <ul class="text-xl">
       <li>Astro Maintainer</li>
       <li>Astro Japan Community</li>
-      <li>Vue Fes 2025 が、コミュニティを始めるきっかけ</li>
     </ul>
   </div>
 </div>
 
-<Ref href="https://x.com/astrodotbuild/status/1982483654858441181">Astro 公式による Astro Japan Community の紹介</Ref>
+<!--
+自己紹介です。Astro のメンテナをしていて、Astro Japan Community の運営もしています。あとで出てきますが、Markdown と MDX まわりで Astro 本体への提案もしています。
+-->
+
+---
+layout: default
+class: community-story
+clicks: 1
+---
+
+## Vue Fes 2025 から Astro Japan Community へ
+
+<div v-show="$clicks === 0" class="community-state" data-community-step="0">
+  <a class="community-post" href="https://x.com/pilcrowonpaper/status/1981982063650812385" target="_blank" rel="noreferrer" aria-label="pilcrow の投稿を開く">
+    <img src="./images/community/pilcrow-vue-fes.png" alt="pilcrow の投稿。Vue Fes 2025 で Astro の参加者について尋ねる。投稿者とアカウント名と本文と投稿日を含む。" />
+  </a>
+  <p class="community-caption">Vue Fes 2025 で Astro の参加者について尋ねる</p>
+  <a class="community-source" href="https://x.com/pilcrowonpaper/status/1981982063650812385" target="_blank" rel="noreferrer">pilcrow の投稿を見る</a>
+</div>
+
+<div v-show="$clicks === 1" class="community-state" data-community-step="1">
+  <a class="community-post" href="https://x.com/PLAID_Tech/status/1991667457032089615" target="_blank" rel="noreferrer" aria-label="PLAID の開催告知を開く">
+    <img src="./images/community/plaid-meetup.png" alt="PLAID の開催告知。コミュニティを設立し、PLAID で Meetup を開催。投稿者とアカウント名と本文と投稿日を含む。添付の開催告知画像も含む。" />
+  </a>
+  <p class="community-caption">コミュニティを設立し、PLAID で Meetup を開催</p>
+  <a class="community-source" href="https://x.com/PLAID_Tech/status/1991667457032089615" target="_blank" rel="noreferrer">PLAID の開催告知を見る</a>
+</div>
 
 <!--
-自己紹介です。Astro のメンテナをしていて、Astro Japan Community の運営もしています。コミュニティを始めるきっかけは Vue Fes 2025 でした。あとで出てきますが、Markdown と MDX まわりで Astro 本体への提案もしています。
+コミュニティを始めるきっかけは Vue Fes 2025 でした。初期表示では、pilcrow が Astro の参加者について尋ねた投稿を紹介します。
+クリック 1 で、コミュニティを設立し、PLAID で Meetup を開催したことを紹介します。開催告知の投稿と添付画像を掲載しています。
+画像は X の公式埋め込みから撮影し、原文と表示色を変更していません。出典と撮影方法は images/community/README.md に記録しています。
 -->
 
 ---
@@ -256,7 +283,7 @@ class: go-era-slide go-era-tools
 />
 
 <!--
-この図は、2023年から2025年の Astro v2〜v5 で利用していたツールと、その役割をまとめた図です。Editor のツール、つまり ESLint や Language Server や Formatter も Go Compiler を利用していました。Compiler の中の HTML5 Parser と CSS の解析と生成のための esbuild、Vite の部分の TypeScript を変換するための esbuild は、8枚目と同じ役割です。
+この図は、2023年から2025年の Astro v2〜v5 で利用していたツールと、その役割をまとめた図です。Editor のツール、つまり ESLint や Language Server や Formatter も Go Compiler を利用していました。Compiler の中の HTML5 Parser と CSS の解析と生成のための esbuild、Vite の部分の TypeScript を変換するための esbuild は、9枚目と同じ役割です。
 時代の表記は、この章で扱う期間を示しています。Editor のツールや Markdown と MDX がすべて v2 で初めて登場したという意味ではありません。MDX は v1 ですでに利用でき、v2 では Content Collections が導入されました。Markdown と MDX は Content Processor で変換し、Build へ渡します。
 この章では、HTML の親子関係と埋め込まれた JavaScript を確認します。Content の解析と変換は、第3章の後半で説明します。
 
@@ -311,7 +338,7 @@ const props = { title: "second" };
 ````
 
 <div class="mt-0 text-center text-2xl">
-  <div v-if="$clicks === 0"><span class="text-primary font-600">Component script</span><br /><code>---</code> で囲む。Build 時とサーバーで実行する JavaScript と TypeScript</div>
+  <div v-if="$clicks === 0"><span class="text-primary font-600">Component script</span><br /><code>---</code> で囲む。ビルド時とサーバーで実行する JavaScript と TypeScript</div>
   <div v-if="$clicks === 1"><span class="text-primary font-600">Template</span><br />HTML を基礎に、expression（JavaScript の式）や<br />コンポーネントを書ける</div>
   <div v-if="$clicks === 2"><span class="text-primary font-600">JavaScript expression</span><br />波かっこの中の式を評価し、結果をその場所に表示する</div>
   <div v-if="$clicks === 3"><span class="text-primary font-600">Q. </span>この <code>title</code> は、どちらの値になる？</div>
@@ -320,10 +347,10 @@ const props = { title: "second" };
   <Overlay v-if="$clicks >= 5" aria-label="Astro Syntax への問いと答え">
     <template #title>
       <span v-if="$clicks === 5">これは、Astro Syntax がおかしいのでは？</span>
-      <span v-else>ブラウザの解釈によるもの</span>
+      <span v-else>もともとのブラウザの解釈や</span>
     </template>
     <p v-if="$clicks >= 6">
-      当時の Astro は、同じ <code>title</code> 属性を重複して出力した。<br />
+      同じ属性を重複して出力した場合<br />
       ブラウザは先の <code>title="first"</code> を採用するため、<code>first</code> になった。
     </p>
     <template #reference>
@@ -363,10 +390,9 @@ clicks: 3
   <Overlay v-if="$clicks >= 2" aria-label="Astro Syntax への問いと答え">
     <template #title>
       <span v-if="$clicks === 2">これは、Astro Syntax がおかしいのでは？</span>
-      <span v-else>ブラウザの解釈によるもの</span>
+      <span v-else>もともとのブラウザの解釈や</span>
     </template>
     <p v-if="$clicks >= 3">
-      Astro は、要素間の改行を HTML にも保持する。<br />
       ブラウザはその改行を空白として表示するため、<code>Astro 1200</code> になる。
     </p>
   </Overlay>
@@ -422,10 +448,10 @@ clicks: 3
 <Overlay v-if="$clicks >= 2" aria-label="Astro Syntax への問いと答え">
   <template #title>
     <span v-if="$clicks === 2">これは、Astro Syntax がおかしいのでは？</span>
-    <span v-else>Compiler がブラウザの HTML 解析も担っていた</span>
+    <span v-else>それは、そう</span>
   </template>
   <p v-if="$clicks >= 3">
-    当時の Compiler は、表の中の式を解析した後、解析状態を正しく戻せなかった。<br />
+    この挙動は、HTML correctionの挙動<br />
     そのため、表の後の <code>h2</code> が <code>table</code> の中に入った。
   </p>
 </Overlay>
@@ -467,7 +493,7 @@ class: ch2-detail
 <div class="ch2-next-question">HTML5 Parser は必要なのか？</div>
 
 <!--
-11枚目の属性と12枚目の空白と13枚目の不具合を振り返ります。HTML に似た構文を解析することと、Browser と同じ HTML correction を採用することは別の判断です。
+12枚目の属性と13枚目の空白と14枚目の不具合を振り返ります。HTML に似た構文を解析することと、Browser と同じ HTML correction を採用することは別の判断です。
 改行を含む空白の表示は、HTML correction とは別の論点です。Astro syntax でどの規則を採用するかという問いであり、空白の仕様が変更済みだという説明ではありません。
 table の後の h2 が table の中に入った例は、Compiler の不具合です。HTML5 の正しい挙動として説明しません。Rust への移行だけで、これらの課題をすべて解決できるという説明もしません。
 次は、Go Compiler の情報をツールがどう利用していたかを確認します。
@@ -688,7 +714,7 @@ class: ch2-detail ch2-position-slide
 <Ref href="https://github.com/ota-meshi/astro-eslint-parser/blob/v1.2.2/src/parser/index.ts">astro-eslint-parser 1.2.2 の解析と位置対応</Ref>
 
 <!--
-元の .astro の文字を診断するために、AST の位置を元のコードに戻します。16枚目の全体図で、AST とスコープ情報を ESLint に渡す前の工程です。18枚目では JavaScript と JSX に変換して式の AST を取得しました。Espree が返す位置は変換後のコードを基準とするため、そのままでは元の .astro の文字を指しません。
+元の .astro の文字を診断するために、AST の位置を元のコードに戻します。17枚目の全体図で、AST とスコープ情報を ESLint に渡す前の工程です。19枚目では JavaScript と JSX に変換して式の AST を取得しました。Espree が返す位置は変換後のコードを基準とするため、そのままでは元の .astro の文字を指しません。
 この例では、式にある price は変換後の全文で [46, 51)、元の .astro の全文で [49, 54) です。astro-eslint-parser が記録した対応を使い、AST の位置を元のコードの位置に変換してから ESLint に渡します。この範囲では差が3文字ですが、ファイル全体で常に3を加えるという意味ではありません。次は、宣言と参照を照合して未定義の変数を検出し、診断がこの5文字を指すことを確認します。
 範囲は0始まりで終端を含みません。左も右も表示は抜粋です。前の枚の読みやすく整えたコード例から数えた値ではなく、検証で取得した全文に対する値です。左の冒頭にある JSX Fragment など、変換で追加した文字や除いた文字により位置が変わります。
 
@@ -742,7 +768,7 @@ const amount = 3;
 <Ref href="https://github.com/ota-meshi/astro-eslint-parser/blob/v1.2.2/src/parser/index.ts">astro-eslint-parser と ESLint への返却値</Ref>
 
 <!--
-未定義の変数は、スコープ情報で宣言と参照を照合して検出します。16枚目の全体図の最後、ESLint の診断です。19枚目で元の .astro に対応させた位置を使い、診断する文字の範囲を示します。この枚で初めて pirce という誤記を示します。AST の Identifier は参照の名前を表します。スコープ情報を使うと、その参照に対応する宣言があるか確認できます。スコープ解析では price と amount の宣言を記録し、amount の参照はその宣言に対応します。pirce の参照には対応する宣言がなく、globalScope.through に含まれます。
+未定義の変数は、スコープ情報で宣言と参照を照合して検出します。17枚目の全体図の最後、ESLint の診断です。20枚目で元の .astro に対応させた位置を使い、診断する文字の範囲を示します。この枚で初めて pirce という誤記を示します。AST の Identifier は参照の名前を表します。スコープ情報を使うと、その参照に対応する宣言があるか確認できます。スコープ解析では price と amount の宣言を記録し、amount の参照はその宣言に対応します。pirce の参照には対応する宣言がなく、globalScope.through に含まれます。
 astro-eslint-parser は AST の位置を .astro に対応させ、Astro の node や visitorKeys も含む返却値を ESLint へ渡します。visitorKeys は AST の子をたどるためのプロパティ名の一覧です。ESLint の no-undef は、スコープ情報から未定義の参照を検査するルールです。意図した綴りを推測して修正するルールではありません。
 診断 JSON の抜粋は { "ruleId": "no-undef", "message": "'pirce' is not defined.", "line": 6, "column": 5, "endLine": 6, "endColumn": 10 } です。ESLint 9.36.0 で確認した値で、文字オフセットの範囲は [49, 54) です。波線はこの範囲を示しています。次は、Formatter が .astro をどう整形するか確認します。
 -->
@@ -878,7 +904,7 @@ group([
 <Ref href="https://github.com/withastro/prettier-plugin-astro/blob/v0.14.1/src/printer/embed.ts">Astro Printer と Doc</Ref>
 
 <!--
-22枚目では、Babel で式を再解析して AST を取得しました。ここでは、その AST から作る整形の指示 Doc を説明します。21枚目の全体図では、式の AST と整形後の .astro の間にある工程です。Doc は、出力する文字列と改行候補と字下げの指示を組み合わせたデータです。Prettier の JavaScript のための Printer は、Babel が解析した式の AST から Doc を作ります。Astro のための Printer は式の Doc を受け取り、Astro の波かっこやタグの Doc と組み合わせます。左は expression を囲む Doc の抜粋で、実装の lineSuffixBoundary を省いています。expressionDoc は式の整形指示を指す、この説明で使う名前です。
+23枚目では、Babel で式を再解析して AST を取得しました。ここでは、その AST から作る整形の指示 Doc を説明します。22枚目の全体図では、式の AST と整形後の .astro の間にある工程です。Doc は、出力する文字列と改行候補と字下げの指示を組み合わせたデータです。Prettier の JavaScript のための Printer は、Babel が解析した式の AST から Doc を作ります。Astro のための Printer は式の Doc を受け取り、Astro の波かっこやタグの Doc と組み合わせます。左は expression を囲む Doc の抜粋で、実装の lineSuffixBoundary を省いています。expressionDoc は式の整形指示を指す、この説明で使う名前です。
 group は、まとまりを1行で表示するか改行するかを選ぶ単位です。softline は1行に収まれば空文字、改行を選べば改行になります。indent は改行後の字下げを表します。Prettier がこれらを行幅などの設定に従って文字列にします。
 Doc を作ると、出力の長さを確認して改行を選べます。右は Prettier 3.6.2 と prettier-plugin-astro 0.14.1 の整形結果です。外の波かっこも改行されます。整形前後で式の AST が一致することを確認しています。product.name と product.price の間にはコロンだけがあり、空白を追加しません。次は、Language Tool が Editor に補完と診断をどう返すか確認します。
 参照: [Doc の定義と命令](https://github.com/prettier/prettier/blob/main/commands.md)
@@ -1036,7 +1062,7 @@ class: ch2-detail ch2-mapping-slide
 <Ref href="https://github.com/withastro/language-tools/blob/b4bcb4fc02cd960936a5faee6c9cc0ad94fc4c05/packages/language-server/src/core/astro2tsx.ts">convertToTSX と位置対応</Ref>
 
 <!--
-19枚目では、Linter が取得した AST の位置を元の .astro に対応させました。ここでは、同じ位置対応の考え方を TypeScript の診断に適用します。
+20枚目では、Linter が取得した AST の位置を元の .astro に対応させました。ここでは、同じ位置対応の考え方を TypeScript の診断に適用します。
 前の .astro 全文から、Compiler 2.12.2 で生成した TSX を TypeScript 5.9.3 へ渡した結果です。型にない nmae に対する診断 TS2339 は、TSX 上の [129, 133) を指します。Compiler の Source map で対応する位置を調べると、.astro では [95, 99) です。抜粋の表示位置から数えた値ではありません。
 language-tools は Source map を Volar の mapping へ変換します。Volar がこの対応を利用し、診断範囲を .astro へ戻します。一定の差分34を常に引く方法ではなく、この範囲について対応が確認できたという意味です。
 下は Editor へ渡す診断の range の抜粋です。LSP は行と列が0始まりなので、8行目の12列目を line 7 と character 11 で表します。終端は含みません。
@@ -1270,43 +1296,38 @@ class: ch3-detail chapter-three ch3-cst
 CST は Concrete Syntax Tree、具象構文木である。変数名や演算子に加え、セミコロンなどの記号も表す構文の木を指す。Lossless は、元のコードを一文字も変えずに再現できるという性質である。空白と改行とコメントも保持する。
 例の price の後ろには空白が2文字あり、演算子の後ろとセミコロンの後ろには空白が1文字ある。コメントは // 税込 で、末尾には LF の改行が1文字ある。下の図は文字の順序を示す模式図であり、実際の木の親子関係は省略している。Biome では空白やコメントなどを trivia として token に付随させる。
 前のページで Biome が使うと紹介した CST の定義である。Lossless である利点は、変更しない部分の空白とコメントを保ちながら、コードを修正するための情報を木から取得できることにある。たとえば price だけを unitPrice に変更するとき、空白2文字とコメントと末尾の改行をそのまま再現できる。実際にどの部分を書き換えるかは、ツールが決める。Formatter は保持した情報を参照し、出力の空白と改行を決め直す。
-情報を保持する性質と、Parser が構文エラーから回復する機能は別である。Lossless であることだけで、書きかけの入力からどこまで解析を続けられるかは決まらない。次のページでは、書きかけのコードを扱う Parser の回復を説明する。
+次のページでは、保持した情報を使って 1 か所の変数名を変更し、元の書式を保つ例を確認する。
 参照: [Biome の設計資料](https://biomejs.dev/internals/architecture/)。ここでは Biome の設計例を紹介する。Astro が Biome や Lossless CST を採用したという説明ではない。
 -->
 
 ---
 layout: default
-class: ch3-detail chapter-three ch3-error-recovery
+class: ch3-detail chapter-three ch3-cst-edit
 ---
 
-## 書きかけのコードを解析するには
+## 変数名だけを変え、元の書式を保つ
 
-<div class="ch3-recovery-intro">Language Tool は、構文が完成する前から診断する</div>
+<div class="ch3-cst-edit-intro">Lossless CST は、構文と元の文字を保持する</div>
 
-```js
-while {}
-```
+<div class="ch3-cst-edit-label">変更前</div>
+<pre class="ch3-cst-edit-source"><code><span class="ch3-cst-edit-name">price</span>  * amount; // 税込
+</code></pre>
 
-<div class="ch3-cols ch3-recovery-cols">
-  <div>
-    <h3>Prettier 3.6.2 の Babel Parser</h3>
-    <p>構文エラーで整形を中止する。</p>
-  </div>
-  <div>
-    <h3>Biome Parser</h3>
-    <p>括弧と条件の欠落を記録し、<br />本文の <code>{}</code> を解析する。</p>
-  </div>
-</div>
-<div class="ch3-summary">エラーの位置と解析できた範囲を、<br />書きかけのコードの診断に利用できる</div>
-<div class="ch3-cst-caveat">Biome も構文エラーを含むファイルの整形は既定で無効。</div>
+<div class="ch3-cst-edit-operation">CST の変数名を <code>price</code> から <code>unitPrice</code> に変更</div>
 
-<Ref><a href="https://biomejs.dev/internals/architecture/">Biome の設計資料</a> と <a href="https://biomejs.dev/reference/configuration/#formatterformatwitherrors">Biome の整形設定</a></Ref>
+<div class="ch3-cst-edit-label">変更後</div>
+<pre class="ch3-cst-edit-source"><code><span class="ch3-cst-edit-name">unitPrice</span>  * amount; // 税込
+</code></pre>
+<div class="ch3-cst-edit-result">空白 2 文字とコメントと末尾の改行を、そのまま再現できる</div>
+
+<Ref href="https://biomejs.dev/internals/architecture/#parser-and-cst">Biome の設計資料</Ref>
 
 <!--
-前のページでは、CST が空白とコメントも保持することを説明しました。書きかけのコードを診断するには、情報の保持に加えて、構文エラーから回復して解析を続ける機能が必要です。Lossless という性質だけで、エラー回復の範囲が決まるわけではありません。
-while {} は Biome の設計資料の例です。Prettier 3.6.2 の Babel Parser では構文エラーとなり、整形を中止します。Biome Parser は括弧と条件の欠落を記録し、本文のブロックを解析できます。解析できた範囲とエラーの位置は、Language Tool が書きかけのコードを診断するために利用できます。回復できる範囲は入力とエラーの位置に依存します。
-Biome の formatter.formatWithErrors は既定で false です。Parser が回復できても、構文エラーを含むファイルを既定で整形するわけではありません。ここではツールの設計を比較しており、Astro が Biome を採用するという説明ではありません。
-参照: [Biome の設計資料](https://biomejs.dev/internals/architecture/)、[Biome の整形設定](https://biomejs.dev/reference/configuration/#formatterformatwitherrors)。
+前のページでは、Lossless CST が構文に加えて空白と改行とコメントも保持することを説明した。ここでは、その情報を使って元の書式を保ちながら 1 か所の変数名を変更する。
+編集ツールが対象の price の token を選び、unitPrice の token に変更する。元の token に付随する空白などの trivia を引き継ぎ、変更しない token とその trivia も保持する。この例では、変数名の直後の空白 2 文字と、ほかの空白と、コメント // 税込 と、末尾の LF の改行をそのまま再現できる。
+biome_rowan の BatchMutation::replace_token は replace_element を呼び、元の token の leading trivia と trailing trivia を新しい token に引き継ぐ。変更は commit で反映する。コメントなどが付随するほかの token は、この編集では変更しない。
+ここで示すのは 1 か所の token の変更である。同じ変数の宣言と参照をまとめて変更するには、名前の参照関係を調べる機能も必要になる。
+参照: [Biome の設計資料](https://biomejs.dev/internals/architecture/#parser-and-cst)、[biome_rowan の replace_token と replace_element の実装](https://github.com/biomejs/biome/blob/main/crates/biome_rowan/src/ast/batch.rs)。
 -->
 
 ---
@@ -1397,7 +1418,7 @@ class: ch3-detail chapter-three mdx-proposals mdx-astro-proposal
 <!--
 Astro に MDX の高速化を提案し、Rust で実装した Compiler の統合を試した。Astro は remark と rehype plugin を使うため、plugin の互換性が課題になった。続いて AST Bridge を試作し、Rust で解析した AST を JavaScript の plugin に渡す方法を検証した。
 PR #14181 では、Astro のメンバーから、Astro 本体よりも upstream の package で取り組むことを勧められた。二つの PR は未マージで終了している。画像は提案時点の画面ではなく、2026年9月23日に撮影した編集版である。
-37枚目から39枚目は、提案先と判断の経緯に沿って説明する。Astro と upstream への提案と package の試作は、時期に重なりがある。ページの順序が厳密な時系列を表すわけではない。
+38枚目から40枚目は、提案先と判断の経緯に沿って説明する。Astro と upstream への提案と package の試作は、時期に重なりがある。ページの順序が厳密な時系列を表すわけではない。
 -->
 
 ---
@@ -1486,7 +1507,7 @@ Astro は astro-xmdx を integration として導入する。astro-xmdx は astr
 参照例は Astro 5 と Vite 6 と Rollup の組み合わせである。固定コミットの Starlight の例では Astro 5.17.2 を指定し、lockfile では Vite 6.4.1 と Rollup 4.60.1 を確認できる。Vite は本番ビルドで Rollup を使い、Rollup が module をまとめる。
 クリック 1 では bindings と Compiler を強調する。@xmdx/napi が Rust の Compiler を JavaScript から呼べるようにする。Compiler は Rust で解析と変換を行い、MDX のコード生成には mdxjs-rs を利用する。frontmatter と見出し情報は xmdx が取得する。WASM 版もある。
 クリック 2 では図全体を同じ濃さに戻す。plugin は bindings から生成コードと frontmatter と見出し情報を受け取り、wrapMdxModule で Astro が実行する module に変換する。component の対応とコードの色付けを含む transformPipeline を実行し、transformJsx で JSX を変換する。
-参照コミットは https://github.com/jp-knj/xmdx/tree/7a89fdb17140e2b710e40d52d26338d978bc5c13 。実装の参照先は images/mdx/README.md に記録する。互換性のない入力には JavaScript の MDX 実装を利用する fallback もある。37 枚目の AST Bridge は Astro への別の提案であり、この図では生成コードと付随情報を受け渡す。
+参照コミットは https://github.com/jp-knj/xmdx/tree/7a89fdb17140e2b710e40d52d26338d978bc5c13 。実装の参照先は images/mdx/README.md に記録する。互換性のない入力には JavaScript の MDX 実装を利用する fallback もある。38 枚目の AST Bridge は Astro への別の提案であり、この図では生成コードと付随情報を受け渡す。
 -->
 
 ---
@@ -1511,7 +1532,6 @@ class: ch3-detail chapter-three mdx-contribution
 MDX 自体にも興味があり、Editor の改善にも取り組んだ。
 経緯は三段階である。まず Astro のメンバーに Remco Haszing を紹介してもらった。次に試作で学んだ解析とエラー回復の知識を MDX の Editor の改善に使い、PR #528 を作成した。最後に PR がマージされ、Remco がリリースの投稿で貢献を紹介した。
 mdx-analyzer の PR #528 は、不完全な import と export があるとファイル全体の補完と診断とホバーが利用できなくなる問題を改善した。ESM の解析に acorn-loose を使い、expression は厳密な Parser で解析する。
-34 枚目で説明したエラー回復を振り返る。編集中のコードには不完全な構文があるため、回復して解析を続けることが Editor の支援にも必要になる。ここでは acorn-loose を利用した。
 不完全な import と export があっても、補完と診断とホバーを継続できるようにした。
 PR は2026年8月25日にマージされた。Remco は2026年8月28日のリリースの投稿で、この貢献を紹介した。左は告知投稿、右は貢献を紹介する返信である。2 投稿は実ページから別々に撮影し、投稿者とアカウント名と本文と投稿日を含めた。右の画像には GitHub PR #528 のプレビュー全体も含めた。ナビゲーションと返信入力欄と他の返信は撮影範囲から除いた。文字と表示色は変更していない。画像から対応する投稿を開ける。
 -->
@@ -1604,7 +1624,7 @@ clicks: 1
 <Ref href="https://github.com/withastro/roadmap/issues/1356">新 Compiler の方針と RFC #1356</Ref>
 
 <!--
-45 枚目は初期表示が Go 版、1 クリック後が Rust 版。Editor と Build と Browser と Content Processor の位置は共通である。
+46 枚目は初期表示が Go 版、1 クリック後が Rust 版。Editor と Build と Browser と Content Processor の位置は共通である。
 Go 版は HTML5 由来の Parser と独自の AST、HTML correction、esbuild 由来の CSS の機能を保守していた。Go の parse() にも literal parsing があり、ツールが使う AST を生成する解析まで必ず HTML correction を行うという意味ではない。
 Rust 版は Astro syntax に対応するよう拡張した Oxc と Astro Codegen と Lightning CSS を利用する。RFC #1356 は Build を含め HTML correction を行わない方針を示す。書かれた親子関係を保持することと、構文エラーを受け入れることは別である。閉じ忘れたタグや終了していない属性はエラーになる。
 両版とも Browser は出力 HTML を解釈して DOM を構築する。HTML の規則による補正はこの段階で起こり得る。Build の名称を共通にし、Compiler の変更を説明する。HTML correction の有無は実装言語とは別の設計判断である。
@@ -1640,7 +1660,7 @@ class: chapter-four ch4-compiler
 <Ref href="https://github.com/withastro/compiler-rs/tree/main/crates">Compiler の実装と依存関係</Ref>
 
 <!--
-46 枚目の線は呼び出しとデータの利用関係を示す。公開 API の parse() は Oxc Parser を呼び、AST と位置情報を提供する。transform() は解析の後に Astro Codegen を呼ぶ。
+47 枚目の線は呼び出しとデータの利用関係を示す。公開 API の parse() は Oxc Parser を呼び、AST と位置情報を提供する。transform() は解析の後に Astro Codegen を呼ぶ。
 Parser と AST は withastro/oxc の feat/astro で拡張している。Astro Codegen は Astro runtime を使う JavaScript を生成する。JavaScript の生成と TypeScript の変換には Oxc Codegen と Oxc Transformer を使う。Oxc を Astro syntax に対応させる変更も Astro の保守範囲に含まれる。
 CSS の解析と生成には Lightning CSS を使う。Astro の selector のスコープ規則は astro_codegen の css_scoping.rs に実装する。CSS のスコープ規則まで Lightning CSS に任せるという意味ではない。
 配布方法の補足: Rust という実装言語、native bindings や WASM という配布と実行方法、AST の設計、保守範囲は別の判断である。Node.js では Node-API bindings を介して呼ぶ。Browser 内で Compiler 自体を実行する場合は WASM などの配布方法を別途検討する。全体図の Browser は生成されたサイトを表示する場所である。
@@ -1699,7 +1719,7 @@ class: chapter-four ch4-content
 </ul>
 
 <!--
-49 枚目は .md と .mdx から Content Processor と Build と Browser への流れを確認する。Astro Compiler と Content Processor は別に選ぶ。Astro は Processor を組み込む入口を用意し、Content Collections と Build に統合する。Processor は Markdown と MDX の構文と変換と拡張機能を実行する仕組みを保守する。
+50 枚目は .md と .mdx から Content Processor と Build と Browser への流れを確認する。Astro Compiler と Content Processor は別に選ぶ。Astro は Processor を組み込む入口を用意し、Content Collections と Build に統合する。Processor は Markdown と MDX の構文と変換と拡張機能を実行する仕組みを保守する。
 出典: [Astro の Markdown Processors](https://docs.astro.build/en/guides/markdown-content/#markdown-processors)。
 -->
 
@@ -1753,10 +1773,10 @@ class: chapter-four ch4-satteri
 <Ref href="https://satteri.bruits.org/docs/plugin-api/">Sätteri の Plugin API</Ref>
 
 <!--
-51 枚目は上段が JavaScript、中段が Node-API bindings、下段が Rust の機能。npm の satteri package は公開 API と plugin の登録を提供する。satteri-napi-binding を介して Rust の satteri を呼ぶ。
+52 枚目は上段が JavaScript、中段が Node-API bindings、下段が Rust の機能。npm の satteri package は公開 API と plugin の登録を提供する。satteri-napi-binding を介して Rust の satteri を呼ぶ。
 図の pulldown-cmark は satteri-pulldown-cmark、mdxjs-rs は satteri-mdxjs-rs の略記。Rust の satteri は、MDX に対応した Parser の satteri-pulldown-cmark、MDAST と HAST を担う satteri-ast、Oxc を利用する MDX Compiler の satteri-mdxjs-rs を組み合わせる。関連部品には satteri-arena と Rust plugin を実装するための satteri-plugin-api もある。図は主な依存関係であり、すべての入力が同じ経路をたどるという意味ではない。
 JavaScript plugin は対象の node の種類を指定し、visitor で検査する。node のプロパティは直接変更できず、変更は ctx の setProperty() や replaceNode() などで指定する。図の往復する線は、bindings を介した node の情報と変更内容の受け渡しを示す。visitor の完了後に変更が適用される。必要なら visitor の戻り値で node を交換することもできる。
-この plugin API は remark と rehype の plugin API と同一ではない。既存 plugin を利用したい場合の unified の選択を 52 枚目へつなげる。
+この plugin API は remark と rehype の plugin API と同一ではない。既存 plugin を利用したい場合の unified の選択を 53 枚目へつなげる。
 出典: [Sätteri の package 一覧](https://github.com/bruits/satteri#packages)、[Plugin API](https://satteri.bruits.org/docs/plugin-api/)。
 -->
 
@@ -1784,7 +1804,7 @@ export default defineConfig({
 <Ref href="https://docs.astro.build/en/guides/markdown-content/#markdown-processors">Astro Docs と Markdown Processors</Ref>
 
 <!--
-52 枚目は import から Processor の指定までを一つの設定例にまとめた。@astrojs/markdown-remark を導入し、unified() を markdown.processor に指定する。既存の remark と rehype plugin は unified() の remarkPlugins と rehypePlugins で指定できる。この例では Processor の選択に注目し、plugin の個別設定は省略した。
+53 枚目は import から Processor の指定までを一つの設定例にまとめた。@astrojs/markdown-remark を導入し、unified() を markdown.processor に指定する。既存の remark と rehype plugin は unified() の remarkPlugins と rehypePlugins で指定できる。この例では Processor の選択に注目し、plugin の個別設定は省略した。
 Sätteri は独自の visitor と ctx の API を提供する。既存の unified plugin をそのまま使う必要がある場合は unified を選ぶ。速度だけでなく plugin の互換性からも Content Processor を判断する。
 -->
 
@@ -1803,9 +1823,9 @@ class: chapter-four ch4-recap
 />
 
 <!--
-53 枚目は 43 枚目の全体図に戻り、実装と保守の分担を振り返る。Compiler は書かれた親子関係と位置情報、埋め込まれた JavaScript の AST を提供する。Browser は生成された HTML から DOM を構築する。
+54 枚目は 44 枚目の全体図に戻り、実装と保守の分担を振り返る。Compiler は書かれた親子関係と位置情報、埋め込まれた JavaScript の AST を提供する。Browser は生成された HTML から DOM を構築する。
 Astro は Astro syntax と実行するコードへの変換を保守し、汎用的な解析と変換と生成には Oxc と Lightning CSS を利用する。Editor のツールは AST と位置情報を目的に応じて使う。Build はモジュールを解決し、JavaScript と CSS をまとめる。
-Content では、Astro への統合と Processor の解析と変換を分け、必要な plugin に応じて Processor を選ぶ。この分担を踏まえ、54 枚目の章の結論へ進む。
+Content では、Astro への統合と Processor の解析と変換を分け、必要な plugin に応じて Processor を選ぶ。この分担を踏まえ、55 枚目の章の結論へ進む。
 -->
 
 ---
@@ -1935,10 +1955,8 @@ class: text-center
 
 ## ありがとうございました
 
-<div class="mt-8 text-xl ">Astro Japan Community</div>
-
-<img src="./images/qrcode_discord.com.png" class="h-60 mx-auto mt-6" alt="Discord QR Code" />
+<div class="mt-8 text-xl ">Vue Fes 楽しんでね。</div>
 
 <!--
-ありがとうございました。Astro Japan Community の Discord です。よかったら覗いてみてください。
+ありがとうございました。Vue Fes 楽しんでね。
 -->

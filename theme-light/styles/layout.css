@@ -205,8 +205,8 @@
     line-height: var(--code-example-line-height) !important;
 }
 
-/* Slide 13: fit both HTML comparison columns.
- * Slide 22: keep the stacked examples above the fixed explanatory note.
+/* Slide 14: fit both HTML comparison columns.
+ * Slide 23: keep the stacked examples above the fixed explanatory note.
  */
 .slidev-layout.code-example-compact {
     --code-example-font-size: 22px;
@@ -309,7 +309,7 @@
 .ch2-result > .ch2-label { margin-bottom: 6px; }
 .ch2-expression-cols { min-height: 324px; }
 .ch2-expression-stages { min-width: 0; }
-/* Slide 18: give the object excerpt enough width for unwrapped 24px code. */
+/* Slide 19: give the object excerpt enough width for unwrapped 24px code. */
 .ch2-expression-data { display: grid; grid-template-columns: 640px minmax(0, 1fr); gap: 24px; min-height: 324px; }
 .ch2-expression-terms { display: grid; align-content: start; gap: 20px; padding-top: 40px; }
 .ch2-expression-terms p { margin: 8px 0 0; line-height: 30px; }
@@ -436,7 +436,7 @@
     margin-top: auto !important;
 }
 
-/* Slide 61: keep the summary clear of the taller M PLUS 2 heading glyphs. */
+/* Summary: keep the summary clear of the taller M PLUS 2 heading glyphs. */
 .slidev-layout.takeaway-slide > h2 + * {
     margin-top: 16px !important;
 }
@@ -613,12 +613,14 @@
 .ch3-format-comparison .ch3-format-flow th, .ch3-format-comparison .ch3-format-flow td { padding: 16px 12px; vertical-align: middle; text-align: left; }
 .ch3-format-flow th { font-weight: 500; }
 .ch3-format-comparison .ch3-summary { font-size: 22px; line-height: 32px; margin-top: 22px; }
-.ch3-recovery-intro { margin-bottom: 18px; font-size: 22px; line-height: 30px; }
-.ch3-recovery-cols { margin-top: 24px; }
-.ch3-error-recovery h3 { font-size: 22px; line-height: 30px; margin: 0; }
-.ch3-error-recovery p { font-size: 22px; line-height: 32px; margin-top: 10px; }
-.ch3-error-recovery .ch3-summary { font-size: 22px; line-height: 32px; margin-top: 24px; }
-.ch3-cst-caveat { font-size: 20px; line-height: 28px; margin-top: 10px; }
+.slidev-layout.ch3-cst-edit { font-size: 22px; line-height: 32px; }
+.ch3-cst-edit h2 { font-size: 36px; line-height: 40px; margin-bottom: 20px; }
+.ch3-cst-edit .ch3-cst-edit-intro { margin-bottom: 20px; }
+.ch3-cst-edit .ch3-cst-edit-label { margin-bottom: 8px; font-weight: 500; }
+.ch3-cst-edit .ch3-cst-edit-source { padding: 12px 16px; margin: 0; border-radius: 8px; background: var(--slidev-code-background); font-size: 24px; line-height: 32px; }
+.ch3-cst-edit .ch3-cst-edit-name { color: var(--astro-heading); font-weight: 500; }
+.ch3-cst-edit .ch3-cst-edit-operation { margin: 16px 0; }
+.ch3-cst-edit .ch3-cst-edit-result { margin-top: 20px; }
 .ch3-syntax { grid-template-columns: minmax(0, 1.2fr) minmax(0, 1fr); }
 .ch3-syntax-labels { display: grid; gap: 18px; }
 .ch3-syntax-labels strong, .ch3-syntax-labels span { display: block; }
@@ -693,9 +695,9 @@
 .ch2-linter-check .ch2-lint-matches { gap: 4px; margin: 4px 0; }
 .ch2-linter-check .ch2-lint-diagnostic { padding: 8px 12px; margin: 8px 0; }
 .ch2-linter-check .ch2-summary { margin-top: 10px; }
-/* Slide 22 stacks four source lines and three parser-input lines above a fixed note. */
+/* Slide 23 stacks four source lines and three parser-input lines above a fixed note. */
 .ch2-formatter-parse { --code-example-font-size: 22px; --code-example-line-height: 30px; }
-/* Slide 23: the 37-character output line exceeds its column at 22px.
+/* Slide 24: the 37-character output line exceeds its column at 22px.
  * Both excerpts use 20px, including the abbreviated six-line Doc example. */
 .slidev-layout.ch2-doc-explainer { --code-example-font-size: 20px; --code-example-line-height: 28px; }
 .ch2-doc-explainer .ch2-doc { grid-template-columns: 340px minmax(0, 1fr); }

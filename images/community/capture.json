@@ -1,0 +1,96 @@
+{
+  "capturedOn": "2026-09-27",
+  "viewport": {
+    "width": 1100,
+    "height": 1600
+  },
+  "deviceScaleFactor": 2,
+  "colorScheme": "light",
+  "timezoneId": "Asia/Tokyo",
+  "posts": [
+    {
+      "image": "pilcrow-vue-fes.png",
+      "source": "https://x.com/pilcrowonpaper/status/1981982063650812385",
+      "embed": "https://platform.twitter.com/embed/Tweet.html?id=1981982063650812385&theme=light&lang=en&conversation=none",
+      "postedAt": "2025-10-25T07:12:02.000Z",
+      "clip": {
+        "x": 17,
+        "y": 13,
+        "width": 516,
+        "height": 120
+      },
+      "width": 1032,
+      "height": 240
+    },
+    {
+      "image": "astro-kenji.png",
+      "source": "https://x.com/astrodotbuild/status/1982160958450520242",
+      "embed": "https://platform.twitter.com/embed/Tweet.html?id=1982160958450520242&theme=light&lang=en&conversation=none",
+      "postedAt": "2025-10-25T19:02:53.000Z",
+      "clip": {
+        "x": 17,
+        "y": 86.96875,
+        "width": 516,
+        "height": 168
+      },
+      "width": 1032,
+      "height": 336
+    },
+    {
+      "image": "pilcrow-more-astro.png",
+      "source": "https://x.com/pilcrowonpaper/status/1982259070112292924",
+      "embed": "https://platform.twitter.com/embed/Tweet.html?id=1982259070112292924&theme=light&lang=en&conversation=none",
+      "postedAt": "2025-10-26T01:32:45.000Z",
+      "clip": {
+        "x": 17,
+        "y": 150.96875,
+        "width": 516,
+        "height": 120
+      },
+      "width": 1032,
+      "height": 240
+    },
+    {
+      "image": "astro-japan-meetup.png",
+      "source": "https://x.com/astrodotbuild/status/1982483654858441181",
+      "embed": "https://platform.twitter.com/embed/Tweet.html?id=1982483654858441181&theme=light&lang=en&conversation=none",
+      "postedAt": "2025-10-26T16:25:10.000Z",
+      "clip": {
+        "x": 17,
+        "y": 110.96875,
+        "width": 516,
+        "height": 120
+      },
+      "width": 1032,
+      "height": 240
+    },
+    {
+      "image": "pilcrow-next-year.png",
+      "source": "https://x.com/pilcrowonpaper/status/1982493498877386783",
+      "embed": "https://platform.twitter.com/embed/Tweet.html?id=1982493498877386783&theme=light&lang=en&conversation=none",
+      "postedAt": "2025-10-26T17:04:17.000Z",
+      "clip": {
+        "x": 17,
+        "y": 110.96875,
+        "width": 516,
+        "height": 168
+      },
+      "width": 1032,
+      "height": 336
+    },
+    {
+      "image": "plaid-meetup.png",
+      "source": "https://x.com/PLAID_Tech/status/1991667457032089615",
+      "embed": "https://platform.twitter.com/embed/Tweet.html?id=1991667457032089615&theme=light&lang=en&conversation=none",
+      "postedAt": "2025-11-21T00:38:19.000Z",
+      "clip": {
+        "x": 17,
+        "y": 13,
+        "width": 516,
+        "height": 632.109375
+      },
+      "width": 1032,
+      "height": 1264
+    }
+  ]
+}
