@@ -44,3 +44,66 @@
     font-size: 20px;
     line-height: 28px;
 }
+
+/* Conversation thread: one reply per click, quoting the post text at body size. */
+.community-story .community-thread {
+    flex: 1;
+    min-height: 0;
+    margin: 0;
+    padding: 0;
+    list-style: none;
+}
+.community-story .thread-post {
+    position: relative;
+    display: grid;
+    grid-template-columns: 44px minmax(0, 1fr);
+    gap: 16px;
+    margin: 0;
+    padding: 0 0 12px;
+    line-height: 32px;
+}
+/* The line joins a post to the next visible reply to show the reply chain. */
+.community-story .thread-continues::before {
+    content: "";
+    position: absolute;
+    top: 48px;
+    bottom: 4px;
+    left: 21px;
+    width: 2px;
+    background: #cfd9de;
+}
+.community-story .thread-avatar {
+    display: block;
+    width: 44px;
+    height: 44px;
+    border-radius: 50%;
+    background-repeat: no-repeat;
+    background-position: 0 0;
+    /* Crop the avatar from the 1032px-wide capture, whose avatar spans 96px. */
+    background-size: 473px auto;
+}
+.community-story .avatar-pilcrow {
+    background-image: url("../../images/community/pilcrow-vue-fes.png");
+}
+.community-story .avatar-astro {
+    background-image: url("../../images/community/astro-kenji.png");
+}
+.community-story .thread-meta {
+    margin: 0;
+    font-size: 20px;
+    line-height: 28px;
+    color: #717781;
+}
+.community-story .thread-meta b {
+    color: #0f1419;
+}
+.community-story .thread-meta a {
+    color: inherit;
+    border: 0;
+}
+.community-story .thread-text {
+    margin: 0;
+    font-size: 24px;
+    line-height: 32px;
+    color: #0f1419;
+}

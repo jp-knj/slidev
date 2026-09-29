@@ -1,16 +1,18 @@
 # Astro Japan Community の経緯を紹介する投稿画像
 
-3 枚目の初期表示で pilcrow の投稿、1 クリック後に PLAID の開催告知を表示する。
+3 枚目は、初期表示で pilcrow の投稿を出し、1 クリックから 4 クリックで返信を 1 件ずつ足して会話を表示する。5 クリック後に PLAID の開催告知を表示する。
+
+会話は画像ではなく、投稿の原文を 24px の本文として引用する。5 件の画像を縦に並べると本文が約 14px になり、20px の下限を下回るため。投稿者のアイコンは `pilcrow-vue-fes.png` と `astro-kenji.png` から CSS で切り出す。日時から元の投稿を開ける。Astro 公式の返信に付いていたリンクの省略表示は引用から除いた。
 
 | 状態 | 画像 | 出典 | 投稿日時（日本時間） | 寸法 |
 | --- | --- | --- | --- | --- |
-| 初期表示 | `pilcrow-vue-fes.png` | [pilcrow の投稿](https://x.com/pilcrowonpaper/status/1981982063650812385) | 2025-10-25 16:12 | 1032 × 240 |
-| 1 クリック | `plaid-meetup.png` | [PLAID の開催告知](https://x.com/PLAID_Tech/status/1991667457032089615) | 2025-11-21 09:38 | 1032 × 1264 |
+| 5 クリック | `plaid-meetup.png` | [PLAID の開催告知](https://x.com/PLAID_Tech/status/1991667457032089615) | 2025-11-21 09:38 | 1032 × 1264 |
 
-掲載しない画像も、出典と撮影記録とともに保管する。
+会話の出典と撮影記録は次のとおり。スライドには画像として掲載しない。
 
 | 画像 | 出典 | 投稿日時（日本時間） | 寸法 |
 | --- | --- | --- | --- |
+| `pilcrow-vue-fes.png` | [pilcrow の投稿](https://x.com/pilcrowonpaper/status/1981982063650812385) | 2025-10-25 16:12 | 1032 × 240 |
 | `astro-kenji.png` | [Astro 公式の返信](https://x.com/astrodotbuild/status/1982160958450520242) | 2025-10-26 04:02 | 1032 × 336 |
 | `pilcrow-more-astro.png` | [pilcrow の返信](https://x.com/pilcrowonpaper/status/1982259070112292924) | 2025-10-26 10:32 | 1032 × 240 |
 | `astro-japan-meetup.png` | [Astro 公式の問い](https://x.com/astrodotbuild/status/1982483654858441181) | 2025-10-27 01:25 | 1032 × 240 |

@@ -56,20 +56,50 @@ class: flex items-center justify-center h-full
 ---
 layout: default
 class: community-story
-clicks: 1
+clicks: 5
 ---
 
 ## Vue Fes 2025 から Astro Japan Community へ
 
-<div v-show="$clicks === 0" class="community-state" data-community-step="0">
-  <a class="community-post" href="https://x.com/pilcrowonpaper/status/1981982063650812385" target="_blank" rel="noreferrer" aria-label="pilcrow の投稿を開く">
-    <img src="./images/community/pilcrow-vue-fes.png" alt="pilcrow の投稿。Vue Fes 2025 で Astro の参加者について尋ねる。投稿者とアカウント名と本文と投稿日を含む。" />
-  </a>
-  <p class="community-caption">Vue Fes 2025 で Astro の参加者について尋ねる</p>
-  <a class="community-source" href="https://x.com/pilcrowonpaper/status/1981982063650812385" target="_blank" rel="noreferrer">pilcrow の投稿を見る</a>
-</div>
+<ol v-show="$clicks <= 4" class="community-thread" data-community-step="thread">
+  <li class="thread-post" :class="{ 'thread-continues': $clicks >= 1 }">
+    <span class="thread-avatar avatar-pilcrow" aria-hidden="true"></span>
+    <div>
+      <p class="thread-meta"><b>pilcrow</b> @pilcrowonpaper · <a href="https://x.com/pilcrowonpaper/status/1981982063650812385" target="_blank" rel="noreferrer">2025-10-25 16:12</a></p>
+      <p class="thread-text">Why isn’t anyone from @astrodotbuild here at @vuefes :(</p>
+    </div>
+  </li>
+  <li v-show="$clicks >= 1" class="thread-post" :class="{ 'thread-continues': $clicks >= 2 }">
+    <span class="thread-avatar avatar-astro" aria-hidden="true"></span>
+    <div>
+      <p class="thread-meta"><b>Astro</b> @astrodotbuild · <a href="https://x.com/astrodotbuild/status/1982160958450520242" target="_blank" rel="noreferrer">2025-10-26 04:02</a></p>
+      <p class="thread-text">@jp_knj was there!</p>
+    </div>
+  </li>
+  <li v-show="$clicks >= 2" class="thread-post" :class="{ 'thread-continues': $clicks >= 3 }">
+    <span class="thread-avatar avatar-pilcrow" aria-hidden="true"></span>
+    <div>
+      <p class="thread-meta"><b>pilcrow</b> @pilcrowonpaper · <a href="https://x.com/pilcrowonpaper/status/1982259070112292924" target="_blank" rel="noreferrer">2025-10-26 10:32</a></p>
+      <p class="thread-text">We need more people!</p>
+    </div>
+  </li>
+  <li v-show="$clicks >= 3" class="thread-post" :class="{ 'thread-continues': $clicks >= 4 }">
+    <span class="thread-avatar avatar-astro" aria-hidden="true"></span>
+    <div>
+      <p class="thread-meta"><b>Astro</b> @astrodotbuild · <a href="https://x.com/astrodotbuild/status/1982483654858441181" target="_blank" rel="noreferrer">2025-10-27 01:25</a></p>
+      <p class="thread-text">Who is organizing Astro meetups in Japan?</p>
+    </div>
+  </li>
+  <li v-show="$clicks >= 4" class="thread-post">
+    <span class="thread-avatar avatar-pilcrow" aria-hidden="true"></span>
+    <div>
+      <p class="thread-meta"><b>pilcrow</b> @pilcrowonpaper · <a href="https://x.com/pilcrowonpaper/status/1982493498877386783" target="_blank" rel="noreferrer">2025-10-27 02:04</a></p>
+      <p class="thread-text">Don't know anyone tbh. But @vuefes is essentially ViteConf Japan so hoping to see a core maintainer or two next year (maybe as a speaker)</p>
+    </div>
+  </li>
+</ol>
 
-<div v-show="$clicks === 1" class="community-state" data-community-step="1">
+<div v-show="$clicks === 5" class="community-state" data-community-step="5">
   <a class="community-post" href="https://x.com/PLAID_Tech/status/1991667457032089615" target="_blank" rel="noreferrer" aria-label="PLAID の開催告知を開く">
     <img src="./images/community/plaid-meetup.png" alt="PLAID の開催告知。コミュニティを設立し、PLAID で Meetup を開催。投稿者とアカウント名と本文と投稿日を含む。添付の開催告知画像も含む。" />
   </a>
@@ -78,9 +108,13 @@ clicks: 1
 </div>
 
 <!--
-コミュニティを始めるきっかけは Vue Fes 2025 でした。初期表示では、pilcrow が Astro の参加者について尋ねた投稿を紹介します。
-クリック 1 で、コミュニティを設立し、PLAID で Meetup を開催したことを紹介します。開催告知の投稿と添付画像を掲載しています。
-画像は X の公式埋め込みから撮影し、原文と表示色を変更していません。出典と撮影方法は images/community/README.md に記録しています。
+コミュニティを始めるきっかけは Vue Fes 2025 でした。初期表示では、pilcrow が Vue Fes の会場で、Astro の人がいないと投稿したところから始めます。
+[click] Astro 公式が、私が会場にいたと返信してくれました。
+[click] pilcrow は、もっと人が必要だと返しました。
+[click] 翌日、Astro 公式が、日本で Meetup を開いている人を尋ねました。
+[click] pilcrow は、知り合いはいないが、来年は Vue Fes にコアメンテナが来てほしい、できれば登壇者として、と返しました。今日ここで話しているのは、この流れの続きです。
+[click] そこでコミュニティを設立し、PLAID で Meetup を開催しました。開催告知の投稿と添付画像を掲載しています。
+会話の本文は投稿の原文のまま引用し、日時は日本時間で書いています。Astro 公式の返信に付いていた私の投稿へのリンクは省きました。日時から元の投稿を開けます。画像は X の公式埋め込みから撮影し、原文と表示色を変更していません。出典と撮影方法は images/community/README.md に記録しています。
 -->
 
 ---
