@@ -15,18 +15,16 @@ layout: center-vertical
 class: text-center
 ---
 
-<div class="text-2xl text-black font-400">Astro Compiler</div>
-
-<h1 class="!text-6xl !font-700 mt-4 leading-tight">
-  動いていたものを、<br />なぜ書き直すのか
+<h1 class="!text-5xl !font-700 leading-tight">
+  Astro と Rust で考える<br />フロントエンドツールチェーンの今
 </h1>
 
-<div class="text-xl text-black mt-8">
-  Go と WASM から Rust へ、5年ぶんの前提の変化
-</div>
+<div class="text-2xl text-black mt-10">Vue Fes 2026</div>
+
+<div class="text-2xl text-black mt-3">kenji(jp-knj)</div>
 
 <!--
-こんにちは。今日は、動いていたものをなぜ書き直すのかを、Astro Compiler を題材に話します。2021年に Go と WASM で書かれた Compiler が、2026年に Rust で書き直されました。その判断の中身を、4つの章に分けて追いかけます。
+こんにちは、kenji です。今日は、Astro と Rust で考えるフロントエンドツールチェーンの今について話します。題材は Astro Compiler で、動いていたものをなぜ書き直すのかを考えます。2021年に Go と WASM で書かれた Compiler が、2026年に Rust で書き直されました。その判断の中身を、4つの章に分けて追いかけます。
 -->
 
 ---
