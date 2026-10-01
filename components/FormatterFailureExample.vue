@@ -36,7 +36,7 @@ defineProps<{ step: number }>();
 .failure-route > svg { width: 44px; height: 24px; margin-top: 34px; }
 .failure-route > svg path { fill: none; stroke: #9a90ab; stroke-width: 2; }
 .failure-generated { margin-top: 24px; visibility: hidden; }
-.failure-result { margin-top: 18px; color: #943f32; font-size: 24px; font-weight: 600; line-height: 32px; visibility: hidden; }
+.failure-result { margin-top: 18px; color: var(--astro-heading); font-size: 24px; font-weight: 600; line-height: 32px; visibility: hidden; }
 .is-revealed { visibility: visible; }
-.failure-code .failure-invalid { color: #943f32; text-decoration: underline wavy; text-underline-offset: 5px; }
+.failure-code .failure-invalid { color: var(--astro-heading); text-decoration: underline wavy; text-underline-offset: 5px; }
 </style>

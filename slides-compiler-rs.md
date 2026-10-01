@@ -33,6 +33,8 @@ class: text-center
 ### 発話
 
 こんにちは、kenji です。今日は Astro Compiler を題材に、動いていたツールをなぜ書き直すのかを考えます。実装言語に加えて、必要な情報と、利用できる基盤の変化を追います。
+
+
 -->
 
 ---
@@ -58,7 +60,7 @@ class: flex items-center justify-center h-full
 </div>
 
 <!--
-改稿前の予定時間 00:15 から 00:25（10 秒）。発話 86 文字。練習での発話に基づいて改稿した。時間配分は再調整する。実測ではない。
+改稿前の予定時間 00:15 から 00:25（10 秒）。発話 51 文字。練習での発話に基づいて改稿した。時間配分は再調整する。実測ではない。
 
 ### 進行案内（発表では話さない）
 
@@ -66,7 +68,7 @@ class: flex items-center justify-center h-full
 
 ### 発話
 
-けんじです。GitHub では jp-knj という名前で活動しています。Astro のメンテナとして開発に参加していて、Astro Japan Community の運営もしています。
+ケンジです。Astro のメンテナをしています。Astro Japan Community も運営しています。
 
 ### 確認メモ（発表では話さない）
 
@@ -116,7 +118,7 @@ class: community-story
 </ol>
 
 <!--
-改稿前の予定時間 00:25 から 00:45（20 秒）。発話 245 文字。練習での発話に基づいて改稿した。時間配分は再調整する。実測ではない。
+改稿前の予定時間 00:25 から 00:45（20 秒）。発話 200 文字。練習での発話に基づいて改稿した。時間配分は再調整する。実測ではない。
 
 ### 進行案内（発表では話さない）
 
@@ -124,9 +126,9 @@ class: community-story
 
 ### 発話
 
-今日、Vue Fes でお話しできるのを嬉しく思っています。実は、このコミュニティを立ち上げるきっかけが、去年の Vue Fes だったんですね。
-この投稿をした pilcrow さんは学生の方で、認証ライブラリの Lucia を開発した方です。Astro の認証まわりにも貢献しています。
-その pilcrow さんが、Vue Fes に Astro の人はいないのか、と投稿したんです。Astro 公式が、僕がいたと返信してくれて、そこから、もっと人が必要だよね、日本の Meetup は誰がやるんだろう、という話になりました。
+実は、このコミュニティを立ち上げたきっかけが、去年の Vue Fes だったんですね。
+この投稿をした pilcrow は学生で、認証ライブラリの Lucia を開発した人です。Astro の認証まわりにも貢献しています。
+その pilcrow が、Vue Fes に Astro の人はいないのか、と投稿したんです。そこから Astro 公式も交えて、もっと人が必要だよね、日本の Meetup は誰がやるんだろう、という話になりました。
 
 ### 確認メモ（発表では話さない）
 
@@ -188,7 +190,7 @@ class: flex flex-col justify-center h-full
 # Go で動いていたものを、<br />なぜ、Rust に書き直すのか？
 
 <!--
-予定時間 00:55 から 01:05（10 秒）。発話 50 文字。予定配分であり、実測ではない。
+予定時間 00:55 から 01:05（10 秒）。発話 49 文字。予定配分であり、実測ではない。
 
 ### 進行案内（発表では話さない）
 
@@ -196,7 +198,9 @@ class: flex flex-col justify-center h-full
 
 ### 発話
 
-Go で動いていたものを、なぜ、Rust に書き直すのか。今日の問いです。要件と設計の判断から考えます。
+Go で動いていたものを、なぜ Rust に書き直すのか。今日の問いです。要件と設計の判断から考えます。
+
+
 -->
 
 ---
@@ -235,6 +239,8 @@ class: body-center
 ### 発話
 
 当時の判断、発見した問題、前提の変化、新しい判断。この四つを順に確認します。
+
+
 -->
 
 ---
@@ -268,14 +274,7 @@ layout: center
 
 <div class="text-center text-xl mt-2">Astro 0.x の出発点</div>
 
-<Ref>
-  <div class="flex items-center gap-3">
-    <logos-youtube-icon class="w-7 h-7 shrink-0" aria-hidden="true" />
-    <a href="https://www.youtube.com/watch?v=bmWQqAKLgT4" target="_blank" rel="noreferrer">VITE: The Documentary</a>
-    <span>（CultRepo）</span>
-  </div>
-  <a href="https://www.youtube.com/watch?v=bmWQqAKLgT4&amp;t=1221s" target="_blank" rel="noreferrer">Astro が Vite を採用した経緯は 20:21 から</a>
-</Ref>
+
 
 <!--
 改稿前の予定時間 01:20 から 01:35（15 秒）。発話 172 文字。Snowpack の説明を追加した。改稿後の所要時間は未計測。
@@ -294,7 +293,7 @@ Snowpack はフロントエンドのビルドツールで、開発サーバー�
 
 Svelte の fork は Compiler の実装。Snowpack はビルドを担当する。
 配信は開発サーバーからブラウザへのファイル配信を指す。Snowpack の開発中の動作を説明し、本番環境でのサイト公開やホスティングとは区別する。
-スライド下部に CultRepo の VITE: The Documentary を掲載した。動画の概要欄で、7 分 40 秒から Snowpack との比較、20 分 21 秒から Astro の Vite 採用を扱うことを確認した。タイトルは動画の冒頭、下のリンクは Astro の章を開く。発表中の全編再生は予定しない。
+CultRepo の VITE: The Documentary は確認資料。動画の概要欄で、7 分 40 秒から Snowpack との比較、20 分 21 秒から Astro の Vite 採用を扱うことを確認した。8 枚目の画面には動画のリンクを表示しない。Vite の採用経緯は 10 枚目のトークスクリプトで話す。
 
 ### 話す場合の補足（任意）
 
@@ -401,19 +400,25 @@ class: go-era-slide go-era-build
   <span class="go-era-year">2022年</span>
 </div>
 
-<div class="go-era-summary">Build のための Compiler だった</div>
+<div class="go-era-body">
+  <div class="go-era-summary">Build のための Compiler だった</div>
 
-<Overview
-  visible="source,compiler,build,browser"
-  era="go"
-/>
+  <Overview
+    visible="source,compiler,build,browser"
+    era="go"
+    :subnotes="{ build: 'Rollup\nesbuild' }"
+  />
 
-<div class="go-era-reason">
-  <div class="text-2xl font-600 text-primary">深く考えすぎずに選んだ</div>
-  <div class="text-xl mt-2">esbuild が Go だった。Go は学びやすかった。</div>
+  <div class="go-era-reason">
+    <div class="text-2xl font-600 text-primary">深く考えすぎずに選んだ</div>
+    <div class="text-xl mt-2">esbuild が Go だった。Go は学びやすかった。</div>
+  </div>
 </div>
 
-<Ref href="https://natemoo.re/posts/hello-from-the-other-side/">Nate Moore: Hello from the other side</Ref>
+<Ref>
+  <a class="block w-fit" href="https://natemoo.re/posts/hello-from-the-other-side/" target="_blank" rel="noreferrer">Nate Moore: Hello from the other side</a>
+  <a class="block w-fit mt-1" href="https://www.youtube.com/watch?v=bmWQqAKLgT4&amp;t=1221s" target="_blank" rel="noreferrer">VITE: The Documentary（Astro の Vite 採用は 20:21 から）</a>
+</Ref>
 
 <!--
 予定時間 01:50 から 02:20（30 秒）。発話 167 文字。予定配分であり、実測ではない。
@@ -425,11 +430,11 @@ class: go-era-slide go-era-build
 ### 発話
 
 Astro は Go Compiler と Vite に移行しました。JavaScript からは WASM を介して Compiler を呼びます。Nate Moore が挙げた Go の選定理由は、esbuild が Go だったことと、学びやすかったことです。
-Compiler は Astro のコードを変換し、Vite につなぎます。当時のビルドの要求に合う選択でした。
+Compiler は Astro のコードを変換し、Vite につなぎます。Parser は Go 公式の HTML5 Parser の fork で、CSS の解析には esbuild の CSS Parser を取り込んでいます。一方で、JavaScript を完全にパースする仕組みは持っていません。
 
 ### 確認メモ（発表では話さない）
 
-Go の経験者だったという理由へ変更しない。Compiler 内の esbuild は CSS の解析と生成、Vite の部分の esbuild は TypeScript の変換を担当する。HTML5 Parser 由来の実装を Astro syntax に対応させた。
+Go の経験者だったという理由へ変更しない。Compiler 内の esbuild は CSS の解析と生成、Vite の部分の esbuild は TypeScript の変換を担当する。HTML5 Parser 由来の実装を Astro syntax に対応させた。原文は "esbuild was written in Go and it was easy to learn. We didn't overthink it." で、深い技術的判断として語らない。`internal/parser.go` と `internal/token.go` は `golang.org/x/net/html` の fork（Copyright The Go Authors）。JavaScript は `tdewolff/parse` による走査（`internal/js_scanner`）だけで、完全な JS Parser はない。
 
 ### 出典と確認資料（発表では話さない）
 
@@ -550,18 +555,18 @@ const props = { title: "second" };
 <div class="mt-0 text-center text-2xl">
   <div v-if="$clicks === 0"><span class="text-primary font-600">Component script</span><br /><code>---</code> で囲む。ビルド時とサーバーで実行する JavaScript と TypeScript</div>
   <div v-if="$clicks === 1"><span class="text-primary font-600">Template</span><br />HTML を基礎に、JavaScript expression や<br />コンポーネントを書ける</div>
-  <div v-if="$clicks === 2"><span class="text-primary font-600">JavaScript expression（式）</span><br />波かっこの中の JavaScript expression を評価し、結果を表示する</div>
+  <div v-if="$clicks === 2"><span class="text-primary font-600">JavaScript expression（式）</span><br />波かっこの中の JavaScript expression を評価し、結果を表示する<br />Astro の書き方って、JSX っぽいですよね。</div>
   <div v-if="$clicks === 3"><span class="text-primary font-600">Q. </span>この <code>title</code> は、どちらの値になる？</div>
   <div v-if="$clicks === 3" class="mt-4"><code>first</code> か、<code>second</code> か</div>
   <div v-if="$clicks === 4"><span class="text-primary font-600">A. </span><code>first</code></div>
   <Overlay v-if="$clicks >= 5" aria-label="Astro Syntax への問いと答え">
     <template #title>
-      <span v-if="$clicks === 5">これは、Astro Syntax がおかしいのでは？</span>
-      <span v-else>それ、ブラウザの解釈。</span>
+      <span v-if="$clicks === 5">JSX なら second。なぜ first になった？</span>
+      <span v-else>重複した属性を HTML の規則で扱ったため</span>
     </template>
     <p v-if="$clicks >= 6">
-      同じ属性を重複して出力した場合<br />
-      ブラウザは先の <code>title="first"</code> を採用するため、<code>first</code> になった。
+      この報告では、Astro が同じ属性を二つ出力した。<br />
+      ブラウザは HTML の規則で先の <code>title="first"</code> を採用した。
     </p>
     <template v-if="$clicks >= 6" #reference>
       <a href="https://html.spec.whatwg.org/multipage/parsing.html#attribute-name-state" target="_blank" rel="noopener noreferrer">HTML Standard：同じ名前の属性は後のものを取り除く</a>
@@ -627,11 +632,12 @@ clicks: 3
   <div v-if="$clicks === 1"><span class="text-primary font-600">A. </span><code>Astro 1200</code></div>
   <Overlay v-if="$clicks >= 2" aria-label="Astro Syntax への問いと答え">
     <template #title>
-      <span v-if="$clicks === 2">これは、Astro Syntax がおかしいのでは？</span>
-      <span v-else>それ、ブラウザの解釈。</span>
+      <span v-if="$clicks === 2">JSX なら空白なし。なぜ空白が入った？</span>
+      <span v-else>Astro が保持した改行を、ブラウザが空白にする</span>
     </template>
     <p v-if="$clicks >= 3">
-      ブラウザはその改行を空白として表示するため、<code>Astro 1200</code> になる。
+      この報告では、Astro が要素間の改行を HTML に保持した。<br />
+      ブラウザがその改行を空白として表示し、<code>Astro 1200</code> になった。
     </p>
     <template v-if="$clicks === 3" #reference>
       <a href="https://github.com/withastro/astro/issues/6011" target="_blank" rel="noopener noreferrer">astro#6011: 要素間の空白テキスト node</a>
@@ -707,14 +713,14 @@ clicks: 4
 
 <Overlay v-if="$clicks >= 2" aria-label="Astro Syntax への問いと答え">
   <template #title>
-    <span v-if="$clicks === 2">これは、Astro Syntax がおかしいのでは？</span>
-    <span v-else-if="$clicks === 3">それ、ブラウザの解釈。</span>
+    <span v-if="$clicks === 2">table の外に書いた h2 が、なぜ中に入った？</span>
+    <span v-else-if="$clicks === 3">Compiler のパース状態を戻せなかった不具合</span>
     <span v-else>HTML Standard の <code>sarcasm</code> 終了タグ</span>
   </template>
   <p v-if="$clicks === 3">
-    Browser が HTML を DOM にするときの補正（HTML correction）を、<br />
-    Compiler が出力の段階で行っていた。<br />
-    そのため、表の後の <code>h2</code> が <code>table</code> の中に入った。
+    波かっこの領域のパース後に、Compiler がパースの状態を戻せなかった。<br />
+    そのため、表の後の <code>h2</code> が <code>table</code> の中に入った。<br />
+    HTML5 の正しい補正結果ではない。
   </p>
   <img v-if="$clicks === 4" src="./images/html-spec/sarcasm-deep-breath.png" alt="HTML Standard の in body insertion mode の項目。An end tag whose tag name is &quot;sarcasm&quot; に対し、Take a deep breath, then act as described in the &quot;any other end tag&quot; entry below. と書かれている。" class="w-full" />
   <template v-if="$clicks === 3" #reference>
@@ -743,9 +749,9 @@ clicks: 4
 [クリック 1]
 表の後に書いた h2 が、生成結果では表の中に入っています。
 [クリック 2]
-これは、
+JSX の感覚なら、表の後に書いた h2 は表の外にあるはずですよね。なぜ中に入ったんでしょうか。
 [クリック 3]
-それ、ブラウザの解釈です。Browser が HTML を DOM にするときの補正、HTML correction を、Compiler が出力の段階で行っていました。そのため、表の後の h2 が、表の中に入りました。
+これは Compiler の不具合でした。波かっこの領域のパース後に、パースの状態を戻せなかったためです。Astro の式と HTML5 Parser を組み合わせる難しさが、この例に出ています。
 [クリック 4]
 HTML5 Parser の仕様には、sarcasm の終了タグに Take a deep breath と書かれています。それほど補正の規則は複雑です。
 
@@ -841,16 +847,16 @@ class: ch2-detail ch2-tool-overview
 <div class="ch2-tool-route">
 <div class="ch2-route-step"><div class="ch2-route-node">.astro</div><div class="ch2-route-caption">検査したい元のコード</div></div>
 <svg class="ch2-route-arrow" viewBox="0 0 24 18" aria-hidden="true"><path d="M12 0 V15 M7 10 L12 15 L17 10" /></svg>
-<div class="ch2-route-step"><div class="ch2-route-node">JavaScript と JSX</div><div class="ch2-route-caption">astro-eslint-parser が解析するために変換<br />JSX は JavaScript にタグを書ける構文</div></div>
+<div class="ch2-route-step"><div class="ch2-route-node">JavaScript と JSX</div><div class="ch2-route-caption">JavaScript をパースするために変換<br />JSX は JavaScript にタグを書ける構文</div></div>
 <svg class="ch2-route-arrow" viewBox="0 0 24 18" aria-hidden="true"><path d="M12 0 V15 M7 10 L12 15 L17 10" /></svg>
-<div class="ch2-route-step"><div class="ch2-route-node">AST</div><div class="ch2-route-caption">Espree が構文解析<br />AST はコードを node で表すデータ</div></div>
+<div class="ch2-route-step"><div class="ch2-route-node">AST</div><div class="ch2-route-caption">JavaScript の Parser でパース<br />AST はコードを node で表すデータ</div></div>
 <svg class="ch2-route-arrow" viewBox="0 0 24 18" aria-hidden="true"><path d="M12 0 V15 M7 10 L12 15 L17 10" /></svg>
 <div class="ch2-route-step"><div class="ch2-route-node">AST とスコープ情報</div><div class="ch2-route-caption">宣言と参照を対応させる<br />位置を元の .astro に対応させて返す</div></div>
 <svg class="ch2-route-arrow" viewBox="0 0 24 18" aria-hidden="true"><path d="M12 0 V15 M7 10 L12 15 L17 10" /></svg>
 <div class="ch2-route-step"><div class="ch2-route-node">ESLint の診断</div><div class="ch2-route-caption">ルールが検査し、元の .astro の範囲で報告</div></div>
 </div>
 
-<Ref href="https://github.com/ota-meshi/astro-eslint-parser/blob/v1.2.2/src/parser/index.ts">astro-eslint-parser 1.2.2 の解析と位置対応</Ref>
+<Ref href="https://github.com/ota-meshi/astro-eslint-parser/blob/v1.2.2/src/parser/index.ts">JavaScript のパースと位置対応</Ref>
 
 <!--
 改稿前の予定時間 04:25 から 04:35（10 秒）。発話 110 文字。練習での発話に基づいて改稿した。時間配分は再調整する。実測ではない。
@@ -958,7 +964,7 @@ const amount = 3;
 </>;
 ```
 
-<div class="ch2-note"><code>astro-eslint-parser</code> が<br />元の <code>.astro</code> から生成する</div>
+<div class="ch2-note">元の <code>.astro</code> を<br />JavaScript と JSX に変換する</div>
 </div>
 <div>
 <div class="ch2-label">JavaScript expression の AST</div>
@@ -1002,7 +1008,7 @@ Identifier という node の種類と、変数の型の情報は区別する。
 
 ---
 layout: default
-class: ch2-detail ch2-position-slide
+class: ch2-detail ch2-position-slide body-center
 ---
 
 ## 位置の対応と位置情報の不具合
@@ -1077,7 +1083,7 @@ const amount = 3;
 </div>
 <div class="ch2-summary">未定義の参照を検出し、元の5文字に波線を表示する</div>
 
-<Ref href="https://github.com/ota-meshi/astro-eslint-parser/blob/v1.2.2/src/parser/index.ts">astro-eslint-parser と ESLint への返却値</Ref>
+<Ref href="https://github.com/ota-meshi/astro-eslint-parser/blob/v1.2.2/src/parser/index.ts">ESLint へ AST を渡すまで</Ref>
 
 <!--
 本編から省略。参考としてソースに保持する。
@@ -1109,11 +1115,11 @@ class: ch2-detail ch2-tool-overview
 ## Formatter が .astro を整形するまで
 
 <div class="ch2-tool-route">
-<div class="ch2-route-step"><div class="ch2-route-node">.astro</div><div class="ch2-route-caption">Compiler の parse() で Astro AST を取得</div></div>
+<div class="ch2-route-step"><div class="ch2-route-node">.astro</div><div class="ch2-route-caption">整形したい元のコード</div></div>
 <svg class="ch2-route-arrow" viewBox="0 0 24 18" aria-hidden="true"><path d="M12 0 V15 M7 10 L12 15 L17 10" /></svg>
-<div class="ch2-route-step"><div class="ch2-route-node">JavaScript expression<br />のコード</div><div class="ch2-route-caption">プラグインが Astro AST から取り出す</div></div>
+<div class="ch2-route-step"><div class="ch2-route-node">JavaScript expression<br />のコード</div><div class="ch2-route-caption">JavaScript をパースするために取り出す</div></div>
 <svg class="ch2-route-arrow" viewBox="0 0 24 18" aria-hidden="true"><path d="M12 0 V15 M7 10 L12 15 L17 10" /></svg>
-<div class="ch2-route-step"><div class="ch2-route-node">JavaScript expression<br />の AST</div><div class="ch2-route-caption">Babel で再解析</div></div>
+<div class="ch2-route-step"><div class="ch2-route-node">JavaScript expression<br />の AST</div><div class="ch2-route-caption">JavaScript の Parser でパース<br />AST はコードを node で表すデータ</div></div>
 <svg class="ch2-route-arrow" viewBox="0 0 24 18" aria-hidden="true"><path d="M12 0 V15 M7 10 L12 15 L17 10" /></svg>
 <div class="ch2-route-step"><div class="ch2-route-node">中間表現 Doc</div><div class="ch2-route-caption">文字と改行候補と字下げの指示</div></div>
 <svg class="ch2-route-arrow" viewBox="0 0 24 18" aria-hidden="true"><path d="M12 0 V15 M7 10 L12 15 L17 10" /></svg>
@@ -1635,7 +1641,7 @@ Biome は Rust で実装された別のツール。Prettier の内部に Biome �
 
 ---
 layout: default
-class: ch3-detail chapter-three ch3-information-slide
+class: ch3-detail chapter-three ch3-information-slide body-center
 ---
 
 ## AST と Lossless CST が保持する情報
@@ -2420,11 +2426,19 @@ class: mdx-source-post
 ## Sätteri が選んだ Rust と JavaScript の分担
 
 <div class="mdx-post-author">Erika <span>@erika.florist</span><time>2026年4月9日</time></div>
-<blockquote class="mdx-post-quote" lang="en">The expensive stuff in Rust,<br />your flexible plugins in JavaScript.</blockquote>
-<div class="mdx-post-summary">Markdown と MDX を変換する Sätteri を紹介。<br />計算負荷の高い部分は Rust、<br />柔軟な plugin は JavaScript が担当する</div>
-<div class="mdx-post-takeaway">Content でも、速度と拡張のしやすさを両立する設計</div>
+<div class="satteri-growth-body">
+  <div class="satteri-growth-context">計算負荷の高い部分は Rust。<br />柔軟な plugin は JavaScript。</div>
+  <div class="satteri-growth-title">npm ダウンロードの推移</div>
+  <div class="satteri-growth-rows">
+    <div><span>9 月 3 日から 9 日</span><i style="--bar-width:45.6%"></i><strong>1,827,292</strong></div>
+    <div><span>9 月 10 日から 16 日</span><i style="--bar-width:77.2%"></i><strong>3,094,168</strong></div>
+    <div><span>9 月 17 日から 23 日</span><i style="--bar-width:93.2%"></i><strong>3,735,680</strong></div>
+    <div><span>9 月 24 日から 30 日</span><i style="--bar-width:100%"></i><strong>4,009,697</strong></div>
+  </div>
+  <div class="satteri-growth-note">2026 年の satteri パッケージ。人数ではなく、ダウンロード回数。</div>
+</div>
 
-<Ref><a href="https://bsky.app/profile/pi0.io/post/3mgwljerlik2h">Pooya の Markdown の試作</a> と <a href="https://bsky.app/profile/erika.florist/post/3mj2tfwryw226">Erika の Sätteri 紹介</a></Ref>
+<Ref><a href="https://api.npmjs.org/downloads/range/2026-08-01:2026-09-30/satteri">npm のダウンロード集計</a> と <a href="https://bsky.app/profile/pi0.io/post/3mgwljerlik2h">Pooya の Markdown の試作</a> と <a href="https://bsky.app/profile/erika.florist/post/3mj2tfwryw226">Erika の Sätteri 紹介</a></Ref>
 
 <!--
 発話 255 文字。今回の改稿後の所要時間は未計測。
@@ -2546,14 +2560,7 @@ class: chapter-four ch4-config
   <li>Sätteri への移行では、plugin の API も確認する</li>
 </ul>
 
-```js
-import { defineConfig } from "astro/config";
-import { unified } from "@astrojs/markdown-remark";
 
-export default defineConfig({
-  markdown: { processor: unified() },
-});
-```
 
 <Ref href="https://docs.astro.build/en/guides/markdown-content/#markdown-processors">Astro Docs と Markdown Processors</Ref>
 
@@ -2566,7 +2573,7 @@ export default defineConfig({
 
 ### 発話
 
-プラグインの互換性も、Processor を選ぶ条件です。Sätteri の API は remark と rehype の API と異なります。既存のプラグインを使い続けたい場合は、この設定で unified を選べます。速度と、必要な拡張機能の両方を確認します。
+プラグインの互換性も、Processor を選ぶ条件です。Sätteri の API は remark と rehype の API と異なります。既存のプラグインを使い続けたい場合は、unified を選べます。速度と、必要な拡張機能の両方を確認します。
 
 ### 確認メモ（発表では話さない）
 
@@ -2738,47 +2745,6 @@ class: text-center
 ### 発話
 
 基盤を再利用し、自分たちの実装範囲を絞り、保守し続けられる設計にするため。これが今日の答えです。
--->
-
----
-layout: default
-class: body-center takeaway-slide
----
-
-## 持ち帰ってほしいこと
-
-<div class="mt-8 text-2xl text-primary">技術選定は、その時点の要件と利用できる基盤に対する判断</div>
-
-<div class="mt-8 text-xl">
-  <h3 class="opacity-100 !text-base">技術を選び直すときに確認すること</h3>
-  <ul class="mt-3">
-    <li>当時、何を実現するために選んだのか</li>
-    <li>利用が広がり、何が新しく必要になったのか</li>
-    <li>今なら、どの機能を基盤に任せられるのか</li>
-    <li>自分たちが実装して保守すべき範囲はどこか</li>
-  </ul>
-</div>
-
-<div class="mt-8 text-xl leading-relaxed">
-  <p>技術を選び直す機会に、<b>担当する責務も見直す</b></p>
-  <p class="">PoC が merge されなくても、制約を明らかにし、コミュニティの次の判断につなげられる</p>
-</div>
-
-<!--
-予定時間 24:30 から 24:55（25 秒）。発話 120 文字。予定配分であり、実測ではない。
-
-### 進行案内（発表では話さない）
-
-ページ内のクリックなし。発話後に次へ進む。
-
-### 発話
-
-技術を選び直すときは、当時の要件、増えた要求、今使える基盤、自分たちが保守する範囲を確認してみてください。
-私の提案や試作も、すべてがマージされたわけではありません。それでも、互換性や配布の条件を確かめ、次の判断や別の改善につなげられました。
-
-### 確認メモ（発表では話さない）
-
-自分の PoC が Astro Compiler や Sätteri の直接の成立要因だったとは説明しない。MDX の編集支援への貢献と、試作で条件を確かめた経験を述べる。
 -->
 
 ---

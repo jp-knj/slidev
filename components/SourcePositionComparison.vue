@@ -42,8 +42,7 @@ import gopher from "../images/logos/gopher-classic.png";
       </div>
     </section>
 
-    <p class="position-owner"><logos-eslint class="position-logo" aria-hidden="true" />両方を astro-eslint-parser が担当していた</p>
-    <p class="position-caption">範囲は検証例の全文が基準。上段は price、下段は波かっこを含む範囲。</p>
+    <p class="position-owner"><logos-eslint class="position-logo" aria-hidden="true" />Linter の Adapter が担当していた</p>
   </div>
 </template>
 
@@ -60,10 +59,9 @@ import gopher from "../images/logos/gopher-classic.png";
 .position-operation { display: flex; flex-direction: column; align-items: center; gap: 4px; text-align: center; font-size: 20px; line-height: 28px; }
 .position-operation svg { width: 76px; height: 24px; }
 .position-operation path { fill: none; stroke: #9a90ab; stroke-width: 2; }
-.position-bug { margin-top: 14px; padding-top: 10px; border-top: 1px solid var(--astro-rule); }
+.position-bug { margin-top: 14px; padding-top: 24px; border-top: 1px solid var(--astro-rule); }
 .position-wrong { color: #a03e2c; }
 .position-description { margin-top: 4px; font-size: 20px; line-height: 28px; }
 .position-data .position-expression { padding: 0; border: 0; border-radius: 0; background: transparent; }
 .position-owner { display: flex; align-items: center; justify-content: center; gap: 10px; margin: 12px 0 0; color: var(--astro-heading); font-size: 22px; font-weight: 600; line-height: 30px; }
-.position-caption { margin: 10px 0 0; font-size: 17px; line-height: 24px; }
 </style>

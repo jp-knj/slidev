@@ -31,34 +31,36 @@ defineProps<{ stage: 1 | 2 | 3 }>();
     </template>
 
     <template v-else-if="stage === 2">
-      <pre class="data-source"><code>price<span class="data-spaces">  </span>* amount; <span class="data-comment">// 税込</span>
+      <div class="information-compare">
+        <div class="information-input">
+          <div class="data-subtitle">同じ JavaScript のコードで比較</div>
+          <pre class="data-source"><code>price<span class="data-spaces">  </span>* amount; <span class="data-comment">// 税込</span>
 </code></pre>
-      <div class="data-comparison">
-        <section>
-          <div class="data-route-title"><logos-prettier class="data-logo" aria-hidden="true" />Prettier（Babel）</div>
-          <div class="data-subtitle">AST の抜粋とコメント</div>
-          <pre class="data-tree"><code>BinaryExpression
+        </div>
+        <div class="information-columns">
+          <section>
+            <div class="data-route-title"><logos-prettier class="data-logo" aria-hidden="true" />Prettier と Babel</div>
+            <h3>AST とコメント</h3>
+            <pre class="data-tree"><code>BinaryExpression
 ├─ Identifier: price
 ├─ operator: "*"
-└─ Identifier: amount</code></pre>
-          <div class="data-detail">コメント：<code>// 税込</code></div>
-          <p class="data-caption">空白などは、元のコードも参照する</p>
-        </section>
-        <section>
-          <div class="data-route-title"><logos-biomejs-icon class="data-logo" aria-hidden="true" />Biome</div>
-          <div class="data-subtitle">Lossless CST</div>
-          <div class="data-preserved" aria-label="構文に加え、空白とコメントと改行を保持する模式図">
-            <div><strong>構文</strong><span>変数名と演算子と記号</span></div>
-            <div class="data-retained"><strong>空白</strong><span>2 文字と 1 文字と 1 文字</span></div>
-            <div class="data-retained"><strong>コメント</strong><code>// 税込</code></div>
-            <div class="data-retained"><strong>改行</strong><span>末尾の改行も保持</span></div>
-          </div>
-          <p class="data-caption">木から、元の文字列を再現できる</p>
-        </section>
-      </div>
-      <div class="data-definitions">
-        <div><strong>CST</strong><span>記号も表す構文の木。具象構文木。</span></div>
-        <div><strong>Lossless</strong><span>元の文字を一文字も変えずに再現できる性質。</span></div>
+└─ Identifier: amount
+
+comments: <span class="data-trivia">["// 税込"]</span></code></pre>
+            <p>空白は元のコードを参照する。</p>
+          </section>
+          <section>
+            <div class="data-route-title"><logos-biomejs-icon class="data-logo" aria-hidden="true" />Biome</div>
+            <h3>Lossless CST の模式図</h3>
+            <pre class="data-tree"><code>ExpressionStatement
+├─ BinaryExpression
+│  ├─ price <span class="data-trivia">["  "]</span>
+│  ├─ "*" <span class="data-trivia">[" "]</span>
+│  └─ amount
+└─ ";" <span class="data-trivia">[" ", "// 税込", "\n"]</span></code></pre>
+            <p>紫は空白とコメントと改行。</p>
+          </section>
+        </div>
       </div>
     </template>
 
@@ -117,4 +119,17 @@ defineProps<{ stage: 1 | 2 | 3 }>();
 .data-edit-action svg { width: 24px; height: 28px; }
 .data-edit-kept { margin-top: 12px; font-size: 22px; line-height: 30px; }
 .formatting-information .data-edit-caption { margin-top: 12px; }
+/* Stage 2: align the comparison rows and reserve space for the definition. */
+.information-input .data-subtitle { margin-top: 0; }
+.information-input .data-source { padding-top: 8px; padding-bottom: 8px; }
+.information-columns { display: grid; grid-template-columns: minmax(0, 1fr) minmax(0, 1fr); gap: 32px; margin-top: 16px; }
+.information-columns section { min-width: 0; }
+.information-columns h3 { margin: 8px 0 8px; padding: 0; font-size: 22px; line-height: 30px; letter-spacing: 0; text-transform: none; }
+.information-columns p { margin: 12px 0 0; font-size: 20px; line-height: 28px; }
+.information-kept { display: flex; flex-direction: column; justify-content: center; gap: 8px; min-height: 144px; padding: 12px 16px; border-radius: 8px; background: var(--slidev-code-background); font-size: 22px; line-height: 30px; }
+.information-definition { margin-top: 16px; font-size: 20px; line-height: 28px; }
+/* Stage 2: six tree rows must fit beside the AST without wrapping token text. */
+.information-columns .data-tree, .information-columns .data-tree code, .information-input .data-source, .information-input .data-source code { font-size: 22px; line-height: 30px; }
+.information-columns .data-tree { min-height: 196px; }
+.data-trivia { color: var(--astro-heading); }
 </style>
