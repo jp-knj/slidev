@@ -1,0 +1,11 @@
+{
+  "source": "{true ? <p>OK</p> : <></>}\n",
+  "compilerVersion": "2.12.2",
+  "pluginVersion": "0.14.1",
+  "prettierVersion": "3.6.2",
+  "compilerTransformSucceeded": true,
+  "fragmentRetainedInAst": true,
+  "originalExpressionAcceptedByBabel": true,
+  "regenerated": "true ? <p>OK</p> : < />",
+  "formatError": "Unexpected token (1:25)\n> 1 | true ? <p>OK</p> : < />\n    |                        ^"
+}

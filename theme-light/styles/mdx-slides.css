@@ -15,6 +15,13 @@
 .mdx-proposals .mdx-efforts p { font-size: 18px; line-height: 27px; margin: 0; }
 .mdx-proposals .mdx-efforts .mdx-current h3 { color: var(--astro-heading); }
 
+/* The Astro proposal page compares two attempts without screenshots. */
+.mdx-astro-proposal .mdx-proposal-steps { display: grid; grid-template-columns: 1fr 1fr; gap: 48px; margin-top: 44px; }
+.mdx-astro-proposal .mdx-proposal-steps section { min-width: 0; }
+.mdx-astro-proposal .mdx-proposal-date { font-size: 20px; line-height: 28px; margin-bottom: 12px; }
+.mdx-astro-proposal .mdx-proposal-steps h3 { font-size: 28px; line-height: 36px; color: var(--astro-heading); margin: 0 0 20px; }
+.mdx-astro-proposal .mdx-proposal-steps p { font-size: 24px; line-height: 36px; margin: 0; }
+
 /* Slide 40: a single relationship diagram, with the native layer emphasized on click 1. */
 .mdx-relation { position: relative; width: 868px; height: 398px; font-family: var(--font-body); }
 .mdx-relation-lines { position: absolute; inset: 0; width: 100%; height: 100%; overflow: visible; }
@@ -46,6 +53,36 @@
 .mdx-relation.is-rust-focus .mdx-node-bindings,
 .mdx-relation.is-rust-focus .mdx-node-compiler { border-color: #7611a6; background: #f6edfb; }
 
+/* MDX data transfer: retain the full route while emphasizing one responsibility at a time. */
+.mdx-transfer h2 { margin-bottom: 18px; }
+.mdx-transfer-diagram { width: 868px; height: 398px; font-family: var(--font-body); }
+.mdx-transfer-call { display: grid; grid-template-columns: 220px 52px 280px 52px 264px; align-items: center; height: 108px; }
+.mdx-transfer-node,
+.mdx-transfer-result,
+.mdx-transfer-js { box-sizing: border-box; border: 1px solid #d9d0df; border-radius: 9px; background: #faf9fc; transition: background-color 180ms ease, border-color 180ms ease; }
+.mdx-transfer-node { display: flex; flex-direction: column; justify-content: center; align-items: center; height: 108px; padding: 8px; text-align: center; }
+.mdx-transfer-diagram strong { display: block; font-size: 24px; line-height: 32px; font-weight: 600; }
+.mdx-transfer-node span,
+.mdx-transfer-values span,
+.mdx-transfer-step span { display: block; font-size: 20px; line-height: 26px; }
+.mdx-transfer-binding strong { font-size: 22px; line-height: 30px; }
+.mdx-transfer-arrow { display: block; width: 40px; height: 24px; justify-self: center; }
+.mdx-transfer-diagram svg path { fill: none; stroke: #887294; stroke-width: 1.8; stroke-linecap: round; stroke-linejoin: round; }
+.mdx-transfer-return { position: relative; height: 36px; }
+.mdx-transfer-return span { position: absolute; top: 4px; left: 12px; font-size: 20px; line-height: 28px; }
+.mdx-transfer-return svg { position: absolute; inset: 0; width: 100%; height: 36px; }
+.mdx-transfer-result { height: 106px; padding: 8px 16px; text-align: center; }
+.mdx-transfer-label { font-size: 20px; line-height: 26px; font-weight: 500; margin-bottom: 4px; }
+.mdx-transfer-values { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 18px; }
+.mdx-transfer-down { display: block; width: 24px; height: 22px; margin: 0 auto; }
+.mdx-transfer-js { height: 126px; padding: 8px 16px; text-align: center; }
+.mdx-transfer-pipeline { display: grid; grid-template-columns: 178px 20px 254px 20px 166px 20px 176px; align-items: center; }
+.mdx-transfer-step { min-width: 0; }
+.mdx-transfer-pipeline .mdx-transfer-arrow { width: 20px; }
+.mdx-transfer-diagram .is-current { border-color: var(--astro-heading); background: #f6edfb; }
+.mdx-transfer-diagram .is-current > strong,
+.mdx-transfer-diagram .is-current > .mdx-transfer-label { color: var(--astro-heading); }
+
 .mdx-source-post .mdx-post-author { display: flex; align-items: baseline; gap: 16px; margin-top: 40px; font-size: 22px; font-weight: 600; }
 .mdx-source-post .mdx-post-author span,
 .mdx-source-post .mdx-post-author time { font-size: 18px; font-weight: 400; }
@@ -55,12 +92,24 @@
 .mdx-post-takeaway { font-size: 22px; line-height: 32px; margin-top: 28px; }
 
 /* Chapter 3 story pages; keep the shared source-post and diagram styles unchanged. */
-.ch3-syntax-spec .ch3-syntax-date { font-size: 24px; line-height: 32px; margin: 0 0 18px; }
-.mdx-astro-proposal .mdx-evidence,
+.ch3-syntax-spec h2 { margin-bottom: 18px; }
+.ch3-syntax-spec .ch3-syntax-date { font-size: 24px; line-height: 32px; margin: 0 0 6px; }
+.ch3-syntax-setting { font-size: 24px; line-height: 32px; margin-bottom: 18px; }
+.ch3-syntax-spec .ch3-syntax-setting p { margin: 0; }
+.ch3-syntax-spec .ch3-syntax-setting p + p { font-size: 20px; line-height: 28px; }
+.ch3-syntax-spec .ch3-syntax-labels { gap: 8px; }
+.ch3-syntax-spec .ch3-syntax-labels span { line-height: 26px; margin-top: 0; }
 .mdx-upstream-proposal .mdx-evidence { height: 310px; }
-.mdx-astro-proposal .mdx-evidence-pair { align-content: start; }
-/* Slide 41: preserve the post screenshot, including its original typography. */
-.mdx-contribution h2 { margin-bottom: 16px; }
-.mdx-contribution .mdx-contribution-grid { display: grid; grid-template-columns: repeat(2, 422px); gap: 24px; align-items: start; }
-.mdx-contribution .mdx-contribution-image { display: flex; justify-content: center; align-items: flex-start; width: 422px; margin: 0; border: 0; }
-.mdx-contribution .mdx-contribution-image img { display: block; width: auto; height: auto; max-width: 100%; max-height: 392px; object-fit: contain; }
+/* The two library proposals share one state without their issue and PR screenshots. */
+.mdx-library-proposals { display: grid; grid-template-columns: 1fr 1fr; gap: 48px; margin-top: 48px; }
+.mdx-library-proposals h3 { margin: 0 0 24px; padding: 0; color: var(--astro-body); font-size: 28px; font-weight: 600; line-height: 36px; letter-spacing: 0; text-transform: none; }
+.mdx-library-proposals ul { margin: 0; padding-left: 26px; color: var(--astro-body); font-size: 24px; line-height: 36px; }
+.mdx-library-proposals li { margin: 0; padding-left: 2px; }
+.mdx-library-proposals li + li { margin-top: 24px; }
+/* Slide 39: retain both original post images and explain the merged improvement beside the reply. */
+.mdx-upstream-story .mdx-upstream-contribution { display: grid; grid-template-columns: repeat(2, 422px); gap: 24px; align-items: start; }
+.mdx-upstream-story .mdx-upstream-post { display: flex; justify-content: center; align-items: flex-start; width: 422px; margin: 0; border: 0; }
+.mdx-upstream-story .mdx-upstream-post img { display: block; width: auto; height: auto; max-width: 100%; max-height: 392px; object-fit: contain; }
+.mdx-upstream-improvement { margin-top: 24px; }
+.mdx-upstream-story .mdx-upstream-improvement h3 { margin: 0 0 10px; font-size: 24px; line-height: 32px; color: var(--astro-heading); }
+.mdx-upstream-story .mdx-upstream-improvement p { margin: 0; font-size: 20px; line-height: 30px; }

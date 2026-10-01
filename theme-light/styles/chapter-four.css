@@ -4,6 +4,11 @@
 .chapter-four .ch4-list li { line-height: 32px; margin-bottom: 18px; }
 .ch4-axes .ch4-list { margin-top: 72px; }
 .ch4-axes .ch4-list li { margin-bottom: 30px; }
+.ch4-choice-table { width: 100%; margin-top: 42px; border-collapse: collapse; font-size: 24px; line-height: 32px; }
+.ch4-choice-table th { padding: 10px 12px 18px; text-align: left; font-weight: 600; color: var(--astro-heading); }
+.ch4-choice-table td { padding: 22px 12px; border-top: 1px solid #e5e0ec; }
+.ch4-choice-table th:first-child { width: 58%; }
+.ch4-choice-takeaway { margin-top: 30px; color: var(--astro-heading); font-size: 24px; line-height: 32px; font-weight: 600; }
 .ch4-comparison h2 { margin-bottom: 14px; }
 .ch4-state { display: flex; justify-content: space-between; align-items: baseline; font-size: 21px; line-height: 30px; margin-bottom: 4px; }
 .ch4-state b { font-size: 24px; color: var(--astro-heading); }

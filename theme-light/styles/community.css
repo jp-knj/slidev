@@ -45,10 +45,13 @@
     line-height: 28px;
 }
 
-/* Conversation thread: one reply per click, quoting the post text at body size. */
+/* Conversation thread: all posts at once, centered with room between replies. */
 .community-story .community-thread {
     flex: 1;
     min-height: 0;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
     margin: 0;
     padding: 0;
     list-style: none;
@@ -59,15 +62,18 @@
     grid-template-columns: 44px minmax(0, 1fr);
     gap: 16px;
     margin: 0;
-    padding: 0 0 12px;
+    padding: 0 0 32px;
     line-height: 32px;
+}
+.community-story .thread-post:last-child {
+    padding-bottom: 0;
 }
 /* The line joins a post to the next visible reply to show the reply chain. */
 .community-story .thread-continues::before {
     content: "";
     position: absolute;
-    top: 48px;
-    bottom: 4px;
+    top: 52px;
+    bottom: 8px;
     left: 21px;
     width: 2px;
     background: #cfd9de;

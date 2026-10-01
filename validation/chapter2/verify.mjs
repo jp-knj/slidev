@@ -245,17 +245,19 @@ output.language = {
   otherDiagnosticCodes: [...new Set(allDiagnostics.filter((item) => item !== diagnostic).map((item) => item.code))],
 };
 
-// Keep the displayed full inputs and the actual formatting output synchronized.
+// Keep the displayed Linter and Language Tool inputs synchronized.
+// The earlier Formatter walkthrough is retained below as a regression fixture;
+// the slides now use the failure reproduced by formatter-fragment.mjs.
 const deck = readFileSync(new URL('../../slides-compiler-rs.md', import.meta.url), 'utf8');
 const slides = (await parseSlides(deck)).slides;
 const astroBlocks = slides.flatMap((slide, index) =>
   [...slide.content.matchAll(/^```astro\n([\s\S]*?)^```[ \t]*$/gm)]
     .map((match) => ({ slide: index, code: match[1] })),
 );
-for (const input of [normalSource, source, fixture('formatter.astro'), languageSource, formatted]) {
+for (const input of [normalSource, source, languageSource]) {
   assert(astroBlocks.some((block) => block.code === input), 'Slide code differs from validated fixture');
 }
-// Verify that formatting preserves the expression in the displayed example.
+// Verify that formatting preserves the expression in the retained fixture.
 const formatterParses = [fixture('formatter.astro'), formatted].map((code) =>
   astroParser.parseForESLint(code, { ecmaVersion: 2022, sourceType: 'module' }));
 const shapes = formatterParses.map((result) => expressionShape(findNode(result, 'CallExpression'), result.visitorKeys));
@@ -263,14 +265,14 @@ assert(shapes.every(Boolean), 'Expected products.map call in all formatting exam
 assert.deepEqual(shapes[1], shapes[0]);
 const normalExample = astroBlocks.find((block) => block.code === normalSource);
 const typoExample = astroBlocks.find((block) => block.code === source);
-const formatterExample = astroBlocks.find((block) => block.code === fixture('formatter.astro'));
-assert(normalExample.slide < typoExample.slide && typoExample.slide < formatterExample.slide,
-  'The normal expression, Linter diagnostic, and Formatter example must remain in order');
+const languageExample = astroBlocks.find((block) => block.code === languageSource);
+assert(normalExample.slide < typoExample.slide && typoExample.slide < languageExample.slide,
+  'The normal expression, Linter diagnostic, and Language Tool example must remain in order');
 assert(!slides.slice(normalExample.slide, typoExample.slide)
   .some((slide) => `${slide.content}\n${slide.note ?? ''}`.includes('pirce')),
   'The typo must first appear in the final Linter example');
-assert.equal(slides.length, 69);
-assert.deepEqual(slides.slice(15, 27).map((slide) => slide.frontmatter.clicks ?? 0),
-  [0, 0, 2, 0, 0, 0, 2, 0, 0, 2, 0, 0]);
+assert.equal(slides.length, 61);
+assert.deepEqual(slides.slice(23, 28).map((slide) => slide.frontmatter.clicks ?? 0),
+  [2, 0, 0, 2, 0]);
 writeFileSync(new URL('results.json', import.meta.url), JSON.stringify(output, null, 2) + '\n');
 console.log('PASS: Compiler ranges, Linter scope and no-undef, Babel input, Doc output, HTML completion, TS2339, Source map, Volar mapping, slide fixtures');

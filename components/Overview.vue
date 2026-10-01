@@ -1,11 +1,13 @@
 <script setup lang="ts">
-import { computed } from "vue";
+import { computed, useId } from "vue";
 
 // foreignObject の中に置くので、相対パスではなく import して解決させる
 import gopher from "../images/logos/gopher-classic.png";
 
 const props = withDefaults(
   defineProps<{
+    /** 前半と比較ページで共有する時代ごとの図。 */
+    era?: "go" | "rust";
     /** 強調するノードid。カンマ区切り。例: "compiler,editor" */
     highlight?: string;
     /** 描画する上位ノード。省略時は全ノード */
@@ -39,6 +41,27 @@ const props = withDefaults(
  * 最小フォントサイズ 20px を図の中でも守るための作り。
  */
 const W = 868;
+const markerPrefix = useId();
+
+// 同じ時代の全体図では、内部項目とラベルを共通にする。
+const ERAS = {
+  go: {
+    subs: "html5-parser,esbuild-css",
+    labels: { compiler: "Go Compiler", build: "Vite" },
+    icons: { compiler: "go" },
+    subnotes: { build: "esbuild" },
+  },
+  rust: {
+    subs: "oxc,lightning-css,astro-syntax",
+    labels: {},
+    icons: {},
+    subnotes: {},
+  },
+} as const;
+const eraConfig = computed(() => props.era ? ERAS[props.era] : undefined);
+const nodeLabels = computed<Record<string, string>>(() => ({ ...eraConfig.value?.labels, ...props.labels }));
+const nodeIcons = computed<Record<string, string>>(() => ({ ...eraConfig.value?.icons, ...props.icons }));
+const nodeSubnotes = computed<Record<string, string>>(() => ({ ...eraConfig.value?.subnotes, ...props.subnotes }));
 
 type Rect = { x: number; y: number; w: number; h: number };
 type Node = Rect & {
@@ -94,7 +117,7 @@ const toSet = (s?: string) => new Set(toList(s));
 
 const on = computed(() => toSet(props.highlight));
 const dimming = computed(() => on.value.size > 0);
-const subIds = computed(() => toSet(props.subs));
+const subIds = computed(() => toSet(props.subs || eraConfig.value?.subs));
 
 /** サブ枠の枚数ぶんだけ Astro Compiler が伸びる */
 const SUB_GAP = 8;
@@ -102,7 +125,7 @@ const SUB_TOP = 40;
 const isComparison = computed(() => subIds.value.has("go-ast") || subIds.value.has("astro-codegen"));
 const activeSubs = computed(() => SUBS.filter((s) => subIds.value.has(s.id)).map(s => ({
   ...s,
-  label: props.labels?.[s.id] ?? s.label,
+  label: nodeLabels.value[s.id] ?? s.label,
   h: isComparison.value && subIds.value.has("go-ast") ? 32 : s.h,
 })));
 const hasGoSubs = computed(() =>
@@ -155,9 +178,9 @@ const BASE_NODES = computed<Node[]>(() => [
  */
 const NODES = computed<Node[]>(() =>
   BASE_NODES.value.map((n) => {
-    const icon = props.icons?.[n.id] ?? n.icon;
-    const note = props.subnotes?.[n.id] ?? n.note;
-    const label = props.labels?.[n.id];
+    const icon = nodeIcons.value[n.id] ?? n.icon;
+    const note = nodeSubnotes.value[n.id] ?? n.note;
+    const label = nodeLabels.value[n.id];
     const noteLines = note?.split("\n").length ?? 0;
     const h = n.id === "build" && noteLines > 1
       ? Math.max(n.h, 56 + noteLines * 24)
@@ -227,14 +250,6 @@ const shownEdges = computed(() => {
   const cy = (n: Node) => n.y + n.h / 2;
 
   const straight = (a: Node, b: Node) => `M${a.x + a.w},${cy(a)} L${b.x - GAP},${cy(b)}`;
-  const branch = (a: Node, b: Node, off: number) => {
-    const sx = a.x + a.w;
-    const sy = cy(a) + off;
-    const ex = b.x - GAP;
-    const ey = cy(b);
-    const mid = sx + (ex - sx) * 0.55;
-    return `M${sx},${sy} C${mid},${sy} ${mid},${ey} ${ex},${ey}`;
-  };
 
   const s = g.get("source");
   const c = g.get("compiler");
@@ -246,16 +261,16 @@ const shownEdges = computed(() => {
 
   if (s && c) push("source->compiler", "source", "compiler", straight(s, c));
   if (md && ct) push("mdsource->content", "mdsource", "content", straight(md, ct));
-  if (c && e) {
-    // Leave the Go group from its top to keep the WASM label clear.
-    const path = hasGoSubs.value
-      ? `M${cx(c)},${c.y} C${cx(c)},${cy(e)} ${e.x - GAP - 36},${cy(e)} ${e.x - GAP},${cy(e)}`
-      : branch(c, e, -c.h * 0.26);
-    push("compiler->editor", "compiler", "editor", path);
-  }
-  // Editor へ分岐しないなら、下へ振らずまっすぐ引く
-  if (c && b)
-    push("compiler->build", "compiler", "build", e ? branch(c, b, c.h * 0.26) : straight(c, b));
+  // Compiler と Build の間は狭く、右辺から縦にずらすと矢印が折れる。
+  // Editor へは Compiler の上端から出し、Build へはまっすぐ引く。
+  if (c && e)
+    push(
+      "compiler->editor",
+      "compiler",
+      "editor",
+      `M${cx(c)},${c.y} C${cx(c)},${cy(e)} ${e.x - GAP - 36},${cy(e)} ${e.x - GAP},${cy(e)}`,
+    );
+  if (c && b) push("compiler->build", "compiler", "build", straight(c, b));
   if (b && br) push("build->browser", "build", "browser", straight(b, br));
   if (ct && b) {
     const sx = ct.x + ct.w;
@@ -375,7 +390,7 @@ const viewBox = computed(() => `0 ${vb.value.y} ${W} ${vb.value.h}`);
             { id: 'ov-arrow-ecosystem', fill: '#198755' },
           ]"
           :key="m.id"
-          :id="m.id"
+          :id="`${markerPrefix}-${m.id}`"
           viewBox="0 0 10 10"
           refX="9"
           refY="5"
@@ -397,7 +412,7 @@ const viewBox = computed(() => `0 ${vb.value.y} ${W} ${vb.value.h}`);
         <path
           :d="e.d"
           :stroke="contractOf(e.id)?.tone"
-          :marker-end="`url(#${markerFor(e.id, edgeState(e.id, e.from, e.to))})`"
+          :marker-end="`url(#${markerPrefix}-${markerFor(e.id, edgeState(e.id, e.from, e.to))})`"
         />
         <line
           v-if="isBoundary(e.id)"
