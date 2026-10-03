@@ -2,12 +2,15 @@
 import { computed, useId } from "vue";
 
 // foreignObject の中に置くので、相対パスではなく import して解決させる
-import gopher from "../images/logos/gopher-classic.png";
+import gopher from "../images/logos/gopher-cutout.png";
+import ferris from "../images/logos/ferris.svg";
 
 const props = withDefaults(
   defineProps<{
     /** 前半と比較ページで共有する時代ごとの図。 */
     era?: "go" | "rust";
+    /** Compiler 全体を囲む枠線を表示する。 */
+    compilerFrame?: boolean;
     /** 強調するノードid。カンマ区切り。例: "compiler,editor" */
     highlight?: string;
     /** 描画する上位ノード。省略時は全ノード */
@@ -81,7 +84,7 @@ const SUBS = [
   { id: "oxc", label: "Oxc（Parser と AST）", h: 58 },
   { id: "astro-codegen", label: "Astro Codegen", h: 34 },
   { id: "lightning-css", label: "Lightning CSS", h: 34 },
-  { id: "astro-syntax", label: "Astro syntax", h: 34 },
+  { id: "astro-syntax", label: "Astro Syntax", h: 34 },
 ] as const;
 
 const CONTRACTS: Record<
@@ -435,7 +438,7 @@ const viewBox = computed(() => `0 ${vb.value.y} ${W} ${vb.value.h}`);
 
       <g v-for="n in shownNodes" :key="n.id" class="ov-node" :class="stateOf(n.id)">
         <rect
-          v-if="n.id === 'compiler' && (hasGoSubs || isComparison)"
+          v-if="n.id === 'compiler' && (props.compilerFrame || hasGoSubs || isComparison)"
           class="ov-compiler-group"
           :x="n.x"
           :y="n.y"
@@ -473,6 +476,7 @@ const viewBox = computed(() => `0 ${vb.value.y} ${W} ${vb.value.h}`);
               <carbon-code v-else-if="n.icon === 'compiler'" class="ov-ico ov-ico-mono" />
               <carbon-application-web v-else-if="n.icon === 'browser'" class="ov-ico ov-ico-mono" />
               <img v-else-if="n.icon === 'go'" :src="gopher" alt="" class="ov-ico ov-ico-go" />
+              <img v-else-if="n.icon === 'rust'" :src="ferris" alt="" class="ov-ico ov-ico-rust" />
               <div class="ov-label">
                 <template v-for="(line, i) in labelLines(n.label)" :key="i">
                   <br v-if="i" />{{ line }}
@@ -527,7 +531,7 @@ const viewBox = computed(() => `0 ${vb.value.y} ${W} ${vb.value.h}`);
   flex: none;
 }
 
-/* The Go compiler frame groups its internal dependencies. */
+/* The compiler frame groups its internal dependencies. */
 .ov-compiler-group {
   fill: #fff;
   stroke: #d9d0e4;
@@ -638,6 +642,12 @@ const viewBox = computed(() => `0 ${vb.value.y} ${W} ${vb.value.h}`);
 .ov-ico-go {
   width: auto;
   height: 40px;
+}
+
+.ov-ico-rust {
+  width: 34px;
+  height: 26px;
+  object-fit: contain;
 }
 
 /* エディタのアクティブタブ風に、下辺をアクセント色で締める */

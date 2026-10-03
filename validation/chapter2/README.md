@@ -32,7 +32,7 @@ TypeScriptの検証にはLanguage Serverが配布する `env.d.ts` と `jsx-runt
 
 正常なexpressionの `expression.astro` を19枚目と20枚目と21枚目で使い、誤記を含む `linter.astro` は22枚目で使います。公開ASTのexpressionの中身が文字列であることと、Astro expressionの補正後の範囲と、JavaScript ASTの識別子の範囲と、正常なexpressionの診断0件を確認します。誤記の初登場がLinterの最後の例であることも検査します。
 
-17枚目のAPIの役割分担は、architectureの資料が対象とするCompiler 3.0.0を参照しています。コードと位置の実測は上記の2.12.2で行います。両版で `parse()` と `convertToTSX()` はLiteral modeを指定し、`transform()` は指定しません。
+17枚目のAPIの役割分担は、architectureの資料が対象とするCompiler 3.0.0を参照しています。コードと位置の実測は上記の2.12.2で行います。2.12.2 と 3.0.0 では `parse()` と `convertToTSX()` は Literal mode を指定し、`transform()` は指定しません。
 
 2026年9月21日、15枚目から28枚目の初期表示と全クリック状態、計28状態をブラウザで確認しました。総枚数は82枚です。入れ子の色分けと、フローの矢印と、誤記の波線と、文字の折り返しを確認しています。
 

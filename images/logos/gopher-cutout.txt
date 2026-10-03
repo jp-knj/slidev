@@ -1,0 +1,11 @@
+Asset: gopher-cutout.png
+Go Gopher creator: Renee French
+License: CC BY 4.0
+License URL: https://creativecommons.org/licenses/by/4.0/
+Original artwork information: https://go.dev/blog/gopher
+Input: User-provided screenshot, Screenshot 2026-10-03 at 17.23.32.png
+Edit: Background removal and transparent cutout
+Tool: Built-in image_gen tool
+
+Prompt:
+Use case: background-extraction. Edit target: the attached screenshot of the blue Go Gopher. Remove only the flat pale cyan rectangular background and the thin white border; make the exterior truly transparent. Preserve the exact original Gopher drawing, its hand-drawn outline texture, cyan body, eyes, teeth, ears, feet, proportions, pose, expression, and colors. Do not redesign, redraw, smooth, or add any details. Tight crop around the full character with a small equal transparent margin. Preserve the entire character. Output a transparent PNG suitable as a small icon in presentation slides.

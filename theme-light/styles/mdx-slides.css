@@ -113,3 +113,21 @@
 .mdx-upstream-improvement { margin-top: 24px; }
 .mdx-upstream-story .mdx-upstream-improvement h3 { margin: 0 0 10px; font-size: 24px; line-height: 32px; color: var(--astro-heading); }
 .mdx-upstream-story .mdx-upstream-improvement p { margin: 0; font-size: 20px; line-height: 30px; }
+
+/* 39 ページの見出しと小見出しを説明スライドの書式にそろえる。 */
+.slidev-layout.ch3-syntax-spec h2 {
+  color: var(--astro-heading);
+  font-size: 36px;
+  line-height: 40px;
+  margin: 0 0 24px;
+}
+.ch3-syntax-spec .ch3-syntax-date {
+  font-size: 20px;
+  line-height: 28px;
+  margin-bottom: 12px;
+}
+.ch3-syntax-spec .ch3-syntax-labels strong {
+  color: var(--astro-heading);
+  font-size: 24px;
+  line-height: 32px;
+}

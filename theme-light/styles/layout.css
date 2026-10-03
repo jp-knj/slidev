@@ -1,6 +1,6 @@
 /*
  * Astro light — 白地に Astro パープルの見出し。
- * ダーク版（../../theme/styles/layout.css）の明度を反転したもので、
+ * ダークテーマ（../../theme/styles/layout.css）の明度を反転したもので、
  * グラデーション・ノイズ・グリッドの装飾は外してフラットな白にしている。
  */
 :root {
@@ -229,6 +229,8 @@
 /* Restore the original progressive syntax overview on slide 11. */
 .slidev-layout.syntax-overview .slidev-code {
     padding: 5px 16px !important;
+    /* Keep the click-2 explanation clear of the pinned reference at 24px. */
+    margin: 4px 0 !important;
 }
 
 /* Restore the original side-by-side table example. */
@@ -417,34 +419,7 @@
     justify-content: center;
 }
 
-/*
- * 見出しは上端に置いたまま、その下の本文だけを上下中央へ寄せる。
- * 本文の先頭に margin-top:auto、末尾に margin-bottom:auto を置いて、
- * 余った縦の余白を上下で折半させる（本文が詰まっていれば auto は 0 になる）。
- * <Ref> は absolute なので行送りには関わらないが :last-child には当たるため、
- * 末尾が Ref のスライドだけ、ひとつ手前を本文の末尾として扱う。
- */
-.slidev-layout.body-center {
-    @apply h-full;
-    min-height: 100%;
-    display: flex;
-    flex-direction: column;
-}
-
-.slidev-layout.body-center > h1 + *,
-.slidev-layout.body-center > h2 + * {
-    margin-top: auto !important;
-}
-
-/* Summary: keep the summary clear of the taller M PLUS 2 heading glyphs. */
-.slidev-layout.takeaway-slide > h2 + * {
-    margin-top: 16px !important;
-}
-
-.slidev-layout.body-center:not(:has(> .ref-note:last-child)) > :last-child,
-.slidev-layout.body-center:has(> .ref-note:last-child) > :nth-last-child(2) {
-    margin-bottom: auto !important;
-}
+/* Body-page vertical alignment is shared in content-centering.css. */
 
 .slidev-layout.intro-image,
 .slidev-layout.intro {
@@ -477,6 +452,14 @@
         @apply text-6xl font-700;
     }
 }
+
+/* 5 ページは発表画像を全面に表示し、その上に問いを重ねる。 */
+.slidev-layout.intro-question { position: relative; isolation: isolate; background: #080808; }
+.slidev-layout.intro-question h1 { position: absolute; inset: 64px 56px auto; z-index: 2; margin: 0; color: #fff; line-height: 1.2; text-shadow: 0 2px 12px rgb(0 0 0 / 70%); pointer-events: none; }
+.slidev-layout .intro-question-video { position: absolute; inset: 0; z-index: 1; display: block; width: 100%; height: 100%; margin: 0; border: 0; }
+.intro-question-screenshot { position: relative; width: 100%; height: 100%; margin: 0; overflow: hidden; }
+.intro-question-screenshot img { display: block; width: 100%; height: 100%; object-fit: cover; transform: translateY(32px); }
+.intro-question-screenshot figcaption { position: absolute; inset: auto auto 28px 56px; padding: 4px 0; font-size: 20px; line-height: 28px; color: #fff; text-shadow: 0 2px 8px #000; text-decoration: underline; text-underline-offset: 3px; }
 
 .slidev-layout.quote {
     h1 + p {
@@ -744,3 +727,28 @@
 .satteri-growth-rows i { display: block; height: 16px; width: var(--bar-width); background: var(--astro-heading); border-radius: 3px; }
 .satteri-growth-rows strong { text-align: right; font-weight: 500; font-variant-numeric: tabular-nums; }
 .satteri-growth-note { margin-top: 20px; font-size: 17px; line-height: 24px; }
+
+/* npmx のグラフと日付をページ内に収める。 */
+.satteri-download-screenshot { display: block; width: 100%; height: 310px; object-fit: contain; margin-top: 14px; }
+
+/* 33 ページの提案と試作と交流を、クリックなしで一覧にする。 */
+.mdx-contribution-map { display: flex; flex-direction: column; justify-content: center; gap: 42px; height: 380px; margin-top: 26px; }
+.mdx-contribution-trials { display: grid; grid-template-columns: 1fr 1fr; gap: 34px; }
+.mdx-contribution-trials h3 { margin: 0 0 16px; color: var(--astro-heading); font-size: 24px; line-height: 32px; text-transform: none; }
+.mdx-contribution-trials p { margin: 8px 0; font-size: 20px; line-height: 28px; }
+.mdx-contribution-detail { color: #62516d; }
+
+
+
+
+/* 24 ページは小見出しと説明を三段に並べ、余白で区切る。 */
+.ch2-tsx-evolution .tsx-challenges { display: flex; flex-direction: column; justify-content: center; gap: 26px; min-height: 348px; }
+.ch2-tsx-evolution .tsx-challenges h3 { color: var(--astro-heading); font-size: 24px; line-height: 32px; font-weight: 600; letter-spacing: 0; text-transform: none; margin: 0 0 8px; padding: 0; }
+.ch2-tsx-evolution .tsx-challenges p { font-size: 22px; line-height: 30px; margin: 0; }
+
+/* 47 ページは箇条書きの既定の行間を調整する。 */
+.answer-recap-grid { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); column-gap: 40px; row-gap: 28px; font-size: 20px; line-height: 28px; }
+.answer-recap-grid h3 { font-size: 24px; line-height: 32px; font-weight: 600; letter-spacing: 0; text-transform: none; padding: 0; margin: 0 0 8px; }
+.answer-recap-grid ul { margin: 0; padding-left: 24px; }
+.answer-recap-grid li { margin: 0; padding-left: 0; line-height: 28px; }
+.answer-recap-grid li + li { margin-top: 6px; }

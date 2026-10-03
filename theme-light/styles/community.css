@@ -107,6 +107,11 @@
     color: inherit;
     border: 0;
 }
+.community-story .thread-meta a:hover,
+.community-story .thread-meta a:focus-visible {
+    text-decoration: underline;
+    text-underline-offset: 3px;
+}
 .community-story .thread-text {
     margin: 0;
     font-size: 24px;

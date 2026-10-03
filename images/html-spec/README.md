@@ -1,6 +1,8 @@
 # HTML Standard の sarcasm 終了タグの画像
 
-15 枚目の 4 クリック後に、HTML Standard の in body insertion mode にある `sarcasm` 終了タグの項目を表示する。HTML5 Parser の補正の規則が複雑だという話の後に表示する。
+HTML Standard の in body insertion mode にある `sarcasm` 終了タグの項目を撮影した資料。14 ページの 4 クリック後に表示する。
+
+Take a deep breath は、`</sarcasm>` に対する一文。sarcasm は皮肉という意味で、文面はジョークとして理解できる。その後は他の終了タグと同じ規則に従う。表のパースの難しさや Astro Compiler の不具合を説明する文ではない。
 
 | 画像 | 出典 | 寸法 |
 | --- | --- | --- |

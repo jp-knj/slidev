@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import gopher from "../images/logos/gopher-classic.png";
+import gopher from "../images/logos/gopher-cutout.png";
 </script>
 
 <template>

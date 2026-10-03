@@ -42,7 +42,7 @@
 .reuse-arrow svg { width: 36px; height: 24px; }
 .reuse-arrow path { fill: none; stroke: #9a90ab; stroke-width: 2; }
 .formatter-reuse .reuse-caption { margin: 9px 0 0; font-size: 20px; line-height: 28px; }
-.reuse-planned { margin-top: 26px; }
+.reuse-planned { margin-top: 18px; }
 .reuse-planned .reuse-node { min-height: 78px; }
 .reuse-planned .reuse-arrow path { stroke-dasharray: 3 3; }
 .reuse-date { margin-top: 12px; font-size: 16px; line-height: 24px; color: #63596d; }

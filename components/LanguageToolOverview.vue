@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import gopher from "../images/logos/gopher-classic.png";
+import gopher from "../images/logos/gopher-cutout.png";
 </script>
 
 <template>
@@ -26,7 +26,7 @@ import gopher from "../images/logos/gopher-classic.png";
         <svg viewBox="0 0 28 24" aria-hidden="true"><path d="M1 12 H25 M19 6 L25 12 L19 18" /></svg>
         <div><strong>Astro の言語対応</strong><span>HTML を作る</span><span>TSX と位置対応を登録する</span></div>
       </div>
-      <div class="language-volar"><div class="language-logo-title"><logos-volar class="language-logo" aria-hidden="true" /><strong>Volar</strong></div><span>解析器に渡すコードと、元の位置との対応を管理</span></div>
+      <div class="language-volar"><div class="language-logo-title"><logos-volar class="language-logo" aria-hidden="true" /><strong>Volar</strong></div><span>言語機能に渡すコードと、元の位置との対応を管理</span></div>
       <div class="language-services">
         <div class="language-service"><div class="language-logo-title"><logos-html-5 class="language-logo" aria-hidden="true" /><strong>HTML Language Service</strong></div><span>HTML から属性を補完</span></div>
         <div class="language-service"><div class="language-logo-title"><logos-typescript-icon class="language-logo" aria-hidden="true" /><strong>TypeScript</strong></div><span>TSX から型の診断と補完</span></div>

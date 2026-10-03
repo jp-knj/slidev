@@ -1,0 +1,47 @@
+/* Keep body-page headings at their existing top inset. Equal flexible spaces
+ * center all following content as a group, including conditional click states.
+ * Covers, section pages and the already centered community layouts retain
+ * their own layout. Pinned references do not participate in the flex flow.
+ */
+.slidev-layout.default:not(.community-story):has(> :is(h1, h2, .go-era-heading)) {
+    display: flex;
+    flex-direction: column;
+    height: 100%;
+    padding-bottom: 40px;
+}
+
+.slidev-layout.default:not(.community-story):has(> :is(h1, h2, .go-era-heading)):has(> .ref-pinned) {
+    padding-bottom: 56px;
+}
+
+.slidev-layout.default:not(.community-story):has(> :is(h1, h2, .go-era-heading))::before,
+.slidev-layout.default:not(.community-story):has(> :is(h1, h2, .go-era-heading))::after {
+    content: "";
+    flex: 1 0 0;
+}
+
+.slidev-layout.default:not(.community-story):has(> :is(h1, h2, .go-era-heading))::before {
+    order: -1;
+}
+
+.slidev-layout.default:not(.community-story):has(> :is(h1, h2, .go-era-heading))::after {
+    order: 1;
+}
+
+.slidev-layout.default:not(.community-story):has(> :is(h1, h2, .go-era-heading)) > * {
+    flex: none;
+}
+
+.slidev-layout.default:not(.community-story) > :is(h1, h2, .go-era-heading) {
+    order: -2;
+    margin-bottom: 16px;
+}
+
+.slidev-layout.default:not(.community-story) > :is(h1, h2, .go-era-heading) + * {
+    margin-top: 0 !important;
+}
+
+/* Two reference lines need more space below the Astro v1 diagram. */
+.slidev-layout.default.go-era-build:has(> .go-era-heading):has(> .ref-pinned) {
+    padding-bottom: 104px;
+}

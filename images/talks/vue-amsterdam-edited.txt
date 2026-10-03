@@ -1,0 +1,9 @@
+Mode: built-in image_gen
+Original: images/talks/vue-amsterdam.png
+Output: images/talks/vue-amsterdam-edited.png
+
+Use case: precise-object-edit
+Asset type: a conference slide screenshot used as a presentation background.
+Edit target: the attached Vue Amsterdam screenshot.
+Primary request: remove the presenter in the lower-right corner, including his whole body, and remove the lectern, laptop, bottles and stage objects accompanying him in that lower-right region. Fill that region by naturally continuing the existing nearly black projected screen and its subtle border.
+Constraints: preserve the original wide composition, aspect ratio, image framing, and screenshot character. Keep all three central logos (Rust crab, blue-green Rolldown symbol, orange Oxc character) and the two plus signs exactly as they appear, with the same positions, scale, colors, and shapes. Keep the rest of the screenshot unchanged. No added text, people, symbols or decorations. The output must be an opaque image. Do not crop or reposition the logos.

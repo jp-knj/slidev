@@ -27,11 +27,11 @@ mdxjs-rs の提案は Issue と表記する。画像は確認時点の状態で�
 
 技術説明は [xmdx の固定コミット](https://github.com/jp-knj/xmdx/tree/7a89fdb17140e2b710e40d52d26338d978bc5c13) を参照する。第 4 章の原文引用と日付は、[Prettier plugin の投稿](https://bsky.app/profile/erika.florist/post/3mtjah7okdc22) と [Sätteri の投稿](https://bsky.app/profile/erika.florist/post/3mj2tfwryw226) を Bluesky の公開 API でも照合した。
 
-## スライドに掲載する編集版
+## スライドに掲載する編集後の画像
 
 38 と 39 ページは `-clean.png` を使用する。元画像と同じ寸法で、指定領域だけを周囲と同じ背景色に変更した。タイトルと投稿者を含む、それ以外の画素は元画像と一致する。元画像と出典と確認時の状態は保管する。
 
-| 元画像 | 編集版 | 削除した表示 |
+| 元画像 | 編集後の画像 | 削除した表示 |
 | --- | --- | --- |
 | `markdown-rs-184.png` | `markdown-rs-184-clean.png` | PR 番号と Open とマージに関する文言 |
 | `markdown-rs-185.png` | `markdown-rs-185-clean.png` | PR 番号と Open とマージに関する文言 |
@@ -63,7 +63,7 @@ mdxjs-rs の提案は Issue と表記する。画像は確認時点の状態で�
 
 39 枚目のノートでは、不完全な入力でも解析と編集支援を継続する必要を、ビルドと編集支援の要求の違いとして説明する。41 枚目のノートでは、互換性と Node.js からの利用方法と Astro との連携を検証したことから、採用には性能と既存機能との組み合わせと保守の分担も必要だと考察する。確認できた取り組みからの考察として記載する。
 
-39 枚目の WASM bindings の説明に、wasm-bindgen を使う WASM 版と napi-rs を使うネイティブ版の約 50 秒の比較を加えた。呼び出しと値の変換、OS と CPU と必要に応じた libc のビルド、実行環境での検証を説明する。2026年9月29日に [wasm-bindgen](https://wasm-bindgen.github.io/wasm-bindgen/)、[napi-rs の生成物と配布](https://napi.rs/docs/introduction/getting-started)、[napi-rs の WebAssembly と WASI](https://napi.rs/docs/concepts/webassembly) を確認した。現在の napi-rs の WASI 対応も説明し、現在の機能を PR 当時の状態として扱わない。
+39 枚目の WASM bindings の説明に、wasm-bindgen による WASM の配布と、napi-rs によるネイティブコードの配布を比較する約 50 秒の説明を加えた。呼び出しと値の変換、OS と CPU と必要に応じた libc のビルド、実行環境での検証を説明する。2026年9月29日に [wasm-bindgen](https://wasm-bindgen.github.io/wasm-bindgen/)、[napi-rs の生成物と配布](https://napi.rs/docs/introduction/getting-started)、[napi-rs の WebAssembly と WASI](https://napi.rs/docs/concepts/webassembly) を確認した。現在の napi-rs の WASI 対応も説明し、現在の機能を PR 当時の状態として扱わない。
 
 対象環境ごとのビルドとテストと配布も維持する範囲の広さに驚いたことを、本人が会話で述べた経験として一文加えた。[PR #182 の ChristianMurphy のコメント](https://github.com/wooorm/markdown-rs/pull/182#issuecomment-2993743993)を2026年9月29日に GitHub API で確認した。CI とローカルでのビルドとテスト、一部の環境をローカルで実行できないというコメントの発言者と、発表者本人の経験を区別する。PR #182 は他者の提案で、発表者の WASM bindings の PR #185 とは別である。
 
@@ -106,7 +106,7 @@ mdxjs-rs の提案は Issue と表記する。画像は確認時点の状態で�
 
 | ページ | 内容 | 出典 |
 | --- | --- | --- |
-| 46 | Go 版と Rust 版の全体比較と HTML correction の方針 | [RFC #1356](https://github.com/withastro/roadmap/issues/1356) |
+| 46 | Go と Rust の全体比較と HTML correction の方針 | [RFC #1356](https://github.com/withastro/roadmap/issues/1356) |
 | 47 | 公開 API による解析と変換の呼び出し | [astro_napi](https://github.com/withastro/compiler-rs/blob/main/crates/astro_napi/src/lib.rs) |
 | 47 | Astro の変換と Oxc の利用 | [Astro Codegen](https://github.com/withastro/compiler-rs/tree/main/crates/astro_codegen/src/printer) と [依存関係](https://github.com/withastro/compiler-rs/blob/main/Cargo.toml) |
 | 47 | Astro のスコープ規則と Lightning CSS の利用 | [css_scoping.rs](https://github.com/withastro/compiler-rs/blob/main/crates/astro_codegen/src/css_scoping.rs) |
