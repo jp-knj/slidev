@@ -25,12 +25,12 @@ class: text-center
 
 <!--
 予定時刻：00:00 から 00:09（9 秒）
-発話 53 文字。時間は予定であり、実測ではない。
+発話 58 文字。時間は予定であり、実測ではない。
 進行：クリックなし。発話後に次へ進む。
 
 ### 発話
 
-今日は Astro Compiler を題材に、動いていたツールチェーンを、なぜ書き直すのか、という話をします。
+今日は Astro Compiler を題材に、書き直しの背景を話します。Astro の公式見解ではなく、僕個人の考えです。
 -->
 
 ---
@@ -188,13 +188,13 @@ class: flex flex-col justify-center h-full intro-question
 
 <!--
 予定時刻：01:04 から 01:16（12 秒）
-発話 86 文字。時間は予定であり、実測ではない。
+発話 98 文字。時間は予定であり、実測ではない。
 進行：クリックなし。発話後に次へ進む。
 
 ### 発話
 
 Matt は Vue Amsterdam で、Astro Compiler を Rust で書き直した話をしていました。
-今日は、なぜ Go から Rust へ書き直すのか、その背景を掘り下げます。
+今日は、なぜ Go から Rust へ書き直すのか、僕自身の経験も交えて、その背景を考えていきます。
 
 ### 画像の出典（発表では話さない）
 
@@ -256,29 +256,33 @@ layout: section
 -->
 
 ---
-layout: center
+layout: default
+class: ch1-start
 ---
 
-<Overview
-  visible="source,compiler,build,browser"
-  :labels="{ compiler: 'Svelte Compiler', build: 'Snowpack' }"
-  :icons="{ compiler: 'svelte', build: 'snowpack' }"
-/>
+## Astro 0.x の出発点
 
-<div class="text-center text-xl mt-2">Astro 0.x の出発点</div>
+<div class="flex flex-col gap-8">
+  <div class="text-2xl">Compiler とビルド基盤は、別の役割を持つ</div>
+  <Overview
+    visible="source,compiler,build,browser"
+    :labels="{ compiler: 'Svelte Compiler', build: 'Snowpack' }"
+    :icons="{ compiler: 'svelte', build: 'snowpack' }"
+    :subnotes="{ compiler: 'fork を拡張', build: 'ビルドと配信' }"
+  />
+  <div class="text-2xl">Astro の構文を変換し、ビルド基盤へ渡す</div>
+</div>
 
 <Ref href="https://www.youtube.com/watch?v=bmWQqAKLgT4&amp;t=460s">VITE: The Documentary（Snowpack の話は 7:40 から）</Ref>
 
 <!--
 予定時刻：01:35 から 01:56（21 秒）
-発話 164 文字。時間は予定であり、実測ではない。
+発話 144 文字。時間は予定であり、実測ではない。
 進行：クリックなし。発話後に次へ進む。
 
 ### 発話
 
-Go を選んだ当時と、Rust を選ぶ今では、必要な機能と利用できる技術が違います。その変化を知るために、初期の Astro から振り返ります。
-当時は Svelte Compiler の fork でコードをパースし、Snowpack がビルドと配信を担当していました。
-下のドキュメンタリーでは、Snowpack と Vite の関係も紹介されています。
+まず、Compiler とビルド基盤の役割を分けて見ます。初期の Astro は Svelte Compiler の fork で構文を変換し、Snowpack でビルドと開発中の配信を行っていました。この Compiler を書き直すとき、どんな言語を選べたんでしょうか。背景は下の動画でも紹介されています。
 
 ### 確認メモ（発表では話さない）
 
@@ -311,7 +315,7 @@ layout: default
 class: body-center
 ---
 
-## 2021年は、Rust 一色ではなかった
+## 2021 年、Go と Rust が選ばれていた
 
 <div class="mt-12 relative">
 
@@ -324,54 +328,60 @@ class: body-center
       <div class="w-3.5 h-3.5 rounded-full bg-[#9A90AB]"></div>
       <logos-vitejs class="text-6xl mt-8" />
       <div class="text-xl mt-5 leading-snug">Vite 2.0</div>
-      <img src="./images/logos/gopher-cutout.png" alt="Go" class="h-16 mt-6" />
+      <div class="text-xl mt-1 h-7 leading-7">esbuild を利用</div>
+      <img src="./images/logos/gopher-cutout.png" alt="Go" class="h-16 mt-3" />
     </div>
     <div class="flex-1 min-w-0 flex flex-col items-center">
       <div class="text-3xl text-black h-11 leading-none">Sep</div>
       <div class="w-3.5 h-3.5 rounded-full bg-[#9A90AB]"></div>
       <logos-rome-icon class="text-6xl mt-8" />
       <div class="text-xl mt-5 leading-snug">Rome</div>
-      <img src="./images/logos/ferris.svg" alt="Rust" class="h-11 mt-9" />
+      <div class="mt-1 h-7" aria-hidden="true"></div>
+      <img src="./images/logos/ferris.svg" alt="Rust" class="h-11 mt-6" />
     </div>
     <div class="flex-1 min-w-0 flex flex-col items-center">
       <div class="text-3xl text-black h-11 leading-none">Oct</div>
       <div class="w-3.5 h-3.5 rounded-full bg-[#9A90AB]"></div>
       <logos-parcel-icon class="text-6xl mt-8" />
       <div class="text-xl mt-5 leading-snug">Parcel 2</div>
-      <img src="./images/logos/ferris.svg" alt="Rust" class="h-11 mt-9" />
+      <div class="mt-1 h-7" aria-hidden="true"></div>
+      <img src="./images/logos/ferris.svg" alt="Rust" class="h-11 mt-6" />
     </div>
     <div class="flex-1 min-w-0 flex flex-col items-center">
       <div class="text-3xl text-black h-11 leading-none">Oct</div>
       <div class="w-3.5 h-3.5 rounded-full bg-[#9A90AB]"></div>
       <logos-nextjs-icon class="text-6xl mt-8" />
       <div class="text-xl mt-5 leading-snug">Next.js 12</div>
-      <img src="./images/logos/ferris.svg" alt="Rust" class="h-11 mt-9" />
+      <div class="mt-1 h-7" aria-hidden="true"></div>
+      <img src="./images/logos/ferris.svg" alt="Rust" class="h-11 mt-6" />
     </div>
     <div class="flex-1 min-w-0 flex flex-col items-center">
       <div class="text-3xl text-primary font-700 h-11 leading-none">Nov</div>
       <div class="w-5 h-5 rounded-full bg-[#BC52EE] -mt-[3px]"></div>
       <logos-astro-icon class="text-6xl mt-8" />
       <div class="text-xl mt-5 leading-snug text-primary font-600">Astro 0.21</div>
-      <img src="./images/logos/gopher-cutout.png" alt="Go" class="h-16 mt-6" />
+      <div class="mt-1 h-7" aria-hidden="true"></div>
+      <img src="./images/logos/gopher-cutout.png" alt="Go" class="h-16 mt-3" />
     </div>
     <div class="flex-1 min-w-0 flex flex-col items-center">
       <div class="text-3xl text-black h-11 leading-none">Dec</div>
       <div class="w-3.5 h-3.5 rounded-full bg-[#9A90AB]"></div>
       <logos-turborepo-icon class="text-6xl mt-8" />
       <div class="text-xl mt-5 leading-snug">Turborepo</div>
-      <img src="./images/logos/gopher-cutout.png" alt="Go" class="h-16 mt-6" />
+      <div class="mt-1 h-7" aria-hidden="true"></div>
+      <img src="./images/logos/gopher-cutout.png" alt="Go" class="h-16 mt-3" />
     </div>
   </div>
 </div>
 
 <!--
 予定時刻：01:56 から 02:10（14 秒）
-発話 79 文字。時間は予定であり、実測ではない。
+発話 83 文字。時間は予定であり、実測ではない。
 進行：クリックなし。発話後に次へ進む。
 
 ### 発話
 
-2021 年は Rust の採用が増えた年ですが、Go の選択肢もありました。Vite が利用した esbuild と、当時の Turborepo は Go で実装されていました。
+2021 年には Rust を採用するツールが増えていました。一方、Vite が使う esbuild や当時の Turborepo は Go です。Go も実績のある選択肢だったんですね。
 
 ### 確認メモ（発表では話さない）
 
@@ -384,12 +394,12 @@ class: go-era-slide go-era-build
 ---
 
 <div class="go-era-heading">
-  <h2>Astro v1</h2>
-  <span class="go-era-year">2022年</span>
+  <h2>Astro v1 の構成</h2>
+  <span class="go-era-year">2022 年</span>
 </div>
 
 <div class="go-era-body">
-  <div class="go-era-summary">Build のための Compiler だった</div>
+  <div class="go-era-summary">Compiler は Go、ビルド基盤は Vite</div>
 
   <Overview
     visible="source,compiler,build,browser"
@@ -398,7 +408,7 @@ class: go-era-slide go-era-build
   />
 
   <div class="go-era-reason">
-    <div class="text-2xl font-600 text-primary">深く考えすぎずに選んだ</div>
+    <div class="text-2xl font-600 text-primary">Nate Moore が挙げた Go の選定理由</div>
     <div class="text-xl mt-2">esbuild が Go だった。Go は学びやすかった。</div>
   </div>
 </div>
@@ -410,18 +420,18 @@ class: go-era-slide go-era-build
 
 <!--
 予定時刻：02:10 から 03:00（50 秒）
-発話 282 文字。時間は予定であり、実測ではない。
+発話 325 文字。時間は予定であり、実測ではない。
 進行：クリックなし。発話後に次へ進む。
 
 ### 発話
 
-Astro は Go Compiler と Vite に移行しました。Vite の改善や Rollup のプラグインを利用できることも、理由の一つでした。当時の話は下のリンクから確認できます。
-Nate Moore が挙げた Go の選定理由は、esbuild が Go だったことと、学びやすかったことです。本人も、深くは考えなかったと書いています。
-実装では HTML5 Parser を fork し、CSS には esbuild の Parser を取り込んでいました。参考になる土台があったんですね。一方、JavaScript の式を完全にパースする仕組みは持っていません。ここが後の AST の問題につながります。
+Astro は 2021 年の 0.21 で Go Compiler と Vite に移行し、v1 でもこの構成を使いました。Compiler が Astro の構文を変換し、Vite がビルドを担当します。Vite の改善や Rollup のプラグインを利用できることも、採用理由の一つでした。
+Go の選定理由は、Nate Moore の振り返りでは、esbuild が Go だったことと学びやすさです。
+実装では HTML5 Parser の fork と、esbuild 由来の CSS Parser を利用していました。僕は、参考になる実装があった点にも納得しています。ただ、JavaScript expression を完全にパースする仕組みはありませんでした。ここから、使い続けて分かった問題を見ていきます。
 
 ### 確認メモ（発表では話さない）
 
-Go の経験者だったという理由へ変更しない。Compiler 内の esbuild は CSS の解析と生成、Vite の部分の esbuild は TypeScript の変換を担当する。HTML5 Parser 由来の実装を Astro Syntax に対応させた。原文は "esbuild was written in Go and it was easy to learn. We didn't overthink it." で、深い技術的判断として語らない。`internal/parser.go` と `internal/token.go` は `golang.org/x/net/html` の fork（Copyright The Go Authors）。JavaScript は `tdewolff/parse` による走査（`internal/js_scanner`）だけで、完全な JS Parser はない。
+Go の経験者だったという理由へ変更しない。Compiler 内の esbuild は CSS の解析と生成、Vite の部分の esbuild は TypeScript の変換を担当する。HTML5 Parser 由来の実装を Astro Template Syntax に対応させた。原文は "esbuild was written in Go and it was easy to learn. We didn't overthink it." で、深い技術的判断として語らない。`internal/parser.go` と `internal/token.go` は `golang.org/x/net/html` の fork（Copyright The Go Authors）。JavaScript は `tdewolff/parse` による走査（`internal/js_scanner`）だけで、完全な JS Parser はない。
 
 ### 出典と確認資料（発表では話さない）
 
@@ -454,7 +464,7 @@ class: syntax-overview body-center
 clicks: 6
 ---
 
-## Astro Syntax
+## Astro Template Syntax
 
 ````md magic-move
 ```astro
@@ -498,17 +508,17 @@ const props = { title: "second" };
 <div class="mt-0 text-center text-2xl">
   <div v-if="$clicks === 0"><span class="text-primary font-600">Component script</span><br /><code>---</code> で囲む。ビルド時とサーバーで実行する JavaScript と TypeScript</div>
   <div v-if="$clicks === 1"><span class="text-primary font-600">Template</span><br />HTML を基礎に、JavaScript expression や<br />コンポーネントを書ける</div>
-  <div v-if="$clicks === 2"><span class="text-primary font-600">JavaScript expression（式）</span><br />波かっこの中の JavaScript expression を評価し、結果を表示する。<br />Astro の書き方って、JSX っぽいですよね。</div>
+  <div v-if="$clicks === 2"><span class="text-primary font-600">JavaScript expression</span><br />Astro の書き方って、JSX っぽいですよね。</div>
   <div v-if="$clicks === 3"><span class="text-primary font-600">Q. </span>この <code>title</code> は、どちらの値になる？</div>
   <div v-if="$clicks === 3" class="mt-4"><code>first</code> か、<code>second</code> か</div>
   <div v-if="$clicks === 4"><span class="text-primary font-600">A. </span><code>first</code></div>
-  <Overlay v-if="$clicks >= 5" aria-label="Astro Syntax への問いと答え">
+  <Overlay v-if="$clicks >= 5" aria-label="Astro Template Syntax への問いと答え">
     <template #title>
       <span v-if="$clicks === 5">JSX なら second。なぜ first になった？</span>
       <span v-else>HTML の規則で扱ったため</span>
     </template>
     <p v-if="$clicks >= 6">
-      この報告では、Astro が同じ属性を二つ出力した。<br />
+      Astro が同じ属性を二つ出力した。<br />
       ブラウザは HTML の規則で先の <code>title="first"</code> を採用した。
     </p>
     <template v-if="$clicks >= 6" #reference>
@@ -517,12 +527,12 @@ const props = { title: "second" };
   </Overlay>
 </div>
 
-<Ref v-if="$clicks < 3" href="https://docs.astro.build/en/reference/astro-syntax/">Astro Syntax</Ref>
+<Ref v-if="$clicks < 3" href="https://docs.astro.build/en/reference/astro-syntax/">Astro Template Syntax</Ref>
 <Ref v-if="$clicks === 4" href="https://github.com/withastro/astro/issues/5558#issuecomment-1343799494">astro#5558 の説明</Ref>
 
 <!--
 予定時刻：03:06 から 04:36（90 秒）
-発話 464 文字。時間は予定であり、実測ではない。
+発話 483 文字。時間は予定であり、実測ではない。
 進行：6 回のクリックを発話に合わせる。
 
 ### 発話
@@ -532,7 +542,7 @@ const props = { title: "second" };
 [クリック 1]
 その下が Template です。HTML を基礎に、表示する内容を書きます。
 [クリック 2]
-波かっこの中で式を評価します。ここでは商品の配列を map で扱い、名前と価格を表示しています。Astro の書き方って、JSX っぽいですよね。
+波かっこの中で JavaScript expression を評価します。ここでは商品の配列を map で扱い、名前と価格を表示しています。Astro の書き方って、JSX っぽいですよね。
 [クリック 3]
 li の title に first を指定して、その後に title が second の props を展開します。JSX のつもりなら second ですよね。Astro では、first だと思う人。second だと思う人。
 [クリック 4]
@@ -544,12 +554,12 @@ li の title に first を指定して、その後に title が second の props
 
 ### 確認メモ（発表では話さない）
 
-2022 年の報告を説明する。現在の Astro の挙動ではない。報告の class 属性を title に簡略化した例。HTML の重複属性と、JSX で後の指定を優先する props の合成を区別する。JavaScript expression は日本語では式。発話では初出で説明し、以後は JavaScript expression に統一する。Astro AST の expression node は波かっこを含む領域を指すため、その中の JavaScript expression と区別する。
+2022 年の報告を説明する。現在の Astro の挙動ではない。報告の class 属性を title に簡略化した例。HTML の重複属性と、JSX で後の指定を優先する props の合成を区別する。発話では JavaScript expression に統一する。Astro AST の expression node は波かっこを含む領域を指すため、その中の JavaScript expression と区別する。
 
 ### 出典と確認資料（発表では話さない）
 
 - [astro#5558 の説明](https://github.com/withastro/astro/issues/5558#issuecomment-1343799494)
-- [Astro Syntax](https://docs.astro.build/en/reference/astro-syntax/)
+- [Astro Template Syntax](https://docs.astro.build/en/reference/astro-syntax/)
 - [HTML Standard の attribute name state](https://html.spec.whatwg.org/multipage/parsing.html#attribute-name-state)
 -->
 
@@ -559,7 +569,7 @@ class: body-center
 clicks: 2
 ---
 
-## Astro Syntax
+## Astro Template Syntax
 
 ```astro
 <span>Astro</span>
@@ -569,14 +579,14 @@ clicks: 2
 <!-- クイズと答えの表示領域を固定し、空白の説明は Overlay で表示する -->
 <div class="mt-4 h-[96px] flex flex-col items-center justify-center text-center text-2xl">
   <div v-if="$clicks === 0"><span class="text-primary font-600">Q. </span>このコードは、どちらの表示になる？</div>
-  <div v-if="$clicks === 0" class="mt-4"><code>Astro1200</code> か、<code>Astro 1200</code> か</div>
+  <div v-if="$clicks === 0" class="mt-4"><code>Astro 1200</code> か、<code>Astro1200</code> か</div>
   <div v-if="$clicks === 1"><span class="text-primary font-600">A. </span><code>Astro 1200</code></div>
-  <Overlay v-if="$clicks >= 2" aria-label="Astro Syntax の空白の扱い">
+  <Overlay v-if="$clicks >= 2" aria-label="Astro Template Syntax の空白の扱い">
     <template #title>
       ブラウザが空白にする
     </template>
     <p>
-      この報告では、Astro が要素間の改行を HTML に保持した。<br />
+      要素間の改行を HTML に保持した。<br />
       ブラウザがその改行を空白として表示し、<code>Astro 1200</code> になった。
     </p>
     <template #reference>
@@ -616,7 +626,7 @@ class: table-comparison body-center code-example-compact
 clicks: 4
 ---
 
-## Astro Syntax
+## Astro Template Syntax
 
 <div>
 
@@ -647,7 +657,7 @@ clicks: 4
   </Transition>
 </div>
 
-<Overlay v-if="$clicks >= 2" aria-label="Astro Syntax への問いと答え">
+<Overlay v-if="$clicks >= 2" aria-label="Astro Template Syntax への問いと答え">
   <template #title>
     <span v-if="$clicks === 2">table の外に書いた h2 が、なぜ中に入った？</span>
     <span v-else-if="$clicks === 3">Compiler が担っていた HTML correction</span>
@@ -712,7 +722,7 @@ layout: default
 class: ch2-detail
 ---
 
-## Astro Syntax を振り返る
+## Astro Template Syntax を振り返る
 
 <div class="ch2-reflection">
   <div>
@@ -721,7 +731,7 @@ class: ch2-detail
   </div>
   <div>
     <h3>空白の扱い</h3>
-    <ul><li>Browser で空白になる改行を、Astro Syntax の規則で扱えないか</li></ul>
+    <ul><li>Browser で空白になる改行を、Astro Template Syntax の規則で扱えないか</li></ul>
   </div>
   <div>
     <h3>HTML5 Parser のふるまい</h3>
@@ -815,14 +825,14 @@ const amount = 3;
 
 <!--
 予定時刻：06:32 から 07:04（32 秒）
-発話 212 文字。時間は予定であり、実測ではない。
+発話 220 文字。時間は予定であり、実測ではない。
 進行：クリックなし。発話後に次へ進む。
 
 ### 発話
 
 まず Linter です。検査には、JavaScript の識別子や演算子をたどれる AST が必要です。ESTree は、その AST の形式を定める仕様です。
 ところが、左の Go Compiler の結果では、price と amount の掛け算が TextNode の文字列になっています。これだけでは、変数名と演算子を node としてたどれません。
-Astro のタグは分かっても、その中の JavaScript の式は別にパースする必要があったんですね。
+Astro のタグは分かっても、その中の JavaScript expression は別にパースする必要があったんですね。
 
 ### 確認メモ（発表では話さない）
 
@@ -997,7 +1007,7 @@ prettier-plugin-astro の空の Fragment に関する報告を簡略化し、Com
 expression の子は TextNode.value の true ? 、p 要素の node、TextNode.value の : 、空の Fragment の node という順序。TextNode.value はすでに文字列で、serialize() はその値をそのまま使う。タグの node をコードの文字列に戻し、連結して expression 全体のコードにする。
 プラグインの printRaw() は Astro AST の expression node の子を Compiler package の serialize() で文字列にする。serialize() の初期設定 selfClose は true で、子が空の fragment を < /> にする。文字列化の実装は Compiler package の JavaScript の補助機能である。Go Parser が Fragment を解析できなかったという説明はしない。
 再生成された true ? <p>OK</p> : < /> を astroExpressionParser が JSX Fragment と波かっこで囲み、Babel に渡すと構文エラーになる。整形前の元の入力を Babel で解析できることも確認する。
-以前の JSX で囲む理由は補足にする。オブジェクトリテラルを文と区別するために <>{式}</> の形式を使い、閉じ波かっこの前の改行で行コメントとの混同を避ける。
+以前の JSX で囲む理由は補足にする。オブジェクトリテラルを文と区別するために <>{expression}</> の形式を使い、閉じ波かっこの前の改行で行コメントとの混同を避ける。
 
 ### 出典と確認資料（発表では話さない）
 
@@ -1018,12 +1028,12 @@ class: ch2-detail ch2-formatter-requirements
 
 <!--
 予定時刻：09:04 から 09:31（27 秒）
-発話 177 文字。時間は予定であり、実測ではない。
+発話 185 文字。時間は予定であり、実測ではない。
 進行：クリックなし。発話後に次へ進む。
 
 ### 発話
 
-Formatter が欲しかったのも、JavaScript の式をたどれる AST です。さらに Astro のタグとコメント、元のコードの正確な位置も必要でした。
+Formatter が欲しかったのも、JavaScript expression をたどれる AST です。さらに Astro のタグとコメント、元のコードの正確な位置も必要でした。
 この情報を Compiler から受け取れれば、AST を得るための再生成と再パースを減らせます。改行と字下げを決めるのは Formatter の担当です。パース結果を渡す仕事と、整形する仕事を分けたいんですね。
 
 ### 確認メモ（発表では話さない）
@@ -1127,18 +1137,18 @@ class: ch2-detail
 
 <!--
 予定時刻：10:45 から 11:30（45 秒）
-発話 326 文字。時間は予定であり、実測ではない。
+発話 315 文字。時間は予定であり、実測ではない。
 進行：クリックなし。発話後に次へ進む。
 
 ### 発話
 
 ここまで、Linter と Formatter と Language Tool が必要とする情報を見てきました。検査や整形を始める前に、パースし直したり、Compiler が返す位置情報を修正したりする必要があったんですね。
 
-それなら、Compiler を直して、ツールの負担を減らした方がいいですよね。必要な AST と正確な位置情報を、最初から返してほしい。
+僕は、Compiler から必要な AST と正確な位置情報を返せれば、ツールの負担を減らせると思っています。
 
-ただ、その Compiler 自体も保守が難しくなっていました。コードを理解して修正できる人が少なく、不具合への対応も進みにくかったんです。
+公開提案では、Compiler を理解して修正できる人が少なく、保守が難しくなっていたと説明されています。既存の基盤を利用し、独自に実装する範囲を減らす方針も示されています。
 
-そこで、自分たちが実装する範囲を見直して、既存の基盤を利用する方針になります。では、Go Compiler を使い続けている間に、僕たちが使える基盤はどう変わっていたんでしょうか。
+僕は、この保守範囲の見直しが大切だと捉えています。では、Go Compiler を使い続けている間に、利用できる基盤はどう変わっていたんでしょうか。
 
 ### 確認メモ（発表では話さない）
 
@@ -1239,13 +1249,13 @@ class: ch3-detail chapter-three ch3-tools
 
 <!--
 予定時刻：11:40 から 12:24（44 秒）
-発話 228 文字。時間は予定であり、実測ではない。
+発話 236 文字。時間は予定であり、実測ではない。
 進行：クリックなし。発話後に次へ進む。
 
 ### 発話
 
 この間に、Rust で作られたフロントエンドのツールが増えました。Oxc、Biome、Lightning CSS などですね。
-注目したいのは、その中のライブラリを、自分たちの実装にも組み込めることです。従来の Astro Compiler が返していなかった JavaScript の式の AST を、既存の基盤から取得する選択肢ができました。
+注目したいのは、その中のライブラリを、自分たちの実装にも組み込めることです。従来の Astro Compiler が返していなかった JavaScript expression の AST を、既存の基盤から取得する選択肢ができました。
 Go 全体に Parser がない、という話ではありません。Astro が再利用したい機能と、保守できる実装の組み合わせが変わったんですね。
 
 ### 確認メモ（発表では話さない）
@@ -1318,7 +1328,7 @@ Oxc に、先ほどの price と amount の掛け算を渡してみます。
 
 ### 確認メモ（発表では話さない）
 
-ここは oxc-parser の JavaScript API の例。Astro Compiler の内部では Astro Syntax に対応させた Oxc の Rust crate を利用する。実装言語と、npm パッケージと、ネイティブコードや WASM という配布方法は別の判断。
+ここは oxc-parser の JavaScript API の例。Astro Compiler の内部では Astro Template Syntax に対応させた Oxc の Rust crate を利用する。実装言語と、npm パッケージと、ネイティブコードや WASM という配布方法は別の判断。
 
 ### 出典と確認資料（発表では話さない）
 
@@ -1462,7 +1472,7 @@ clicks: 1
 <Ref><a href="https://github.com/withastro/astro/pull/14080">Compiler の統合提案</a> と <a href="https://github.com/withastro/astro/pull/14181">AST Bridge の提案</a></Ref>
 
 <!--
-予定時刻：14:16 から 16:07（111 秒）
+予定時刻：14:16 から 15:52（96 秒）
 発話 580 文字。時間は予定であり、実測ではない。
 進行：提案と試作を説明し、クリック 1 で Remco の告知投稿を紹介し、サポートへの感謝を伝える。
 
@@ -1529,26 +1539,36 @@ clicks: 2
 <Ref href="https://github.com/jp-knj/xmdx">xmdx と Astro integration</Ref>
 
 <!--
-予定時刻：16:07 から 17:16（69 秒）
-発話 319 文字。時間は予定であり、実測ではない。
+予定時刻：15:52 から 17:22（90 秒）
+発話 561 文字。時間は予定であり、実測ではない。
 進行：2 回のクリックを発話に合わせる。
 
 ### 発話
 
 [初期表示]
-自作した xmdx は、Astro integration として導入します。integration は Astro に機能を追加するプラグインです。そこから Vite plugin を登録し、開発やビルドの途中に MDX の変換を追加します。
+自作した xmdx は Astro integration、つまり Astro に機能を追加するプラグインとして導入します。Vite plugin を登録して、ビルド中に MDX を変換します。
 [クリック 1]
 変換には Rust の mdxjs-rs を使い、Node-API bindings で JavaScript から呼びます。本文に加えて、frontmatter と見出しの情報も返す必要がありました。
 [クリック 2]
-これを Starlight に組み込み、当時の公式ドキュメントで確認しました。僕が試した環境では、ビルド全体が半分以下になりました。サイトと設定による結果ですが、Compiler 以外にも Rust の基盤を活かせる、という手応えがありました。
+Starlight に組み込み、当時の公式ドキュメントで確認しました。僕が試した環境では、ビルド全体が半分以下になりました。
+ただ、そこで悩んだのがベンチマークです。Vite のフックはファイルごとに動き、非同期の実行時間も重なります。フックの時間を合計しても、ビルド全体の時間にはならないんですね。
+変換単体は、同じファイル群をビルドの外で直接変換して比べます。ファイルの取得と初期化は計測から分けます。
+CPU プロファイルでは、負荷が集中する場所をサンプリングから推定します。変換全体の時間を測ることとは分けます。
+ビルド全体は hyperfine で繰り返し測り、平均とばらつきを比べます。キャッシュとプラグイン、コードの色付けをそろえ、本文や見出しの結果も確かめます。
+速い数字を示すだけでなく、何を含めた比較なのかを説明する。僕は、ここまで準備するのが難しかったんですね。
 
 ### 確認メモ（発表では話さない）
 
 参照する試作は Astro 5 と Vite 6 と Rollup の組み合わせ。本番ビルドと開発時の依存関係の事前バンドルを混同しない。Rust の MDX コード生成には mdxjs-rs を利用。frontmatter と見出し情報は xmdx が取得する。実装の関数名は発話しない。
 
+計測の難しさは発表者が練習で話した経験に基づく。変換単体と CPU プロファイルとビルド全体は、計測範囲を分けて説明する。Node.js の CPU プロファイルはサンプリングであり、関数の self time を合計して変換全体の正確な CPU 時間としない。Rust の内部を調べるには別の計測も必要になる。hyperfine では同じ機能と環境とキャッシュの条件をそろえ、繰り返した結果を比較する。計測手順の説明を、当時その手順をすべて実施したという主張に変えない。今回、新しいベンチマークは実行していない。
+
 ### 出典と確認資料（発表では話さない）
 
 - [参照資料 1](https://github.com/jp-knj/xmdx/tree/7a89fdb17140e2b710e40d52d26338d978bc5c13)
+- [Vite のプラグインの実行時間とプロファイル](https://vite.dev/guide/performance.html#audit-configured-vite-plugins)
+- [Node.js の CPU プロファイルのサンプリング間隔](https://nodejs.org/api/cli.html#--cpu-prof-interval)
+- [hyperfine の繰り返し計測とキャッシュの条件](https://github.com/sharkdp/hyperfine#usage)
 -->
 
 ---
@@ -1569,7 +1589,7 @@ class: ch3-detail chapter-three ch3-recap-slide
 <div class="ch3-summary">欲しい情報と導入の条件から、基盤を選び直せる</div>
 
 <!--
-予定時刻：17:16 から 17:45（29 秒）
+予定時刻：17:22 から 17:45（23 秒）
 発話 145 文字。時間は予定であり、実測ではない。
 進行：クリックなし。発話後に次へ進む。
 
@@ -1581,7 +1601,7 @@ MDX の試作では、既存プラグインとの互換性、配布、Astro へ�
 
 ### 確認メモ（発表では話さない）
 
-MDX の編集支援は本人の貢献の経験として、MDX のページで説明する。前提の変化をまとめるこの表では扱わない。MDX の試作と Astro Compiler の変更、xmdx と Sätteri の間に、未確認の直接的な因果関係を作らない。Astro Syntax の規則と空白の設定は、第 4 章の新しい判断として説明する。
+MDX の編集支援は本人の貢献の経験として、MDX のページで説明する。前提の変化をまとめるこの表では扱わない。MDX の試作と Astro Compiler の変更、xmdx と Sätteri の間に、未確認の直接的な因果関係を作らない。Astro Template Syntax の規則と空白の設定は、第 4 章の新しい判断として説明する。
 -->
 
 ---
@@ -1628,7 +1648,7 @@ Astro のコードから、ビルドで実行するコードを作ります。�
 
 ### 確認メモ（発表では話さない）
 
-このページは全体の案内に絞る。Go と Rust の比較、Astro Syntax の規則と空白の扱い、Compiler 内部の担当の順に説明する。
+このページは全体の案内に絞る。Go と Rust の比較、Astro Template Syntax の規則と空白の扱い、Compiler 内部の担当の順に説明する。
 
 ### 出典と確認資料（発表では話さない）
 
@@ -1659,7 +1679,7 @@ clicks: 1
 
 <!--
 予定時刻：18:28 から 19:19（51 秒）
-発話 219 文字。時間は予定であり、実測ではない。
+発話 217 文字。時間は予定であり、実測ではない。
 進行：1 回のクリックを発話に合わせる。
 
 ### 発話
@@ -1668,8 +1688,8 @@ clicks: 1
 前半と同じ Go の図です。Compiler は HTML5 Parser を基礎に、Astro の構文と変換を実装していました。ビルド時には HTML correction も担っていました。
 
 [クリック 1]
-Rust Compiler は HTML correction を行わず、書かれた親子関係を保つ方針にしました。出力された HTML から DOM を作るのは、引き続きブラウザです。
-言語を Rust に変えただけではなくて、Compiler がどこまで担当するかも選び直しているんですね。
+公開提案では、Rust Compiler は HTML correction を行わず、書かれた親子関係を保つ方針が示されています。出力された HTML から DOM を作るのは、引き続きブラウザです。
+僕はここに、Compiler が担当する範囲を見直す意図があると捉えています。
 
 ### 確認メモ（発表では話さない）
 
@@ -1686,7 +1706,7 @@ layout: default
 class: ch3-detail chapter-four ch3-syntax-spec
 ---
 
-## Astro Syntax の規則と空白の扱い
+## Astro Template Syntax の規則と空白の扱い
 
 <div class="ch3-syntax-date">2026 年 2 月、構文の共通基準を仕様ドラフトにまとめる</div>
 <div class="ch3-syntax-setting">
@@ -1714,18 +1734,18 @@ const name = "Astro";
 </div>
 </div>
 
-<Ref><a href="https://github.com/withastro/compiler/blob/04170031ce2f30d1882fe480e87998197e0016aa/SYNTAX_SPEC.md">Astro Syntax の仕様ドラフト</a> と <a href="https://docs.astro.build/en/guides/upgrade-to/v7/#new-default-whitespace-handling-compresshtml-jsx">v7 の空白規則</a> と <a href="https://docs.astro.build/en/reference/configuration-reference/#compresshtml">compressHTML の設定</a></Ref>
+<Ref><a href="https://github.com/withastro/compiler/blob/04170031ce2f30d1882fe480e87998197e0016aa/SYNTAX_SPEC.md">Astro Template Syntax の仕様ドラフト</a> と <a href="https://docs.astro.build/en/guides/upgrade-to/v7/#new-default-whitespace-handling-compresshtml-jsx">v7 の空白規則</a> と <a href="https://docs.astro.build/en/reference/configuration-reference/#compresshtml">compressHTML の設定</a></Ref>
 
 <!--
 予定時刻：19:19 から 19:56（37 秒）
-発話 182 文字。時間は予定であり、実測ではない。
+発話 192 文字。時間は予定であり、実測ではない。
 進行：クリックなし。発話後に次へ進む。
 
 ### 発話
 
-2026 年 2 月の仕様ドラフトでは、Astro の構文の共通基準を確認できます。空白の扱いも整理しました。
+2026 年 2 月の仕様ドラフトでは、Astro の構文の共通基準を確認できます。空白の扱いも整理されています。
 Astro v7 では compressHTML の既定値が jsx になり、JSX の規則で空白を扱います。前半の二つの span は、Astro1200 と表示されます。以前の扱いも設定で選べます。
-構文の文書化と、HTML の空白の規則。これも Astro が担当する判断なんですね。
+構文の文書化と、HTML の空白の規則。僕は、こうした規則を明確にすることも大切だと思っています。
 
 ### 確認メモ（発表では話さない）
 
@@ -1737,7 +1757,7 @@ compressHTML は既存の設定。Astro v7 では既定値が true から 'jsx' 
 
 - [Astro v7 の空白規則](https://docs.astro.build/en/guides/upgrade-to/v7/#new-default-whitespace-handling-compresshtml-jsx)
 - [compressHTML の設定](https://docs.astro.build/en/reference/configuration-reference/#compresshtml)
-- [Astro Syntax の仕様ドラフト](https://github.com/withastro/compiler/blob/04170031ce2f30d1882fe480e87998197e0016aa/SYNTAX_SPEC.md)
+- [Astro Template Syntax の仕様ドラフト](https://github.com/withastro/compiler/blob/04170031ce2f30d1882fe480e87998197e0016aa/SYNTAX_SPEC.md)
 -->
 
 ---
@@ -1755,7 +1775,7 @@ class: chapter-four ch4-compiler
     <path d="M600,236 V269 H404 V301" /><path d="M745,236 V301" />
   </svg>
   <div class="ch4-node ch4-api"><strong>Astro の公開 API と Node-API bindings</strong><span>parse() と transform()</span></div>
-  <div class="ch4-node ch4-parser"><strong>Oxc Parser と AST</strong><span>Astro Syntax への対応</span></div>
+  <div class="ch4-node ch4-parser"><strong>Oxc Parser と AST</strong><span>Astro Template Syntax への対応</span></div>
   <div class="ch4-node ch4-codegen ch4-owned"><strong>Astro Codegen</strong><span>Astro の変換と CSS スコープ規則</span></div>
   <div class="ch4-node ch4-oxc"><strong>Oxc Transformer と Codegen</strong><span>TypeScript の変換と JS の生成</span></div>
   <div class="ch4-node ch4-css"><strong>Lightning CSS</strong><span>CSS のパースと出力</span></div>
@@ -1800,19 +1820,19 @@ class: chapter-four ch4-tools
 
 <div class="ch4-responsibilities">
   <section><h3>Compiler が提供する情報</h3><ul class="ch4-list"><li>Astro の親子関係と Source の位置情報</li><li>埋め込まれた JavaScript の AST</li><li>JavaScript expression の演算子と識別子</li></ul></section>
-  <section><h3>ツールが担当する機能</h3><ul class="ch4-list"><li>Linter は規則の検査、Formatter は整形を行う</li><li>Language Tool は宣言と参照、型情報を使って診断と補完を作る</li><li>Astro Syntax と位置情報、不完全な入力を扱う</li></ul></section>
+  <section><h3>ツールが担当する機能</h3><ul class="ch4-list"><li>Linter は規則の検査、Formatter は整形を行う</li><li>Language Tool は宣言と参照、型情報を使って診断と補完を作る</li><li>Astro Template Syntax と位置情報、不完全な入力を扱う</li></ul></section>
 </div>
 
 <Ref href="https://github.com/withastro/compiler-rs">Rust Compiler の公開 API と AST</Ref>
 
 <!--
 予定時刻：20:39 から 21:11（32 秒）
-発話 152 文字。時間は予定であり、実測ではない。
+発話 160 文字。時間は予定であり、実測ではない。
 進行：クリックなし。発話後に次へ進む。
 
 ### 発話
 
-JavaScript の式の AST と位置情報を、Compiler から受け取れるようになりました。前半の、コードを再生成してパースし直す入口を変えられます。
+JavaScript expression の AST と位置情報を、Compiler から受け取れるようになりました。前半の、コードを再生成してパースし直す入口を変えられます。
 その AST で何を検査するか、どう整形するかは、引き続きツールが決めます。すべての調整がなくなるわけではありませんが、共通のデータから仕事を始められます。
 
 ### 確認メモ（発表では話さない）
@@ -1942,7 +1962,7 @@ class: body-center
   <ul>
     <li>Rust への移行では、<b>Compiler の設計と保守範囲</b> も見直している</li>
     <li>汎用的なパースと変換には、<b>Oxc などの基盤</b> を利用する</li>
-    <li>Astro は、<b>Astro Syntax と変換と統合</b> を担当する</li>
+    <li>Astro は、<b>Astro Template Syntax と変換と統合</b> を担当する</li>
     <li>用途に応じて、<b>Rust と JavaScript の役割</b> を分ける</li>
     <li>Astro Compiler と Markdown と MDX の Processor も、<br />それぞれの要件に合った構成を選ぶ</li>
   </ul>
@@ -1955,7 +1975,7 @@ class: body-center
 
 ### 発話
 
-今回の変更では、実装言語とともに設計と保守範囲を見直しています。汎用的な機能は基盤を利用し、Astro の構文と変換と統合を、自分たちの仕事として明確にしています。
+僕は今回の変更を、設計と保守範囲を見直す機会だったと捉えています。汎用的な機能は基盤を利用し、Astro の構文と変換と統合に取り組む。この分担が大切だと思います。
 -->
 
 ---
@@ -2007,7 +2027,7 @@ class: body-center
     <ul>
       <li>Rust 基盤の成熟</li>
       <li>再利用できる範囲の拡大</li>
-      <li>Astro Syntax の整理</li>
+      <li>Astro Template Syntax の整理</li>
     </ul>
   </section>
   <section>
@@ -2022,13 +2042,13 @@ class: body-center
 
 <!--
 予定時刻：23:51 から 24:38（47 秒）
-発話 181 文字。時間は予定であり、実測ではない。
+発話 220 文字。時間は予定であり、実測ではない。
 進行：クリックなし。発話後に次へ進む。
 
 ### 発話
 
-当時は、学びやすさと参考になる実装から Go を選びました。使い続けるなかで、編集支援が求める AST と位置情報、HTML の補正、独自実装の保守が課題になりました。
-その間に、Oxc と Lightning CSS など、再利用したい基盤が Rust にそろいました。構文の規則と、Compiler が渡す情報を整理し、Astro が保守する範囲を選び直す。それが、今書き直す理由です。
+当時の選定理由として、Nate Moore は学びやすさと、esbuild が Go だったことを挙げています。使い続けるなかで、編集支援が求める AST と位置情報、HTML の補正、独自実装の保守が課題になりました。
+その間に、Oxc と Lightning CSS などの基盤が Rust にそろいました。構文の規則と、Compiler が渡す情報を整理し、Astro が保守する範囲を選び直す。これらをまとめて見直せることに、僕は書き直しの意味があると思っています。
 
 ### 確認メモ（発表では話さない）
 
@@ -2048,12 +2068,12 @@ class: text-center
 
 <!--
 予定時刻：24:38 から 24:50（12 秒）
-発話 48 文字。時間は予定であり、実測ではない。
+発話 50 文字。時間は予定であり、実測ではない。
 進行：クリックなし。発話後に次へ進む。
 
 ### 発話
 
-基盤を再利用し、自分たちの実装範囲を絞り、保守し続けられる設計にするため。これが今日の答えです。
+基盤を再利用し、自分たちの実装範囲を絞り、保守し続けられる設計にするため。これが、僕なりの答えです。
 -->
 
 ---

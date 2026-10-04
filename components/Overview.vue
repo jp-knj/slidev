@@ -84,7 +84,7 @@ const SUBS = [
   { id: "oxc", label: "Oxc（Parser と AST）", h: 58 },
   { id: "astro-codegen", label: "Astro Codegen", h: 34 },
   { id: "lightning-css", label: "Lightning CSS", h: 34 },
-  { id: "astro-syntax", label: "Astro Syntax", h: 34 },
+  { id: "astro-syntax", label: "Astro Template Syntax", h: 58 },
 ] as const;
 
 const CONTRACTS: Record<

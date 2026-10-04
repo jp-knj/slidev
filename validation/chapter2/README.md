@@ -65,7 +65,7 @@ SlidevのParserで63枚と確認しました。旧30枚目から56枚目を新30
 
 新30枚目から37枚目は計11状態です。30枚目と37枚目は1クリックで副題を表示し、次の操作で31枚目と38枚目へ進むことを確認しました。空白ページと不要なクリックはありません。変更ページの文字の折り返し、図との重なり、はみ出しを目視と要素の座標で確認しました。27枚目の改行と28枚目の小文字表記を調整し、新33枚目のラベルを黒に揃えています。ASTの枝と入れ子のガイドも維持しています。
 
-OxcのparseSyncの呼び出し方は[Parserの資料](https://oxc.rs/docs/guide/usage/parser.html)、CSTとwhileの例は[Biomeの設計資料](https://biomejs.dev/internals/architecture/)と照合しました。[Astro SyntaxのDraft](https://github.com/withastro/compiler/blob/04170031ce2f30d1882fe480e87998197e0016aa/SYNTAX_SPEC.md)は2026年2月3日付のコミットに固定しています。各PRとIssueの内容も一次資料で確認し、AstroのPR #14080とPR #14181はいずれも未マージでcloseされていることをGitHub APIで確認しました。
+OxcのparseSyncの呼び出し方は[Parserの資料](https://oxc.rs/docs/guide/usage/parser.html)、CSTとwhileの例は[Biomeの設計資料](https://biomejs.dev/internals/architecture/)と照合しました。[Astro Template Syntax の Draft](https://github.com/withastro/compiler/blob/04170031ce2f30d1882fe480e87998197e0016aa/SYNTAX_SPEC.md)は2026年2月3日付のコミットに固定しています。各PRとIssueの内容も一次資料で確認し、AstroのPR #14080とPR #14181はいずれも未マージでcloseされていることをGitHub APIで確認しました。
 
 `npm run check --prefix validation/chapter2` と `pnpm build:compiler` は成功しました。ASTと範囲と診断とFormatterの実測結果に変更はありません。再編範囲外のコードフェンスは変更前と一致し、`pirce` の初登場は22枚目のままです。`[48, 64)` は波かっこを含むAstro expressionの範囲、`[49, 54)` は `price` の範囲として維持しています。
 
