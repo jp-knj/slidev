@@ -225,12 +225,13 @@ class: body-center
 
 <!--
 予定時刻：01:16 から 01:30（14 秒）
-発話 100 文字。時間は予定であり、実測ではない。
+発話 115 文字。時間は予定であり、実測ではない。
 進行：クリックなし。発話後に次へ進む。
 
 ### 発話
 
 当時、なぜ Go を選んだのか。使い続けて、どんな問題が分かったのか。その間に、利用できる技術はどう変わったのか。最後に、どんな判断で書き直すのか。この４つの視点で歴史を紐解いていこうかなと思っています。
+基礎的な用語の解説は省きます。
 -->
 
 ---
@@ -662,12 +663,11 @@ clicks: 3
     <span v-else>Compiler が HTML の補正まで担うべきか</span>
   </template>
   <div v-if="$clicks === 2">
-    <p><code>expression</code> の後に、タグの親子関係を間違えた。</p>
     <p>Go Compiler は HTML5 Parser を拡張し、<br />ビルド時にもタグの補完と入れ子の補正を担っていた。</p>
   </div>
   <div v-else>
-    <p>HTML に似た構文を採用することと、<br />ブラウザと同じ補正を行うことを分けて考える。</p>
-    <p>属性と空白の規則は、別の論点として決める。</p>
+    <p>HTML に似た構文を採用することと、<br />ブラウザと同じ補正を行うことを分けて考えていい。</p>
+  
   </div>
   <template #reference>
     <a href="https://github.com/withastro/compiler/issues/870" target="_blank" rel="noopener noreferrer">compiler#870 の不具合報告</a>
@@ -994,77 +994,39 @@ class: ch2-detail ch2-language-overview
 <Ref><a href="https://code.visualstudio.com/api/language-extensions/language-server-extension-guide">LSP と Language Server</a> と <a href="https://volarjs.dev/core-concepts/embedded-languages/">Volar と位置対応</a> と <a href="https://github.com/withastro/language-tools/blob/b4bcb4fc02cd960936a5faee6c9cc0ad94fc4c05/packages/language-server/src/core/index.ts">従来の Astro の実装</a></Ref>
 
 <!--
-予定時刻：08:16 から 08:56（40 秒）
-発話 251 文字。時間は予定であり、実測ではない。
+予定時刻：08:16 から 09:31（75 秒）
+発話 236 文字。時間は予定であり、実測ではない。
 進行：クリックなし。発話後に次へ進む。
 
 ### 発話
 
-これが Language Tool の全体像です。Go Compiler が TSX と Source map を返し、Astro の言語対応が HTML も作ります。Volar は、これらのコードと元の Astro の位置の対応を管理します。
-HTML の属性補完は HTML Language Service、TSX の型の検査は TypeScript が担当します。結果を元の Astro の位置へ対応させ、エディタに返します。
-既存の言語の機能を使えるのが、この設計の利点です。そのために、型の情報を保つコードと、正確な位置の対応が必要になります。
+これが Language Tool の全体像です。既存の言語の機能を使えるのが、この設計の利点です。そのために、型の情報を保つコードと、正確な位置の対応が必要になります。
+TSX を作る Go Compiler は、JavaScript の構文を独自の Scanner で判別していました。構文の変化への追従や、書きかけのコードの扱いも自前で保守する必要があったんですね。ジェネリクスのように、本物の Parser なしでは直しにくい例もありました。少ない人数で、これを保守し続けるのは大変でした。
+
+### 確認メモ（発表では話さない）
+
+TSX と Source map の生成、Volar の位置対応、HTML Language Service と TypeScript の分担は図で示し、発話しない。
+独自の Scanner による構文の判別は実装上の負担として扱う。すべての不完全なコードで TSX 生成が失敗したという説明はしない。
+compiler-rs PR #34 は、Biome のエラー耐性のある Parser で TSX 変換を作り直し、適切な JavaScript の Parser なしでは直せなかった edge case を修正したと説明している。例として Frontmatter の末尾の ASI とジェネリクスが挙がっている。
+TSX 生成は 2026 年の公開提案の対象外。Rust Compiler で Language Tool の問題がすべて解消したとは説明しない。
+以前の本文にあった Props と CRLF は、従来の Go Compiler に報告された事例。本編では扱わない。現在も同じ不具合があるという説明はしない。
 
 ### 出典と確認資料（発表では話さない）
 
 - [Biome を使う実装とテスト](https://github.com/withastro/compiler-rs/pull/34/files)
--->
-
----
-layout: default
-class: ch2-detail ch2-tsx-evolution
----
-
-## TSX 変換で抱えていた課題
-
-<div class="tsx-challenges">
-  <section>
-    <h3>型の情報を正しく渡す</h3>
-    <p><code>as: Tag</code> を取り違え、使っている <code>Props</code> が未使用と診断された。</p>
-  </section>
-  <section>
-    <h3>診断を元の位置へ戻す</h3>
-    <p>CRLF で Source map の位置がずれ、診断を正しい場所へ戻せなかった。</p>
-  </section>
-  <section>
-    <h3>書きかけのコードも扱う</h3>
-    <p>独自の Scanner で JavaScript の構文を判別していた。<br />構文への対応に加え、入力途中の扱いも保守する必要があった。</p>
-  </section>
-</div>
-
-<Ref><a href="https://github.com/withastro/compiler/issues/927">Props の事例</a> と <a href="https://github.com/withastro/compiler/issues/714">CRLF の事例</a> と <a href="https://github.com/withastro/compiler-rs/pull/34">TSX 変換の見直し</a></Ref>
-
-<!--
-予定時刻：08:56 から 09:31（35 秒）
-発話 209 文字。時間は予定であり、実測ではない。
-進行：クリックなし。発話後に次へ進む。
-
-### 発話
-
-[初期表示]
-Go Compiler の TSX 変換にも課題がありました。
-as という prop を取り違え、使っている Props が未使用と診断される事例がありました。CRLF では、Source map が誤った位置を示しました。
-JavaScript の構文は独自の Scanner で判別していたので、構文への対応や書きかけの入力を扱う負担もありました。
-ビルドできるコードを作るだけでなく、型の情報と元の位置を保って、編集を支える必要があったんですね。
-
-### 確認メモ（発表では話さない）
-
-Props と CRLF は、従来の Go Compiler に報告された事例。現在も同じ不具合があるという説明はしない。
-独自の Scanner による構文の判別は実装上の負担として扱う。すべての不完全なコードで TSX 生成が失敗したという説明はしない。
-
-
-### 出典と確認資料（発表では話さない）
-
+- [TSX 変換の見直し](https://github.com/withastro/compiler-rs/pull/34)
 - [Props の不具合](https://github.com/withastro/compiler/issues/927)
 - [CRLF の位置対応の不具合](https://github.com/withastro/compiler/issues/714)
-- [TSX 変換の見直し](https://github.com/withastro/compiler-rs/pull/34)
+
 -->
+
 
 ---
 layout: default
 class: ch2-detail chapter-four
 ---
 
-## ツールの前準備を Compiler から見直す
+## Compiler がツールに渡す情報を見直す
 
 <div class="ch4-responsibilities">
   <section>
@@ -1082,13 +1044,13 @@ class: ch2-detail chapter-four
 
 <!--
 予定時刻：09:31 から 10:00（29 秒）
-発話 160 文字。時間は予定であり、実測ではない。
+発話 89 文字。時間は予定であり、実測ではない。
 進行：クリックなし。発話後に次へ進む。
 
 ### 発話
 
-検査や整形の前に、コードを作り直したり、位置の不具合に対応したりしていました。僕は、この準備を Compiler から見直す必要があると思っています。
-公開提案でも、Compiler を理解して修正できる人が少なく、保守が難しくなっていたと説明されています。機能を増やすとともに、改善を続けられる実装を考える段階だったんですね。
+僕は、Compiler がツールに渡す情報を見直す必要があると思っています。
+公開提案でも、Compiler を理解して修正できる人が少なく、保守が難しくなっていたと説明されています。
 
 ### 確認メモ（発表では話さない）
 
@@ -1219,8 +1181,6 @@ const { program } = parseSync(
 );
 ```
 
-<p class="text-2xl mt-6">第 2 章で確認した変数名と演算子を取得できる。</p>
-<p class="text-2xl mt-4">Astro Template Syntax への対応は、Astro が実装する。</p>
 </div>
 
 <Ref href="https://oxc.rs/docs/guide/usage/parser.html">Oxc Parser</Ref>
@@ -1465,7 +1425,7 @@ clicks: 1
 ## Go と Rust のツールチェーン
 
 <div class="ch4-state">
-  <p>{{ $clicks === 0 ? 'Build 時の変換で HTML correction' : 'Compiler は HTML correction を行わない' }}</p>
+  <p>{{ $clicks === 0 ? 'ビルド時の変換で HTML correction' : 'Compiler は HTML correction を行わない' }}</p>
 </div>
 <Overview
   compiler-frame
@@ -1676,7 +1636,6 @@ clicks: 1
     <section>
       <h3>MDX のコミュニティでの経験</h3>
       <p>Remco のサポートを受けて貢献</p>
-      <p>不完全な import と export の編集支援を改善</p>
       <p class="mdx-contribution-detail">試作から、人との交流が続いた</p>
     </section>
   </div>
@@ -1702,7 +1661,7 @@ clicks: 1
 
 <!--
 予定時刻：18:50 から 19:50（60 秒）
-発話 345 文字。時間は予定であり、実測ではない。
+発話 289 文字。時間は予定であり、実測ではない。
 進行：1 回のクリックを発話に合わせる。
 
 ### 発話
@@ -1711,7 +1670,7 @@ clicks: 1
 ここからは Astro Compiler とは別の試作です。僕は、Markdown と MDX にも高速な実装を使いたいと思い、2025 年 7 月に Rust の MDX Compiler の統合、8 月に AST Bridge を提案しました。既存の remark と rehype のプラグインとの互換性が課題でした。
 採用の見通しは立ちませんでしたが、MDX のコミュニティとの交流は続きました。
 [クリック 1]
-Remco にサポートしてもらいながら、不完全な import と export で補完や診断が止まる問題を改善しました。親切に教えてくれた Remco に感謝しています。
+親切に教えてくれた Remco に感謝しています。
 冒頭の Astro Japan Community もそうですが、人と話し、助けてもらうことで、自分が取り組めることが増えました。僕にとって OSS の面白さは、こういう経験にもあります。
 
 ### 確認メモ（発表では話さない）
@@ -1806,40 +1765,6 @@ CPU プロファイルでは、負荷が集中する場所をサンプリング�
 - [hyperfine の繰り返し計測とキャッシュの条件](https://github.com/sharkdp/hyperfine#usage)
 -->
 
----
-layout: default
-class: body-center
----
-
-## Astro と Content Processor の分担
-
-<div class="grid grid-cols-2 gap-10 mt-10 text-2xl leading-relaxed">
-  <section><h3>Astro</h3><p>Processor を選ぶ入口</p><p>Collections とビルドへの統合</p></section>
-  <section><h3>Processor</h3><p>Markdown と MDX のパースと変換</p><p>plugin の実行</p></section>
-</div>
-<div class="mt-8 text-xl leading-relaxed"><p>remark と rehype plugin を使うなら unified</p><p>Sätteri への移行では plugin の API も確認する</p></div>
-
-<Ref href="https://docs.astro.build/en/guides/markdown-content/#markdown-processors">Astro の Markdown Processors</Ref>
-
-<!--
-予定時刻：20:55 から 21:20（25 秒）
-発話 172 文字。時間は予定であり、実測ではない。
-進行：クリックなし。発話後に次へ進む。
-
-### 発話
-
-実際に導入するときは、Astro が Collections とビルドへの統合を担当し、Processor が Markdown と MDX の変換とプラグインの実行を担当します。
-既存の remark と rehype を使うなら unified、Sätteri に移るならプラグインの API を確認します。高速化だけでなく、今のサイトの機能を続けられるかも判断の条件です。
-
-### 確認メモ（発表では話さない）
-
-Astro Compiler と Content Processor は別に選ぶ。
-
-
-### 出典と確認資料（発表では話さない）
-
-- [Astro の Markdown Processors](https://docs.astro.build/en/guides/markdown-content/#markdown-processors)
--->
 
 ---
 layout: default
@@ -1856,7 +1781,7 @@ class: mdx-source-post
 <Ref><a href="https://npmx.dev/package-stats/satteri/v/0.10.5?end=2026-09-30&start=2025-10-02#trends">npmx のグラフ</a> と <a href="https://bsky.app/profile/erika.florist/post/3mj2tfwryw226">Erika の Sätteri 紹介</a></Ref>
 
 <!--
-予定時刻：21:20 から 21:45（25 秒）
+予定時刻：20:55 から 21:20（25 秒）
 発話 146 文字。時間は予定であり、実測ではない。
 進行：クリックなし。発話後に次へ進む。
 
@@ -1891,7 +1816,7 @@ class: flex flex-col justify-center h-full intro-question
 </a>
 
 <!--
-予定時刻：21:45 から 21:50（5 秒）
+予定時刻：21:20 から 21:25（5 秒）
 発話 42 文字。時間は予定であり、実測ではない。
 進行：クリックなし。発話後に次へ進む。
 
@@ -1946,7 +1871,7 @@ class: body-center
 </div>
 
 <!--
-予定時刻：21:50 から 22:50（60 秒）
+予定時刻：21:25 から 22:25（60 秒）
 発話 312 文字。時間は予定であり、実測ではない。
 進行：クリックなし。発話後に次へ進む。
 
@@ -1973,7 +1898,7 @@ class: text-center
 </div>
 
 <!--
-予定時刻：22:50 から 23:05（15 秒）
+予定時刻：22:25 から 22:40（15 秒）
 発話 50 文字。時間は予定であり、実測ではない。
 進行：クリックなし。発話後に次へ進む。
 
@@ -1992,7 +1917,7 @@ class: text-center
 <div class="mt-8 text-xl ">Vue Fes 楽しんでね。</div>
 
 <!--
-予定時刻：23:05 から 23:35（30 秒）
+予定時刻：22:40 から 23:10（30 秒）
 発話 111 文字。時間は予定であり、実測ではない。
 進行：クリックなし。発話後に次へ進む。
 
@@ -2000,71 +1925,4 @@ class: text-center
 
 Astro と MDX の開発で助けてくれた皆さん、そして、きっかけをくれた Vue Fes に感謝しています。受け取った知識や助けを、僕も次の人へ渡していきたいと思っています。
 ありがとうございました。Vue Fes、楽しんでください。
--->
-
----
-layout: default
-class: ch2-detail code-example-dense ch2-linter-check
-disabled: true
----
-
-## 未定義の変数をどう検出するのか
-
-<div class="ch2-context-flow ch2-lint-context" aria-label="Linter の全体図から、AST の取得と位置対応と診断の工程を再掲">
-  <div class="ch2-context-node">AST</div>
-  <svg class="ch2-context-arrow" viewBox="0 0 28 24" aria-hidden="true"><path d="M1 12 H25 M19 6 L25 12 L19 18" /></svg>
-  <div class="ch2-context-node">AST とスコープ情報<span>位置を元の .astro に対応させる</span></div>
-  <svg class="ch2-context-arrow" viewBox="0 0 28 24" aria-hidden="true"><path d="M1 12 H25 M19 6 L25 12 L19 18" /></svg>
-  <div class="ch2-context-node is-current">ESLint の診断</div>
-</div>
-
-<div class="ch2-cols ch2-scope">
-<div>
-<div class="ch2-label">ここで変数名を誤記する</div>
-
-```astro
----
-const price = 10;
-const amount = 3;
----
-
-<p>{pirce * amount}</p>
-<!-- pirce は診断のための誤記 -->
-```
-
-</div>
-<div>
-<div class="ch2-label">スコープ情報で宣言と参照を照合する</div>
-<div class="ch2-lint-matches"><div><code>price</code><span>宣言あり</span></div><div><code>amount</code><span>参照先の宣言あり</span></div><div><code>pirce</code><span>参照先の宣言なし</span></div></div>
-<div class="ch2-label flex items-center gap-2"><logos-astro-icon class="w-5 h-5 shrink-0" aria-hidden="true" />.astro への診断</div>
-<pre class="ch2-lint-diagnostic">&lt;p&gt;{<span>pirce</span> * amount}&lt;/p&gt;</pre>
-<div class="ch2-note">元のコードの範囲 <code>[49, 54)</code><br /><code>no-undef</code>: <code>'pirce' is not defined.</code></div>
-</div>
-</div>
-<div class="ch2-summary">未定義の参照を検出し、元の5文字に波線を表示する</div>
-
-<Ref href="https://github.com/ota-meshi/astro-eslint-parser/blob/v1.2.2/src/parser/index.ts">ESLint へ AST を渡すまで</Ref>
-
-<!--
-本編から省略。参考としてソースに保持する。
-
-予定時間 05:30 から 05:45（15 秒）。発話 71 文字。予定配分であり、実測ではない。
-
-### 進行案内（発表では話さない）
-
-ページ内のクリックなし。発話後に次へ進む。
-
-### 発話
-
-price を pirce と誤記すると、対応する宣言がありません。スコープ情報でこれを検出し、位置の対応を使って、元の五文字に波線を表示できます。
-
-
-### 確認メモ（発表では話さない）
-
-ESLint の no-undef は未定義の参照を検査する。正しい綴りを推測して修正する機能ではない。元の検証は ESLint 9.36.0 と astro-eslint-parser 1.2.2。
-
-
-### 出典と確認資料（発表では話さない）
-
-- [astro-eslint-parser と ESLint への返却値](https://github.com/ota-meshi/astro-eslint-parser/blob/v1.2.2/src/parser/index.ts)
 -->
