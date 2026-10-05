@@ -259,7 +259,6 @@ class: ch1-start
 ## Astro 0.x の出発点
 
 <div class="flex flex-col gap-8">
-  <div class="text-2xl">Compiler とビルド基盤は、別の役割を持つ</div>
   <Overview
     visible="source,compiler,build,browser"
     :labels="{ compiler: 'Svelte Compiler', build: 'Snowpack' }"
@@ -659,14 +658,13 @@ clicks: 3
 
 <Overlay v-if="$clicks >= 2" aria-label="HTML の規則と Compiler の担当範囲">
   <template #title>
-    <span v-if="$clicks === 2">HTML の規則による補正とは別の不具合</span>
+    <span v-if="$clicks === 2">HTML の規則による補正</span>
     <span v-else>Compiler が HTML の補正まで担うべきか</span>
   </template>
   <div v-if="$clicks === 2">
     <p>Go Compiler は HTML5 Parser を拡張し、<br />ビルド時にもタグの補完と入れ子の補正を担っていた。</p>
   </div>
   <div v-else>
-    <p>HTML に似た構文を採用することと、<br />ブラウザと同じ補正を行うことを分けて考えていい。</p>
   
   </div>
   <template #reference>
@@ -1532,7 +1530,7 @@ class: chapter-four ch4-tools
 
 <div class="ch4-responsibilities">
   <section><h3>Rust Compiler の公開 API</h3><ul class="ch4-list"><li>parse() で AST と位置情報を返す</li><li>transform() でビルドのコードを作る</li></ul></section>
-  <section><h3>受け取った後の担当</h3><ul class="ch4-list"><li>Linter は規則に基づいて検査する</li><li>Formatter は改行と字下げを決める</li><li>Language Tool の TSX 生成は別の要件</li></ul></section>
+  <section><h3>受け取った後の担当</h3><ul class="ch4-list"><li>Linter は規則に基づいて検査する</li><li>Formatter は改行と字下げを決める</li></ul></section>
 </div>
 
 <Ref><a href="https://github.com/withastro/compiler-rs">Rust Compiler の公開 API</a> と <a href="https://github.com/withastro/roadmap/issues/1356">RFC の対象範囲</a></Ref>
@@ -1605,7 +1603,7 @@ layout: section
 ---
 
 # MDX と Sätteri
-## Rust と JavaScript の分担を、別の場所でも試した
+## Rust と JavaScript の分担
 
 <!--
 予定時刻：18:45 から 18:50（5 秒）
