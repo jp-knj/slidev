@@ -410,8 +410,8 @@ class: go-era-slide go-era-build
 </div>
 
 <Ref>
-  <a class="block w-fit" href="https://natemoo.re/posts/hello-from-the-other-side/" target="_blank" rel="noreferrer">Nate Moore: Hello from the other side</a>
-  <a class="block w-fit mt-1" href="https://www.youtube.com/watch?v=bmWQqAKLgT4&amp;t=1221s" target="_blank" rel="noreferrer">VITE: The Documentary（Astro の Vite 採用は 20:21 から）</a>
+  <li><a href="https://natemoo.re/posts/hello-from-the-other-side/" target="_blank" rel="noreferrer">Nate Moore: Hello from the other side</a></li>
+  <li><a href="https://www.youtube.com/watch?v=bmWQqAKLgT4&amp;t=1221s" target="_blank" rel="noreferrer">VITE: The Documentary（Astro の Vite 採用は 20:21 から）</a></li>
 </Ref>
 
 <!--
@@ -888,23 +888,23 @@ class: ch2-detail ch2-formatter-failure
 clicks: 2
 ---
 
-## コードの再生成で、整形が止まった
+## Formatter が整形を始めるまで
 
 <FormatterFailureExample :step="$clicks" />
 
 <!--
 予定時刻：07:11 から 07:51（40 秒）
-発話 219 文字。時間は予定であり、実測ではない。
+発話 239 文字。時間は予定であり、実測ではない。
 進行：2 回のクリックを発話に合わせる。
 
 ### 発話
 
 [初期表示]
-Formatter でも、Babel に渡すコードを作り直していました。この例の子には TextNode と p 要素と空の Fragment があります。TextNode.value はすでに文字列です。
+Go Compiler が返すのは Astro AST です。この expression の子には、TextNode、p 要素、空の Fragment があります。JavaScript expression 全体の AST はありません。
 [クリック 1]
-プラグインはタグをコードの文字列に戻し、TextNode.value と連結します。そのとき空の Fragment が不正なタグになってしまいました。
+プラグインは TextNode.value をそのまま使い、タグを文字列に戻して連結します。ここで空の Fragment が、不正なタグになってしまいました。
 [クリック 2]
-Babel が構文エラーを返し、整形が止まります。元のコードは扱えていたのに、整形の準備で失敗したんですね。
+このコードを Babel に渡して、expression の AST を得ようとします。でも構文エラーで、整形を始められません。
 
 ### 確認メモ（発表では話さない）
 
@@ -929,54 +929,38 @@ layout: default
 class: ch2-detail chapter-four ch2-formatter-requirements
 ---
 
-## Formatter が担当する仕事に集中する
+## Compiler から受け取りたい情報
 
 <div class="ch4-responsibilities">
   <section>
-    <h3>Compiler から受け取る</h3>
-    <ul class="ch4-list"><li>タグとコメントを含む AST</li><li>元のコードの正確な位置</li><li>AST を得るためのコード再生成を減らす</li></ul>
-  </section>
-  <section>
-    <h3>Prettier で整形する</h3>
-    <ul class="ch4-list"><li>AST を Prettier が扱う形に変換</li><li>Doc に文字と改行候補と字下げを記録</li><li>行幅に合わせて文字列を生成</li></ul>
+    <ul class="ch4-list">
+      <li>JavaScript expression の AST</li>
+      <li>Astro のタグとコメント</li>
+      <li>元のコードの正確な位置</li>
+    </ul>
   </section>
 </div>
 
-<Ref href="https://prettier.io/docs/plugins#the-printing-process">Prettier の整形工程</Ref>
+<Ref href="https://github.com/withastro/roadmap/discussions/1306">新 Compiler と Prettier plugin の検討</Ref>
 
 <!--
 予定時刻：07:51 から 08:16（25 秒）
-発話 144 文字。時間は予定であり、実測ではない。
+発話 112 文字。時間は予定であり、実測ではない。
 進行：クリックなし。発話後に次へ進む。
 
 ### 発話
 
-欲しかったのは、タグやコメント、元の位置も含むパース結果です。AST を得るためにコードを作り直す工程を減らしたいんですね。
-その後、Prettier は AST から Doc を作ります。Doc は文字と改行候補と字下げの指示です。行幅に合わせて整形する仕事は、引き続き Formatter が担当します。
+Compiler から受け取りたいのは、JavaScript expression の AST と、Astro のタグやコメント、元のコードの正確な位置です。
+この情報があれば、先ほどのようにコードを作り直してパースする工程を減らせます。
 
 ### 確認メモ（発表では話さない）
 
 このページは第 2 章の要求を整理する。Rust Compiler が再パースをすべて廃止したという説明はしない。Astro の node を含む AST は、Prettier の AST とそのまま同じとは限らず、対応する Printer や変換が必要になる。
-旧ページの group と softline と indent の詳説は本編では扱わない。group は改行を判断するまとまり、softline は 1 行なら空文字で改行時には改行、indent は字下げを表す。JavaScript expression を解析して AST を取得する工程と、AST から Doc を作る工程は区別する。
-前の Fragment の例では、Astro AST に Fragment は保持されていた。必要なのは、タグの認識に加えて JavaScript expression 全体の AST を提供し、整形ツールが文字列の再生成と再解析を引き受ける範囲を減らすこと。
-
+前の Fragment の例では、Astro AST に Fragment は保持されていた。JavaScript expression 全体の AST も取得できれば、整形ツールがコードを作り直してパースする工程を減らせる。
 
 ### 出典と確認資料（発表では話さない）
 
 - [新 Compiler と Prettier plugin の検討](https://github.com/withastro/roadmap/discussions/1306)
-- [Prettier の整形工程](https://prettier.io/docs/plugins#the-printing-process)
-- [Doc の定義と命令](https://github.com/prettier/prettier/blob/main/commands.md)
-
-
-### 確認メモ（発表では話さない）
-
-prettier-plugin-astro 0.14.1 と Prettier 3.6.2 の例。Babel が解析し、Prettier の Printer が Doc を作る。再解析と整形指示への変換は別の工程。
-
-
-### 出典と確認資料（発表では話さない）
-
-- [Prettier の Parser と Printer](https://prettier.io/docs/plugins)
-- [Prettier の整形方式](https://prettier.io/docs/technical-details)
 - [prettier-plugin-astro 0.14.1 と JavaScript expression の整形](https://github.com/withastro/prettier-plugin-astro/blob/v0.14.1/src/printer/embed.ts)
 -->
 
@@ -989,7 +973,11 @@ class: ch2-detail ch2-language-overview
 
 <LanguageToolOverview />
 
-<Ref><a href="https://code.visualstudio.com/api/language-extensions/language-server-extension-guide">LSP と Language Server</a> と <a href="https://volarjs.dev/core-concepts/embedded-languages/">Volar と位置対応</a> と <a href="https://github.com/withastro/language-tools/blob/b4bcb4fc02cd960936a5faee6c9cc0ad94fc4c05/packages/language-server/src/core/index.ts">従来の Astro の実装</a></Ref>
+<Ref>
+  <li><a href="https://code.visualstudio.com/api/language-extensions/language-server-extension-guide">LSP と Language Server</a></li>
+  <li><a href="https://volarjs.dev/core-concepts/embedded-languages/">Volar と位置対応</a></li>
+  <li><a href="https://github.com/withastro/language-tools/blob/b4bcb4fc02cd960936a5faee6c9cc0ad94fc4c05/packages/language-server/src/core/index.ts">従来の Astro の実装</a></li>
+</Ref>
 
 <!--
 予定時刻：08:16 から 09:31（75 秒）
@@ -1024,33 +1012,35 @@ layout: default
 class: ch2-detail chapter-four
 ---
 
-## Compiler がツールに渡す情報を見直す
+## Compiler はどうあるべきか
 
 <div class="ch4-responsibilities">
   <section>
-    <h3>Compiler に求めること</h3>
-    <ul class="ch4-list"><li>パース結果と正確な位置を提供する</li><li>TSX への変換でも情報を保つ</li></ul>
-  </section>
-  <section>
-    <h3>ツールが担当すること</h3>
-    <ul class="ch4-list"><li>規則に基づく検査と整形</li><li>型の診断と補完</li></ul>
+    <h3>僕が Compiler に求めること</h3>
+    <ul class="ch4-list">
+      <li>JavaScript expression の AST と正確な位置情報を返す</li>
+      <li>TSX への変換でも、型の情報と元の位置との対応を保つ</li>
+      <li>開発チームが修正と構文への対応を続けられる実装にする</li>
+    </ul>
   </section>
 </div>
-<p class="ch2-summary">独自実装の保守も含め、Compiler の設計を見直したい</p>
 
 <Ref href="https://github.com/withastro/roadmap/issues/1356">Compiler の保守範囲を見直す公開提案</Ref>
 
 <!--
 予定時刻：09:31 から 10:00（29 秒）
-発話 89 文字。時間は予定であり、実測ではない。
+発話 181 文字。時間は予定であり、実測ではない。
 進行：クリックなし。発話後に次へ進む。
 
 ### 発話
 
-僕は、Compiler がツールに渡す情報を見直す必要があると思っています。
-公開提案でも、Compiler を理解して修正できる人が少なく、保守が難しくなっていたと説明されています。
+ここまでの例から、僕は Compiler に、ビルドと編集の両方で使える情報を返してほしいと思っています。
+JavaScript expression の AST と正確な位置情報。TSX に変換するときも、型の情報と元の位置との対応が必要です。
+そして、開発チームが修正を続けられる実装であることも大切だと思います。次は、そのために利用できる基盤がどう変わったかを見ていきます。
 
 ### 確認メモ（発表では話さない）
+
+Compiler を利用する立場からの個人的な意見として話す。登壇者自身が Compiler の実装を担当しているとは説明しない。
 
 第 2 章では、ツールが必要とする情報、Compiler の情報不足と不具合、ツールが担当する変換を区別する。Virtual Code と位置対応と Doc の生成を、それ自体が Go Compiler の不具合であるとは説明しない。
 未定義の参照の詳説は本編から省略し、補足にする。関連ページは再解析のためのコード生成の途中の不具合、関連ページは Compiler と Formatter の分担に改稿した。JSX で囲む理由と Doc の命令の詳説は確認メモに移した。LSP と Volar の分担は本編で説明する。
@@ -1493,7 +1483,11 @@ const name = "Astro";
 </div>
 </div>
 
-<Ref><a href="https://github.com/withastro/compiler/blob/04170031ce2f30d1882fe480e87998197e0016aa/SYNTAX_SPEC.md">Astro Template Syntax の仕様ドラフト</a> と <a href="https://docs.astro.build/en/guides/upgrade-to/v7/#new-default-whitespace-handling-compresshtml-jsx">v7 の空白規則</a> と <a href="https://docs.astro.build/en/reference/configuration-reference/#compresshtml">compressHTML の設定</a></Ref>
+<Ref>
+  <li><a href="https://github.com/withastro/compiler/blob/04170031ce2f30d1882fe480e87998197e0016aa/SYNTAX_SPEC.md">Astro Template Syntax の仕様ドラフト</a></li>
+  <li><a href="https://docs.astro.build/en/guides/upgrade-to/v7/#new-default-whitespace-handling-compresshtml-jsx">v7 の空白規則</a></li>
+  <li><a href="https://docs.astro.build/en/reference/configuration-reference/#compresshtml">compressHTML の設定</a></li>
+</Ref>
 
 <!--
 予定時刻：15:35 から 16:35（60 秒）
@@ -1521,81 +1515,43 @@ compressHTML は既存の設定。Astro v7 では既定値が true から 'jsx' 
 - [Astro Template Syntax の仕様ドラフト](https://github.com/withastro/compiler/blob/04170031ce2f30d1882fe480e87998197e0016aa/SYNTAX_SPEC.md)
 -->
 
----
-layout: default
-class: chapter-four ch4-tools
----
-
-## パース結果を共有し、ツールが機能を作る
-
-<div class="ch4-responsibilities">
-  <section><h3>Rust Compiler の公開 API</h3><ul class="ch4-list"><li>parse() で AST と位置情報を返す</li><li>transform() でビルドのコードを作る</li></ul></section>
-  <section><h3>受け取った後の担当</h3><ul class="ch4-list"><li>Linter は規則に基づいて検査する</li><li>Formatter は改行と字下げを決める</li></ul></section>
-</div>
-
-<Ref><a href="https://github.com/withastro/compiler-rs">Rust Compiler の公開 API</a> と <a href="https://github.com/withastro/roadmap/issues/1356">RFC の対象範囲</a></Ref>
-
-<!--
-予定時刻：16:35 から 17:45（70 秒）
-発話 355 文字。時間は予定であり、実測ではない。
-進行：クリックなし。発話後に次へ進む。
-
-### 発話
-
-第 2 章では、ツールが検査や整形を始めるまでの準備が問題でした。新しい API からパース結果と位置情報を受け取れることで、その準備を変えられます。
-ただ、何を警告するか、どこで改行するかまで Compiler が決めるわけではありません。規則の検査は Linter、整形は Formatter が担当します。ツールが期待するデータへの調整も必要です。
-また、AST を返す API と、Language Tool が必要とする TSX の生成は別です。公開提案でも TSX の生成は対象外とされています。ここで、言語ツールの問題がすべて解消したとは言えません。
-僕は今後、TSX の生成についても既存の基盤を使う設計が進むと期待しています。ただ、それは今の成果と分けて話したいところです。現在の再利用の具体例が、次の Prettier plugin です。
-
-### 確認メモ（発表では話さない）
-
-RFC は実行コードの生成と Language Server に渡す TSX を別の要件として扱う。現在のツールがすべて Rust Compiler へ移行済みとは説明しない。
-
-
-### 出典と確認資料（発表では話さない）
-
-- [Rust Compiler の公開 API と AST](https://github.com/withastro/compiler-rs)
--->
 
 ---
 layout: default
 class: chapter-four ch4-formatter-reuse
 ---
 
-## Compiler を整形ツールでも再利用する
+## Oxfmt の Astro 対応計画
 
 <FormatterReuse />
 
-<Ref><a href="https://github.com/withastro/prettier-plugin-astro/blob/12c5a89d63227c7992f63a1d4e5ad08baecbf705/src/parser.ts">Astro plugin の実装</a> と <a href="https://github.com/oxc-project/oxc/issues/19715">Oxfmt の対応計画</a></Ref>
+<Ref>
+  <li><a href="https://github.com/oxc-project/oxc/issues/19715">Oxfmt の Astro 対応計画</a></li>
+  <li><a href="https://github.com/withastro/prettier-plugin-astro/blob/12c5a89d63227c7992f63a1d4e5ad08baecbf705/src/parser.ts">Astro plugin の実装</a></li>
+</Ref>
 
 <!--
-予定時刻：17:45 から 18:45（60 秒）
-発話 372 文字。時間は予定であり、実測ではない。
+予定時刻：16:35 から 17:10（35 秒）
+発話 173 文字。時間は予定であり、実測ではない。
 進行：クリックなし。発話後に次へ進む。
 
 ### 発話
 
-Rust Compiler を使う Prettier plugin は公開されています。第 2 章では、文字列化の途中で Fragment が不正なタグになり、整形が止まる例を見ました。
-新しいプラグインは Compiler の parse を呼び、受け取った AST を Prettier が扱う形に調整します。コメントの扱いなど、プラグインが担当する仕事もあります。その上で Prettier の機能を使って整形します。
-Oxfmt でも、このプラグインと Rust Compiler を使う計画があります。資料を確認した 2026 年 10 月 1 日時点では、Astro 対応はまだ提供されていません。
-僕は、自分たちの Compiler が別のツールからも利用されることに意味があると思っています。パースした情報の受け渡しを決めると、Compiler と Formatter が、それぞれの機能を改善できます。
+Oxc の Formatter、Oxfmt にも Astro への対応計画があります。
+既存の Astro の Prettier plugin を利用し、プラグインが Rust Compiler から AST を受け取る設計です。
+Astro のために作った Compiler とプラグインを、別の Formatter でも再利用できるんですね。僕は、こういう広がりも面白いと思っています。
 
 ### 確認メモ（発表では話さない）
 
-上段は公開済みの呼び出し関係。Astro plugin の Parser は Rust Compiler の parse() を呼ぶ。AST の調整とコメントの扱い、Prettier の ESTree Printer の利用も行う。Rust Compiler に変われば、すべての調整や再パースが不要になるとは説明しない。
-
-下段は Oxfmt の対応計画で、実装済みの機能ではない。2026 年 10 月 1 日の公式の対応表は Astro を未対応とし、Issue #19715 の Astro の項目も未完了。計画では Prettier plugin と @astrojs/compiler-rs を利用する。Astro の全体を Oxfmt が直接 Rust で整形するという説明はしない。
-
-2026 年 8 月 20 日の Erika の投稿は、Astro の Prettier plugin 1.0 の beta の紹介。発表者が関心を持った今後の再利用の例として Oxfmt を紹介し、Astro が Rust を選んだ原因としては扱わない。
-
+2026 年 10 月 6 日に Issue #19715 を確認した。Astro の項目は未完了。計画では Oxfmt に prettier-plugin-astro を組み込み、Compiler は別にインストールする。図の破線は対応計画を表し、矢印は利用と呼び出しの順序を示す。Astro 全体を Oxfmt が直接 Rust で整形するという説明はしない。
+Astro plugin の Parser は Rust Compiler の parseAstro(source) から AST と診断を取得し、コメントなどを調整する。Printer は Astro の node を扱う機能と Prettier の ESTree Printer を組み合わせる。図ではこれらを Astro の Prettier plugin としてまとめる。
+このページは再利用の計画を紹介する。AST の提供と Language Tool の TSX 生成は別の要件であり、言語ツール全体の改善済みを意味しない。
 
 ### 出典と確認資料（発表では話さない）
 
-- [Erika の投稿と Prettier plugin](https://bsky.app/profile/erika.florist/post/3mtjah7okdc22)
+- [Oxfmt の Astro 対応計画](https://github.com/oxc-project/oxc/issues/19715)
 - [Astro plugin の Parser](https://github.com/withastro/prettier-plugin-astro/blob/12c5a89d63227c7992f63a1d4e5ad08baecbf705/src/parser.ts)
 - [Astro plugin の Printer](https://github.com/withastro/prettier-plugin-astro/blob/12c5a89d63227c7992f63a1d4e5ad08baecbf705/src/printer/index.ts)
-- [Oxfmt の対応表](https://oxc.rs/compatibility.html)
-- [Oxfmt の Astro 対応計画](https://github.com/oxc-project/oxc/issues/19715)
 -->
 
 ---
@@ -1606,7 +1562,7 @@ layout: section
 ## Rust と JavaScript の分担
 
 <!--
-予定時刻：18:45 から 18:50（5 秒）
+予定時刻：17:10 から 17:15（5 秒）
 発話 27 文字。時間は予定であり、実測ではない。
 進行：クリックなし。発話後に次へ進む。
 
@@ -1655,10 +1611,13 @@ clicks: 1
   </section>
 </div>
 
-<Ref><a href="https://github.com/withastro/astro/pull/14080">Compiler の統合提案</a> と <a href="https://github.com/withastro/astro/pull/14181">AST Bridge の提案</a></Ref>
+<Ref>
+  <li><a href="https://github.com/withastro/astro/pull/14080">Compiler の統合提案</a></li>
+  <li><a href="https://github.com/withastro/astro/pull/14181">AST Bridge の提案</a></li>
+</Ref>
 
 <!--
-予定時刻：18:50 から 19:50（60 秒）
+予定時刻：17:15 から 18:15（60 秒）
 発話 289 文字。時間は予定であり、実測ではない。
 進行：1 回のクリックを発話に合わせる。
 
@@ -1727,7 +1686,7 @@ clicks: 2
 <Ref href="https://github.com/jp-knj/xmdx">xmdx と Astro integration</Ref>
 
 <!--
-予定時刻：19:50 から 20:55（65 秒）
+予定時刻：18:15 から 19:20（65 秒）
 発話 359 文字。時間は予定であり、実測ではない。
 進行：2 回のクリックを発話に合わせる。
 
@@ -1776,10 +1735,13 @@ class: mdx-source-post
   <img class="satteri-download-screenshot" src="./images/satteri-npmx-2026-10-02.jpg" alt="npmx の satteri の週ごとのダウンロード推移。2026 年 6 月以降に増加し、直近は週 400 万回を超えている。" />
 </div>
 
-<Ref><a href="https://npmx.dev/package-stats/satteri/v/0.10.5?end=2026-09-30&start=2025-10-02#trends">npmx のグラフ</a> と <a href="https://bsky.app/profile/erika.florist/post/3mj2tfwryw226">Erika の Sätteri 紹介</a></Ref>
+<Ref>
+  <li><a href="https://npmx.dev/package-stats/satteri/v/0.10.5?end=2026-09-30&start=2025-10-02#trends">npmx のグラフ</a></li>
+  <li><a href="https://bsky.app/profile/erika.florist/post/3mj2tfwryw226">Erika の Sätteri 紹介</a></li>
+</Ref>
 
 <!--
-予定時刻：20:55 から 21:20（25 秒）
+予定時刻：19:20 から 19:45（25 秒）
 発話 146 文字。時間は予定であり、実測ではない。
 進行：クリックなし。発話後に次へ進む。
 
@@ -1814,7 +1776,7 @@ class: flex flex-col justify-center h-full intro-question
 </a>
 
 <!--
-予定時刻：21:20 から 21:25（5 秒）
+予定時刻：19:45 から 19:50（5 秒）
 発話 42 文字。時間は予定であり、実測ではない。
 進行：クリックなし。発話後に次へ進む。
 
@@ -1869,7 +1831,7 @@ class: body-center
 </div>
 
 <!--
-予定時刻：21:25 から 22:25（60 秒）
+予定時刻：19:50 から 20:50（60 秒）
 発話 312 文字。時間は予定であり、実測ではない。
 進行：クリックなし。発話後に次へ進む。
 
@@ -1896,7 +1858,7 @@ class: text-center
 </div>
 
 <!--
-予定時刻：22:25 から 22:40（15 秒）
+予定時刻：20:50 から 21:05（15 秒）
 発話 50 文字。時間は予定であり、実測ではない。
 進行：クリックなし。発話後に次へ進む。
 
@@ -1915,7 +1877,7 @@ class: text-center
 <div class="mt-8 text-xl ">Vue Fes 楽しんでね。</div>
 
 <!--
-予定時刻：22:40 から 23:10（30 秒）
+予定時刻：21:05 から 21:35（30 秒）
 発話 111 文字。時間は予定であり、実測ではない。
 進行：クリックなし。発話後に次へ進む。
 

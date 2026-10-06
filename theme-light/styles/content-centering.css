@@ -11,7 +11,16 @@
 }
 
 .slidev-layout.default:not(.community-story):has(> :is(h1, h2, .go-era-heading)):has(> .ref-pinned) {
-    padding-bottom: 56px;
+    padding-bottom: 64px;
+}
+
+/* Reserve space for the reference list below the centered slide content. */
+.slidev-layout.default:not(.community-story):has(> :is(h1, h2, .go-era-heading)):has(> .ref-pinned .ref-list > li:nth-child(2)) {
+    padding-bottom: 90px;
+}
+
+.slidev-layout.default:not(.community-story):has(> :is(h1, h2, .go-era-heading)):has(> .ref-pinned .ref-list > li:nth-child(3)) {
+    padding-bottom: 116px;
 }
 
 .slidev-layout.default:not(.community-story):has(> :is(h1, h2, .go-era-heading))::before,
