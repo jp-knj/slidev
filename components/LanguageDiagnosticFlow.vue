@@ -9,8 +9,8 @@
       <section><svg class="diagnostic-down" viewBox="0 0 24 26" aria-hidden="true"><path d="M12 0 V23 M6 17 L12 23 L18 17" /></svg><div class="diagnostic-owner"><logos-astro-icon class="diagnostic-logo" aria-hidden="true" /><strong>Astro の言語対応</strong></div><span>Source map の形式を変換</span><div class="diagnostic-mapping">Volar の位置対応データ</div><small>元の文字と生成後の文字を対応させる</small></section>
     </div>
     <svg class="diagnostic-merge" viewBox="0 0 868 30" aria-hidden="true"><path d="M210 0 V12 H434 M658 0 V12 H434 M434 12 V27 M428 21 L434 27 L440 21" /></svg>
-    <div class="diagnostic-volar"><logos-volar class="diagnostic-logo" aria-hidden="true" /><strong>Volar</strong><span>診断の範囲を元の .astro へ対応させる</span></div>
-    <div class="diagnostic-return"><svg viewBox="0 0 24 30" aria-hidden="true"><path d="M12 0 V27 M6 21 L12 27 L18 21" /></svg><span>Astro Language Server が LSP で返す</span></div>
+    <div class="diagnostic-volar"><logos-volar class="diagnostic-logo" aria-hidden="true" /><strong>Volar</strong><span>診断の範囲を.astro へ対応させる</span></div>
+    <div class="diagnostic-return"><svg viewBox="0 0 24 30" aria-hidden="true"><path d="M12 0 V27 M6 21 L12 27 L18 21" /></svg><span>Language Tool が診断を返す</span></div>
     <div class="diagnostic-editor"><div class="diagnostic-owner"><logos-visual-studio-code class="diagnostic-logo" aria-hidden="true" /><strong>Editor</strong></div><pre><code>{product.<mark>nmae</mark>}</code></pre><span>元の 4 文字に波線を表示</span></div>
   </div>
 </template>

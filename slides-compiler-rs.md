@@ -381,7 +381,7 @@ class: body-center
 
 ### 確認メモ（発表では話さない）
 
-Vite 自体を Go で実装したという説明ではない。製品の採用時期は既存の参照資料に基づく。
+Vite 自体を Go で実装したという説明ではない。製品の採用時期は参照資料に基づく。
 -->
 
 ---
@@ -401,6 +401,7 @@ class: go-era-slide go-era-build
     visible="source,compiler,build,browser"
     era="go"
     :subnotes="{ build: 'Rollup\nesbuild' }"
+    :term-markers="{ 'html5-parser': true }"
   />
 
   <div class="go-era-reason">
@@ -409,10 +410,12 @@ class: go-era-slide go-era-build
   </div>
 </div>
 
-<Ref>
+<TermNotes  :notes="['Parser は、コードを文法に沿ってパースし、木などのデータにするプログラム。']">
+<Ref inline>
   <li><a href="https://natemoo.re/posts/hello-from-the-other-side/" target="_blank" rel="noreferrer">Nate Moore: Hello from the other side</a></li>
   <li><a href="https://www.youtube.com/watch?v=bmWQqAKLgT4&amp;t=1221s" target="_blank" rel="noreferrer">VITE: The Documentary（Astro の Vite 採用は 20:21 から）</a></li>
 </Ref>
+</TermNotes>
 
 <!--
 予定時刻：02:10 から 03:00（50 秒）
@@ -461,7 +464,7 @@ class: syntax-overview body-center
 clicks: 6
 ---
 
-## 属性の優先順位と JSX の期待
+## Astro Template Syntax
 
 ````md magic-move
 ```astro
@@ -515,8 +518,7 @@ const props = { title: "second" };
       <span v-else>HTML の規則で扱ったため</span>
     </template>
     <p v-if="$clicks >= 6">
-      Astro が同じ属性を二つ出力した。<br />
-      ブラウザは HTML の規則で先の <code>title="first"</code> を採用した。
+      <strong>同じタグに同じ名前の属性が複数あれば、後の属性を捨てる。</strong>
     </p>
     <template v-if="$clicks >= 6" #reference>
       <a href="https://html.spec.whatwg.org/multipage/parsing.html#attribute-name-state" target="_blank" rel="noopener noreferrer">HTML Standard：同じ名前の属性は後のものを取り除く</a>
@@ -529,7 +531,7 @@ const props = { title: "second" };
 
 <!--
 予定時刻：03:06 から 04:16（70 秒）
-発話 402 文字。時間は予定であり、実測ではない。
+発話 389 文字。時間は予定であり、実測ではない。
 進行：6 回のクリックを発話に合わせる。
 
 ### 発話
@@ -543,15 +545,15 @@ const props = { title: "second" };
 [クリック 3]
 li の title に first を指定して、その後に title が second の props を展開します。JSX のつもりなら second ですよね。Astro では、first だと思う人。second だと思う人。
 [クリック 4]
-2022 年の報告では、first になりました。
+答えは first です。
 [クリック 5]
 なぜ、後の指定が優先されなかったんでしょうか。
 [クリック 6]
-当時の Astro は、title 属性を二つ含む HTML を生成していました。ブラウザは重複した属性の先のものを採用します。
+この例では、Astro は title 属性を二つ含む HTML を生成します。ブラウザは重複した属性の先のものを採用します。
 
 ### 確認メモ（発表では話さない）
 
-2022 年の報告を説明する。現在の Astro の挙動ではない。報告の class 属性を title に簡略化した例。HTML の重複属性と、JSX で後の指定を優先する props の合成を区別する。発話では JavaScript expression に統一する。Astro AST の expression node は波かっこを含む領域を指すため、その中の JavaScript expression と区別する。
+2022 年の報告は class 属性について。このスライドでは title 属性に簡略化している。2026 年 10 月 7 日に Astro 7.3.6 でビルドし、title="first" の後に {...props} を書くと、生成した HTML に title="first" title="second" が含まれることを確認した。順番を逆にすると title="second" title="first" になった。Go Compiler 2.12.2 の変換結果も、title="first" と $$spreadAttributes(props) を別々に出力している。この例を過去だけの挙動として扱わない。class 属性には特別な規則があるため、すべての属性に一般化しない。HTML の重複属性と、JSX で後の指定を優先する props の合成を区別する。発話では JavaScript expression に統一する。Astro AST の expression node は波かっこを含む領域を指すため、その中の JavaScript expression と区別する。
 
 
 ### 出典と確認資料（発表では話さない）
@@ -567,7 +569,7 @@ class: body-center
 clicks: 2
 ---
 
-## 改行は空白になるのか
+## Astro Template Syntax
 
 ```astro
 <span>Astro</span>
@@ -622,10 +624,10 @@ Astro が改行を HTML に保持し、ブラウザが空白として表示し�
 ---
 layout: default
 class: table-comparison body-center code-example-compact
-clicks: 3
+clicks: 2
 ---
 
-## 表の外の h2 が移動した
+## Astro Template Syntax
 
 <div>
 
@@ -633,7 +635,7 @@ clicks: 3
   <div class="min-w-0 code-split" :class="$clicks >= 1 ? 'w-[calc(50%-1rem)]' : 'w-full'">
     <div class="text-primary font-600 text-xl mb-1 flex items-center gap-2"><logos-astro-icon class="w-5 h-5 shrink-0" aria-hidden="true" />.astro</div>
 
-```astro
+```astro {4}
 <table>
   <tr><td>{'foo'}</td></tr>
 </table>
@@ -645,7 +647,7 @@ clicks: 3
   <div class="min-w-0 w-[calc(50%-1rem)]" v-if="$clicks >= 1">
     <div class="text-primary font-600 text-xl mb-1 flex items-center gap-2"><logos-html-5 class="w-5 h-5" />生成された HTML</div>
 
-```html
+```html {3}
 <table>
   <tr><td>foo</td></tr>
   <h2>Chats</h2>
@@ -658,14 +660,10 @@ clicks: 3
 
 <Overlay v-if="$clicks >= 2" aria-label="HTML の規則と Compiler の担当範囲">
   <template #title>
-    <span v-if="$clicks === 2">HTML の規則による補正</span>
-    <span v-else>Compiler が HTML の補正まで担うべきか</span>
+    HTML の規則による補正
   </template>
-  <div v-if="$clicks === 2">
+  <div>
     <p>Go Compiler は HTML5 Parser を拡張し、<br />ビルド時にもタグの補完と入れ子の補正を担っていた。</p>
-  </div>
-  <div v-else>
-  
   </div>
   <template #reference>
     <a href="https://github.com/withastro/compiler/issues/870" target="_blank" rel="noopener noreferrer">compiler#870 の不具合報告</a>
@@ -679,8 +677,8 @@ clicks: 3
 
 <!--
 予定時刻：04:46 から 05:36（50 秒）
-発話 292 文字。時間は予定であり、実測ではない。
-進行：3 回のクリックを発話に合わせる。
+発話 183 文字。時間は予定であり、実測ではない。
+進行：2 回のクリックを発話に合わせる。
 
 ### 発話
 
@@ -691,8 +689,6 @@ clicks: 3
 [クリック 2]
 これは、expression の後にタグの親子関係を間違えた不具合です。HTML の規則による補正ではありません。
 Go Compiler は HTML5 Parser を拡張していて、ビルド時にもタグの補完と入れ子の補正を担っていました。
-[クリック 3]
-僕は、HTML に似た構文を採用することと、ブラウザと同じ補正を Compiler が行うことを、分けて考えたいんですね。属性と空白の規則とは別に、Compiler が HTML の補正まで担うべきか。この問いを後半で確認します。
 
 ### 確認メモ（発表では話さない）
 
@@ -724,23 +720,23 @@ class: go-era-slide go-era-tools
 <Overview
   highlight="source,compiler,editor"
   era="go"
-  :subnotes="{ editor: 'Linter と LSP と Formatter' }"
+  :subnotes="{ editor: 'Linter と Language Tool と Formatter' }"
 />
 
 <!--
-予定時刻：05:36 から 05:56（20 秒）
-発話 130 文字。時間は予定であり、実測ではない。
+予定時刻：05:36 から 06:01（25 秒）
+発話 137 文字。時間は予定であり、実測ではない。
 進行：クリックなし。発話後に次へ進む。
 
 ### 発話
 
-ここからは編集ツールの話です。実行するコードが作れても、それだけでは書いている間のサポートはできません。
-Linter と Formatter と Language Tool は、Go Compiler の結果を使っていました。それぞれ、どんな準備が必要だったかを見ていきます。
+Astro を書くときは、コードをチェックしたり、整形したり、補完を使ったりしますよね。
+それを支える Linter と Formatter と Language Tool も、Go Compiler を使っていました。ただ、その結果を受け取って、そのまま仕事を始められるわけではなかったんです。
 -->
 
 ---
 layout: default
-class: ch2-detail
+class: ch2-detail term-ast-page
 clicks: 1
 ---
 
@@ -749,7 +745,7 @@ clicks: 1
 <div v-if="$clicks === 0">
 <div class="ch2-cols">
 <div>
-<div class="ch2-label">Go Compiler が返す Astro AST</div>
+<div class="ch2-label">Go Compiler が返す Astro AST<TermMark :n="1" /></div>
 
 ```js
 {
@@ -761,10 +757,10 @@ clicks: 1
 }
 ```
 
-<div class="ch2-note"><code>TextNode.value</code> は文字列</div>
+<div class="ch2-note"><code>TextNode.value</code><TermMark :n="2" /> は文字列</div>
 </div>
 <div>
-<div class="ch2-label flex items-center gap-2"><logos-astro-icon class="w-5 h-5 shrink-0" aria-hidden="true" />.astro の構文は Espree へ直接渡せない</div>
+<div class="ch2-label flex items-center gap-2"><logos-astro-icon class="w-5 h-5 shrink-0" aria-hidden="true" />.astro の構文は Espree<TermMark :n="3" /> へ直接渡せない</div>
 
 ```astro
 ---
@@ -792,10 +788,10 @@ const amount = 3;
 </>;
 ```
 
-<div class="ch2-note">元の <code>.astro</code> を<br />JavaScript と JSX に変換する</div>
+<div class="ch2-note"><code>.astro</code> を<br />JavaScript と JSX に変換する</div>
 </div>
 <div>
-<div class="ch2-label">JavaScript expression の AST</div>
+<div class="ch2-label">JavaScript expression の AST<TermMark :n="1" /></div>
 
 ```text
 BinaryExpression
@@ -809,21 +805,24 @@ BinaryExpression
 <div class="ch2-note"><strong>BinaryExpression</strong> は二項演算<br /><strong>Identifier</strong> は識別子</div>
 </div>
 </div>
-<div class="ch2-summary">Espree でパースし、変数名と演算子を AST の項目として取得する</div>
+<div class="ch2-summary">Espree<TermMark :n="3" /> でパースし、変数名と演算子を AST の項目として取得する</div>
 </div>
 
+<TermNotes :notes="['AST は、コードの文法上のまとまりを木で表したデータ。', 'TextNode は、文字列を値として持つ node。', 'Espree は、JavaScript と JSX をパースして AST を返すライブラリ。']" />
+
 <!--
-予定時刻：05:56 から 06:46（50 秒）
-発話 300 文字。時間は予定であり、実測ではない。
+予定時刻：06:01 から 07:01（60 秒）
+発話 308 文字。時間は予定であり、実測ではない。
 進行：1 回のクリックを発話に合わせる。
 
 ### 発話
 
 [初期表示]
-Linter で検査するには、変数名と演算子を node としてたどりたいんですね。ところが左の結果では、price と amount の掛け算は TextNode の文字列です。Astro のタグは分かっても、その中の JavaScript expression の AST はありません。
+まず Linter です。たとえば price がどこで使われているかを調べたい。そのためには、price と amount を変数として、掛け算を演算子としてたどる必要があります。
+ところが、Go Compiler が返す Astro AST では、この部分は TextNode の文字列です。JavaScript expression の中身までは分かれていません。
 [クリック 1]
-そこで、元の Astro を JavaScript と JSX に変換し、Espree でもう一度パースします。右のように Identifier と BinaryExpression が取得できます。ESTree は、この AST の形式を定める仕様です。
-ここでようやく検査を始められます。ただ、変換したコードは元の Astro と位置が違うので、その対応も必要です。
+そこで、.astro を JavaScript と JSX に変換して、Espree でパースし直します。これでようやく、変数と演算子を AST でたどれるようになります。
+検査する情報はそろいました。でも、調べたのは変換後のコードです。結果を .astro のどこに表示するかも考えないといけません。
 
 ### 確認メモ（発表では話さない）
 
@@ -857,16 +856,17 @@ class: ch2-detail ch2-position-slide body-center
 
 <SourcePositionComparison />
 
+<TermNotes :notes="['Adapter は、Compiler の返却値を Linter が扱える形へ調整する部分。']" />
+
 <!--
-予定時刻：06:46 から 07:11（25 秒）
-発話 181 文字。時間は予定であり、実測ではない。
+予定時刻：07:01 から 07:36（35 秒）
+発話 175 文字。時間は予定であり、実測ではない。
 進行：クリックなし。発話後に次へ進む。
 
 ### 発話
 
-位置についても、二つの仕事がありました。上段は、生成したコードの位置を、元の Astro の位置に対応させる話です。
-下段は、Compiler が返す位置情報そのものの不具合です。これは Linter の Adapter で修正していました。
-変換後のコードを扱う仕事と、Compiler の不具合への対応は別なんですね。Linter が検査を始める前にも、こうした手間がありました。
+たとえば price に警告を表示するなら、.astro の price に波線を引きたいですよね。変換後は文字の位置が違うので、上段のように .astro の位置に戻す必要があります。
+それに加えて、Compiler が返す位置そのものが不正確な場合もありました。下段はその例です。Linter の Adapter は、位置の対応だけでなく、その修正も担当していたんです。
 
 ### 確認メモ（発表では話さない）
 
@@ -893,28 +893,25 @@ clicks: 2
 <FormatterFailureExample :step="$clicks" />
 
 <!--
-予定時刻：07:11 から 07:51（40 秒）
-発話 239 文字。時間は予定であり、実測ではない。
+予定時刻：07:36 から 08:21（45 秒）
+発話 231 文字。時間は予定であり、実測ではない。
 進行：2 回のクリックを発話に合わせる。
 
 ### 発話
 
 [初期表示]
-Go Compiler が返すのは Astro AST です。この expression の子には、TextNode、p 要素、空の Fragment があります。JavaScript expression 全体の AST はありません。
+Formatter でも、整形の前に一手間あります。Go Compiler から受け取る Astro AST には、このように TextNode とタグが並んでいます。
 [クリック 1]
-プラグインは TextNode.value をそのまま使い、タグを文字列に戻して連結します。ここで空の Fragment が、不正なタグになってしまいました。
+プラグインは、ここから expression 全体の文字列を作ります。TextNode の値はそのまま使って、p 要素はタグの文字列に戻して、順番につなぎます。この工程でも、エッジケースへの対応が必要になるんですね。
 [クリック 2]
-このコードを Babel に渡して、expression の AST を得ようとします。でも構文エラーで、整形を始められません。
+組み立てたコードを Babel でパースしてから、整形に進みます。この準備も、プラグインが担っていました。
 
 ### 確認メモ（発表では話さない）
 
-prettier-plugin-astro の空の Fragment に関する報告を簡略化し、Compiler 2.12.2 と prettier-plugin-astro 0.14.1 と Prettier 3.6.2 で再現した。現在の実装の挙動を示すものではない。
-入力は {true ? <p>OK</p> : <></>}。Compiler の transform() は成功し、parse() は空の fragment node を返す。条件演算子を含む JavaScript expression 全体は AST として返らない。
-expression の子は TextNode.value の true ? 、p 要素の node、TextNode.value の : 、空の Fragment の node という順序。TextNode.value はすでに文字列で、serialize() はその値をそのまま使う。タグの node をコードの文字列に戻し、連結して expression 全体のコードにする。
-プラグインの printRaw() は Astro AST の expression node の子を Compiler package の serialize() で文字列にする。serialize() の初期設定 selfClose は true で、子が空の fragment を < /> にする。文字列化の実装は Compiler package の JavaScript の補助機能である。Go Parser が Fragment を解析できなかったという説明はしない。
-再生成された true ? <p>OK</p> : < /> を astroExpressionParser が JSX Fragment と波かっこで囲み、Babel に渡すと構文エラーになる。整形前の元の入力を Babel で解析できることも確認する。
-以前の JSX で囲む理由は補足にする。オブジェクトリテラルを文と区別するために <>{expression}</> の形式を使い、閉じ波かっこの前の改行で行コメントとの混同を避ける。
-
+画面は {true ? <p>OK</p> : null} を使い、Astro AST から JavaScript expression の文字列を組み立て、Babel でパースする流れを示す模式例。現在の実装の出力全体を示すものではない。
+expression の子は TextNode.value の true ? 、p 要素の node、TextNode.value の : null という順序。TextNode.value はすでに文字列で、serialize() はその値をそのまま使う。タグの node をコードの文字列に戻し、連結して expression 全体のコードにする。
+プラグインの printRaw() は Astro AST の expression node の子を Compiler package の serialize() で文字列にする。その後、astroExpressionParser が JSX Fragment と波かっこで囲み、Babel に渡す。オブジェクトリテラルを文と区別するために <>{expression}</> の形式を使い、閉じ波かっこの前の改行で行コメントとの混同を避ける。
+エッジケースへの対応が必要という説明の確認資料として、prettier-plugin-astro Issue #444 とローカルの再現記録を参照する。本編では、空の Fragment の不具合を再現せず、文字列を組み立てる工程の負担として説明する。文字列化の実装は Compiler package の JavaScript の補助機能で、Go Parser のパースに失敗したという説明はしない。
 
 ### 出典と確認資料（発表では話さない）
 
@@ -926,46 +923,6 @@ expression の子は TextNode.value の true ? 、p 要素の node、TextNode.va
 
 ---
 layout: default
-class: ch2-detail chapter-four ch2-formatter-requirements
----
-
-## Compiler から受け取りたい情報
-
-<div class="ch4-responsibilities">
-  <section>
-    <ul class="ch4-list">
-      <li>JavaScript expression の AST</li>
-      <li>Astro のタグとコメント</li>
-      <li>元のコードの正確な位置</li>
-    </ul>
-  </section>
-</div>
-
-<Ref href="https://github.com/withastro/roadmap/discussions/1306">新 Compiler と Prettier plugin の検討</Ref>
-
-<!--
-予定時刻：07:51 から 08:16（25 秒）
-発話 112 文字。時間は予定であり、実測ではない。
-進行：クリックなし。発話後に次へ進む。
-
-### 発話
-
-Compiler から受け取りたいのは、JavaScript expression の AST と、Astro のタグやコメント、元のコードの正確な位置です。
-この情報があれば、先ほどのようにコードを作り直してパースする工程を減らせます。
-
-### 確認メモ（発表では話さない）
-
-このページは第 2 章の要求を整理する。Rust Compiler が再パースをすべて廃止したという説明はしない。Astro の node を含む AST は、Prettier の AST とそのまま同じとは限らず、対応する Printer や変換が必要になる。
-前の Fragment の例では、Astro AST に Fragment は保持されていた。JavaScript expression 全体の AST も取得できれば、整形ツールがコードを作り直してパースする工程を減らせる。
-
-### 出典と確認資料（発表では話さない）
-
-- [新 Compiler と Prettier plugin の検討](https://github.com/withastro/roadmap/discussions/1306)
-- [prettier-plugin-astro 0.14.1 と JavaScript expression の整形](https://github.com/withastro/prettier-plugin-astro/blob/v0.14.1/src/printer/embed.ts)
--->
-
----
-layout: default
 class: ch2-detail ch2-language-overview
 ---
 
@@ -973,25 +930,29 @@ class: ch2-detail ch2-language-overview
 
 <LanguageToolOverview />
 
-<Ref>
-  <li><a href="https://code.visualstudio.com/api/language-extensions/language-server-extension-guide">LSP と Language Server</a></li>
+<TermNotes class="language-term-notes" :notes="['Source map は、変換前後のコードの位置対応を記録したデータ。']">
+<Ref inline>
+  <li><a href="https://code.visualstudio.com/api/language-extensions/language-server-extension-guide">Language Tool と Editor の連携</a></li>
   <li><a href="https://volarjs.dev/core-concepts/embedded-languages/">Volar と位置対応</a></li>
   <li><a href="https://github.com/withastro/language-tools/blob/b4bcb4fc02cd960936a5faee6c9cc0ad94fc4c05/packages/language-server/src/core/index.ts">従来の Astro の実装</a></li>
 </Ref>
+</TermNotes>
 
 <!--
-予定時刻：08:16 から 09:31（75 秒）
-発話 236 文字。時間は予定であり、実測ではない。
+予定時刻：08:21 から 09:31（70 秒）
+発話 355 文字。時間は予定であり、実測ではない。
 進行：クリックなし。発話後に次へ進む。
 
 ### 発話
 
-これが Language Tool の全体像です。既存の言語の機能を使えるのが、この設計の利点です。そのために、型の情報を保つコードと、正確な位置の対応が必要になります。
-TSX を作る Go Compiler は、JavaScript の構文を独自の Scanner で判別していました。構文の変化への追従や、書きかけのコードの扱いも自前で保守する必要があったんですね。ジェネリクスのように、本物の Parser なしでは直しにくい例もありました。少ない人数で、これを保守し続けるのは大変でした。
+次は、補完や型の診断です。ここでは、HTML と TypeScript が持っている機能を使いたいんですね。
+そのために、Go Compiler が .astro から TSX と Source map を作ります。TypeScript は TSX を調べて、Volar が診断の位置を .astro に対応させます。HTML の補完には、HTML Language Service を使います。
+こうすれば、言語機能をすべて Astro で作る必要はありません。ただ、その機能を使える TSX を作り続けるのが大変でした。
+Go Compiler は、JavaScript の構文を独自の Scanner で判別していました。構文の変化や、書きかけのコードにも対応しないといけません。ジェネリクスのように、JavaScript の Parser なしでは直しにくい例もあったんです。
 
 ### 確認メモ（発表では話さない）
 
-TSX と Source map の生成、Volar の位置対応、HTML Language Service と TypeScript の分担は図で示し、発話しない。
+HTML と TypeScript の機能を使う目的を話してから、図に沿って TSX と Source map と位置対応の役割を説明する。
 独自の Scanner による構文の判別は実装上の負担として扱う。すべての不完全なコードで TSX 生成が失敗したという説明はしない。
 compiler-rs PR #34 は、Biome のエラー耐性のある Parser で TSX 変換を作り直し、適切な JavaScript の Parser なしでは直せなかった edge case を修正したと説明している。例として Frontmatter の末尾の ASI とジェネリクスが挙がっている。
 TSX 生成は 2026 年の公開提案の対象外。Rust Compiler で Language Tool の問題がすべて解消したとは説明しない。
@@ -1016,43 +977,50 @@ class: ch2-detail chapter-four
 
 <div class="ch4-responsibilities">
   <section>
-    <h3>僕が Compiler に求めること</h3>
+    <h3>Compiler に求めること</h3>
     <ul class="ch4-list">
-      <li>JavaScript expression の AST と正確な位置情報を返す</li>
-      <li>TSX への変換でも、型の情報と元の位置との対応を保つ</li>
-      <li>開発チームが修正と構文への対応を続けられる実装にする</li>
+      <li>JavaScript expression の AST と、Astro のタグとコメントを返す</li>
+      <li>正確な位置情報を返し、TSX への変換でも型の情報と位置の対応を保つ</li>
+      <li>開発チームが修正を続けられる実装にする</li>
     </ul>
   </section>
 </div>
 
-<Ref href="https://github.com/withastro/roadmap/issues/1356">Compiler の保守範囲を見直す公開提案</Ref>
+<Ref>
+  <li><a href="https://github.com/withastro/roadmap/discussions/1306">新 Compiler と Prettier plugin の検討</a></li>
+  <li><a href="https://github.com/withastro/roadmap/issues/1356">Compiler の保守範囲を見直す公開提案</a></li>
+</Ref>
 
 <!--
-予定時刻：09:31 から 10:00（29 秒）
-発話 181 文字。時間は予定であり、実測ではない。
+予定時刻：09:31 から 10:11（40 秒）
+発話 207 文字。時間は予定であり、実測ではない。
 進行：クリックなし。発話後に次へ進む。
 
 ### 発話
 
-ここまでの例から、僕は Compiler に、ビルドと編集の両方で使える情報を返してほしいと思っています。
-JavaScript expression の AST と正確な位置情報。TSX に変換するときも、型の情報と元の位置との対応が必要です。
-そして、開発チームが修正を続けられる実装であることも大切だと思います。次は、そのために利用できる基盤がどう変わったかを見ていきます。
+こうして見ると、ツールは検査や整形に加えて、その前の準備もかなり担っていました。
+僕は、JavaScript expression の AST や、タグとコメント、正確な位置を、Compiler から受け取れるといいと思っています。TSX も、型の情報と .astro との対応を保って渡してほしい。
+そして、その要求に応えながら、チームが修正を続けられること。欲しい情報を返すことと、保守し続けられることを、一緒に考えたいんですね。
 
 ### 確認メモ（発表では話さない）
+
+Rust Compiler が再パースをすべて廃止したという説明はしない。Astro の node を含む AST は、Prettier の AST とそのまま同じとは限らず、対応する Printer や変換が必要になる。
+Astro AST から JavaScript expression 全体のコードを組み立て、Babel でパースしていた。JavaScript expression 全体の AST も取得できれば、この工程を減らせる。
 
 Compiler を利用する立場からの個人的な意見として話す。登壇者自身が Compiler の実装を担当しているとは説明しない。
 
 第 2 章では、ツールが必要とする情報、Compiler の情報不足と不具合、ツールが担当する変換を区別する。Virtual Code と位置対応と Doc の生成を、それ自体が Go Compiler の不具合であるとは説明しない。
-未定義の参照の詳説は本編から省略し、補足にする。関連ページは再解析のためのコード生成の途中の不具合、関連ページは Compiler と Formatter の分担に改稿した。JSX で囲む理由と Doc の命令の詳説は確認メモに移した。LSP と Volar の分担は本編で説明する。
+未定義の参照の詳説は本編から省略し、補足にする。関連ページは再解析のためのコード生成の途中の不具合、関連ページは Compiler と Formatter の分担に改稿した。JSX で囲む理由と Doc の命令の詳説は確認メモに移した。Language Tool の全体像を図で示す。
 AST があればスコープ解析や型検査が不要という意味ではない。Compiler が生成したコードの位置対応は Compiler が、Adapter が独自に生成したコードの位置対応は Adapter が管理する。
 
-保守の難しさと既存の基盤を利用する方針は、2026 年の公開提案に基づく。TSX 生成は同じ提案の対象外とされ、Language Tool の改善がすべて完了したとは説明しない。
+保守の難しさと基盤を利用する方針は、2026 年の公開提案に基づく。TSX 生成は同じ提案の対象外とされ、Language Tool の改善がすべて完了したとは説明しない。
 
 
 ### 出典と確認資料（発表では話さない）
 
+- [prettier-plugin-astro 0.14.1 と JavaScript expression の整形](https://github.com/withastro/prettier-plugin-astro/blob/v0.14.1/src/printer/embed.ts)
 - [新しい Compiler の提案と Prettier の AST に関する議論](https://github.com/withastro/roadmap/discussions/1306)
-- [保守範囲と既存の基盤の利用を示した正式提案](https://github.com/withastro/roadmap/issues/1356)
+- [保守範囲と基盤の利用を示した正式提案](https://github.com/withastro/roadmap/issues/1356)
 -->
 
 ---
@@ -1063,13 +1031,13 @@ layout: section
 ## Astro が再利用できる基盤はどう変わったのか
 
 <!--
-予定時刻：10:00 から 10:05（5 秒）
-発話 27 文字。時間は予定であり、実測ではない。
+予定時刻：10:11 から 10:16（5 秒）
+発話 30 文字。時間は予定であり、実測ではない。
 進行：クリックなし。発話後に次へ進む。
 
 ### 発話
 
-その間に、再利用できる基盤はどう変わったのでしょうか。
+では、そのために使える基盤は、どう変わってきたのでしょうか。
 -->
 
 ---
@@ -1123,14 +1091,15 @@ class: ch3-detail chapter-three ch3-tools
 </div>
 
 <!--
-予定時刻：10:05 から 10:40（35 秒）
-発話 174 文字。時間は予定であり、実測ではない。
+予定時刻：10:16 から 10:51（35 秒）
+発話 186 文字。時間は予定であり、実測ではない。
 進行：クリックなし。発話後に次へ進む。
 
 ### 発話
 
-Rust で作られたフロントエンドのツールが増えました。ここで注目したいのは、ツールの中のライブラリを、自分たちの実装にも組み込めることです。
-Parser や変換の機能を最初から作る代わりに、既存の実装を利用する選択肢が増えました。Go に Parser がないという話ではなく、Astro が再利用したい機能と、保守できる実装の組み合わせが変わったんですね。
+その間に、Rust で作られたフロントエンドのツールが増えてきました。Oxc、Biome、Rolldown などですね。
+ここで注目したいのは、完成したツールを使うだけでなく、その中のライブラリを自分たちの実装に組み込めることです。
+JavaScript の Parser や変換の機能を、自前で作り続ける以外の選択肢が増えた。先ほどの保守の負担を考えると、この変化は大きいと思います。
 
 ### 確認メモ（発表では話さない）
 
@@ -1156,7 +1125,7 @@ layout: default
 class: ch3-detail chapter-three
 ---
 
-## Oxc を既存の Parser として利用する
+## Oxc を Parser として利用する
 
 <div class="rebuild-oxc-example">
 
@@ -1174,15 +1143,15 @@ const { program } = parseSync(
 <Ref href="https://oxc.rs/docs/guide/usage/parser.html">Oxc Parser</Ref>
 
 <!--
-予定時刻：10:40 から 11:40（60 秒）
-発話 346 文字。時間は予定であり、実測ではない。
+予定時刻：10:51 から 11:36（45 秒）
+発話 200 文字。時間は予定であり、実測ではない。
 進行：クリックなし。発話後に次へ進む。
 
 ### 発話
 
-先ほどの掛け算を、今度は Oxc の Parser に渡します。第 2 章で確認した変数名と演算子を、この呼び出しから取得できます。木の中身の説明は同じなので、ここでは呼び出す部分に注目してください。
-この例は npm package から呼んでいます。Astro Compiler の内部では、Oxc の Rust crate を利用します。ここが、実装言語を選び直す理由につながります。欲しい機能を、自分たちの Compiler の中で利用できるんですね。
-ただし、JavaScript が分かる Parser を入れるだけでは、Astro Template Syntax には対応できません。Astro のタグや Component script を扱う部分は、自分たちで実装して保守します。もう一つ、編集に必要な情報を保持する設計例を見ます。
+先ほど、JavaScript expression の中の変数名や演算子が欲しい、という話をしました。Oxc を使うと、その情報を AST として取得できます。
+ここで嬉しいのは、JavaScript をパースする部分を、自前で作らなくていいことなんですね。Oxc の Parser を、Compiler の中に組み込めます。
+僕は、こうした基盤を利用できるようになったことが、Rust を選び直す理由の一つだと思っています。
 
 ### 確認メモ（発表では話さない）
 
@@ -1202,28 +1171,29 @@ layout: default
 class: ch3-detail chapter-three ch3-cst-comparison
 ---
 
-## AST と Lossless CST が保持する情報
+## AST と Lossless CST<TermMark /> が保持する情報
 
 <FormattingInformation :stage="2" />
 
+<TermNotes :notes="['Lossless CST は、記号と空白とコメントも保持し、元のコードを再現できる構文の木。']" />
+
 <!--
-予定時刻：11:40 から 12:15（35 秒）
-発話 206 文字。時間は予定であり、実測ではない。
+予定時刻：11:36 から 12:11（35 秒）
+発話 160 文字。時間は予定であり、実測ではない。
 進行：クリックなし。上のコードから、左と右の順に比較する。
 
 ### 発話
 
-編集では、元のコードの情報をどこまで保持するかも大切です。同じコードで比べます。
-左は Prettier と Babel の例です。変数名や演算子の AST とコメントを受け取り、空白の確認には元のコードも参照します。
-右は Biome の Lossless CST です。構文に加えて、空白二文字、コメント、末尾の改行も木の中に保持します。
-既存の設計と、これから参考にできる設計の比較です。Astro の採用予定を示すものではありません。
+もう一つ、名前だけ変えて、空白やコメントはそのままにしたい、という編集を考えます。
+左の AST とコメントだけでは、空白が何文字あったかは分かりません。元のコードも参照する必要があります。
+右の Biome の Lossless CST は、構文と空白とコメントを一つの木に持っています。この違いが、編集するときの手間に関わってきます。
 
 ### 確認メモ（発表では話さない）
 
 左の AST は BinaryExpression の抜粋。comments はコメントを取得できることを示す模式図で、Prettier と Babel のデータ全体ではない。AST が常にコメントを持たないという説明はしない。
 右は Biome の Lossless CST の模式図。空白とコメントと改行は token に付随する情報として保持される。末尾の改行を含め、図は実際のダンプを簡略化している。
 元の文字を保持する性質と、不完全なコードをパースするエラー回復は別の性質。
-既存の設計と今後参考にできる設計を比較する。Astro Compiler が Biome や Lossless CST を採用する予定を示すものではない。
+Prettier と Babel の設計を、Biome の設計と比較する。Astro Compiler が Biome や Lossless CST を採用する予定を示すものではない。
 
 ### 出典と確認資料（発表では話さない）
 
@@ -1250,15 +1220,14 @@ class: ch3-detail chapter-three ch3-cst-example
 </style>
 
 <!--
-予定時刻：12:15 から 12:45（30 秒）
-発話 178 文字。時間は予定であり、実測ではない。
+予定時刻：12:11 から 12:41（30 秒）
+発話 157 文字。時間は予定であり、実測ではない。
 進行：クリックなし。変更前と変更後を順に示す。
 
 ### 発話
 
-では、この一か所の price を unitPrice に変えるとします。名前の部分を変更し、ほかの情報を引き継げば、空白二文字もコメントも末尾の改行も、そのままです。
-AST と元のコードの位置を使っても実現できます。Lossless CST では、構文と元の文字を、一つの木で扱えるんですね。
-必要な情報から基盤を選ぶ、という視点で、次は Astro の判断を見ていきます。
+この一か所の price を unitPrice に変えてみます。名前の token だけ変更して、周りの文字を引き継げば、空白二文字もコメントも末尾の改行もそのままです。
+構文の情報と元の文字を別々に照合する手間を減らせるんですね。ここでは、Compiler がどこまで情報を持つかという設計例として、Biome を紹介しました。
 
 ### 確認メモ（発表では話さない）
 
@@ -1281,7 +1250,7 @@ Biome の BatchMutation::replace_token は、元の token に付随する空白�
 
 ### 確認メモ（発表では話さない）
 
-上段は Go Compiler と Astro の Prettier plugin の課題の振り返り。下段は JavaScript を扱う Biome の設計例。入力言語と目的が異なるため、性能や対応範囲の直接比較にはしない。空の Fragment の再生成の不具合は、コードの再生成で整形が止まったページを参照する。
+上段は Go Compiler と Astro の Prettier plugin の課題の振り返り。下段は JavaScript を扱う Biome の設計例。入力言語と目的が異なるため、性能や対応範囲の直接比較にはしない。文字列を組み立てる工程の説明は、Formatter が整形を始めるまでのページを参照する。
 Biome は Rust で実装された別のツール。Prettier の内部に Biome があるという意味ではない。Astro が Biome や Lossless CST を採用したとは説明しない。Rust Compiler を基盤にした Astro の Prettier plugin は、第 4 章で説明する。
 
 
@@ -1322,6 +1291,57 @@ Biome では空白とコメントなどを trivia として token に付随さ�
 -->
 
 ---
+layout: default
+class: ch3-detail chapter-three ch3-content-mapper
+---
+
+## TypeScript との連携
+
+<div class="content-mapper-body">
+  <ContentMapperFlow />
+</div>
+
+<Ref>
+  <li><a href="https://github.com/withastro/compiler-rs/blob/main/crates/astro2tsx/src/lib.rs" target="_blank" rel="noreferrer">astro2tsx と Biome の実装</a></li>
+  <li><a href="https://github.com/microsoft/TypeScript/pull/63936" target="_blank" rel="noreferrer">Content Mapper の仕様と実装</a></li>
+</Ref>
+
+<!--
+予定時刻：12:41 から 13:21（40 秒）
+発話 245 文字。時間は予定であり、実測ではない。
+進行：クリックなし。図を左から右へ説明する。
+
+### 発話
+
+Go Compiler が TSX を生成していたのが、前半の話でした。
+TypeScript 7 は Go に移行しましたが、7.0 には連携する安定した API がありませんでした。
+Astro の Content Mapper は、内部の astro2tsx で Biome を使ってパースします。TSX と位置対応を生成し、TypeScript に返します。
+TypeScript は補完や診断を行い、結果を .astro の位置に対応させます。
+パースする基盤と、TypeScript との連携方法。両方が変わり、分担も見直せるんですね。
+
+### 確認メモ（発表では話さない）
+
+2026 年 7 月 8 日の Microsoft の発表は、TypeScript 7.0 に安定した API がないため、Volar などを介した Astro と Vue の言語支援は TypeScript 6 を必要とする、と説明している。TypeScript チームはフレームワークのメンテナと対応を進める方針も示した。Astro のコードの中にある JavaScript と TypeScript を、すべて TypeScript 7 で検査できないという意味ではない。
+図は Astro による TSX の生成、Content Mapper が返すデータ、TypeScript の機能を横一列に示している。実際には Astro の Content Mapper が @astrojs/astro2tsx を呼ぶ。astro2tsx が Biome で .astro をパースし、Astro の実装が TSX と位置対応を生成する。Go Compiler 時代の TSX 生成とは区別する。
+Content Mapper は、TypeScript が Astro などの外部ツールから、生成したコードと位置対応を受け取る仕組み。図の矢印は返すデータの方向を示す。実際のコード生成の要求は TypeScript から送る。
+返すのは AST ではなく、コードの文字列と SpanMapping の配列。位置対応は v3 Source map と同じ形式ではない。
+TypeScript は生成後のコードで言語機能を実行し、位置対応を使って .astro の位置へ結果を対応させる。補完と診断に加え、定義への移動なども仕様に含まれる。編集の反映には、変更範囲の文字がそのまま対応するなどの条件がある。
+最初の Content Mapper の PR #4712 は 2026 年 8 月 19 日にマージされた。参照リンクは、後の仕様と実装を含む TypeScript の PR #63936。TypeScript 7.1 の安定リリースが完了したとは話さない。
+2026 年 10 月 8 日に確認した Astro の main（28e74103fe3d999a56ae3404b5fe67a1ad6d8013）には、Volar を使う Language Tool と @astrojs/ts-content-mapper の両方がある。両方とも @astrojs/astro2tsx から TSX と位置対応を受け取る。この TSX の生成を担うパッケージは Rust と Biome を使って実装されている。全面的な移行が完了したという Before と After の図ではない。HTML の補完まで TypeScript が担うことも示していない。
+この仕組みは今後の Language Tool の分担を考える選択肢として紹介する。Astro Compiler を Rust で書き直した過去の判断の理由にはしない。分担を見直せるという評価は発表者の意見。
+
+### 出典と確認資料（発表では話さない）
+
+- [TypeScript 7.0 と外部ツールの課題](https://devblogs.microsoft.com/typescript/announcing-typescript-7-0/#typescript-and-embedded-languages)
+- [Content Mapper の仕様と実装](https://github.com/microsoft/TypeScript/pull/63936)
+- [最初の Content Mapper の仕様](https://github.com/microsoft/typescript-go/pull/4712)
+- [TypeScript 7.1 の開発計画](https://github.com/microsoft/TypeScript/issues/63703)
+- [Astro と Volar の連携](https://github.com/withastro/astro/blob/28e74103fe3d999a56ae3404b5fe67a1ad6d8013/packages/language-tools/language-server/src/core/astro2tsx.ts)
+- [Astro の Content Mapper](https://github.com/withastro/astro/blob/28e74103fe3d999a56ae3404b5fe67a1ad6d8013/packages/language-tools/ts-content-mapper/src/transform.ts)
+- [astro2tsx の Parser](https://github.com/withastro/compiler-rs/blob/main/crates/astro2tsx/src/lib.rs)
+-->
+
+---
 layout: section
 ---
 
@@ -1329,192 +1349,125 @@ layout: section
 ## Astro は何を実装し、何を基盤に任せるのか
 
 <!--
-予定時刻：12:45 から 12:50（5 秒）
-発話 27 文字。時間は予定であり、実測ではない。
+予定時刻：13:21 から 13:26（5 秒）
+発話 32 文字。時間は予定であり、実測ではない。
 進行：クリックなし。発話後に次へ進む。
 
 ### 発話
 
-ここから、Compiler の新しい設計を見ていきます。
+こうした基盤がある中で、Astro は何を選び直したのでしょうか。
 -->
 
 ---
 layout: default
-class: chapter-four ch4-compiler
+class: chapter-four ch4-ownership
 ---
 
-## Astro が選んだ基盤と保守する実装
+## Astro が実装して保守する範囲
 
-<div class="ch4-diagram ch4-compiler-diagram">
-  <svg class="ch4-lines" viewBox="0 0 868 398" aria-hidden="true">
-    <defs><marker id="ch4-compiler-arrow" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="8" markerHeight="8" orient="auto"><path d="M1,1 L9,5 L1,9" /></marker></defs>
-    <path d="M175,68 V145" /><path d="M675,68 V145" />
-    <path d="M350,191 H479" />
-    <path d="M600,236 V269 H404 V301" /><path d="M745,236 V301" />
-  </svg>
-  <div class="ch4-node ch4-api"><strong>Astro の公開 API と Node-API bindings</strong><span>parse() と transform()</span></div>
-  <div class="ch4-node ch4-parser"><strong>Oxc Parser と AST</strong><span>Astro Template Syntax への対応</span></div>
-  <div class="ch4-node ch4-codegen ch4-owned"><strong>Astro Codegen</strong><span>Astro の変換と CSS スコープ規則</span></div>
-  <div class="ch4-node ch4-oxc"><strong>Oxc Transformer と Codegen</strong><span>TypeScript の変換と JS の生成</span></div>
-  <div class="ch4-node ch4-css"><strong>Lightning CSS</strong><span>CSS のパースと出力</span></div>
-  <span class="ch4-edge ch4-edge-parse">パースを呼ぶ</span>
-  <span class="ch4-edge ch4-edge-transform">変換を呼ぶ</span>
-  <span class="ch4-edge ch4-edge-ast">AST を渡す</span>
-  <span class="ch4-edge ch4-edge-js">変換と生成を利用</span>
-  <span class="ch4-edge ch4-edge-css">パースと出力を利用</span>
-</div>
+<CompilerOwnership />
 
 <Ref href="https://github.com/withastro/compiler-rs/tree/main/crates">Compiler の実装と依存関係</Ref>
 
 <!--
-予定時刻：12:50 から 14:30（100 秒）
-発話 461 文字。時間は予定であり、実測ではない。
-進行：クリックなし。発話後に次へ進む。
+予定時刻：13:26 から 14:11（45 秒）
+発話 242 文字。時間は予定であり、実測ではない。
+進行：クリックなし。左の基盤と右の実装を順に説明する。
 
 ### 発話
 
-この図では、既存の基盤を使う部分と、Astro が実装する部分を分けています。上の parse はパース結果を返す API、transform はビルドで実行するコードへ変換する API です。
-パースには、Astro Template Syntax に対応させた Oxc を使います。JavaScript の Parser と AST を利用しながら、Astro の構文に対応させた部分は自分たちで保守します。
-次に、実行するコードを作るのが中央の Astro Codegen です。TypeScript の変換と JavaScript の出力では、Oxc の Transformer と Codegen を利用します。Astro としてどんなコードを生成するかは、Astro の担当です。
-CSS のパースと出力には Lightning CSS を使います。ただ、スタイルをどのコンポーネントに限定するかという規則は、Astro が実装します。
-僕が大切だと思うのは、この保守範囲です。構文に対応するすべてを自分たちだけで実装するより、既存の機能を使いながら、Astro が決める部分に取り組めます。
+Astro が再利用するのは、JavaScript と TypeScript のための Oxc と、CSS のための Lightning CSS です。
+Astro が実装するのは、Astro Template Syntax への対応や、Astro としてどんなコードを生成するかという部分です。スタイルをどのコンポーネントに限定するかも、Astro が決めます。
+JavaScript や CSS のための機能は基盤から利用して、Astro として決める部分を実装する。僕は、この保守範囲を見直せることが大切だと思っています。
 
 ### 確認メモ（発表では話さない）
 
-parse() は AST と位置情報を返す。transform() は解析の後に Astro Codegen を呼ぶ。Oxc の Astro 拡張も保守範囲に含む。CSS のスコープ規則まで Lightning CSS に任せる説明はしない。実装言語、Node-API や WASM という配布方法、AST の設計は別の判断。
-
+ライブラリが提供する機能と、Astro が実装して保守する範囲を説明する図。API の呼び出し順は示していない。Oxc の Astro 拡張も Astro の保守範囲に含む。CSS のパースと出力には Lightning CSS を利用するが、CSS のスコープ規則は Astro が実装する。
+発表者自身が Compiler を実装したという説明にはしない。分担への評価は、発表者の意見として話す。
 
 ### 出典と確認資料（発表では話さない）
 
-- [astro_napi](https://github.com/withastro/compiler-rs/blob/main/crates/astro_napi/src/lib.rs)
 - [Astro Codegen](https://github.com/withastro/compiler-rs/tree/main/crates/astro_codegen/src/printer)
-- [CSS scoping](https://github.com/withastro/compiler-rs/blob/main/crates/astro_codegen/src/css_scoping.rs)
-- [Cargo.toml](https://github.com/withastro/compiler-rs/blob/main/Cargo.toml)
-- [Compiler の実装と依存関係](https://github.com/withastro/compiler-rs/tree/main/crates)
-
-
-### 確認メモ（発表では話さない）
-
-このページは全体の案内に絞る。Go と Rust の比較、Astro Template Syntax の規則と空白の扱い、Compiler 内部の担当の順に説明する。
-
-
-### 出典と確認資料（発表では話さない）
-
-- [Astro の構文解析と AST](https://github.com/withastro/compiler-rs/blob/main/crates/astro_napi/src/lib.rs)
-- [CSS の解析と生成](https://github.com/withastro/compiler-rs/blob/main/crates/astro_codegen/src/css_scoping.rs)
+- [CSS スコープ規則](https://github.com/withastro/compiler-rs/blob/main/crates/astro_codegen/src/css_scoping.rs)
+- [Compiler の依存関係](https://github.com/withastro/compiler-rs/blob/main/Cargo.toml)
 -->
 
 ---
 layout: default
-class: chapter-four ch4-comparison
+class: chapter-four ch4-template-behavior table-comparison code-example-compact
 clicks: 1
 ---
 
-## Go と Rust のツールチェーン
+## Astro Template Syntax の振る舞い
 
-<div class="ch4-state">
-  <p>{{ $clicks === 0 ? 'ビルド時の変換で HTML correction' : 'Compiler は HTML correction を行わない' }}</p>
-</div>
-<Overview
-  compiler-frame
-  :era="$clicks === 0 ? 'go' : 'rust'"
-  :labels="{ build: 'Vite', compiler: $clicks === 0 ? 'Go Compiler' : 'Rust Compiler' }"
-  :icons="{ compiler: $clicks === 0 ? 'go' : 'rust' }"
-  :subnotes="{ build: '' }"
-/>
+<TemplateBehaviorExamples :whitespace="$clicks >= 1">
+  <template #table-source>
 
-<Ref href="https://github.com/withastro/roadmap/issues/1356">新 Compiler の方針と RFC #1356</Ref>
+```astro {4}
+<table>
+  <tr><td>{'foo'}</td></tr>
+</table>
+<h2>Chats</h2>
+```
+
+  </template>
+  <template #table-output>
+
+```html {4}
+<table>
+  <tr><td>foo</td></tr>
+</table>
+<h2>Chats</h2>
+```
+
+  </template>
+  <template #whitespace-source>
+
+```astro
+<span>Astro</span>
+<span>1200</span>
+```
+
+  </template>
+</TemplateBehaviorExamples>
+
+<Ref>
+  <li v-if="$clicks === 0"><a href="https://github.com/withastro/roadmap/issues/1356">HTML correction を行わない方針</a></li>
+  <li v-else><a href="https://docs.astro.build/en/guides/upgrade-to/v7/#new-default-whitespace-handling-compresshtml-jsx">Astro v7 の空白規則</a></li>
+  <li><a href="https://github.com/withastro/compiler/blob/04170031ce2f30d1882fe480e87998197e0016aa/SYNTAX_SPEC.md">Astro Template Syntax の仕様ドラフト</a></li>
+</Ref>
 
 <!--
-予定時刻：14:30 から 15:35（65 秒）
-発話 315 文字。時間は予定であり、実測ではない。
-進行：1 回のクリックを発話に合わせる。
+予定時刻：14:11 から 15:16（65 秒）
+発話 308 文字。時間は予定であり、実測ではない。
+進行：1 回のクリックで table の例から span の例へ切り替える。
 
 ### 発話
 
 [初期表示]
-では、第 2 章の問いに戻ります。Compiler が HTML の補正まで担うべきか、という話でした。Go Compiler では、HTML5 Parser に基づく補正をビルド時にも行っていました。
+Astro として決めることには、タグや空白をどう扱うかもあります。
+前半の table の例では、h2 を table の後に書いていました。Rust Compiler は HTML correction を行わず、書かれた親子関係を保つ方針です。この例なら、h2 は table の後のまま扱います。ブラウザでの HTML の補正は、引き続き行われます。
 [クリック 1]
-公開提案では、Rust Compiler は HTML correction を行わず、書かれた親子関係を保つ方針が示されています。出力された HTML から DOM を作るときには、引き続きブラウザが HTML の規則を適用します。
-ここは、Compiler が何を変えるかの判断です。書いたタグの関係を保つことと、閉じ忘れたタグを許容することは別で、構文エラーの検査は必要です。
-僕は、言語を Rust に変える機会に、ビルドで担う仕事そのものを見直した点に注目しています。
+空白については、Astro v7 で JSX の規則で扱うのが標準になります。前半の二つの span なら、Astro1200 と続けて表示されます。
+こうした Astro Template Syntax の規則も、仕様ドラフトにまとめられました。何が正しい動きなのかを、Compiler とツールで共有するためです。
 
 ### 確認メモ（発表では話さない）
 
-Go の parse() には literal parsing があり、すべての API が常に HTML correction を行うとは説明しない。書かれた親子関係の保持と、構文エラーを許容することは別。閉じ忘れたタグや未終了の属性はエラーになる。Build の表示は Vite にそろえ、Compiler の変更を比較する。詳細な独自 AST と HTML correction と Astro Codegen の担当はノートと Compiler 内部の関連図で説明し、全体図の内部項目は共通設定に従う。
-
-
-### 出典と確認資料（発表では話さない）
-
-- [RFC #1356](https://github.com/withastro/roadmap/issues/1356)
-- [Go の parse API](https://github.com/withastro/compiler/blob/ab9b285a34c482544da359f0ca91d0b0c25cdee4/README.md#parse-astro-and-return-an-ast)
--->
-
----
-layout: default
-class: ch3-detail chapter-four ch3-syntax-spec
----
-
-## Astro Template Syntax の規則と空白の扱い
-
-<div class="ch3-syntax-date">2026 年 2 月、構文の共通基準を仕様ドラフトにまとめる</div>
-<div class="ch3-syntax-setting">
-  <p>Astro v7 の既定値は <code>compressHTML: 'jsx'</code></p>
-  <p>JSX の規則で空白を扱う</p>
-</div>
-
-<div class="ch3-cols ch3-syntax">
-<div>
-
-```astro
----
-const name = "Astro";
----
-<h1 class="title">{name}</h1>
-<p>複数のルート要素</p>
-```
-
-</div>
-<div class="ch3-syntax-labels">
-  <div><strong>Component script</strong><span><code>---</code> で囲んだ領域</span></div>
-  <div><strong>HTML 属性</strong><span><code>class="title"</code></span></div>
-  <div><strong>JavaScript expression</strong><span><code>{name}</code> の中の <code>name</code></span></div>
-  <div><strong>複数のルート要素</strong><span><code>h1</code> と <code>p</code> を並べた Template</span></div>
-</div>
-</div>
-
-<Ref>
-  <li><a href="https://github.com/withastro/compiler/blob/04170031ce2f30d1882fe480e87998197e0016aa/SYNTAX_SPEC.md">Astro Template Syntax の仕様ドラフト</a></li>
-  <li><a href="https://docs.astro.build/en/guides/upgrade-to/v7/#new-default-whitespace-handling-compresshtml-jsx">v7 の空白規則</a></li>
-  <li><a href="https://docs.astro.build/en/reference/configuration-reference/#compresshtml">compressHTML の設定</a></li>
-</Ref>
-
-<!--
-予定時刻：15:35 から 16:35（60 秒）
-発話 334 文字。時間は予定であり、実測ではない。
-進行：クリックなし。発話後に次へ進む。
-
-### 発話
-
-属性と空白の話も確認します。これらは HTML correction とは別に、Astro Template Syntax の規則として考える内容です。
-2026 年 2 月の仕様ドラフトでは、構文の共通基準が文書化されています。Compiler とツールが同じ書き方を扱うために、参照できる規則があることも大切です。
-空白については、Astro v7 で compressHTML の既定値が jsx になり、JSX の規則で扱います。前半の二つの span は Astro1200 と続けて表示されます。以前の扱いも設定で選べます。
-Rust という言語だけで空白の扱いが決まるわけではありません。どの規則を採用するかは Astro の判断です。僕は、実装とともに、この規則も明確にすることが必要だったと考えています。
-
-### 確認メモ（発表では話さない）
-
-仕様は 2026 年 2 月 3 日付の Draft。Component Script と Component Template は以前からの呼称。構文の呼称がこの時点で初めて定義されたとは説明しない。
-compressHTML は既存の設定。Astro v7 では既定値が true から 'jsx' に変更された。関連ページの二つの span を改行して並べる例では、'jsx' は Astro1200、従来の true は Astro 1200。既定の CSS の空白規則を前提とする。false は空白を保持する。
-仕様ドラフトは位置情報の精度やエラー回復を保証しない。元の文字を保持する Lossless CST と、出力する HTML の空白をどう扱うかは別の判断。
-
+table の入力は前半の compiler#870 の例を再掲したもの。h2 が table の中に入ったのは当時の不具合で、HTML の規則による正しい補正とは説明しない。この不具合は Go Compiler でも修正されている。Rust で初めてこの例が直るという比較ではなく、HTML correction を行わない方針を説明する。
+右の HTML は、この方針で保たれる親子関係を示した抜粋。Compiler 自体が返す JavaScript や、ブラウザが補正した DOM のダンプではない。今回、この入力を Rust Compiler で実行して取得した出力ではない。
+空白は HTML correction と別の判断。Astro v7 では、設定を省略したときの compressHTML が true から 'jsx' に変わる。CSS の white-space: normal を前提に、二つの span の間に空白が表示されなくなる例を示す。
+仕様ドラフトは 2026 年 2 月 3 日付。元の文字を保持する Lossless CST と、生成する HTML の空白規則も区別する。
 
 ### 出典と確認資料（発表では話さない）
 
+- [新 Compiler の方針と RFC #1356](https://github.com/withastro/roadmap/issues/1356)
+- [前半の table の不具合](https://github.com/withastro/compiler/issues/870)
+- [Go Compiler での修正 PR #925](https://github.com/withastro/compiler/pull/925)
+- [Astro v7 の Compiler の変更](https://docs.astro.build/en/guides/upgrade-to/v7/#rust-compiler)
 - [Astro v7 の空白規則](https://docs.astro.build/en/guides/upgrade-to/v7/#new-default-whitespace-handling-compresshtml-jsx)
 - [compressHTML の設定](https://docs.astro.build/en/reference/configuration-reference/#compresshtml)
 - [Astro Template Syntax の仕様ドラフト](https://github.com/withastro/compiler/blob/04170031ce2f30d1882fe480e87998197e0016aa/SYNTAX_SPEC.md)
 -->
-
 
 ---
 layout: default
@@ -1531,15 +1484,15 @@ class: chapter-four ch4-formatter-reuse
 </Ref>
 
 <!--
-予定時刻：16:35 から 17:10（35 秒）
-発話 173 文字。時間は予定であり、実測ではない。
+予定時刻：15:16 から 15:51（35 秒）
+発話 189 文字。時間は予定であり、実測ではない。
 進行：クリックなし。発話後に次へ進む。
 
 ### 発話
 
-Oxc の Formatter、Oxfmt にも Astro への対応計画があります。
-既存の Astro の Prettier plugin を利用し、プラグインが Rust Compiler から AST を受け取る設計です。
-Astro のために作った Compiler とプラグインを、別の Formatter でも再利用できるんですね。僕は、こういう広がりも面白いと思っています。
+この Compiler を、別のツールでも使おうとしているのが Oxfmt です。
+Oxfmt の Astro 対応では、Astro の Prettier plugin を利用する計画になっています。そのプラグインが Rust Compiler から AST を受け取り、整形につなげます。
+Astro の構文を扱う実装を、別の Formatter でも再利用できる。まだ計画の段階ですが、こういう広がりもあるんですね。
 
 ### 確認メモ（発表では話さない）
 
@@ -1555,6 +1508,48 @@ Astro plugin の Parser は Rust Compiler の parseAstro(source) から AST と�
 -->
 
 ---
+layout: default
+class: chapter-four ch4-language-routes
+---
+
+## TSX と位置対応
+
+<LanguageToolRoutes />
+
+<Ref>
+  <li><a href="https://github.com/withastro/astro/blob/28e74103fe3d999a56ae3404b5fe67a1ad6d8013/packages/language-tools/language-server/src/core/astro2tsx.ts">Language Tool と Volar の連携</a></li>
+  <li><a href="https://github.com/withastro/astro/blob/28e74103fe3d999a56ae3404b5fe67a1ad6d8013/packages/language-tools/ts-content-mapper/src/transform.ts">Content Mapper が返すデータ</a></li>
+</Ref>
+
+<!--
+予定時刻：15:51 から 16:36（45 秒）
+発話 282 文字。時間は予定であり、実測ではない。
+進行：クリックなし。共通のデータから、左と右の経路を順に説明する。
+
+### 発話
+
+書いている間を支える Language Tool も確認します。今の Astro は、Rust と Biome で実装した astro2tsx で、TSX と位置対応を生成しています。
+そのデータを使う経路が二つあります。左は Volar を介して TypeScript の JavaScript API を使い、補完や診断を .astro の位置に対応させる経路です。
+右は、Content Mapper から TypeScript 7.1 以降へ返して、tsc で型検査する経路です。
+TSX を生成する実装を共有しながら、TypeScript との連携方法を選べる。僕は、ここにも分担を見直せる余地があると思っています。
+
+### 確認メモ（発表では話さない）
+
+2026 年 10 月 8 日に確認した Astro の main（28e74103fe3d999a56ae3404b5fe67a1ad6d8013）の実装を示す。二つの経路は同じ @astrojs/astro2tsx を呼ぶ。両者が一つの生成結果をメモリ上で共有する図ではない。Content Mapper は ambientTypes を有効にするため、返す TSX の宣言は同一とは限らない。
+astro2tsx は Rust で実装され、Biome で .astro をパースする。その結果から Astro の実装が TSX の文字列と位置対応を生成する。図では返すデータを二つに絞り、診断と script などの情報は省略した。位置対応は SpanMapping と互換性のある配列であり、v3 Source map と同一ではない。
+Language Tool は TSX と位置対応を Volar の Virtual Code に登録し、TypeScript の JavaScript API を利用する。図の左下の双方向矢印は言語機能の要求と結果を示す。HTML と CSS の言語機能は別のサービスが担当しており、この図では省略した。
+Content Mapper は TypeScript の要求で astro2tsx を呼び、コードと位置対応を返す。図の右の矢印は返すデータの方向を示す。tsc で .astro を検査するには、Content Mapper の登録と外部コードの実行を許可する設定が必要になる。TypeScript 7.1 の安定リリースが完了したとは説明しない。
+この図は、Volar を使う Editor の機能が全面的に Content Mapper に移行したことを示していない。ビルドの Compiler で使う Oxc と、TSX の生成で使う Biome も区別する。分担を見直せるという評価は発表者の意見。
+
+### 出典と確認資料（発表では話さない）
+
+- [astro2tsx と Biome の実装](https://github.com/withastro/compiler-rs/blob/main/crates/astro2tsx/src/lib.rs)
+- [Language Tool と Volar の連携](https://github.com/withastro/astro/blob/28e74103fe3d999a56ae3404b5fe67a1ad6d8013/packages/language-tools/language-server/src/core/astro2tsx.ts)
+- [Content Mapper が返すデータ](https://github.com/withastro/astro/blob/28e74103fe3d999a56ae3404b5fe67a1ad6d8013/packages/language-tools/ts-content-mapper/src/transform.ts)
+- [Content Mapper の設定](https://github.com/withastro/astro/blob/28e74103fe3d999a56ae3404b5fe67a1ad6d8013/packages/language-tools/ts-content-mapper/README.md)
+-->
+
+---
 layout: section
 ---
 
@@ -1562,13 +1557,13 @@ layout: section
 ## Rust と JavaScript の分担
 
 <!--
-予定時刻：17:10 から 17:15（5 秒）
-発話 27 文字。時間は予定であり、実測ではない。
+予定時刻：16:36 から 16:41（5 秒）
+発話 28 文字。時間は予定であり、実測ではない。
 進行：クリックなし。発話後に次へ進む。
 
 ### 発話
 
-最後に、同じ分担の考え方を、僕が MDX で試した話です。
+ここからは、僕が Markdown と MDX で試した話です。
 -->
 
 ---
@@ -1584,16 +1579,17 @@ clicks: 1
     <section>
       <h3>Astro への提案</h3>
       <p>2025 年 7 月に Rust Compiler の統合を提案</p>
-      <p>2025 年 8 月に AST Bridge を提案</p>
-      <p class="mdx-contribution-detail">remark と rehype plugin の互換性が課題</p>
+      <p>2025 年 8 月に AST Bridge<TermMark :n="1" /> を提案</p>
+      <p class="mdx-contribution-detail">remark と rehype<TermMark :n="2" /> plugin の互換性が課題</p>
     </section>
     <section>
-      <h3>MDX のコミュニティでの経験</h3>
-      <p>Remco のサポートを受けて貢献</p>
-      <p class="mdx-contribution-detail">試作から、人との交流が続いた</p>
+      <h3>プラグインで拡張する提案</h3>
+      <p>2025 年 8 月に markdown-rs へ提案</p>
+      <p>プラグインで AST を変換するフック</p>
+      <p class="mdx-contribution-detail">Rust で変換し、<br />JavaScript との往復を減らす</p>
     </section>
   </div>
-
+  <p class="mdx-contribution-message">試作をきっかけに、交流がはじまった。</p>
 </div>
 
 <div v-if="$clicks >= 1" class="mt-8 grid grid-cols-2 gap-8">
@@ -1611,30 +1607,40 @@ clicks: 1
   </section>
 </div>
 
-<Ref>
+<TermNotes v-if="$clicks === 0" :notes="['AST Bridge は、Rust でパースした AST を JavaScript のプラグインへ渡す提案。', 'remark は Markdown、rehype は HTML の変換をプラグインで拡張する仕組み。']">
+<Ref inline>
   <li><a href="https://github.com/withastro/astro/pull/14080">Compiler の統合提案</a></li>
   <li><a href="https://github.com/withastro/astro/pull/14181">AST Bridge の提案</a></li>
+  <li><a href="https://github.com/wooorm/markdown-rs/discussions/186">プラグインのフックの提案</a></li>
+</Ref>
+</TermNotes>
+<Ref v-else>
+  <li><a href="https://github.com/withastro/astro/pull/14080">Compiler の統合提案</a></li>
+  <li><a href="https://github.com/withastro/astro/pull/14181">AST Bridge の提案</a></li>
+  <li><a href="https://github.com/wooorm/markdown-rs/discussions/186">プラグインのフックの提案</a></li>
 </Ref>
 
 <!--
-予定時刻：17:15 から 18:15（60 秒）
-発話 289 文字。時間は予定であり、実測ではない。
+予定時刻：16:41 から 17:56（75 秒）
+発話 379 文字。時間は予定であり、実測ではない。
 進行：1 回のクリックを発話に合わせる。
 
 ### 発話
 
 [初期表示]
-ここからは Astro Compiler とは別の試作です。僕は、Markdown と MDX にも高速な実装を使いたいと思い、2025 年 7 月に Rust の MDX Compiler の統合、8 月に AST Bridge を提案しました。既存の remark と rehype のプラグインとの互換性が課題でした。
-採用の見通しは立ちませんでしたが、MDX のコミュニティとの交流は続きました。
+僕がやりたかったのは、Astro の Markdown と MDX の変換を速くすることでした。2025 年 7 月に、Rust の MDX Compiler を Astro に組み込む提案をしました。
+ただ、remark と rehype のプラグインも使い続けたいんですね。そこで 8 月には、Rust でパースした AST を JavaScript のプラグインへ渡す AST Bridge を提案しました。
+さらに markdown-rs にも、プラグインで AST を変換するフックを提案しています。こちらは Rust で変換して、JavaScript との往復を減らす狙いでした。
 [クリック 1]
-親切に教えてくれた Remco に感謝しています。
-冒頭の Astro Japan Community もそうですが、人と話し、助けてもらうことで、自分が取り組めることが増えました。僕にとって OSS の面白さは、こういう経験にもあります。
+その中で、Remco にも親切に教えてもらいました。何か手伝いたいと思っていた僕に、貢献するきっかけをくれたんですね。
+試作を始めたときは、Markdown と MDX を速くしたいという気持ちだったんですけど、そこから人との交流がはじまりました。
 
 ### 確認メモ（発表では話さない）
 
 配布方法の補足。NAPI-RS は Rust の関数の公開と TypeScript の型定義を支援する。ネイティブコードでは OS と CPU ごとのビルドと検証が必要。僕の提案では、配布と保守の負担を減らすため wasm-bindgen を選んだ。
 
 最初の統合提案は 2025 年 7 月 16 日、AST Bridge の提案は 2025 年 8 月 3 日（日本時間）。PR の作成日であり、試作を開始した日とは限らない。提案と試作を並行して進めた時期もある。
+markdown-rs Discussion #186 は jp-knj が 2025 年 8 月 23 日に投稿した提案。AST の変換フックから始め、必要に応じて Syntax と Render のフックへ広げる案。Rust で実行する変換を増やし、JavaScript の実行をまとめて、言語間の往復を減らす意図を説明している。採用済みの機能とは説明しない。Titus の返答を受けた追記では、Parser の拡張と rehype の担当を分け、Markdown の AST へのフックに話を絞っている。この議論の相手は Titus で、クリック後の Remco のサポートとは別のやり取り。
 動機とボトルネックについてのやり取りは、本人がこの会話で共有した経験。相手と対象工程と計測範囲は未特定。一般的なベンチマーク事実や特定人物の発言として提示しない。6999 ページ、10 秒、半減などの数値は使わない。Astro の PR #14080 と PR #14181 は未マージで終了。拒否されたとは断定しない。AST Bridge と、xmdx の生成コードと付随情報を返す仕組みは別。
 
 
@@ -1643,6 +1649,7 @@ clicks: 1
 - [Remco Haszing の Bluesky](https://bsky.app/profile/remcohaszing.nl)
 - [Astro PR #14080](https://github.com/withastro/astro/pull/14080)
 - [PR #14181 での提案と助言](https://github.com/withastro/astro/pull/14181#issuecomment-3311059055)
+- [markdown-rs のプラグインのフックを提案した Discussion #186](https://github.com/wooorm/markdown-rs/discussions/186)
 -->
 
 ---
@@ -1653,61 +1660,58 @@ clicks: 2
 
 ## Processor を自作して Astro に組み込む
 
-<div class="mdx-relation" :class="{ 'is-rust-focus': $clicks === 1 }" role="group" aria-label="Astro と Vite と Rollup、および Astro integration と Vite plugin と Node-API bindings と Compiler の関係">
-  <svg class="mdx-relation-lines" viewBox="0 0 868 398" aria-hidden="true">
+<div class="mdx-relation" :class="{ 'is-rust-focus': $clicks === 1 }" role="group" aria-label="Astro と Vite と Astro integration と Vite plugin と Node-API bindings と Compiler の関係">
+  <svg class="mdx-relation-lines" viewBox="0 0 868 370" aria-hidden="true">
     <defs><marker id="mdx-relation-arrow" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M 1 1 L 9 5 L 1 9" /></marker></defs>
     <g class="mdx-relation-context">
-      <path d="M 240 64 H 300" /><path d="M 550 64 H 634" />
+      <path d="M 240 64 H 300" />
       <path d="M 120 104 V 162" /><path d="M 240 206 H 300" />
       <path d="M 425 104 V 162" />
     </g>
-    <path class="mdx-relation-call" d="M 425 254 V 306" />
-    <path class="mdx-relation-native" d="M 550 350 H 634" />
+    <path class="mdx-relation-call" d="M 425 254 V 278" />
+    <path class="mdx-relation-native" d="M 550 322 H 634" />
   </svg>
   <div class="mdx-relation-context">
     <div class="mdx-starlight">Starlight のサイトが利用</div>
     <section class="mdx-relation-node mdx-node-astro"><strong>Astro</strong></section>
     <section class="mdx-relation-node mdx-node-vite"><strong>Vite</strong></section>
-    <section class="mdx-relation-node mdx-node-rollup"><span>Bundler</span><strong>Rollup</strong><small>module をまとめる</small></section>
     <section class="mdx-relation-node mdx-node-integration"><strong>Astro integration</strong></section>
     <section class="mdx-relation-node mdx-node-plugin"><strong>Vite plugin</strong><small>Astro の<br />モジュールに変換</small></section>
     <span class="mdx-edge-label mdx-edge-use">利用</span>
-    <span class="mdx-edge-label mdx-edge-build">本番で<br />利用</span>
     <span class="mdx-edge-label mdx-edge-introduce">導入</span>
     <span class="mdx-edge-label mdx-edge-register">登録</span>
     <span class="mdx-edge-label mdx-edge-hook">hook を実行</span>
   </div>
-  <section class="mdx-relation-node mdx-node-bindings"><strong>Node-API bindings</strong><small>JavaScript から Rust を呼ぶ</small></section>
+  <section class="mdx-relation-node mdx-node-bindings"><strong>Node-API bindings<TermMark /></strong><small>JavaScript から Rust を呼ぶ</small></section>
   <section class="mdx-relation-node mdx-node-compiler"><strong>Compiler</strong><small>Rust でパースと変換<br />MDX のコードを生成</small></section>
   <span class="mdx-edge-label mdx-edge-binding-call">呼び出し</span>
   <span class="mdx-edge-label mdx-edge-compiler-call">呼び出し</span>
 </div>
 
-<Ref href="https://github.com/jp-knj/xmdx">xmdx と Astro integration</Ref>
+<TermNotes  :notes="['Node-API bindings は、Node.js とネイティブコードの間で関数と値を受け渡す部分。']">
+<Ref inline href="https://github.com/jp-knj/xmdx">xmdx と Astro integration</Ref>
+</TermNotes>
 
 <!--
-予定時刻：18:15 から 19:20（65 秒）
-発話 359 文字。時間は予定であり、実測ではない。
+予定時刻：17:56 から 20:06（130 秒）
+発話 701 文字。時間は予定であり、実測ではない。
 進行：2 回のクリックを発話に合わせる。
 
 ### 発話
 
 [初期表示]
-自作した xmdx は、Astro integration として導入します。これは Astro に機能を追加するプラグインです。Vite plugin を登録して、ビルド中に MDX を変換します。
+Astro のビルドに組み込むために作ったのが xmdx です。Astro に機能を追加する integration として、Vite plugin を登録します。このプラグインが、ビルド中の MDX の変換を担当します。
 [クリック 1]
-変換には Rust の mdxjs-rs を使い、Node-API bindings で JavaScript から呼びます。Rust が変換を担当し、JavaScript が Astro に組み込みます。本文に加えて、frontmatter と見出し情報も返す必要がありました。
+変換そのものには、Rust の mdxjs-rs を使います。Node-API bindings を介して、JavaScript から呼び出します。Astro に組み込むためには、本文に加えて、frontmatter と見出し情報も返す必要がありました。
 [クリック 2]
-Starlight に組み込み、当時の公式ドキュメントで確認しました。僕が試した環境では、ビルド全体が半分以下になりました。
-ただ、ベンチマークには苦労しました。変換だけの時間と、ビルド全体の時間は別です。速度に加え、どんな情報を返し、どんな条件で使えるかまで考える必要があったんですね。
+これを Starlight に組み込んで、当時の公式ドキュメントで試しました。僕の環境では、ビルド全体が半分以下になったんですね。これは嬉しかったです。
+でも、速くなったと言うためのベンチマークには苦労しました。Vite の hook はファイルごとに動きますし、非同期の実行時間も重なります。hook の時間を全部足しても、ビルド全体の時間にはならないんです。
+そのため、何を知りたいかで計測を分けます。MDX の変換だけを比べるなら、同じファイル群をビルドの外で直接変換します。ファイルの取得と初期化は、計測する時間から分けます。
+サイトができあがるまでの時間なら、hyperfine でビルドコマンドの開始から終了までを繰り返し測ります。平均とばらつきを比べるには、キャッシュやプラグイン、コードの色付けの条件もそろえる必要があります。
+負荷が集中する場所を調べるなら、CPU プロファイルを使います。ただ、これはサンプリングによる推定で、変換全体の時間を直接測るものではありません。
+どこからどこまでを測った数字なのか。そこを説明できるように準備するのが、僕には難しかったんですね。
 
 ### 確認メモ（発表では話さない）
-
-ベンチマークの詳説は補足として保存する。
-ただ、そこで悩んだのがベンチマークです。Vite のフックはファイルごとに動き、非同期の実行時間も重なります。フックの時間を合計しても、ビルド全体の時間にはならないんですね。
-変換単体は、同じファイル群をビルドの外で直接変換して比べます。ファイルの取得と初期化は計測から分けます。
-CPU プロファイルでは、負荷が集中する場所をサンプリングから推定します。変換全体の時間を測ることとは分けます。
-ビルド全体は hyperfine で繰り返し測り、平均とばらつきを比べます。キャッシュとプラグイン、コードの色付けをそろえ、本文や見出しの結果も確かめます。
-速い数字を示すだけでなく、何を含めた比較なのかを説明する。僕は、ここまで準備するのが難しかったんですね。
 
 参照する試作は Astro 5 と Vite 6 と Rollup の組み合わせ。本番ビルドと開発時の依存関係の事前バンドルを混同しない。Rust の MDX コード生成には mdxjs-rs を利用。frontmatter と見出し情報は xmdx が取得する。実装の関数名は発話しない。
 
@@ -1725,40 +1729,64 @@ CPU プロファイルでは、負荷が集中する場所をサンプリング�
 
 ---
 layout: default
-class: mdx-source-post
+class: mdx-source-post satteri-story-page
+clicks: 1
 ---
 
-## Sätteri が選んだ Rust と JavaScript の分担
+<h2 v-if="$clicks === 0">Sätteri のきっかけ</h2>
+<h2 v-else>Sätteri のダウンロード数</h2>
 
-<div class="satteri-growth-body">
-  <div class="satteri-growth-context">計算負荷の高い部分は Rust。柔軟な plugin は JavaScript。</div>
-  <img class="satteri-download-screenshot" src="./images/satteri-npmx-2026-10-02.jpg" alt="npmx の satteri の週ごとのダウンロード推移。2026 年 6 月以降に増加し、直近は週 400 万回を超えている。" />
+<div v-if="$clicks === 0" class="satteri-story-body">
+  <figure class="satteri-story-post">
+    <a class="satteri-post-crop" href="https://bsky.app/profile/pi0.io/post/3mgwljerlik2h" target="_blank" rel="noreferrer">
+      <span class="satteri-post-viewport">
+        <img src="./images/mdx/pooya-markdown-post.jpg" alt="Pooya Parsa の Bluesky 投稿。会場で mk.gg の隣に座り、Vibe coding で Astro の Markdown Renderer を試作したと紹介している。" />
+      </span>
+    </a>
+    <p class="satteri-post-date">2026 年 3 月 13 日</p>
+  </figure>
+</div>
+
+<div v-else class="satteri-growth-body">
+  <div class="satteri-growth-context">2026 年 9 月 24 日から 30 日の 7 日間で約 401 万回。</div>
+  <img class="satteri-download-screenshot" src="./images/satteri-npmx-2026-10-02.jpg" alt="npmx の satteri の週ごとのダウンロード推移。2026 年 9 月 24 日から 30 日は約 401 万回。利用者の人数ではなく、ダウンロード回数。" />
 </div>
 
 <Ref>
-  <li><a href="https://npmx.dev/package-stats/satteri/v/0.10.5?end=2026-09-30&start=2025-10-02#trends">npmx のグラフ</a></li>
+  <li v-if="$clicks === 0"><a href="https://bsky.app/profile/pi0.io/post/3mgwljerlik2h">Pooya の Markdown の試作</a></li>
+  <li v-if="$clicks >= 1"><a href="https://npmx.dev/package-stats/satteri/v/0.10.5?end=2026-09-30&start=2025-10-02#trends">npmx のグラフ</a></li>
   <li><a href="https://bsky.app/profile/erika.florist/post/3mj2tfwryw226">Erika の Sätteri 紹介</a></li>
 </Ref>
 
 <!--
-予定時刻：19:20 から 19:45（25 秒）
-発話 146 文字。時間は予定であり、実測ではない。
-進行：クリックなし。発話後に次へ進む。
+予定時刻：20:06 から 21:46（100 秒）
+発話 474 文字。時間は予定であり、実測ではない。
+進行：1 回のクリックを発話に合わせる。
 
 ### 発話
 
-Erika の Sätteri も、計算負荷の高い部分を Rust に、柔軟なプラグインを JavaScript に分けています。僕の試作が採用されたという話ではありません。同じ課題に取り組む人と交流し、実装が進むのが嬉しかったんですね。
-ここでも、言語の間で何を渡すかと、誰が何を保守するかを決めています。
+[初期表示]
+その後、Markdown を速くする別の試作を教えてもらいました。きっかけは Vue Amsterdam です。Pooya が mk.gg の隣で Vibe coding をしていたんですね。その Markdown の試作を mk.gg が Discord で共有して、僕にもメンションをくれました。
+そこから Erika が取り組むことになって、Sätteri の開発が進んでいきました。
+僕も試作の中で、速さとプラグインの互換性に悩んでいたんですね。その課題に、今度は Erika が取り組んでいる。しかも、交流してきた MDX のコミュニティともつながりながら進んでいる。それが嬉しかったんです。
+[クリック 1]
+こちらは npmx のダウンロード数のグラフです。2026 年 9 月 24 日から 30 日の 7 日間で、約 401 万回ダウンロードされています。これは利用者の人数ではなく、npm のダウンロード回数です。
+自分で試して、誰かに助けてもらって、また別の人の実装から学ぶ。Astro Japan Community もそうですが、人と関わることで、次にやってみたいことが増えていく。僕にとって、OSS の面白さはそこにもあります。
 
 ### 確認メモ（発表では話さない）
 
+Pooya の公開投稿には、会場で mk.gg の隣に座り Vibe coding をしたと書かれている。会場が Vue Amsterdam だったことと、Discord での共有とメンション、その後の Erika の取り組みは、発表者から聞いた経緯として記載する。投稿の倍率は Markdown の変換についての記載で、Astro 全体のビルド時間の比較としては扱わない。
 Erika の紹介は 2026 年 4 月 9 日。npmx のグラフは 2026 年 10 月 2 日に撮影した。
+ダウンロード数は、保存済みの npm Downloads API の日別データから 2026 年 9 月 24 日から 30 日を合計した 4,009,697 回。利用者数やプロジェクト数には換算しない。データには 0 回の日が含まれるため、前週との増加率は示さない。
 発表者も関心を持っていた課題に、別の実装で取り組む人がいた嬉しさを話す。以前の xmdx の提案の採否と、Sätteri の開発を混同しない。
 
 
 ### 出典と確認資料（発表では話さない）
 
+- [Pooya の Markdown の試作](https://bsky.app/profile/pi0.io/post/3mgwljerlik2h)
 - [Erika の投稿と Sätteri](https://bsky.app/profile/erika.florist/post/3mj2tfwryw226)
+- [npm の日別ダウンロード数](https://api.npmjs.org/downloads/range/2026-08-01:2026-09-30/satteri)
+- [保存した日別データ](./images/data/satteri-downloads-2026-10-01.json)
 -->
 
 ---
@@ -1776,13 +1804,13 @@ class: flex flex-col justify-center h-full intro-question
 </a>
 
 <!--
-予定時刻：19:45 から 19:50（5 秒）
-発話 42 文字。時間は予定であり、実測ではない。
+予定時刻：21:46 から 21:51（5 秒）
+発話 29 文字。時間は予定であり、実測ではない。
 進行：クリックなし。発話後に次へ進む。
 
 ### 発話
 
-では、最初の問いに戻ります。なぜ、動いていた Compiler を書き直すのでしょうか。
+では、Go で動いていたものを、なぜ Rust に書き直すのか。
 
 ### 確認メモ（発表では話さない）
 
@@ -1831,15 +1859,16 @@ class: body-center
 </div>
 
 <!--
-予定時刻：19:50 から 20:50（60 秒）
-発話 312 文字。時間は予定であり、実測ではない。
+予定時刻：21:51 から 22:51（60 秒）
+発話 251 文字。時間は予定であり、実測ではない。
 進行：クリックなし。発話後に次へ進む。
 
 ### 発話
 
-当時の Go Compiler は、Astro のビルドを支えていました。使い続けるなかで分かったのは、実行するコードに加えて、編集を支える情報も必要だということです。HTML の補正をどこまで担うか、独自の実装をどう保守するかも、考え直す段階になりました。
-その間に、再利用したい基盤が Rust にそろってきました。だから、実装言語の変更とともに、Compiler が渡す情報と、Astro が保守する範囲を見直せる。僕は、そこに今回の書き直しの意味があると思っています。
-補章の MDX でも、言語の分担と既存のプラグインとの関係を考えました。技術だけでなく、その実装を作り、教え、改善してくれる人たちとの関係も、続けていきたいと思っています。
+Go Compiler を使い続けるうちに、編集ツールが欲しい情報や、保守で苦労する部分が分かってきました。
+その間に、JavaScript や CSS を扱う Rust の基盤が育ってきました。必要な機能を利用して、Astro が自分たちで実装する範囲を絞れるようになったんですね。
+だから僕は、今回の書き直しを、これから何を保守していくかを選び直す機会だと捉えています。ツールへ何を返すか、どの規則を共有するかまで考え直す。
+そして、その基盤やプラグインを保守する人と、一緒に考えていくことも大切にしたいと思っています。
 
 ### 確認メモ（発表では話さない）
 
@@ -1858,7 +1887,7 @@ class: text-center
 </div>
 
 <!--
-予定時刻：20:50 から 21:05（15 秒）
+予定時刻：22:51 から 23:06（15 秒）
 発話 50 文字。時間は予定であり、実測ではない。
 進行：クリックなし。発話後に次へ進む。
 
@@ -1877,7 +1906,7 @@ class: text-center
 <div class="mt-8 text-xl ">Vue Fes 楽しんでね。</div>
 
 <!--
-予定時刻：21:05 から 21:35（30 秒）
+予定時刻：23:06 から 23:36（30 秒）
 発話 111 文字。時間は予定であり、実測ではない。
 進行：クリックなし。発話後に次へ進む。
 

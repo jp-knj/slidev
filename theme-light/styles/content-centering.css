@@ -54,3 +54,50 @@
 .slidev-layout.default.go-era-build:has(> .go-era-heading):has(> .ref-pinned) {
     padding-bottom: 104px;
 }
+
+/* Footnotes and references share a footer in normal flow. Its actual height
+ * is excluded from the space that centers the slide body. */
+.slidev-layout.default:not(.community-story):has(> .term-notes) {
+    padding-bottom: 24px;
+}
+.slidev-layout.default > .term-notes {
+    order: 2;
+    margin-top: 16px;
+}
+
+/* The language diagram has a free column below the editor. Keep definitions
+ * there and place the three reference links in one row below the diagram. */
+.slidev-layout.ch2-language-overview > .language-term-notes {
+    position: absolute;
+    left: 56px;
+    right: 56px;
+    bottom: 24px;
+    margin: 0;
+}
+.language-term-notes .term-notes-list { width: 272px; }
+.slidev-layout .language-term-notes .ref-list {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0 28px;
+}
+.language-term-notes .ref-inline { margin-top: 14px; }
+
+/* Three definitions fit under both AST click states with 22px code.
+ * Keep every code block on this page at the same size. */
+.slidev-layout.term-ast-page {
+    --code-example-font-size: 22px;
+    --code-example-line-height: 30px;
+}
+.term-ast-page .ch2-summary { margin-top: 12px; }
+
+/* Preserve the tree examples and their code size while reserving one line
+ * for the first Lossless CST definition. */
+.slidev-layout.ch3-cst-comparison:has(> .term-notes) > h2 { margin-bottom: 12px; }
+.ch3-cst-comparison:has(> .term-notes) .information-columns { margin-top: 12px; }
+.ch3-cst-comparison:has(> .term-notes) .information-columns p { margin-top: 8px; }
+.slidev-layout.ch3-cst-comparison > .term-notes { margin-top: 12px; }
+
+.mdx-contribution-page:has(> .term-notes) .mdx-contribution-map {
+    height: auto;
+    gap: 28px;
+}

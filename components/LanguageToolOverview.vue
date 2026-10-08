@@ -3,15 +3,14 @@ import gopher from "../images/logos/gopher-cutout.png";
 </script>
 
 <template>
-  <div class="language-tool-overview" role="group" aria-label="Go Compiler の返却値と Astro Language Server 内部の担当と LSP の通信">
+  <div class="language-tool-overview" role="group" aria-label="Go Compiler の返却値と Astro Language Tool の担当と Editor とのやり取り">
     <section class="language-client">
       <small>Editor の例</small>
       <div class="language-logo-title"><logos-visual-studio-code class="language-logo" aria-hidden="true" /><strong>VS Code</strong></div>
-      <span>LSP クライアント</span>
+      <span>Astro 拡張</span>
       <small>候補と波線を表示</small>
     </section>
 
-    <div class="language-protocol"><strong>LSP</strong><span>通信の規約</span></div>
     <span class="language-request">変更と要求</span>
     <span class="language-response">補完と診断</span>
     <svg class="language-communication" viewBox="0 0 868 406" aria-hidden="true">
@@ -20,9 +19,9 @@ import gopher from "../images/logos/gopher-cutout.png";
     </svg>
 
     <section class="language-server">
-      <div class="language-server-title language-logo-title"><logos-astro-icon class="language-logo" aria-hidden="true" /><span>Astro Language Server</span></div>
+      <div class="language-server-title language-logo-title"><logos-astro-icon class="language-logo" aria-hidden="true" /><span>Astro Language Tool</span></div>
       <div class="language-adapters">
-        <div><div class="language-logo-title"><img :src="gopher" class="language-logo" alt="" /><strong>Go Compiler</strong></div><span>TSX と Source map を返す</span><small>元の .astro から生成する</small></div>
+        <div><div class="language-logo-title"><img :src="gopher" class="language-logo" alt="" /><strong>Go Compiler</strong></div><span>TSX と Source map<TermMark /> を返す</span><small>.astro から生成する</small></div>
         <svg viewBox="0 0 28 24" aria-hidden="true"><path d="M1 12 H25 M19 6 L25 12 L19 18" /></svg>
         <div><strong>Astro の言語対応</strong><span>HTML を作る</span><span>TSX と位置対応を登録する</span></div>
       </div>
@@ -31,7 +30,7 @@ import gopher from "../images/logos/gopher-cutout.png";
         <div class="language-service"><div class="language-logo-title"><logos-html-5 class="language-logo" aria-hidden="true" /><strong>HTML Language Service</strong></div><span>HTML から属性を補完</span></div>
         <div class="language-service"><div class="language-logo-title"><logos-typescript-icon class="language-logo" aria-hidden="true" /><strong>TypeScript</strong></div><span>TSX から型の診断と補完</span></div>
       </div>
-      <div class="language-position">Volar が結果を元の位置へ対応させ、サーバーが返す</div>
+      <div class="language-position">Volar が結果を .astro の位置へ対応させる</div>
     </section>
   </div>
 </template>
@@ -44,9 +43,6 @@ import gopher from "../images/logos/gopher-cutout.png";
 .language-client strong { color: var(--astro-heading); font-size: 24px; line-height: 32px; }
 .language-client span { font-size: 18px; line-height: 26px; }
 .language-client small { font-size: 16px; line-height: 24px; }
-.language-protocol { position: absolute; left: 154px; top: 94px; width: 127px; text-align: center; }
-.language-protocol strong { display: block; color: var(--astro-heading); font-size: 24px; line-height: 32px; }
-.language-protocol span { display: block; font-size: 17px; line-height: 24px; }
 .language-request, .language-response { position: absolute; left: 154px; width: 127px; text-align: center; font-size: 18px; line-height: 26px; }
 .language-request { top: 150px; }
 .language-response { top: 231px; }

@@ -1,5 +1,11 @@
 # MDX の提案を紹介する画像
 
+## Pooya の試作の投稿
+
+`pooya-markdown-post.jpg` は、2026 年 10 月 6 日に [Pooya Parsa の投稿](https://bsky.app/profile/pi0.io/post/3mgwljerlik2h) をブラウザで撮影した 1265 × 712 ピクセルの画像。投稿日は 2026 年 3 月 13 日。35 ページの初期表示に、投稿者と本文の範囲を CSS で切り抜いて掲載する。画像ファイル自体は変更していない。
+
+投稿には、会場で mk.gg の隣に座り Vibe coding をしたと書かれている。Vue Amsterdam という会場名と、その後の Discord での共有と Erika の開発は、発表者から聞いた経緯として記載する。本文の倍率は Markdown の変換についての記載で、サイト全体のビルド時間の比較としては扱わない。
+
 ## 2026 年 10 月 1 日の発表練習での変更
 
 37 枚目から Astro の PR のスクリーンショットを外し、Compiler の統合と AST Bridge の二つの提案を文章で示す。元画像と撮影記録は保管する。

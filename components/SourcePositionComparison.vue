@@ -42,7 +42,7 @@ import gopher from "../images/logos/gopher-cutout.png";
       </div>
     </section>
 
-    <p class="position-owner"><logos-eslint class="position-logo" aria-hidden="true" />Linter の Adapter が担当していた</p>
+    <p class="position-owner"><logos-eslint class="position-logo" aria-hidden="true" /><span>Linter の Adapter<TermMark /> が担当していた</span></p>
   </div>
 </template>
 
@@ -63,5 +63,5 @@ import gopher from "../images/logos/gopher-cutout.png";
 .position-wrong { color: #a03e2c; }
 .position-description { margin-top: 4px; font-size: 20px; line-height: 28px; }
 .position-data .position-expression { padding: 0; border: 0; border-radius: 0; background: transparent; }
-.position-owner { display: flex; align-items: center; justify-content: center; gap: 10px; margin: 12px 0 0; color: var(--astro-heading); font-size: 22px; font-weight: 600; line-height: 30px; }
+.position-owner { display: flex; align-items: center; justify-content: center; gap: 10px; margin: 52px 0 0; color: var(--astro-heading); font-size: 22px; font-weight: 600; line-height: 30px; }
 </style>

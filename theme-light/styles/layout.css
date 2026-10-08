@@ -205,7 +205,7 @@
     line-height: var(--code-example-line-height) !important;
 }
 
-/* Slide 14: fit both HTML comparison columns.
+/* Slides 14 and 29: fit both HTML comparison columns.
  * Slide 23: keep the stacked examples above the fixed explanatory note.
  */
 .slidev-layout.code-example-compact {
@@ -236,6 +236,17 @@
 /* Restore the original side-by-side table example. */
 .slidev-layout.table-comparison .slidev-code {
     padding: 14px 18px !important;
+}
+
+/* Highlight the relevant line without fading the surrounding code. */
+.slidev-layout.table-comparison .slidev-code .slidev-code-dishonored {
+    opacity: 1;
+    pointer-events: auto;
+}
+
+.slidev-layout.table-comparison .slidev-code .slidev-code-highlighted {
+    background-color: rgb(118 17 166 / 8%);
+    border-radius: 3px;
 }
 
 /* Spacing for chapter 2 pages combining code and diagrams. */
@@ -726,6 +737,7 @@
 .mdx-contribution-trials h3 { margin: 0 0 16px; color: var(--astro-heading); font-size: 24px; line-height: 32px; text-transform: none; }
 .mdx-contribution-trials p { margin: 8px 0; font-size: 20px; line-height: 28px; }
 .mdx-contribution-detail { color: #62516d; }
+.mdx-contribution-map .mdx-contribution-message { margin: 0; font-size: 24px; line-height: 32px; font-weight: 500; }
 
 
 

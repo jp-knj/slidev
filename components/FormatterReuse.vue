@@ -7,7 +7,7 @@ import ferris from "../images/logos/ferris.svg";
     <div class="reuse-route">
       <div class="reuse-node">
         <strong><logos-oxc-icon class="reuse-logo" aria-hidden="true" />Oxfmt</strong>
-        <span>既存の plugin を<br />利用する計画</span>
+        <span> plugin を<br />利用する計画</span>
       </div>
       <div class="reuse-link reuse-planned">
         <span>利用</span>

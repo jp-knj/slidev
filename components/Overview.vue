@@ -25,6 +25,8 @@ const props = withDefaults(
     contract?: string;
     /** ノードのラベル差し替え。キーはノードid。"\n" で改行する */
     labels?: Record<string, string>;
+    /** 初出の図のラベルに付ける補足番号。 */
+    termMarkers?: Record<string, number | true>;
     /** ノードのアイコン差し替え。"" でアイコンなし、"go" で Gopher */
     icons?: Record<string, string>;
     /** 箱の中の小さな補足の差し替え。"" で消す */
@@ -165,9 +167,10 @@ const BASE_NODES = computed<Node[]>(() => [
     note: "Markdown と MDX",
   },
   {
-    ...box("editor", 490, 378, 35, 70),
+    // The Language Tool label wraps to two lines below the Editor heading.
+    ...box("editor", 490, 378, 48, 96),
     label: "Editor",
-    note: "ESLint と LSP と Formatter",
+    note: "Linter と Language Tool と Formatter",
     icon: "editor",
   },
   // ラベルが長いぶん、アイコンは横ではなく上に積んで幅に収める
@@ -185,7 +188,9 @@ const NODES = computed<Node[]>(() =>
     const note = nodeSubnotes.value[n.id] ?? n.note;
     const label = nodeLabels.value[n.id];
     const noteLines = note?.split("\n").length ?? 0;
-    const h = n.id === "build" && noteLines > 1
+    const h = n.id === "compiler" && props.termMarkers?.compiler
+      ? Math.max(n.h, 112)
+      : n.id === "build" && noteLines > 1
       ? Math.max(n.h, 56 + noteLines * 24)
       : n.h;
     return {
@@ -481,12 +486,14 @@ const viewBox = computed(() => `0 ${vb.value.y} ${W} ${vb.value.h}`);
                 <template v-for="(line, i) in labelLines(n.label)" :key="i">
                   <br v-if="i" />{{ line }}
                 </template>
+                <TermMark v-if="termMarkers?.[n.id]" :n="termMarkers[n.id] === true ? undefined : termMarkers[n.id] as number" />
               </div>
             </div>
             <div v-if="n.note" class="ov-note">
               <template v-for="(line, i) in labelLines(n.note)" :key="i">
                 <br v-if="i" />{{ line }}
               </template>
+              <TermMark v-if="termMarkers?.[`${n.id}-note`]" :n="termMarkers[`${n.id}-note`] as number" />
             </div>
           </div>
         </foreignObject>
@@ -496,7 +503,7 @@ const viewBox = computed(() => `0 ${vb.value.y} ${W} ${vb.value.h}`);
         <rect :x="s.x" :y="s.y" :width="s.w" :height="s.h" rx="8" />
         <foreignObject :x="s.x" :y="s.y" :width="s.w" :height="s.h">
           <div xmlns="http://www.w3.org/1999/xhtml" class="ov-box">
-            <div class="ov-sublabel">{{ s.label }}</div>
+            <div class="ov-sublabel">{{ s.label }}<TermMark v-if="termMarkers?.[s.id]" :n="termMarkers[s.id] === true ? undefined : termMarkers[s.id] as number" /></div>
           </div>
         </foreignObject>
       </g>

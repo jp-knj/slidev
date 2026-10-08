@@ -35,7 +35,6 @@
 .mdx-starlight { position: absolute; left: 0; top: -3px; width: 240px; text-align: center; font-size: 18px; line-height: 26px; }
 .mdx-node-astro { left: 0; top: 28px; width: 240px; height: 76px; }
 .mdx-node-vite { left: 300px; top: 28px; width: 250px; height: 76px; }
-.mdx-node-rollup { left: 634px; top: 16px; width: 234px; height: 100px; }
 .mdx-node-integration { left: 0; top: 162px; width: 240px; height: 92px; }
 .mdx-node-plugin { left: 300px; top: 162px; width: 250px; height: 92px; }
 .mdx-node-bindings { left: 300px; top: 306px; width: 250px; height: 92px; }
@@ -43,7 +42,6 @@
 .mdx-node-compiler strong { font-size: 22px; line-height: 30px; }
 .mdx-edge-label { position: absolute; font-size: 18px; line-height: 26px; white-space: nowrap; }
 .mdx-edge-use { left: 252px; top: 32px; }
-.mdx-edge-build { left: 558px; top: 7px; width: 68px; text-align: center; }
 .mdx-edge-introduce { left: 132px; top: 119px; }
 .mdx-edge-register { left: 252px; top: 174px; }
 .mdx-edge-hook { left: 437px; top: 119px; }
@@ -52,6 +50,13 @@
 .mdx-relation.is-rust-focus .mdx-relation-context { opacity: .28; }
 .mdx-relation.is-rust-focus .mdx-node-bindings,
 .mdx-relation.is-rust-focus .mdx-node-compiler { border-color: #7611a6; background: #f6edfb; }
+
+/* Shorten the vertical connector to reserve the binding definition below. */
+.mdx-integration:has(> .term-notes) .mdx-relation { height: 370px; }
+.mdx-integration:has(> .term-notes) .mdx-node-bindings,
+.mdx-integration:has(> .term-notes) .mdx-node-compiler { top: 278px; }
+.mdx-integration:has(> .term-notes) .mdx-edge-binding-call { top: 252px; }
+.mdx-integration:has(> .term-notes) .mdx-edge-compiler-call { top: 289px; }
 
 /* MDX data transfer: retain the full route while emphasizing one responsibility at a time. */
 .mdx-transfer h2 { margin-bottom: 18px; }
@@ -130,4 +135,46 @@
   color: var(--astro-heading);
   font-size: 24px;
   line-height: 32px;
+}
+
+/* Center the source post before showing the Sätteri download graph. */
+.satteri-story-page .satteri-story-body {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  min-height: 356px;
+  font-family: var(--font-body);
+}
+.satteri-story-post {
+  width: 680px;
+  max-width: 100%;
+  margin: 0;
+}
+/* Preserve the captured pixels; show the author and post text without navigation. */
+.satteri-story-post .satteri-post-crop {
+  display: block;
+  padding: 24px;
+  border: 0;
+  background: #fff;
+}
+.satteri-post-viewport {
+  display: block;
+  position: relative;
+  overflow: hidden;
+  aspect-ratio: 565 / 240;
+}
+.satteri-post-crop img {
+  position: absolute;
+  width: calc(1265 / 565 * 100%);
+  max-width: none;
+  height: auto;
+  max-height: none;
+  left: calc(-239 / 565 * 100%);
+  top: calc(-62 / 240 * 100%);
+}
+.satteri-story-post .satteri-post-date {
+  margin: 0 24px;
+  color: #62516d;
+  font-size: 16px;
+  line-height: 24px;
 }
