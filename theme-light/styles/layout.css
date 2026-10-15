@@ -432,6 +432,23 @@
 
 /* Body-page vertical alignment is shared in content-centering.css. */
 
+.slidev-layout.profile-page {
+    padding-block: 40px;
+}
+
+.profile-page .profile-socials {
+    color: var(--astro-heading);
+}
+
+.profile-page .profile-socials svg,
+.profile-page .profile-socials svg path {
+    fill: currentColor;
+}
+
+.profile-page .profile-roles {
+    margin-block: 0;
+}
+
 .slidev-layout.intro-image,
 .slidev-layout.intro {
     @apply h-full;

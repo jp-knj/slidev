@@ -119,6 +119,13 @@
 .mdx-upstream-story .mdx-upstream-improvement h3 { margin: 0 0 10px; font-size: 24px; line-height: 32px; color: var(--astro-heading); }
 .mdx-upstream-story .mdx-upstream-improvement p { margin: 0; font-size: 20px; line-height: 30px; }
 
+/* Stack the post and reply beside the acknowledgement, with the author and full text. */
+.mdx-contribution-page .remco-thanks { display: grid; grid-template-columns: 510px 326px; gap: 32px; align-items: center; font-family: var(--font-body); }
+.mdx-contribution-page .remco-posts { display: grid; gap: 20px; }
+.mdx-contribution-page .remco-post-heading { margin: 0 0 8px; font-size: 20px; line-height: 28px; color: var(--astro-heading); text-transform: none; letter-spacing: 0; }
+.mdx-contribution-page .remco-post-image { display: block; aspect-ratio: 1136 / 342; overflow: hidden; border: 0; }
+.mdx-contribution-page .remco-post-image img { display: block; width: 100%; max-width: none; height: auto; }
+
 /* 39 ページの見出しと小見出しを説明スライドの書式にそろえる。 */
 .slidev-layout.ch3-syntax-spec h2 {
   color: var(--astro-heading);
@@ -137,7 +144,7 @@
   line-height: 32px;
 }
 
-/* Center the source post before showing the Sätteri download graph. */
+/* Keep the source post centered in the opening click state. */
 .satteri-story-page .satteri-story-body {
   display: flex;
   justify-content: center;
@@ -178,3 +185,23 @@
   font-size: 16px;
   line-height: 24px;
 }
+
+.ch3-content-mapper .content-mapper-intro { margin: 0 0 28px; font-size: 28px; line-height: 36px; text-align: center; color: var(--astro-heading); font-weight: 600; }
+
+/* Present the responsibilities and the event link in one click state. */
+.satteri-story-page .satteri-role-body { font-family: var(--font-body); }
+.satteri-story-page .satteri-introduction-post { width: 740px; max-width: 100%; margin: 0 auto; }
+.satteri-introduction-post a { display: block; border: 0; }
+.satteri-introduction-post img { display: block; width: 100%; height: auto; }
+.satteri-story-page .satteri-role-intro { margin: 0 0 8px; text-align: center; font-size: 28px; line-height: 36px; }
+.satteri-story-page .satteri-role-description { margin: 0 0 20px; text-align: center; font-size: 24px; line-height: 32px; }
+.satteri-story-page .satteri-role-diagram { display: grid; grid-template-columns: 1fr 48px 1fr; align-items: center; gap: 16px; max-width: 740px; margin: 0 auto; }
+.satteri-story-page .satteri-role-card { padding: 16px; border: 1px solid #d5c6df; border-radius: 12px; background: #fcf9ff; text-align: center; }
+.satteri-story-page .satteri-role-icon { display: block; width: 48px; height: 48px; margin: 0 auto 12px; font-size: 44px; line-height: 48px; }
+.satteri-story-page .satteri-role-plus { color: #927da4; font-size: 32px; text-align: center; }
+.satteri-story-page .satteri-role-body h3 { margin: 0 0 8px; padding: 0; color: var(--astro-heading); font-size: 28px; line-height: 36px; font-weight: 600; text-transform: none; letter-spacing: 0; }
+.satteri-story-page .satteri-role-card p { margin: 0; font-size: 24px; line-height: 32px; }
+.satteri-story-page .satteri-event-note { margin-top: 24px; text-align: center; }
+.satteri-story-page .satteri-event-note p { margin: 0; font-size: 20px; line-height: 28px; }
+.satteri-story-page .satteri-event-video { display: inline-flex; align-items: center; gap: 12px; margin-top: 4px; font-size: 22px; line-height: 30px; }
+.satteri-story-page .satteri-event-video svg { width: 32px; height: 24px; flex: none; }

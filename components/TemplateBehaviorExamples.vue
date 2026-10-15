@@ -14,7 +14,7 @@ defineProps<{ whitespace?: boolean }>();
       <section>
         <div class="text-primary font-600 text-xl mb-1 flex items-center gap-2"><logos-html-5 v-if="!whitespace" class="w-5 h-5" aria-hidden="true" />{{ whitespace ? 'ブラウザでの表示' : '生成された HTML' }}</div>
         <slot v-if="!whitespace" name="table-output" />
-        <div v-else class="behavior-preview"><span>Astro</span><span>1200</span></div>
+        <div v-else class="behavior-preview"><span>Hello</span><span>World</span></div>
       </section>
     </div>
     <p v-if="!whitespace" class="behavior-takeaway">Compiler は HTML correction を行わない。</p>

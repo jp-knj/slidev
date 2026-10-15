@@ -2,7 +2,7 @@
 
 ## Pooya の試作の投稿
 
-`pooya-markdown-post.jpg` は、2026 年 10 月 6 日に [Pooya Parsa の投稿](https://bsky.app/profile/pi0.io/post/3mgwljerlik2h) をブラウザで撮影した 1265 × 712 ピクセルの画像。投稿日は 2026 年 3 月 13 日。35 ページの初期表示に、投稿者と本文の範囲を CSS で切り抜いて掲載する。画像ファイル自体は変更していない。
+`pooya-markdown-post.jpg` は、2026 年 10 月 6 日に [Pooya Parsa の投稿](https://bsky.app/profile/pi0.io/post/3mgwljerlik2h) をブラウザで撮影した 1265 × 712 ピクセルの画像。投稿日は 2026 年 3 月 13 日。35 ページの初期表示に、投稿者と本文の範囲を CSS で切り抜いて掲載する。投稿の下に日付の説明は表示しない。画像ファイル自体は変更していない。
 
 投稿には、会場で mk.gg の隣に座り Vibe coding をしたと書かれている。Vue Amsterdam という会場名と、その後の Discord での共有と Erika の開発は、発表者から聞いた経緯として記載する。本文の倍率は Markdown の変換についての記載で、サイト全体のビルド時間の比較としては扱わない。
 
@@ -106,7 +106,11 @@ mdxjs-rs の提案は Issue と表記する。画像は確認時点の状態で�
 
 `remco-mdx-editor.png` は2026年9月24日に撮影した旧画像として保管する。投稿者とアカウント名と本文を含む 1196 × 360 ピクセルの画像で、現在の 39 枚目では使用しない。
 
+現在の 33 ページのクリック 1 では、`remco-mdx-release.png` と `remco-mdx-contribution.png` を上下に表示する。上はリリース告知のポスト、下は Remco が `@jp-knj.bsky.social` にメンションし、貢献を紹介してくれたリプライ。CSS で画像の上端から 342 ピクセルまでを表示し、投稿者と二つの段落を含める。画像ファイルは変更しない。画像をクリックすると、対応する[告知ポスト](https://bsky.app/profile/remcohaszing.nl/post/3mu5jnocvbk2r)と[紹介のリプライ](https://bsky.app/profile/remcohaszing.nl/post/3mu5jrfpj222r)を開く。
+
 ## 第 4 章の関連図の出典
+
+35 ページのクリック 1 にある `erika-satteri-introduction.png` は、2026 年 10 月 13 日に [Erika の Sätteri 紹介ポスト](https://bsky.app/profile/erika.florist/post/3mj2tfwryw226)をブラウザで撮影した画像。著者とアカウント名と本文と GitHub のリンクを含む 583 × 218 ピクセル。本文と表示色は変更せず、ナビゲーションとプレビューと投稿日と返信は撮影範囲から除いた。画像をクリックすると紹介ポストを開く。
 
 2026年9月24日に公開文書と実装を確認した。2026年9月29日にデータの受け渡しの図を 41 枚目に追加し、元の 41 枚目の貢献の紹介を 39 枚目へ統合した。全体は 60 枚で、第 4 章の番号は変更前と同じ。Prettier plugin の投稿は 49 枚目、Sätteri の投稿は 51 枚目に掲載する。原文と日付と出典は維持している。
 

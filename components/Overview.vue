@@ -9,6 +9,8 @@ const props = withDefaults(
   defineProps<{
     /** 前半と比較ページで共有する時代ごとの図。 */
     era?: "go" | "rust";
+    /** Language Tool の受け渡しを横一列で表示する。 */
+    layout?: "language";
     /** Compiler 全体を囲む枠線を表示する。 */
     compilerFrame?: boolean;
     /** 強調するノードid。カンマ区切り。例: "compiler,editor" */
@@ -76,6 +78,7 @@ type Node = Rect & {
   icon?: string;
   tab?: boolean;
   stack?: boolean;
+  frame?: boolean;
 };
 
 const SUBS = [
@@ -156,7 +159,12 @@ const box = (id: string, x: number, w: number, cy: number, h: number) => ({
   y: cy - h / 2,
 });
 
-const BASE_NODES = computed<Node[]>(() => [
+const BASE_NODES = computed<Node[]>(() => props.layout === "language" ? [
+  { ...box("source", 0, 140, 90, 70), label: ".astro", icon: "astro", tab: true },
+  { ...box("compiler", 168, 218, 90, 80), label: "Go Compiler", icon: "go" },
+  { ...box("output", 414, 190, 90, 112), label: "TSX\nSource map", frame: true },
+  { ...box("editor", 632, 236, 90, 80), label: "Language Tool", icon: "astro" },
+] : [
   // source 系はエディタのファイルタブに見えるよう tab: true で上端だけ角丸にする
   { ...box("source", 0, 175, 175, 70), label: ".astro", icon: "astro", tab: true },
   { ...box("mdsource", 0, 175, 320, 70), label: ".md と .mdx", icon: "md", tab: true },
@@ -266,12 +274,15 @@ const shownEdges = computed(() => {
   const br = g.get("browser");
   const md = g.get("mdsource");
   const ct = g.get("content");
+  const output = g.get("output");
 
   if (s && c) push("source->compiler", "source", "compiler", straight(s, c));
   if (md && ct) push("mdsource->content", "mdsource", "content", straight(md, ct));
   // Compiler と Build の間は狭く、右辺から縦にずらすと矢印が折れる。
   // Editor へは Compiler の上端から出し、Build へはまっすぐ引く。
-  if (c && e)
+  if (c && output) push("compiler->output", "compiler", "output", straight(c, output));
+  if (output && e) push("output->editor", "output", "editor", straight(output, e));
+  if (c && e && !output)
     push(
       "compiler->editor",
       "compiler",
@@ -443,6 +454,15 @@ const viewBox = computed(() => `0 ${vb.value.y} ${W} ${vb.value.h}`);
 
       <g v-for="n in shownNodes" :key="n.id" class="ov-node" :class="stateOf(n.id)">
         <rect
+          v-if="n.frame"
+          class="ov-data-group"
+          :x="n.x"
+          :y="n.y"
+          :width="n.w"
+          :height="n.h"
+          rx="8"
+        />
+        <rect
           v-if="n.id === 'compiler' && (props.compilerFrame || hasGoSubs || isComparison)"
           class="ov-compiler-group"
           :x="n.x"
@@ -542,6 +562,12 @@ const viewBox = computed(() => `0 ${vb.value.y} ${W} ${vb.value.h}`);
 .ov-compiler-group {
   fill: #fff;
   stroke: #d9d0e4;
+  stroke-width: 1.2;
+}
+
+.ov-data-group {
+  fill: #f2eff8;
+  stroke: #bc52ee;
   stroke-width: 1.2;
 }
 

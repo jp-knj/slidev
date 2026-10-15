@@ -50,7 +50,7 @@ comments: <span class="data-trivia">["// 税込"]</span></code></pre>
             <p>空白は元のコードを参照する。</p>
           </section>
           <section>
-            <div class="data-route-title"><logos-biomejs-icon class="data-logo" aria-hidden="true" />Biome</div>
+            <div class="data-route-title"><logos-biomejs-icon class="data-logo" aria-hidden="true" />Biome の Lossless CST</div>
             <h3>Lossless CST の模式図</h3>
             <pre class="data-tree"><code>ExpressionStatement
 ├─ BinaryExpression

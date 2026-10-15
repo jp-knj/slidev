@@ -10,39 +10,30 @@
       <path d="M685 210 V264 M678 256 L685 264 L692 256" />
     </svg>
 
-    <div class="routes-node routes-input"><strong>.astro</strong></div>
+    <div class="routes-node routes-input"><strong class="routes-brand"><logos-astro-icon class="routes-logo" aria-hidden="true" />.astro</strong></div>
     <div class="routes-node routes-generator routes-accent">
-      <strong>@astrojs/astro2tsx</strong>
-      <span>Rust と Biome で TSX を生成</span>
+      <strong class="routes-brand"><logos-astro-icon class="routes-logo" aria-hidden="true" />@astrojs/astro2tsx</strong>
     </div>
     <div class="routes-node routes-output">
-      <strong>TSX の文字列と位置対応</strong>
+      <strong>TSX と位置対応</strong>
     </div>
 
     <div class="routes-node routes-language-tool routes-accent">
-      <strong>Astro Language Tool</strong>
-      <span>Volar に TSX と位置対応を登録</span>
+      <strong class="routes-brand"><logos-astro-icon class="routes-logo" aria-hidden="true" />Astro Language Tool</strong>
     </div>
     <div class="routes-node routes-mapper">
-      <strong>Content Mapper</strong>
+      <strong class="routes-brand"><logos-astro-icon class="routes-logo" aria-hidden="true" />Content Mapper</strong>
       <span>@astrojs/ts-content-mapper</span>
     </div>
 
-    <span class="routes-edge routes-api-edge">要求と結果</span>
-    <span class="routes-edge routes-editor-edge">.astro の位置へ</span>
-    <span class="routes-edge routes-mapper-edge">コードと位置対応を返す</span>
-
     <div class="routes-node routes-typescript-api">
-      <strong>TypeScript</strong>
-      <span>JavaScript API</span>
+      <strong class="routes-brand"><logos-typescript-icon class="routes-logo" aria-hidden="true" />TypeScript</strong>
     </div>
     <div class="routes-node routes-editor">
-      <strong>Editor</strong>
-      <span>補完と診断</span>
+      <strong class="routes-brand"><logos-visual-studio-code class="routes-logo" aria-hidden="true" />Editor</strong>
     </div>
     <div class="routes-node routes-typescript-native routes-accent">
-      <strong>TypeScript 7.1 以降</strong>
-      <span>tsc が型検査と位置対応を担当</span>
+      <strong class="routes-brand"><logos-typescript-icon class="routes-logo" aria-hidden="true" />TypeScript 7.1</strong>
     </div>
   </div>
 </template>
@@ -53,6 +44,9 @@
 .routes-lines path { fill: none; stroke: #887294; stroke-width: 1.8; stroke-linejoin: round; }
 .routes-node { position: absolute; display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 4px; padding: 8px; border: 1px solid #d9d0df; border-radius: 9px; background: #faf9fc; text-align: center; }
 .routes-node strong { font-size: 24px; line-height: 32px; font-weight: 600; color: var(--astro-heading); }
+.routes-brand { display: flex; align-items: center; justify-content: center; gap: 10px; }
+.routes-logo { width: 28px; height: 28px; flex: 0 0 28px; }
+.routes-input .routes-brand { flex-direction: column; gap: 4px; }
 .routes-node span { font-size: 18px; line-height: 26px; }
 .routes-accent { border-color: #bc52ee; background: #f7effb; }
 .routes-input { left: 0; top: 0; width: 110px; height: 88px; }
@@ -61,10 +55,6 @@
 .routes-output strong { color: var(--astro-body); }
 .routes-language-tool { left: 0; top: 128px; width: 470px; height: 82px; }
 .routes-mapper { left: 502px; top: 128px; width: 366px; height: 82px; }
-.routes-edge { position: absolute; top: 226px; padding: 0 6px; background: white; font-size: 18px; line-height: 26px; white-space: nowrap; transform: translateX(-50%); }
-.routes-api-edge { left: 125px; }
-.routes-editor-edge { left: 373px; }
-.routes-mapper-edge { left: 685px; }
 .routes-typescript-api { left: 0; top: 270px; width: 250px; height: 80px; }
 .routes-editor { left: 276px; top: 270px; width: 194px; height: 80px; }
 .routes-typescript-native { left: 502px; top: 270px; width: 366px; height: 80px; }
